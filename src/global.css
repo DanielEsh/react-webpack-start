@@ -1,0 +1,7 @@
+.test {
+    background: red;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
