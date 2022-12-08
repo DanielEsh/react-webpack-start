@@ -1,4 +1,5 @@
 import {RuleSetRule} from 'webpack';
+import MiniCssExtractPlugin from "mini-css-extract-plugin"
 
 const typescriptLoader = {
     test: /\.tsx?$/,
@@ -9,11 +10,8 @@ const typescriptLoader = {
 const cssLoader = {
     test: /\.css$/i,
     use: [
-        // Creates `style` nodes from js strings
-        'style-loader',
-        // Translates CSS into CommonJS
+        MiniCssExtractPlugin.loader,
         'css-loader',
-        // 
         'postcss-loader',
     ]
 }
