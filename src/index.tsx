@@ -3,8 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { App } from "./App";
 import {BrowserRouter} from "react-router-dom";
 
-import './global.scss';
-
 const APP_ROOT_ID = 'root';
 
 const rootElement = document.getElementById(APP_ROOT_ID);
