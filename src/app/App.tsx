@@ -1,8 +1,9 @@
 import { Suspense } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
-import { AboutPageAsync } from './pages/AboutPage/AboutPage.async'
-import { MainPage } from './pages/MainPage/MainPage'
+import { AboutPageAsync } from 'pages/AboutPage/AboutPage.async'
+import { MainPage } from 'pages/MainPage/MainPage'
 
+import './tailwind.css'
 import './global.css'
 
 export const App = () => {
