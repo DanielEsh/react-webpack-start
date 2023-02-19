@@ -6,6 +6,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
+import 'shared/ui/Table/table.css'
+
 type Person = {
   firstName: string
   lastName: string
@@ -80,6 +82,7 @@ export const Table = () => {
   const table = useReactTable({
     data,
     columns,
+    columnResizeMode: 'onChange',
     getCoreRowModel: getCoreRowModel(),
   })
 
@@ -87,13 +90,24 @@ export const Table = () => {
 
   return (
     <div className="p-2">
-      <table>
+      <table
+        {...{
+          style: {
+            width: table.getCenterTotalSize(),
+          },
+        }}>
         <thead>
           {headerGroup.map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
-                  key={header.id}
+                  {...{
+                    key: header.id,
+                    colSpan: header.colSpan,
+                    style: {
+                      width: header.getSize(),
+                    },
+                  }}
                   className="border border-red-500 bg-slate-400">
                   {header.isPlaceholder
                     ? null
@@ -101,6 +115,15 @@ export const Table = () => {
                         header.column.columnDef.header,
                         header.getContext(),
                       )}
+                  <div
+                    {...{
+                      onMouseDown: header.getResizeHandler(),
+                      onTouchStart: header.getResizeHandler(),
+                      className: `resizer ${
+                        header.column.getIsResizing() ? 'isResizing' : ''
+                      }`,
+                    }}
+                  />
                 </th>
               ))}
             </tr>
@@ -111,7 +134,12 @@ export const Table = () => {
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <td
-                  key={cell.id}
+                  {...{
+                    key: cell.id,
+                    style: {
+                      width: cell.column.getSize(),
+                    },
+                  }}
                   className="border border-red-500 bg-yellow-400">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
