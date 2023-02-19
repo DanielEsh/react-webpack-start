@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const Counter = () => {
+  const { t } = useTranslation()
+
   const [count, setCount] = useState(0)
 
   const increment = () => {
@@ -10,7 +13,7 @@ const Counter = () => {
   return (
     <div>
       <h1>{count}</h1>
-      <button onClick={increment}>increment</button>
+      <button onClick={increment}>{t('test')}</button>
     </div>
   )
 }
