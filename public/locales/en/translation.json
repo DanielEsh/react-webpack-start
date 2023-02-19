@@ -1,4 +1,5 @@
 {
     "test": "test en",
-    "changeButton": "change lang"
+    "changeButton": "change lang",
+    "notFound": "Page not found" 
 }
