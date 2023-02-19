@@ -79,9 +79,15 @@ const columns = [
 export const Table = () => {
   const [data, setData] = useState(() => [...defaultData])
 
+  const [columnVisibility, setColumnVisibility] = useState({})
+
   const table = useReactTable({
     data,
     columns,
+    state: {
+      columnVisibility,
+    },
+    onColumnVisibilityChange: setColumnVisibility,
     columnResizeMode: 'onChange',
     getCoreRowModel: getCoreRowModel(),
   })
@@ -90,6 +96,37 @@ export const Table = () => {
 
   return (
     <div className="p-2">
+      <div className="inline-block rounded border border-black shadow">
+        <div className="border-b border-black px-1">
+          <label>
+            <input
+              {...{
+                type: 'checkbox',
+                checked: table.getIsAllColumnsVisible(),
+                onChange: table.getToggleAllColumnsVisibilityHandler(),
+              }}
+            />{' '}
+            Toggle All
+          </label>
+        </div>
+        {table.getAllLeafColumns().map((column) => {
+          return (
+            <div key={column.id} className="px-1">
+              <label>
+                <input
+                  {...{
+                    type: 'checkbox',
+                    checked: column.getIsVisible(),
+                    onChange: column.getToggleVisibilityHandler(),
+                  }}
+                />{' '}
+                {column.id}
+              </label>
+            </div>
+          )
+        })}
+      </div>
+
       <table
         {...{
           style: {
