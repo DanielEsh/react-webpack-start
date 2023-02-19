@@ -20,5 +20,6 @@ export function buildPlugins({
     new webpack.DefinePlugin({
       IS_DEVELOPMENT: isDev,
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ]
 }
