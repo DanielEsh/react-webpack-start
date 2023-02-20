@@ -7,6 +7,11 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
+import { TableHead } from 'shared/ui/Table/TableHead'
+import { TableBody } from 'shared/ui/Table/TableBody'
+import { TableCellHead } from 'shared/ui/Table/TableCellHead'
+import { TableCell } from 'shared/ui/Table/TableCell'
+
 import 'shared/ui/Table/table.css'
 
 type Person = {
@@ -242,11 +247,11 @@ export const Table = () => {
             width: table.getCenterTotalSize(),
           },
         }}>
-        <thead>
+        <TableHead>
           {headerGroup.map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th
+                <TableCellHead
                   {...{
                     key: header.id,
                     colSpan: header.colSpan,
@@ -270,16 +275,16 @@ export const Table = () => {
                       }`,
                     }}
                   />
-                </th>
+                </TableCellHead>
               ))}
             </tr>
           ))}
-        </thead>
-        <tbody>
+        </TableHead>
+        <TableBody>
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td
+                <TableCell
                   {...{
                     key: cell.id,
                     style: {
@@ -288,11 +293,11 @@ export const Table = () => {
                   }}
                   className="border border-red-500 bg-yellow-400">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+                </TableCell>
               ))}
             </tr>
           ))}
-        </tbody>
+        </TableBody>
       </table>
     </div>
   )
