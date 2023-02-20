@@ -3,6 +3,7 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  ColumnDef,
   useReactTable,
 } from '@tanstack/react-table'
 
@@ -44,37 +45,145 @@ const defaultData: Person[] = [
   },
 ]
 
-const columnHelper = createColumnHelper<Person>()
+// const columnHelper = createColumnHelper<Person>()
 
-const columns = [
-  columnHelper.accessor('firstName', {
-    cell: (info) => info.getValue(),
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor((row) => row.lastName, {
+// const columns = [
+//   columnHelper.accessor('firstName', {
+//     cell: (info) => info.getValue(),
+//     footer: (info) => info.column.id,
+//   }),
+//   columnHelper.accessor((row) => row.lastName, {
+//     id: 'lastName',
+//     cell: (info) => <i>{info.getValue()}</i>,
+//     header: () => <span>Last Name</span>,
+//     footer: (info) => info.column.id,
+//   }),
+//   columnHelper.accessor('age', {
+//     header: () => 'Age',
+//     cell: (info) => info.renderValue(),
+//     footer: (info) => info.column.id,
+//   }),
+//   columnHelper.accessor('visits', {
+//     header: () => <span>Visits</span>,
+//     footer: (info) => info.column.id,
+//   }),
+//   columnHelper.accessor('status', {
+//     header: 'Status',
+//     footer: (info) => info.column.id,
+//   }),
+//   columnHelper.accessor('progress', {
+//     header: 'Profile Progress',
+//     footer: (info) => info.column.id,
+//   }),
+// ]
+
+const columns: ColumnDef<Person>[] = [
+  {
+    accessorKey: 'firstName',
+    header: 'First Name',
+    cell: ({ row, getValue }) => (
+      <div
+        style={{
+          // Since rows are flattened by default,
+          // we can use the row.depth property
+          // and paddingLeft to visually indicate the depth
+          // of the row
+          paddingLeft: `${row.depth * 2}rem`,
+        }}>
+        {getValue<string>()}
+      </div>
+    ),
+    footer: (props) => props.column.id,
+  },
+  {
+    accessorFn: (row) => row.lastName,
     id: 'lastName',
-    cell: (info) => <i>{info.getValue()}</i>,
+    cell: (info) => info.getValue(),
     header: () => <span>Last Name</span>,
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor('age', {
-    header: () => 'Age',
-    cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor('visits', {
-    header: () => <span>Visits</span>,
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor('status', {
-    header: 'Status',
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor('progress', {
-    header: 'Profile Progress',
-    footer: (info) => info.column.id,
-  }),
+    footer: (props) => props.column.id,
+  },
+  {
+    accessorKey: 'age',
+    id: 'age',
+    cell: (info) => info.getValue(),
+    header: () => <span>Age</span>,
+    footer: (props) => props.column.id,
+  },
+  {
+    accessorKey: 'visits',
+    id: 'visits',
+    cell: (info) => info.getValue(),
+    header: () => <span>visits</span>,
+    footer: (props) => props.column.id,
+  },
+  {
+    accessorKey: 'status',
+    id: 'status',
+    cell: (info) => info.getValue(),
+    header: () => <span>status</span>,
+    footer: (props) => props.column.id,
+  },
+  {
+    accessorKey: 'progress',
+    id: 'progress',
+    cell: (info) => info.getValue(),
+    header: () => <span>progress</span>,
+    footer: (props) => props.column.id,
+  },
+  {
+    header: 'Actions',
+    footer: (props) => props.column.id,
+    cell: ({ row }) => {
+      return (
+        <button
+          {...{
+            style: { cursor: 'pointer' },
+          }}>
+          '🔵'
+        </button>
+      )
+    },
+  },
 ]
+
+// const columns: ColumnDef<Person>[] = [
+//   {
+//     header: 'Actions',
+//     footer: (props) => props.column.id,
+//     columns: [,],
+//   },
+//   {
+//     header: 'Info',
+//     footer: (props) => props.column.id,
+//     columns: [
+//       {
+//         accessorKey: 'age',
+//         header: () => 'Age',
+//         footer: (props) => props.column.id,
+//       },
+//       {
+//         header: 'More Info',
+//         columns: [
+//           {
+//             accessorKey: 'visits',
+//             header: () => <span>Visits</span>,
+//             footer: (props) => props.column.id,
+//           },
+//           {
+//             accessorKey: 'status',
+//             header: 'Status',
+//             footer: (props) => props.column.id,
+//           },
+//           {
+//             accessorKey: 'progress',
+//             header: 'Profile Progress',
+//             footer: (props) => props.column.id,
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// ]
 
 export const Table = () => {
   const [data, setData] = useState(() => [...defaultData])
