@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { createContext, useState } from 'react'
 import {
   createColumnHelper,
   flexRender,
@@ -206,7 +206,9 @@ export const Table = () => {
     getCoreRowModel: getCoreRowModel(),
   })
 
-  const headerGroup = table.getHeaderGroups()
+  const headerGroups = table.getHeaderGroups()
+
+  const { rows } = table.getRowModel()
 
   return (
     <div className="p-2">
@@ -248,7 +250,7 @@ export const Table = () => {
           },
         }}>
         <TableHead>
-          {headerGroup.map((headerGroup) => (
+          {headerGroups.map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <TableCellHead
@@ -281,7 +283,7 @@ export const Table = () => {
           ))}
         </TableHead>
         <TableBody>
-          {table.getRowModel().rows.map((row) => (
+          {rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <TableCell
