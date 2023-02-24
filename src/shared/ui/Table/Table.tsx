@@ -10,6 +10,7 @@ import { TableHead } from 'shared/ui/Table/TableHead'
 import { TableBody } from 'shared/ui/Table/TableBody'
 import { TableCellHead } from 'shared/ui/Table/TableCellHead'
 import { TableCell } from 'shared/ui/Table/TableCell'
+import { TableContext } from 'shared/ui/Table/TableContext'
 
 import 'shared/ui/Table/table.css'
 
@@ -88,48 +89,55 @@ export const Table = (props: TableProps) => {
       </tr>
     ))
 
-  return (
-    <div className="p-2">
-      <div className="inline-block rounded border border-black shadow">
-        <div className="border-b border-black px-1">
-          <label>
-            <input
-              {...{
-                type: 'checkbox',
-                checked: table.getIsAllColumnsVisible(),
-                onChange: table.getToggleAllColumnsVisibilityHandler(),
-              }}
-            />{' '}
-            Toggle All
-          </label>
-        </div>
-        {table.getAllLeafColumns().map((column) => {
-          return (
-            <div key={column.id} className="px-1">
-              <label>
-                <input
-                  {...{
-                    type: 'checkbox',
-                    checked: column.getIsVisible(),
-                    onChange: column.getToggleVisibilityHandler(),
-                  }}
-                />{' '}
-                {column.id}
-              </label>
-            </div>
-          )
-        })}
-      </div>
+  const context = {
+    headerGroups: headerGroups,
+    rows: rows,
+  }
 
-      <table
-        {...{
-          style: {
-            width: table.getCenterTotalSize(),
-          },
-        }}>
-        <TableHead>{renderHeadersGroups()}</TableHead>
-        <TableBody>{renderBody()}</TableBody>
-      </table>
-    </div>
+  return (
+    <TableContext.Provider value={context}>
+      <div className="p-2">
+        <div className="inline-block rounded border border-black shadow">
+          <div className="border-b border-black px-1">
+            <label>
+              <input
+                {...{
+                  type: 'checkbox',
+                  checked: table.getIsAllColumnsVisible(),
+                  onChange: table.getToggleAllColumnsVisibilityHandler(),
+                }}
+              />{' '}
+              Toggle All
+            </label>
+          </div>
+          {table.getAllLeafColumns().map((column) => {
+            return (
+              <div key={column.id} className="px-1">
+                <label>
+                  <input
+                    {...{
+                      type: 'checkbox',
+                      checked: column.getIsVisible(),
+                      onChange: column.getToggleVisibilityHandler(),
+                    }}
+                  />{' '}
+                  {column.id}
+                </label>
+              </div>
+            )
+          })}
+        </div>
+
+        <table
+          {...{
+            style: {
+              width: table.getCenterTotalSize(),
+            },
+          }}>
+          <TableHead>{renderHeadersGroups()}</TableHead>
+          <TableBody>{renderBody()}</TableBody>
+        </table>
+      </div>
+    </TableContext.Provider>
   )
 }

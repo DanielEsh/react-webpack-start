@@ -1,10 +1,13 @@
-import { HeaderGroup } from '@tanstack/react-table'
+import { HeaderGroup, Row } from '@tanstack/react-table'
 import { createContext } from 'react'
 
 export interface TableContextType<TableData> {
   headerGroups: HeaderGroup<TableData>[]
+  rows: Row<any>[]
 }
 
-// const NAME = 'TableContext')
+const NAME = 'TableContext'
 
-// TableContext.displayName = NAME
+export const TableContext = createContext<TableContextType<null> | null>(null)
+
+TableContext.displayName = NAME
