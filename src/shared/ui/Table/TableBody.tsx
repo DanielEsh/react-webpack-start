@@ -1,9 +1,31 @@
-import type { ReactNode } from 'react'
+import { flexRender } from '@tanstack/react-table'
+import { useContext } from 'react'
+import { TableCell } from 'shared/ui/Table/TableCell'
+import { TableContext } from 'shared/ui/Table/TableContext'
 
-export interface TableBodyProps {
-  children: ReactNode
-}
+export const TableBody = () => {
+  const context = useContext(TableContext)
+  const { rows } = context
 
-export const TableBody = ({ children }: TableBodyProps) => {
-  return <tbody>{children}</tbody>
+  return (
+    <tbody>
+      {rows &&
+        rows.map((row) => (
+          <tr key={row.id}>
+            {row.getVisibleCells().map((cell) => (
+              <TableCell
+                {...{
+                  key: cell.id,
+                  style: {
+                    width: cell.column.getSize(),
+                  },
+                }}
+                className="border border-red-500 bg-yellow-400">
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </TableCell>
+            ))}
+          </tr>
+        ))}
+    </tbody>
+  )
 }

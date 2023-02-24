@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import {
-  flexRender,
   getCoreRowModel,
   ColumnDef,
   useReactTable,
@@ -8,8 +7,6 @@ import {
 
 import { TableHead } from 'shared/ui/Table/TableHead'
 import { TableBody } from 'shared/ui/Table/TableBody'
-import { TableCellHead } from 'shared/ui/Table/TableCellHead'
-import { TableCell } from 'shared/ui/Table/TableCell'
 import { TableContext } from 'shared/ui/Table/TableContext'
 
 import 'shared/ui/Table/table.css'
@@ -40,54 +37,6 @@ export const Table = (props: TableProps) => {
   const headerGroups = table.getHeaderGroups()
 
   const { rows } = table.getRowModel()
-
-  const renderHeadersGroups = () =>
-    headerGroups.map((headerGroup) => (
-      <tr key={headerGroup.id}>
-        {headerGroup.headers.map((header) => (
-          <TableCellHead
-            {...{
-              key: header.id,
-              colSpan: header.colSpan,
-              style: {
-                width: header.getSize(),
-              },
-            }}
-            className="border border-red-500 bg-slate-400">
-            {header.isPlaceholder
-              ? null
-              : flexRender(header.column.columnDef.header, header.getContext())}
-            <div
-              {...{
-                onMouseDown: header.getResizeHandler(),
-                onTouchStart: header.getResizeHandler(),
-                className: `resizer ${
-                  header.column.getIsResizing() ? 'isResizing' : ''
-                }`,
-              }}
-            />
-          </TableCellHead>
-        ))}
-      </tr>
-    ))
-
-  const renderBody = () =>
-    rows.map((row) => (
-      <tr key={row.id}>
-        {row.getVisibleCells().map((cell) => (
-          <TableCell
-            {...{
-              key: cell.id,
-              style: {
-                width: cell.column.getSize(),
-              },
-            }}
-            className="border border-red-500 bg-yellow-400">
-            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-          </TableCell>
-        ))}
-      </tr>
-    ))
 
   const context = {
     headerGroups: headerGroups,
@@ -134,8 +83,8 @@ export const Table = (props: TableProps) => {
               width: table.getCenterTotalSize(),
             },
           }}>
-          <TableHead>{renderHeadersGroups()}</TableHead>
-          <TableBody>{renderBody()}</TableBody>
+          <TableHead />
+          <TableBody />
         </table>
       </div>
     </TableContext.Provider>
