@@ -1,16 +1,28 @@
-import type { ReactNode } from 'react'
+import { flexRender, type Header } from '@tanstack/react-table'
 
 export interface TableCellHead {
-  children: ReactNode
-  className: string
+  header: Header<any, unknown>
 }
 
-export const TableCellHead = (props: TableCellHead) => {
-  const { children, className, ...restProps } = props
-
+export const TableCellHead = ({ header }: TableCellHead) => {
   return (
-    <th className={className} {...restProps}>
-      {children}
+    <th
+      className="border border-red-500 bg-slate-400"
+      colSpan={header.colSpan}
+      style={{ width: header.getSize() }}>
+      {header.isPlaceholder
+        ? null
+        : flexRender(header.column.columnDef.header, header.getContext())}
+
+      <div
+        {...{
+          onMouseDown: header.getResizeHandler(),
+          onTouchStart: header.getResizeHandler(),
+          className: `resizer ${
+            header.column.getIsResizing() ? 'isResizing' : ''
+          }`,
+        }}
+      />
     </th>
   )
 }
