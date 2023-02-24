@@ -3,7 +3,7 @@ import { createContext } from 'react'
 
 export interface TableContextType<TableData> {
   headerGroups: HeaderGroup<TableData>[] | null
-  rows: Row<any>[] | null
+  rows: Row<TableData>[] | null
 }
 
 const NAME = 'TableContext'

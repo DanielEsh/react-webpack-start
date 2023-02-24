@@ -112,7 +112,7 @@ const columns: ColumnDef<Person>[] = [
             {...{
               style: { cursor: 'pointer' },
             }}>
-            '🔵'
+            🔵
           </button>
           <button
             {...{
@@ -133,5 +133,5 @@ const columns: ColumnDef<Person>[] = [
 ]
 
 export const DataTable = () => {
-  return <Table defaultData={defaultData} columns={columns} />
+  return <Table<Person> defaultData={defaultData} columns={columns} />
 }

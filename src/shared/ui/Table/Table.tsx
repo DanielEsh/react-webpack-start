@@ -11,12 +11,14 @@ import { TableContext } from 'shared/ui/Table/TableContext'
 
 import 'shared/ui/Table/table.css'
 
-interface TableProps {
-  defaultData: any[]
-  columns: ColumnDef<any>[]
+type BaseData = unknown | object | any[]
+
+interface TableProps<TData> {
+  defaultData: TData[]
+  columns: ColumnDef<TData>[]
 }
 
-export const Table = (props: TableProps) => {
+export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   const { defaultData, columns } = props
 
   const [data, setData] = useState(() => [...defaultData])
@@ -42,6 +44,16 @@ export const Table = (props: TableProps) => {
     headerGroups: headerGroups,
     rows: rows,
   }
+
+  /**
+   * TODO:
+   * types
+   * sync with lc
+   * Header
+   * Table settings (columns visible)
+   * remove styles
+   * fix wqrning
+   */
 
   return (
     <TableContext.Provider value={context}>
