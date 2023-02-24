@@ -50,38 +50,6 @@ const defaultData: Person[] = [
   },
 ]
 
-// const columnHelper = createColumnHelper<Person>()
-
-// const columns = [
-//   columnHelper.accessor('firstName', {
-//     cell: (info) => info.getValue(),
-//     footer: (info) => info.column.id,
-//   }),
-//   columnHelper.accessor((row) => row.lastName, {
-//     id: 'lastName',
-//     cell: (info) => <i>{info.getValue()}</i>,
-//     header: () => <span>Last Name</span>,
-//     footer: (info) => info.column.id,
-//   }),
-//   columnHelper.accessor('age', {
-//     header: () => 'Age',
-//     cell: (info) => info.renderValue(),
-//     footer: (info) => info.column.id,
-//   }),
-//   columnHelper.accessor('visits', {
-//     header: () => <span>Visits</span>,
-//     footer: (info) => info.column.id,
-//   }),
-//   columnHelper.accessor('status', {
-//     header: 'Status',
-//     footer: (info) => info.column.id,
-//   }),
-//   columnHelper.accessor('progress', {
-//     header: 'Profile Progress',
-//     footer: (info) => info.column.id,
-//   }),
-// ]
-
 const columns: ColumnDef<Person>[] = [
   {
     accessorKey: 'firstName',
@@ -151,44 +119,10 @@ const columns: ColumnDef<Person>[] = [
   },
 ]
 
-// const columns: ColumnDef<Person>[] = [
-//   {
-//     header: 'Actions',
-//     footer: (props) => props.column.id,
-//     columns: [,],
-//   },
-//   {
-//     header: 'Info',
-//     footer: (props) => props.column.id,
-//     columns: [
-//       {
-//         accessorKey: 'age',
-//         header: () => 'Age',
-//         footer: (props) => props.column.id,
-//       },
-//       {
-//         header: 'More Info',
-//         columns: [
-//           {
-//             accessorKey: 'visits',
-//             header: () => <span>Visits</span>,
-//             footer: (props) => props.column.id,
-//           },
-//           {
-//             accessorKey: 'status',
-//             header: 'Status',
-//             footer: (props) => props.column.id,
-//           },
-//           {
-//             accessorKey: 'progress',
-//             header: 'Profile Progress',
-//             footer: (props) => props.column.id,
-//           },
-//         ],
-//       },
-//     ],
-//   },
-// ]
+interface TableProps<TData> {
+  defaultData: []
+  columns: ColumnDef<TData>[]
+}
 
 export const Table = () => {
   const [data, setData] = useState(() => [...defaultData])
