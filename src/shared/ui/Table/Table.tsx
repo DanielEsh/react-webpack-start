@@ -10,6 +10,7 @@ import { TableBody } from 'shared/ui/Table/TableBody'
 import { TableContext } from 'shared/ui/Table/TableContext'
 
 import 'shared/ui/Table/table.css'
+import { TableVisibilityChanger } from 'shared/ui/Table/TableVisibilityChanger'
 
 type BaseData = unknown | object | any[]
 
@@ -39,10 +40,13 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   const headerGroups = table.getHeaderGroups()
 
   const { rows } = table.getRowModel()
+  const cols = table.getAllLeafColumns()
 
   const context = {
+    tableInstance: table,
     headerGroups: headerGroups,
     rows: rows,
+    columns: cols,
   }
 
   /**
@@ -58,36 +62,7 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   return (
     <TableContext.Provider value={context}>
       <div className="p-2">
-        <div className="inline-block rounded border border-black shadow">
-          <div className="border-b border-black px-1">
-            <label>
-              <input
-                {...{
-                  type: 'checkbox',
-                  checked: table.getIsAllColumnsVisible(),
-                  onChange: table.getToggleAllColumnsVisibilityHandler(),
-                }}
-              />{' '}
-              Toggle All
-            </label>
-          </div>
-          {table.getAllLeafColumns().map((column) => {
-            return (
-              <div key={column.id} className="px-1">
-                <label>
-                  <input
-                    {...{
-                      type: 'checkbox',
-                      checked: column.getIsVisible(),
-                      onChange: column.getToggleVisibilityHandler(),
-                    }}
-                  />{' '}
-                  {column.id}
-                </label>
-              </div>
-            )
-          })}
-        </div>
+        <TableVisibilityChanger />
 
         <table
           {...{
