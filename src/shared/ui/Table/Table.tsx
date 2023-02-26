@@ -24,7 +24,17 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
 
   const [data, setData] = useState(() => [...defaultData])
 
-  const [columnVisibility, setColumnVisibility] = useState({})
+  const key = localStorage.getItem('test')
+  const getter = JSON.parse(key || '')
+
+  const getHiddenColumns = () =>
+    Object.keys(getter).reduce<any>((acc, item) => {
+      const test = getter[item]
+
+      return (acc[item] = test.isVisible), acc
+    }, {})
+
+  const [columnVisibility, setColumnVisibility] = useState(getHiddenColumns())
 
   const table = useReactTable({
     data,
@@ -42,13 +52,6 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   const { rows } = table.getRowModel()
   const cols = table.getAllLeafColumns()
 
-  const context = {
-    tableInstance: table,
-    headerGroups: headerGroups,
-    rows: rows,
-    columns: cols,
-  }
-
   const lsValue = cols.reduce<any>((acc, n) => {
     const name = n.id
 
@@ -63,14 +66,16 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     return (acc[name] = result), acc
   }, {})
 
-  console.log('lsValue', lsValue)
+  // console.log('lsValue', lsValue)
 
-  // const test = {
-  //   Actions: {
-  //     visible: true,
-  //     size: '',
-  //   },
-  // }
+  localStorage.setItem('test', JSON.stringify(lsValue))
+
+  const context = {
+    tableInstance: table,
+    headerGroups: headerGroups,
+    rows: rows,
+    columns: cols,
+  }
 
   /**
    * TODO:
