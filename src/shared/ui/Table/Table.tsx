@@ -22,8 +22,6 @@ interface TableProps<TData> {
 export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   const { defaultData, columns } = props
 
-  const [data, setData] = useState(() => [...defaultData])
-
   const key = localStorage.getItem('test')
   const getter = JSON.parse(key || '')
 
@@ -45,7 +43,7 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   const [columnSizing, setColumnSizing] = useState(getSizesColumns)
 
   const table = useReactTable({
-    data,
+    data: [...defaultData],
     columns,
     state: {
       columnVisibility,
@@ -92,8 +90,9 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
    * Header +
    * Table settings (columns visible) +
    * remove styles +
-   * fix wqrning
+   * fix wqrning +
    *
+   * create column type with required id, size, minsize, max size
    */
 
   return (

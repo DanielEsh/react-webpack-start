@@ -1,11 +1,4 @@
-import { createContext, useState } from 'react'
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  ColumnDef,
-  useReactTable,
-} from '@tanstack/react-table'
+import { ColumnDef } from '@tanstack/react-table'
 
 import { Table } from 'shared/ui/Table'
 
@@ -113,6 +106,9 @@ const columns: ColumnDef<Person>[] = [
           <button
             {...{
               style: { cursor: 'pointer' },
+              onClick: () => {
+                console.log('row', row)
+              },
             }}>
             🔵
           </button>
