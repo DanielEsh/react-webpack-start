@@ -104,8 +104,7 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
           <div>Persons</div>
 
           <div className="flex gap-3">
-            <button>btn 1</button>
-            <button>btn 2</button>
+            <button onClick={() => setColumnSizing({})}>reset Size</button>
           </div>
         </div>
         <table
