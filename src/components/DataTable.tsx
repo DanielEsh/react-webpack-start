@@ -47,6 +47,7 @@ const defaultData: Person[] = [
 
 const columns: ColumnDef<Person>[] = [
   {
+    id: 'firstName',
     accessorKey: 'firstName',
     header: 'First Name',
     cell: ({ row, getValue }) => (
@@ -102,6 +103,7 @@ const columns: ColumnDef<Person>[] = [
     footer: (props) => props.column.id,
   },
   {
+    id: 'actions',
     header: 'Actions',
     minSize: 220,
     footer: (props) => props.column.id,

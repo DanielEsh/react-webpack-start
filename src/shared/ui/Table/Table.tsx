@@ -49,14 +49,38 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     columns: cols,
   }
 
+  const lsValue = cols.reduce<any>((acc, n) => {
+    const name = n.id
+
+    const isVisible = n.getIsVisible()
+    const size = n.getSize()
+
+    const result = {
+      isVisible,
+      size,
+    }
+
+    return (acc[name] = result), acc
+  }, {})
+
+  console.log('lsValue', lsValue)
+
+  // const test = {
+  //   Actions: {
+  //     visible: true,
+  //     size: '',
+  //   },
+  // }
+
   /**
    * TODO:
    * types
    * sync with lc
    * Header
-   * Table settings (columns visible)
+   * Table settings (columns visible) +
    * remove styles
    * fix wqrning
+   *
    */
 
   return (

@@ -5,6 +5,15 @@ export interface TableCellHead {
 }
 
 export const TableCellHead = ({ header }: TableCellHead) => {
+  const handleTouchResize = (event: any) => {
+    const changeColumnSesizeFn = header.getResizeHandler()
+    changeColumnSesizeFn(event)
+  }
+
+  const handleTouchEnd = () => {
+    console.log('event', header.column.id, header.getSize())
+  }
+
   return (
     <th
       className="border border-red-500 bg-slate-400"
@@ -15,13 +24,12 @@ export const TableCellHead = ({ header }: TableCellHead) => {
         : flexRender(header.column.columnDef.header, header.getContext())}
 
       <div
-        {...{
-          onMouseDown: header.getResizeHandler(),
-          onTouchStart: header.getResizeHandler(),
-          className: `resizer ${
-            header.column.getIsResizing() ? 'isResizing' : ''
-          }`,
-        }}
+        onTouchStart={(event) => handleTouchResize(event)}
+        onMouseUp={handleTouchEnd}
+        onMouseDown={(event) => handleTouchResize(event)}
+        className={`resizer ${
+          header.column.getIsResizing() ? 'isResizing' : ''
+        }`}
       />
     </th>
   )
