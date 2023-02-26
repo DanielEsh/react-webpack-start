@@ -88,7 +88,7 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   /**
    * TODO:
    * types
-   * sync with lc
+   * sync with lc +
    * Header
    * Table settings (columns visible) +
    * remove styles
@@ -100,7 +100,14 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     <TableContext.Provider value={context}>
       <div className="p-2">
         <TableVisibilityChanger />
+        <div className="flex justify-between">
+          <div>Persons</div>
 
+          <div className="flex gap-3">
+            <button>btn 1</button>
+            <button>btn 2</button>
+          </div>
+        </div>
         <table
           {...{
             style: {
