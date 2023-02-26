@@ -34,15 +34,25 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
       return (acc[item] = test.isVisible), acc
     }, {})
 
+  const getSizesColumns = () =>
+    Object.keys(getter).reduce<any>((acc, item) => {
+      const test = getter[item]
+
+      return (acc[item] = test.size), acc
+    }, {})
+
   const [columnVisibility, setColumnVisibility] = useState(getHiddenColumns())
+  const [columnSizing, setColumnSizing] = useState(getSizesColumns)
 
   const table = useReactTable({
     data,
     columns,
     state: {
       columnVisibility,
+      columnSizing,
     },
     onColumnVisibilityChange: setColumnVisibility,
+    onColumnSizingChange: setColumnSizing,
     columnResizeMode: 'onChange',
     getCoreRowModel: getCoreRowModel(),
   })
@@ -65,8 +75,6 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
 
     return (acc[name] = result), acc
   }, {})
-
-  // console.log('lsValue', lsValue)
 
   localStorage.setItem('test', JSON.stringify(lsValue))
 
