@@ -16,7 +16,7 @@ export const TableCellHead = ({ header }: TableCellHead) => {
 
   return (
     <th
-      className="border border-red-500 bg-slate-400"
+      className="relative border border-red-500 bg-slate-400"
       colSpan={header.colSpan}
       style={{ width: header.getSize() }}>
       {header.isPlaceholder

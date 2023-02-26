@@ -89,9 +89,9 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
    * TODO:
    * types
    * sync with lc +
-   * Header
+   * Header +
    * Table settings (columns visible) +
-   * remove styles
+   * remove styles +
    * fix wqrning
    *
    */
