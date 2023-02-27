@@ -17,4 +17,13 @@ export const TableContext = createContext<TableContextType<any>>({
   columns: null,
 })
 
+export const createTableContext = <T = unknown>() => {
+  return createContext<TableContextType<T>>({
+    tableInstance: null,
+    headerGroups: null,
+    rows: null,
+    columns: null,
+  })
+}
+
 TableContext.displayName = NAME
