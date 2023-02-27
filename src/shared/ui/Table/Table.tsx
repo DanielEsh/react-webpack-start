@@ -7,12 +7,12 @@ import {
 
 import { TableHead } from 'shared/ui/Table/TableHead'
 import { TableBody } from 'shared/ui/Table/TableBody'
-import { TableContext } from 'shared/ui/Table/TableContext'
+import { TableContext, TableContextType } from 'shared/ui/Table/TableContext'
 
 import 'shared/ui/Table/table.css'
 import { TableVisibilityChanger } from 'shared/ui/Table/TableVisibilityChanger'
 
-type BaseData = unknown | object | any[]
+type BaseData = unknown | object
 
 interface TableProps<TData> {
   defaultData: TData[]
@@ -22,28 +22,23 @@ interface TableProps<TData> {
 export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   const { defaultData, columns } = props
 
+  const [data, setData] = useState(() => [...defaultData])
+
   const key = localStorage.getItem('test')
   const getter = JSON.parse(key || '')
 
-  const getHiddenColumns = () =>
-    Object.keys(getter).reduce<any>((acc, item) => {
-      const test = getter[item]
+  const {
+    columnVisibility: defaultColumnVisibility = {},
+    columnSizing: defaultColumnSizing = {},
+  } = getter
 
-      return (acc[item] = test.isVisible), acc
-    }, {})
-
-  const getSizesColumns = () =>
-    Object.keys(getter).reduce<any>((acc, item) => {
-      const test = getter[item]
-
-      return (acc[item] = test.size), acc
-    }, {})
-
-  const [columnVisibility, setColumnVisibility] = useState(getHiddenColumns())
-  const [columnSizing, setColumnSizing] = useState(getSizesColumns)
+  const [columnVisibility, setColumnVisibility] = useState(
+    defaultColumnVisibility,
+  )
+  const [columnSizing, setColumnSizing] = useState(defaultColumnSizing)
 
   const table = useReactTable({
-    data: [...defaultData],
+    data,
     columns,
     state: {
       columnVisibility,
@@ -60,23 +55,14 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   const { rows } = table.getRowModel()
   const cols = table.getAllLeafColumns()
 
-  const lsValue = cols.reduce<any>((acc, n) => {
-    const name = n.id
-
-    const isVisible = n.getIsVisible()
-    const size = n.getSize()
-
-    const result = {
-      isVisible,
-      size,
-    }
-
-    return (acc[name] = result), acc
-  }, {})
+  const lsValue = {
+    columnVisibility,
+    columnSizing,
+  }
 
   localStorage.setItem('test', JSON.stringify(lsValue))
 
-  const context = {
+  const context: TableContextType<TData> = {
     tableInstance: table,
     headerGroups: headerGroups,
     rows: rows,
@@ -98,7 +84,7 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   return (
     <TableContext.Provider value={context}>
       <div className="p-2">
-        <TableVisibilityChanger />
+        <TableVisibilityChanger<TData> />
         <div className="flex justify-between">
           <div>Persons</div>
 

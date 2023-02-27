@@ -1,10 +1,15 @@
-import { useContext } from 'react'
+import { useContext, ChangeEvent } from 'react'
 import { Column } from '@tanstack/react-table'
 import { TableContext } from 'shared/ui/Table/TableContext'
 
-export const TableVisibilityChanger = () => {
+type BaseData = unknown | object
+
+export const TableVisibilityChanger = <TData extends BaseData>() => {
   const { tableInstance, columns } = useContext(TableContext)
-  const handleChange = (event: any, column: Column<any, unknown>) => {
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    column: Column<TData, unknown>,
+  ) => {
     const changeVisibilityColumnFn = column.getToggleVisibilityHandler()
     changeVisibilityColumnFn(event)
   }

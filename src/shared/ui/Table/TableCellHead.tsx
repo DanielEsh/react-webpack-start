@@ -1,3 +1,4 @@
+import type { TouchEvent, MouseEvent } from 'react'
 import { flexRender, type Header } from '@tanstack/react-table'
 
 export interface TableCellHead {
@@ -5,13 +6,9 @@ export interface TableCellHead {
 }
 
 export const TableCellHead = ({ header }: TableCellHead) => {
-  const handleTouchResize = (event: any) => {
+  const handleTouchResize = (event: TouchEvent | MouseEvent) => {
     const changeColumnSesizeFn = header.getResizeHandler()
     changeColumnSesizeFn(event)
-  }
-
-  const handleTouchEnd = () => {
-    console.log('event', header.column.id, header.getSize())
   }
 
   return (
@@ -25,7 +22,6 @@ export const TableCellHead = ({ header }: TableCellHead) => {
 
       <div
         onTouchStart={(event) => handleTouchResize(event)}
-        onMouseUp={handleTouchEnd}
         onMouseDown={(event) => handleTouchResize(event)}
         className={`resizer ${
           header.column.getIsResizing() ? 'isResizing' : ''
