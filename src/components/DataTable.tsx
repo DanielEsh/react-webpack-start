@@ -131,5 +131,11 @@ const columns: ColumnDef<Person>[] = [
 ]
 
 export const DataTable = () => {
-  return <Table<Person> defaultData={defaultData} columns={columns} />
+  return (
+    <Table<Person>
+      localStorageKey="dataTable"
+      defaultData={defaultData}
+      columns={columns}
+    />
+  )
 }

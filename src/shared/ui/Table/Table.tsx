@@ -15,18 +15,23 @@ import { TableVisibilityChanger } from 'shared/ui/Table/TableVisibilityChanger'
 type BaseData = unknown | object
 
 interface TableProps<TData> {
-  key: string
+  localStorageKey: string
   defaultData: TData[]
   columns: ColumnDef<TData>[]
 }
 
 export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
-  const { key: localStorageKey, defaultData, columns } = props
+  const { localStorageKey, defaultData, columns } = props
 
   const [data, setData] = useState(() => [...defaultData])
 
+  const emptyValues = {
+    columnVisibility: {},
+    columnSizing: {},
+  }
+
   const key = localStorage.getItem(localStorageKey)
-  const getter = JSON.parse(key || '')
+  const getter = key ? JSON.parse(key || '') : emptyValues
 
   const {
     columnVisibility: defaultColumnVisibility = {},
