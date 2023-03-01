@@ -14,7 +14,7 @@ const Counter = () => {
     // if (Math.random() < 0.5) {
     //   throw new Error()
     // }
-    throw new Error()
+    // throw new Error()
   }, [])
 
   return (

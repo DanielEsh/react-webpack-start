@@ -1,2 +1,3 @@
-export * from 'app/providers/router/ui/AppRouter'
-export * from 'app/providers/router/routesFactory'
+import AppRouter from './ui/AppRouter'
+
+export { AppRouter }
