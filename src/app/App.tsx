@@ -13,8 +13,12 @@ export const App = () => {
         <BrowserRouter>
           <ErrorBoundary>
             <div className="app">
-              <Link to={'/'}>Главная</Link>
-              <Link to={'/about'}>О сайте</Link>
+              <div className="flex gap-3">
+                <Link to={'/'}>Главная</Link>
+                <Link to={'/about'}>О сайте</Link>
+                <Link to={'/collections'}>Collections</Link>
+                <Link to={'/collections/1'}>Collections 1</Link>
+              </div>
               <AppRouter />
             </div>
           </ErrorBoundary>
