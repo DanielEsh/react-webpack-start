@@ -2,6 +2,7 @@ import { mkdir, writeFile } from 'fs'
 import { resolveRoot } from '../resolveRoot.mjs'
 import { firstCharUpperCase } from '../firstCharUpperCase.mjs'
 import { componentTemplate } from './componentTemplate.mjs'
+import { errorCb } from '../error.mjs'
 
 export const createUI = async (layer, sliceName) => {
   const resolveUIPath = (...segments) =>
@@ -9,7 +10,7 @@ export const createUI = async (layer, sliceName) => {
 
   const createUIDir = async () => {
     try {
-      await mkdir(resolveUIPath(), (err) => console.log('ERROR', err))
+      await mkdir(resolveUIPath(), errorCb)
     } catch (e) {
       console.log('Не удалось создать UI директорию')
     }
@@ -18,13 +19,11 @@ export const createUI = async (layer, sliceName) => {
   const createComponent = async () => {
     try {
       const componentName = firstCharUpperCase(sliceName)
-      await mkdir(resolveUIPath(componentName), (err) =>
-        console.log('ERROR', err),
-      )
+      await mkdir(resolveUIPath(componentName), errorCb)
       await writeFile(
         resolveUIPath(componentName, `${componentName}.tsx`),
         componentTemplate(componentName),
-        (err) => console.log('ERROR', err),
+        errorCb,
       )
     } catch (e) {
       console.log('Не удалось создать компонент')

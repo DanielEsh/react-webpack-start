@@ -1,6 +1,7 @@
 import { writeFile } from 'fs'
 import { resolveRoot } from '../resolveRoot.mjs'
 import { firstCharUpperCase } from '../firstCharUpperCase.mjs'
+import { errorCb } from '../error.mjs'
 
 export const createPublicApi = async (layer, sliceName) => {
   const componentName = firstCharUpperCase(sliceName)
@@ -13,7 +14,7 @@ export const createPublicApi = async (layer, sliceName) => {
 export { ${firstCharUpperCase(
         schemaName,
       )} } from './model/types/${schemaName}';`,
-      (err) => console.log('ERROR', err),
+      errorCb,
     )
   } catch (e) {
     console.log('Не удалось создать PUBLIC API')
