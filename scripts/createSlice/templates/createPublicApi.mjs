@@ -1,13 +1,13 @@
-const fs = require('fs/promises')
-const resolveRoot = require('../resolveRoot')
-const firstCharUpperCase = require('../firstCharUpperCase')
+import { writeFile } from 'fs'
+import { resolveRoot } from '../resolveRoot.mjs'
+import { firstCharUpperCase } from '../firstCharUpperCase.mjs'
 
-module.exports = async (layer, sliceName) => {
+export const createPublicApi = async (layer, sliceName) => {
   const componentName = firstCharUpperCase(sliceName)
   const schemaName = `${sliceName}Schema`
 
   try {
-    await fs.writeFile(
+    await writeFile(
       resolveRoot('src', layer, sliceName, 'index.ts'),
       `export { ${componentName} } from './ui/${componentName}/${componentName}';
 export { ${firstCharUpperCase(

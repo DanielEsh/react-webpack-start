@@ -1,4 +1,4 @@
-import { firstCharUpperCase } from '../firstCharUpperCase'
+import { firstCharUpperCase } from '../firstCharUpperCase.mjs'
 
 export const schemaTypeTemplate = (
   sliceName,

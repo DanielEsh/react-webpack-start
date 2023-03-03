@@ -8,7 +8,7 @@
     "lint": "eslint",
     "lint:fix": "eslint ./ --fix",
     "test": "jest --config ./config/jest/jest.config.ts",
-    "generate:slice": "node ./scripts/createSlice/index.js"
+    "generate:slice": "node ./scripts/createSlice/index.mjs"
   },
   "license": "MIT",
   "devDependencies": {

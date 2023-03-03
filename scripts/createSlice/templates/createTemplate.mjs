@@ -1,8 +1,8 @@
 import { mkdir } from 'fs'
-import { resolveRoot } from '../resolveRoot'
-import { createModel } from './createModel'
-const createUI = require('./createUI')
-const createPublicApi = require('./createPublicApi')
+import { resolveRoot } from '../resolveRoot.mjs'
+import { createModel } from './createModel.mjs'
+import { createUI } from './createUI.mjs'
+import { createPublicApi } from './createPublicApi.mjs'
 
 export const createTemplate = async (layer, sliceName) => {
   try {

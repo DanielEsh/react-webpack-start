@@ -1,6 +1,6 @@
 import { mkdir, writeFile } from 'fs'
-import { resolveRoot } from '../resolveRoot'
-import { schemaTypeTemplate } from './schemaTypeTemplate'
+import { resolveRoot } from '../resolveRoot.mjs'
+import { schemaTypeTemplate } from './schemaTypeTemplate.mjs'
 
 export const createModel = async (layer, sliceName) => {
   const resolveModelPath = (...segments) =>
@@ -30,6 +30,5 @@ export const createModel = async (layer, sliceName) => {
   }
 
   await createModelStructure()
-  await createReduxSlice()
   await createSchemaType()
 }
