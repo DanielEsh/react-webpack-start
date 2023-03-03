@@ -1,7 +1,7 @@
-const firstCharUpperCase = require('../firstCharUpperCase')
+import { firstCharUpperCase } from '../firstCharUpperCase'
 
-module.exports = (sliceName) => `export interface ${firstCharUpperCase(
+export const schemaTypeTemplate = (
   sliceName,
-)}Schema {
+) => `export interface ${firstCharUpperCase(sliceName)}Schema {
     
 }`

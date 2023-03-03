@@ -1,17 +1,17 @@
-const fs = require('fs/promises')
-const resolveRoot = require('../resolveRoot')
-const firstCharUpperCase = require('../firstCharUpperCase')
+import { mkdir, writeFile } from 'fs'
+import { resolveRoot } from '../resolveRoot'
+import { firstCharUpperCase } from '../firstCharUpperCase'
 const componentTemplate = require('./componentTemplate')
 const storyTemplate = require('./storyTemplate')
 const styleTemplate = require('./styleTemplate')
 
-module.exports = async (layer, sliceName) => {
+export const createUI = async (layer, sliceName) => {
   const resolveUIPath = (...segments) =>
     resolveRoot('src', layer, sliceName, 'ui', ...segments)
 
   const createUIDir = async () => {
     try {
-      await fs.mkdir(resolveUIPath())
+      await mkdir(resolveUIPath())
     } catch (e) {
       console.log('Не удалось создать UI директорию')
     }
@@ -20,16 +20,16 @@ module.exports = async (layer, sliceName) => {
   const createComponent = async () => {
     try {
       const componentName = firstCharUpperCase(sliceName)
-      await fs.mkdir(resolveUIPath(componentName))
-      await fs.writeFile(
+      await mkdir(resolveUIPath(componentName))
+      await writeFile(
         resolveUIPath(componentName, `${componentName}.tsx`),
         componentTemplate(componentName),
       )
-      await fs.writeFile(
+      await writeFile(
         resolveUIPath(componentName, `${componentName}.stories.tsx`),
         storyTemplate(layer, componentName),
       )
-      await fs.writeFile(
+      await writeFile(
         resolveUIPath(componentName, `${componentName}.module.scss`),
         styleTemplate(componentName),
       )

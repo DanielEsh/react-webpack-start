@@ -1,12 +1,12 @@
-const fs = require('fs/promises')
-const resolveRoot = require('../resolveRoot')
-const createModel = require('./createModel')
+import { mkdir } from 'fs'
+import { resolveRoot } from '../resolveRoot'
+import { createModel } from './createModel'
 const createUI = require('./createUI')
 const createPublicApi = require('./createPublicApi')
 
-module.exports = async (layer, sliceName) => {
+export const createTemplate = async (layer, sliceName) => {
   try {
-    await fs.mkdir(resolveRoot('src', layer, sliceName))
+    await mkdir(resolveRoot('src', layer, sliceName))
   } catch (e) {
     console.log(`не удалось создать директорию для слайса${sliceName}`)
   }
