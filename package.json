@@ -7,7 +7,8 @@
     "build": "webpack --env mode=development",
     "lint": "eslint",
     "lint:fix": "eslint ./ --fix",
-    "test": "jest --config ./config/jest/jest.config.ts"
+    "test": "jest --config ./config/jest/jest.config.ts",
+    "generate:slice": "node ./scripts/createSlice/index.js"
   },
   "license": "MIT",
   "devDependencies": {
