@@ -13,6 +13,7 @@ export const createPublicApi = async (layer, sliceName) => {
 export { ${firstCharUpperCase(
         schemaName,
       )} } from './model/types/${schemaName}';`,
+      (err) => console.log('ERROR', err),
     )
   } catch (e) {
     console.log('Не удалось создать PUBLIC API')

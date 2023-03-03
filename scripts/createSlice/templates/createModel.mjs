@@ -8,11 +8,17 @@ export const createModel = async (layer, sliceName) => {
 
   const createModelStructure = async () => {
     try {
-      await mkdir(resolveModelPath())
-      await mkdir(resolveModelPath('types'))
-      await mkdir(resolveModelPath('slices'))
-      await mkdir(resolveModelPath('selectors'))
-      await mkdir(resolveModelPath('services'))
+      await mkdir(resolveModelPath(), (err) => console.log('ERROR', err))
+      await mkdir(resolveModelPath('types'), (err) => console.log('ERROR', err))
+      await mkdir(resolveModelPath('slices'), (err) =>
+        console.log('ERROR', err),
+      )
+      await mkdir(resolveModelPath('selectors'), (err) =>
+        console.log('ERROR', err),
+      )
+      await mkdir(resolveModelPath('services'), (err) =>
+        console.log('ERROR', err),
+      )
     } catch (e) {
       console.log(`Не удалось создать model сегмент для слайса ${sliceName}`, e)
     }
@@ -23,6 +29,7 @@ export const createModel = async (layer, sliceName) => {
       await writeFile(
         resolveModelPath('types', `${sliceName}Schema.ts`),
         schemaTypeTemplate(sliceName),
+        (err) => console.log('ERROR', err),
       )
     } catch (e) {
       console.log('Не удалось создать тип схемы стейта', e)

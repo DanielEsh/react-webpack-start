@@ -9,7 +9,7 @@ export const createUI = async (layer, sliceName) => {
 
   const createUIDir = async () => {
     try {
-      await mkdir(resolveUIPath())
+      await mkdir(resolveUIPath(), (err) => console.log('ERROR', err))
     } catch (e) {
       console.log('Не удалось создать UI директорию')
     }
@@ -18,10 +18,13 @@ export const createUI = async (layer, sliceName) => {
   const createComponent = async () => {
     try {
       const componentName = firstCharUpperCase(sliceName)
-      await mkdir(resolveUIPath(componentName))
+      await mkdir(resolveUIPath(componentName), (err) =>
+        console.log('ERROR', err),
+      )
       await writeFile(
         resolveUIPath(componentName, `${componentName}.tsx`),
         componentTemplate(componentName),
+        (err) => console.log('ERROR', err),
       )
     } catch (e) {
       console.log('Не удалось создать компонент')
