@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom'
 import { RoutePath } from '../config'
 
 export function RequireAuth({ children }: { children: JSX.Element }) {
-  const auth = false
+  const auth = true
   const location = useLocation()
 
   if (!auth) {
