@@ -6,11 +6,16 @@ import 'shared/lib/l18n/i18'
 
 // msw
 import { initMsw } from '__mocks__'
-initMsw()
 
-const APP_ROOT_ID = 'root'
+const initApp = async () => {
+  await initMsw()
 
-const rootElement = document.getElementById(APP_ROOT_ID)
-const root = createRoot(rootElement as Element)
+  const APP_ROOT_ID = 'root'
 
-root.render(<App />)
+  const rootElement = document.getElementById(APP_ROOT_ID)
+  const root = createRoot(rootElement as Element)
+
+  root.render(<App />)
+}
+
+initApp()
