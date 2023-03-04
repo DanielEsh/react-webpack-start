@@ -11,5 +11,17 @@ export function buildResolvers(options: BuildOptions): ResolveOptions {
     modules: [dirSrc, 'node_modules'],
     mainFiles: ['index'],
     alias: {},
+    fallback: {
+      fs: false,
+      tls: false,
+      net: false,
+      path: false,
+      zlib: false,
+      http: false,
+      https: false,
+      stream: false,
+      crypto: false,
+      timers: false,
+    },
   }
 }
