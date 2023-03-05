@@ -1,17 +1,24 @@
 import { factory, primaryKey } from '@mswjs/data'
 import { rest } from 'msw'
+import { seed, randUuid, rand } from '@ngneat/falso'
+
+seed('test-seed')
+
+const getId = () => randUuid()
+const getSlug = () => rand(['slug1', 'slug2', 'slug3', 'slug4'])
+const getName = () => rand(['name1', 'name2', 'name3', 'name4'])
 
 export const db = factory({
   collection: {
-    id: primaryKey(String),
-    firstName: String,
-    age: Number,
+    id: primaryKey(() => getId()),
+    slug: () => getSlug(),
+    name: () => getName(),
   },
 })
 
-db.collection.create({ id: 'user-1', firstName: 'test', age: 27 })
-db.collection.create({ id: 'user-2', firstName: 't2', age: 21 })
-db.collection.create({ id: 'user-3', firstName: 't3', age: 44 })
+const ITEMS_COUNT = 20
+
+for (let i = 0; i < ITEMS_COUNT; i++) db.collection.create()
 
 const readAll = () => {
   return rest.get('http://localhost:8000/api/collection', (_req, res, ctx) => {
