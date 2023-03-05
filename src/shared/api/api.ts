@@ -7,6 +7,6 @@ export const $api = axios.create({
 })
 
 export const getTestData = async () => {
-  const { data } = await $api.get('/test')
+  const { data } = await $api.get('/collection')
   return data
 }
