@@ -37,11 +37,21 @@ const readAll = () => {
       skip: 2,
     })
 
+    const limit = 2
+    const totalItemsCount = db.collection.count()
+    const totalPages =
+      totalItemsCount !== undefined
+        ? Math.ceil(totalItemsCount / limit)
+        : undefined
+
     const result = {
-      ...items,
-      totalCount: db.collection.count(),
-      firstPage: firstPage,
-      secondPage: secondPage,
+      items: items,
+      meta: {
+        totalCount: db.collection.count(),
+        totalPages: totalPages,
+        firstPage: firstPage,
+        secondPage: secondPage,
+      },
     }
 
     return res(ctx.json(result))

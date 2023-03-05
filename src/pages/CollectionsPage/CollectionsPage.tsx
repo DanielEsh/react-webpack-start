@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { getTestData } from 'shared/api/api'
 
 const CollectionsPage = () => {
-  const [testData, setTestData] = useState([])
+  const [testData, setTestData] = useState<any>(null)
   const [isLoading, setLoading] = useState(true)
   const [isError, setIsError] = useState(false)
 
@@ -28,11 +28,23 @@ const CollectionsPage = () => {
   }, [])
 
   const beautifyRender = () => {
-    if (!testData.length) return
-
-    return testData.map((item, idx) => {
+    return testData.items.map((item: any, idx: number) => {
       return <div key={idx}>{JSON.stringify(item, null, '\t')}</div>
     })
+  }
+
+  const render = () => {
+    if (!testData) return
+
+    return (
+      <div>
+        {beautifyRender()}
+        <div className="flex gap-3">
+          <div>Prev</div>
+          <div>Next</div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -42,7 +54,7 @@ const CollectionsPage = () => {
 
         {isLoading && <div>Loading...</div>}
         {isError && <div>Error loading</div>}
-        {testData ? beautifyRender() : null}
+        {testData ? render() : null}
       </div>
     </div>
   )
