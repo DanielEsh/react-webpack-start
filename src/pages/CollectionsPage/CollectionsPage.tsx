@@ -41,6 +41,9 @@ const CollectionsPage = () => {
         {beautifyRender()}
         <div className="flex gap-3">
           <div>Prev</div>
+          {testData.meta.pages.map((item: number, idx: number) => {
+            return <div key={idx}>{item}</div>
+          })}
           <div>Next</div>
         </div>
       </div>
