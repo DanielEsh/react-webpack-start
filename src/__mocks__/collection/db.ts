@@ -81,6 +81,8 @@ const getPaginationRange = (currentPage = 1) => {
 
 const readAll = () => {
   return rest.get('http://localhost:8000/api/collection', (_req, res, ctx) => {
+    const currentPage = Number(_req.url.searchParams.get('page')) ?? 1
+
     const firstPage = db.collection.findMany({
       take: 2,
       cursor: null,
@@ -109,7 +111,7 @@ const readAll = () => {
         totalCount: db.collection.count(),
         totalPages: totalPages,
         firstPage: firstPage,
-        pages: getPaginationRange(),
+        pages: getPaginationRange(currentPage),
         secondPage: secondPage,
       },
     }

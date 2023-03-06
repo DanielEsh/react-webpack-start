@@ -6,7 +6,7 @@ export const $api = axios.create({
   baseURL: BASE_API_URL,
 })
 
-export const getTestData = async () => {
-  const { data } = await $api.get('/collection')
+export const getTestData = async (currentPage: string) => {
+  const { data } = await $api.get(`/collection?page=${currentPage}`)
   return data
 }
