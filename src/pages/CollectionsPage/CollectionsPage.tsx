@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { getTestData } from 'shared/api/api'
-import { usePagination } from 'shared/lib/hooks/usePagination'
+
 import { useSearchParams } from 'react-router-dom'
+import { Pagiantion } from 'shared/ui/Pagiantion/Pagination'
 
 const CollectionsPage = () => {
   const [testData, setTestData] = useState<any>(null)
@@ -12,17 +13,6 @@ const CollectionsPage = () => {
 
   const currentPage = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '2'
-
-  let paginationModel: any
-
-  if (testData) {
-    paginationModel = usePagination({
-      currentPage: parseInt(currentPage),
-      totalPagesCount: testData?.meta?.totalPages,
-    })
-  }
-
-  console.log('MODEL', paginationModel)
 
   useEffect(() => {
     async function fetchData() {
@@ -51,7 +41,7 @@ const CollectionsPage = () => {
     })
   }
 
-  const handlePageClick = (page: number) => {
+  const handlePageClick = (page: string) => {
     const strPage = String(page)
     setSearchParams({ page: strPage })
   }
@@ -60,20 +50,16 @@ const CollectionsPage = () => {
     if (!testData) return
 
     return (
-      <div>
+      <>
         {beautifyRender()}
-        <div className="flex gap-3">
-          <div>Prev</div>
-          {paginationModel.map((item: number, idx: number) => {
-            return (
-              <div key={idx} onClick={() => handlePageClick(item)}>
-                {item}
-              </div>
-            )
-          })}
-          <div>Next</div>
-        </div>
-      </div>
+        {testData && (
+          <Pagiantion
+            currentPage={parseInt(currentPage)}
+            totalPages={testData.meta.totalPages}
+            onChange={(item) => handlePageClick(item)}
+          />
+        )}
+      </>
     )
   }
 
