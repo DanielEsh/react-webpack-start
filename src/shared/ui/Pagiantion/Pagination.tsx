@@ -19,20 +19,24 @@ export const Pagiantion = (props: Props) => {
     onChange(item)
   }
 
+  const buttonClasses = 'border border-stone-800 py-1 px-2'
+
   return (
     <div className="flex gap-3">
-      <div>Prev</div>
+      <div className={buttonClasses}>First</div>
+      <div className={buttonClasses}>Prev</div>
       {paginationModel?.map((item: any, idx: number) => {
         return (
           <div
-            className="border border-stone-800 py-1 px-2"
+            className={buttonClasses}
             key={idx}
             onClick={() => handlePageClick(item)}>
             {item}
           </div>
         )
       })}
-      <div>Next</div>
+      <div className={buttonClasses}>Next</div>
+      <div className={buttonClasses}>Last</div>
     </div>
   )
 }
