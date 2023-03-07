@@ -115,6 +115,12 @@ db.collection.create({
   goodsCount: 49,
 })
 db.collection.create({
+  id: 17,
+  slug: 'dts',
+  name: 'DTS',
+  goodsCount: 23,
+})
+db.collection.create({
   id: 18,
   slug: 'quos-commodi-repellat-possimus-magnam-at-occaecati',
   name: 'Bernier LLC',
@@ -199,23 +205,33 @@ const getPaginationRange = (currentPage = 1) => {
 const readAll = () => {
   return rest.get('http://localhost:8000/api/collection', (_req, res, ctx) => {
     const currentPage = Number(_req.url.searchParams.get('page')) ?? 1
+    const limit = Number(_req.url.searchParams.get('limit')) ?? 1
+    const offset = (currentPage - 1) * limit
+
+    // take - limit
+    // offset - skip
+
+    console.group('Pagination')
+    console.log('limit', limit)
+    console.log('offset', offset)
+    console.groupEnd()
 
     const firstPage = db.collection.findMany({
-      take: 2,
+      take: limit,
       cursor: null,
     })
 
     const secondPage = db.collection.findMany({
-      take: 2,
+      take: limit,
       cursor: firstPage[firstPage.length - 1].id,
     })
 
     const items = db.collection.findMany({
-      take: 2,
-      skip: 2,
+      take: limit,
+      skip: offset,
     })
 
-    const limit = 2
+    // const limit = 2
     const totalItemsCount = db.collection.count()
     const totalPages =
       totalItemsCount !== undefined

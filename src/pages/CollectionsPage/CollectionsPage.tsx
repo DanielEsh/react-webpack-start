@@ -10,13 +10,14 @@ const CollectionsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const currentPage = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '2'
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true)
 
       try {
-        const data = await getTestData(currentPage)
+        const data = await getTestData(currentPage, limit)
         console.log('data', data)
         setTestData(data)
         setLoading(false)
@@ -30,7 +31,7 @@ const CollectionsPage = () => {
     setTimeout(() => {
       console.log('testData', testData)
     }, 2000)
-  }, [currentPage])
+  }, [currentPage, limit])
 
   const beautifyRender = () => {
     return testData.items.map((item: any, idx: number) => {
