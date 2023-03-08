@@ -1,19 +1,18 @@
-export const createRange = (start: number, end: number): number[] => {
-  const range: number[] = []
-  for (let i = start; i <= end; i++) {
-    range.push(i)
-  }
-  return range
+import { PaginationElementsType, createPaginationElement } from './helpers'
+
+const createRange = (start: number, end: number) => {
+  const length = end - start + 1
+  return Array.from({ length }, (_, idx) => idx + start)
 }
 
 export const createPageFactory = (currentPage: number) => {
   return (pageNumber: number) => {
-    return {
-      type: 'PAGE',
+    return createPaginationElement({
+      type: PaginationElementsType.PAGE,
       key: pageNumber,
       value: pageNumber,
       isActive: pageNumber === currentPage,
-    }
+    })
   }
 }
 
@@ -106,8 +105,8 @@ export function paginationFactory(options: PaginationModelOptions) {
 
   const ellipsisSize = 1
   const paginationModel = []
-  const createPage = createPageFactory(currentPage)
 
+  const createPage = createPageFactory(currentPage)
   // Simplify generation of pages if number of available items is equal or greater than total pages to show
   if (
     1 + 2 * ellipsisSize + 2 * siblingPagesRange + 2 * boundaryPagesRange >=
