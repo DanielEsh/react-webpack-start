@@ -168,5 +168,10 @@ export function paginationFactory(options: PaginationModelOptions) {
     paginationModel.push(...lastPages)
   }
 
-  return paginationModel
+  const first = createFirstPageLink(currentPage)
+  const last = createLastPageLink(currentPage, totalPages)
+  const prev = createPreviousPageLink(currentPage)
+  const next = createNextPageLink(currentPage, totalPages)
+
+  return [first, prev, ...paginationModel, next, last]
 }
