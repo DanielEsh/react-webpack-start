@@ -29,6 +29,11 @@ export const createPaginationElement = (options: CreateOptions) => {
   }
 }
 
+export const createRange = (start: number, end: number) => {
+  const length = end - start + 1
+  return Array.from({ length }, (_, idx) => idx + start)
+}
+
 // export const createPageFactory = (currentPage: number) => {
 //   return (pageNumber: number) => {
 //     return {
