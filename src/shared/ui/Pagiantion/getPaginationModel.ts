@@ -1,9 +1,8 @@
-import { PaginationElementsType, createPaginationElement } from './helpers'
-
-const createRange = (start: number, end: number) => {
-  const length = end - start + 1
-  return Array.from({ length }, (_, idx) => idx + start)
-}
+import {
+  PaginationElementsType,
+  createPaginationElement,
+  createRange,
+} from './helpers'
 
 export const createPageFactory = (currentPage: number) => {
   return (pageNumber: number) => {
@@ -107,6 +106,16 @@ export function paginationFactory(options: PaginationModelOptions) {
   const paginationModel = []
 
   const createPage = createPageFactory(currentPage)
+
+  const makeFirstGroup = (groupEnd: number) => {
+    const firstPagesStart = 1
+    return createRange(firstPagesStart, groupEnd).map(createPage)
+  }
+
+  const makeLastGroup = (groupStart: number) => {
+    return createRange(groupStart, totalPages).map(createPage)
+  }
+
   // Simplify generation of pages if number of available items is equal or greater than total pages to show
   if (
     1 + 2 * ellipsisSize + 2 * siblingPagesRange + 2 * boundaryPagesRange >=
@@ -116,15 +125,12 @@ export function paginationFactory(options: PaginationModelOptions) {
     paginationModel.push(...allPages)
   } else {
     // Calculate group of first pages
-    const firstPagesStart = 1
     const firstPagesEnd = boundaryPagesRange
-    const firstPages = createRange(firstPagesStart, firstPagesEnd).map(
-      createPage,
-    )
+    const firstPages = makeFirstGroup(firstPagesEnd)
 
     // Calculate group of last pages
     const lastPagesStart = totalPages + 1 - boundaryPagesRange
-    const lastPages = createRange(lastPagesStart, totalPages).map(createPage)
+    const lastPages = makeLastGroup(lastPagesStart)
 
     // Calculate group of main pages
     const mainPagesStart = Math.min(
