@@ -106,6 +106,10 @@ export function paginationFactory(options: PaginationModelOptions) {
   const paginationModel = []
 
   const createPage = createPageFactory(currentPage)
+  const first = createFirstPageLink(currentPage)
+  const last = createLastPageLink(currentPage, totalPages)
+  const prev = createPreviousPageLink(currentPage)
+  const next = createNextPageLink(currentPage, totalPages)
 
   const makeFirstGroup = (groupEnd: number) => {
     const firstPagesStart = 1
@@ -116,13 +120,16 @@ export function paginationFactory(options: PaginationModelOptions) {
     return createRange(groupStart, totalPages).map(createPage)
   }
 
+  const createAllElements = () => {
+    return createRange(1, totalPages).map(createPage)
+  }
+
   // Simplify generation of pages if number of available items is equal or greater than total pages to show
   if (
     1 + 2 * ellipsisSize + 2 * siblingPagesRange + 2 * boundaryPagesRange >=
     totalPages
   ) {
-    const allPages = createRange(1, totalPages).map(createPage)
-    paginationModel.push(...allPages)
+    paginationModel.push(...createAllElements())
   } else {
     // Calculate group of first pages
     const firstPagesEnd = boundaryPagesRange
@@ -172,11 +179,6 @@ export function paginationFactory(options: PaginationModelOptions) {
     // Add group of last pages
     paginationModel.push(...lastPages)
   }
-
-  const first = createFirstPageLink(currentPage)
-  const last = createLastPageLink(currentPage, totalPages)
-  const prev = createPreviousPageLink(currentPage)
-  const next = createNextPageLink(currentPage, totalPages)
 
   return [first, prev, ...paginationModel, next, last]
 }
