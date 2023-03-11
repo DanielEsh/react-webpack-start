@@ -20,7 +20,11 @@ export const Pagiantion = (props: Props) => {
 
   console.log('MODEL', paginationModel)
 
-  const renderItemComponent = renderPaginationElements(currentPage, totalPages, onChange)
+  const renderItemComponent = renderPaginationElements(
+    currentPage,
+    totalPages,
+    onChange,
+  )
 
   return (
     <ul className="mt-6 flex gap-3">
