@@ -23,9 +23,7 @@ export const Pagiantion = (props: Props) => {
   return (
     <ul className="mt-6 flex gap-3">
       {paginationModel.map((itemModel: PaginationModel) =>
-        renderItemComponent({
-          ...itemModel,
-        }),
+        renderItemComponent(itemModel),
       )}
     </ul>
   )
