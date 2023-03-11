@@ -37,7 +37,7 @@ const DEFAULT_BOUNDARY_PAGES_RANGE = 1
 const ELLIPSIS_SIZE = 1
 const FIRST_PAGE = 1
 
-export function paginationFactory(
+export function getPaginationModel(
   options: PaginationModelOptions,
 ): PaginationModel[] {
   const {

@@ -1,4 +1,4 @@
-import { paginationFactory } from 'shared/ui/Pagiantion/getPaginationModel'
+import { getPaginationModel } from 'shared/ui/Pagiantion/getPaginationModel'
 import { renderPaginationElements } from './renderPaginationElements'
 import type { PaginationModel } from './types'
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 export const Pagiantion = (props: Props) => {
   const { currentPage, totalPages, onChange } = props
 
-  const paginationModel = paginationFactory({
+  const paginationModel = getPaginationModel({
     boundaryPagesRange: 0,
     totalPages: totalPages,
     currentPage: currentPage,
