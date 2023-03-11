@@ -20,6 +20,15 @@ interface Props {
   onChange?: (item: string) => void
 }
 
+const itemTypeToComponent: Record<PaginationElementsType, ReactNode> = {
+  [PaginationElementsType.PAGE]: PageLink,
+  [PaginationElementsType.ELLIPSIS]: Ellipsis,
+  [PaginationElementsType.FIRST]: FirstPageLink,
+  [PaginationElementsType.PREVIOUS]: PreviousPageLink,
+  [PaginationElementsType.NEXT]: NextPageLink,
+  [PaginationElementsType.LAST]: LastPageLink,
+}
+
 const renderItemComponentFunctionFactory = (
   itemTypeToComponent,
   currentPage,
@@ -63,15 +72,6 @@ export const Pagiantion = (props: Props) => {
 
   const buttonClasses = 'border border-stone-800 py-1 px-2'
 
-  const itemTypeToComponent: Record<PaginationElementsType, ReactNode> = {
-    [PaginationElementsType.PAGE]: PageLink,
-    [PaginationElementsType.ELLIPSIS]: Ellipsis,
-    [PaginationElementsType.FIRST]: FirstPageLink,
-    [PaginationElementsType.PREVIOUS]: PreviousPageLink,
-    [PaginationElementsType.NEXT]: NextPageLink,
-    [PaginationElementsType.LAST]: LastPageLink,
-  }
-
   const renderItemComponent = renderItemComponentFunctionFactory(
     itemTypeToComponent,
     currentPage,
@@ -83,7 +83,7 @@ export const Pagiantion = (props: Props) => {
       {paginationModel.map((itemModel) =>
         renderItemComponent({
           ...itemModel,
-          isDisabled: !!disabled,
+          isDisabled: true,
         }),
       )}
     </ul>

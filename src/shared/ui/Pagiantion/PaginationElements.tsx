@@ -3,25 +3,16 @@ import { clsx } from 'clsx'
 import { PaginationElementsType } from './types'
 
 interface PaginationElementProps {
-  isActive: boolean
-  disabled: boolean
+  isActive?: boolean
+  isDisabled?: boolean
   value: number | ReactNode
   onClick: () => void
 }
 
-interface PaginationItemsProps {
-  disabled: boolean
-  onClick: () => void
-}
-
-const pagesClasses = (isActive: boolean) =>
+const pagesClasses = (isActive = false, disabled = false) =>
   clsx('flex items-center justify-center py-1 px-2 border border-black', {
     ['bg-black text-white']: isActive,
-  })
-
-const itemsClasses = (interactive = true) =>
-  clsx('flex items-center justify-center py-1 px-2 border border-black', {
-    ['bg-red-500']: !interactive,
+    ['bg-red-500']: disabled,
   })
 
 const PaginationElementValues = {
@@ -33,14 +24,19 @@ const PaginationElementValues = {
 }
 
 const PaginationElement = (props: PaginationElementProps) => {
-  const { value, disabled, isActive = false, onClick = () => null } = props
+  const {
+    value,
+    isDisabled = true,
+    isActive = false,
+    onClick = () => null,
+  } = props
 
   return (
     <li>
       <button
-        className={pagesClasses(isActive)}
+        className={pagesClasses(isActive, isDisabled)}
         onClick={onClick}
-        disabled={disabled}>
+        disabled={isDisabled}>
         {value}
       </button>
     </li>
