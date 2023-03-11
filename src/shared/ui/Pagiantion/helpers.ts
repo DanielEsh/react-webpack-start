@@ -5,12 +5,13 @@ import {
 } from './types'
 
 export const createPaginationElement = (options: PaginationModel) => {
-  const { type, key, value, isActive } = options
+  const { type, key, value, isActive, isDisabled } = options
   return {
     type,
     key,
     value,
     isActive,
+    isDisabled,
   }
 }
 
@@ -26,6 +27,7 @@ export const createPageFactory = (currentPage: number) => {
       key: pageNumber,
       value: pageNumber,
       isActive: pageNumber === currentPage,
+      isDisabled: false,
     })
   }
 }
@@ -36,6 +38,7 @@ export const createFirstEllipsis = (pageNumber: number) => {
     key: PaginationElementsKeys.FIRST_ELLIPSIS,
     value: pageNumber,
     isActive: false,
+    isDisabled: false,
   }
 }
 
@@ -45,6 +48,7 @@ export const createSecondEllipsis = (pageNumber: number) => {
     key: PaginationElementsKeys.SECOND_ELLIPSIS,
     value: pageNumber,
     isActive: false,
+    isDisabled: false,
   }
 }
 
@@ -53,7 +57,8 @@ export const createPreviousPageLink = (currentPage: number) => {
     type: PaginationElementsType.PREVIOUS,
     key: PaginationElementsKeys.PREVIOUS,
     value: Math.max(1, currentPage - 1),
-    isActive: currentPage === 1,
+    isActive: false,
+    isDisabled: currentPage === 1,
   }
 }
 
@@ -62,7 +67,8 @@ export const createNextPageLink = (currentPage: number, totalPages: number) => {
     type: PaginationElementsType.NEXT,
     key: PaginationElementsKeys.NEXT,
     value: Math.min(totalPages, currentPage + 1),
-    isActive: currentPage === totalPages,
+    isActive: false,
+    isDisabled: currentPage === totalPages,
   }
 }
 
@@ -71,7 +77,8 @@ export const createFirstPageLink = (currentPage: number) => {
     type: PaginationElementsType.FIRST,
     key: PaginationElementsKeys.FIRST,
     value: 1,
-    isActive: currentPage === 1,
+    isActive: false,
+    isDisabled: currentPage === 1,
   }
 }
 
@@ -80,6 +87,7 @@ export const createLastPageLink = (currentPage: number, totalPages: number) => {
     type: PaginationElementsType.LAST,
     key: PaginationElementsKeys.LAST,
     value: totalPages,
-    isActive: currentPage === totalPages,
+    isActive: false,
+    isDisabled: currentPage === totalPages,
   }
 }

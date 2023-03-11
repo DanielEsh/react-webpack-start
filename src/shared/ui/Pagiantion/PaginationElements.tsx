@@ -1,13 +1,9 @@
 import type { ReactNode } from 'react'
 import { clsx } from 'clsx'
-import { PaginationElementsType } from './types'
+import { PaginationElementsType, PaginationModel } from './types'
 
-interface PaginationElementProps {
-  isActive?: boolean
-  isDisabled?: boolean
-  currentPage: number
-  totalPages: number
-  value: number | ReactNode
+interface PaginationElementProps extends PaginationModel {
+  children: ReactNode
   onClick: () => void
 }
 
@@ -27,7 +23,7 @@ const PaginationElementValues = {
 
 const PaginationElement = (props: PaginationElementProps) => {
   const {
-    value,
+    children,
     isDisabled = true,
     isActive = false,
     onClick = () => null,
@@ -39,7 +35,7 @@ const PaginationElement = (props: PaginationElementProps) => {
         className={pagesClasses(isActive, isDisabled)}
         onClick={onClick}
         disabled={isDisabled}>
-        {value}
+        {children}
       </button>
     </li>
   )
@@ -50,67 +46,46 @@ export const PageLink = (props: PaginationElementProps) => (
 )
 
 export const FirstPageLink = (props: PaginationElementProps) => {
-  const isDisabled = props.currentPage === 1
   return (
-    <PaginationElement
-      {...props}
-      value={PaginationElementValues.FIRST}
-      isActive={false}
-      isDisabled={isDisabled}
-    />
+    <PaginationElement {...props}>
+      {PaginationElementValues.FIRST}
+    </PaginationElement>
   )
 }
 
 export const PreviousPageLink = (props: PaginationElementProps) => {
-  const isDisabled = props.currentPage === 1
-
   return (
-    <PaginationElement
-      {...props}
-      value={PaginationElementValues.PREVIOUS}
-      isActive={false}
-      isDisabled={isDisabled}
-    />
+    <PaginationElement {...props}>
+      {PaginationElementValues.PREVIOUS}
+    </PaginationElement>
   )
 }
 
 export const NextPageLink = (props: PaginationElementProps) => {
-  const isDisabled = props.currentPage === props.totalPages
   return (
-    <PaginationElement
-      {...props}
-      value={PaginationElementValues.NEXT}
-      isActive={false}
-      isDisabled={isDisabled}
-    />
+    <PaginationElement {...props}>
+      {PaginationElementValues.NEXT}
+    </PaginationElement>
   )
 }
 
 export const LastPageLink = (props: PaginationElementProps) => {
-  const isDisabled = props.currentPage === props.totalPages
   return (
-    <PaginationElement
-      {...props}
-      value={PaginationElementValues.LAST}
-      isActive={false}
-      isDisabled={isDisabled}
-    />
+    <PaginationElement {...props}>
+      {PaginationElementValues.LAST}
+    </PaginationElement>
   )
 }
 
 export const Ellipsis = (props: PaginationElementProps) => {
   return (
-    <PaginationElement
-      {...props}
-      value={PaginationElementValues.ELLISIS}
-      isActive={false}
-    />
+    <PaginationElement {...props}>
+      {PaginationElementValues.ELLISIS}
+    </PaginationElement>
   )
 }
 
 export const renderPaginationElements = (
-  currentPage: number,
-  totalPages: number,
   onChangeCb?: (value: number) => void,
 ) => {
   const itemTypeToComponent: Record<
@@ -125,23 +100,19 @@ export const renderPaginationElements = (
     [PaginationElementsType.LAST]: LastPageLink,
   }
 
-  const handleClick = ({ value }: any) => {
-    return () =>
-      onChangeCb && currentPage !== value ? onChangeCb(value) : null
+  const handleClick = ({ value }: PaginationModel) => {
+    return () => (onChangeCb ? onChangeCb(value) : null)
   }
 
-  return (props: any) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+  return (props: PaginationModel) => {
     const PaginationComponent = itemTypeToComponent[props.type]
     const onItemClick = handleClick(props)
     return (
-      <PaginationComponent
-        onClick={onItemClick}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        {...props}
-      />
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      <PaginationComponent onClick={onItemClick} {...props}>
+        {props.value}
+      </PaginationComponent>
     )
   }
 }

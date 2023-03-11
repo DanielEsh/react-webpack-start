@@ -21,4 +21,5 @@ export interface PaginationModel {
   key: PaginationElementsKeys | number
   value: number
   isActive: boolean
+  isDisabled: boolean
 }
