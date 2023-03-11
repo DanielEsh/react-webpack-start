@@ -1,11 +1,5 @@
-import type { ReactNode } from 'react'
 import { clsx } from 'clsx'
-import { PaginationElementsType, PaginationModel } from './types'
-
-interface PaginationElementProps extends PaginationModel {
-  children: ReactNode
-  onClick: () => void
-}
+import type { PaginationElementProps } from './types'
 
 const pagesClasses = (isActive = false, disabled = false) =>
   clsx('flex items-center justify-center py-1 px-2 border border-black', {
@@ -41,11 +35,11 @@ const PaginationElement = (props: PaginationElementProps) => {
   )
 }
 
-export const PageLink = (props: PaginationElementProps) => (
+export const PaginationPageLink = (props: PaginationElementProps) => (
   <PaginationElement {...props} />
 )
 
-export const FirstPageLink = (props: PaginationElementProps) => {
+export const PagiantionFirstLink = (props: PaginationElementProps) => {
   return (
     <PaginationElement {...props}>
       {PaginationElementValues.FIRST}
@@ -53,7 +47,7 @@ export const FirstPageLink = (props: PaginationElementProps) => {
   )
 }
 
-export const PreviousPageLink = (props: PaginationElementProps) => {
+export const PagiantionPreviousLink = (props: PaginationElementProps) => {
   return (
     <PaginationElement {...props}>
       {PaginationElementValues.PREVIOUS}
@@ -61,7 +55,7 @@ export const PreviousPageLink = (props: PaginationElementProps) => {
   )
 }
 
-export const NextPageLink = (props: PaginationElementProps) => {
+export const PaginationNextLink = (props: PaginationElementProps) => {
   return (
     <PaginationElement {...props}>
       {PaginationElementValues.NEXT}
@@ -69,7 +63,7 @@ export const NextPageLink = (props: PaginationElementProps) => {
   )
 }
 
-export const LastPageLink = (props: PaginationElementProps) => {
+export const PagiantionLastLink = (props: PaginationElementProps) => {
   return (
     <PaginationElement {...props}>
       {PaginationElementValues.LAST}
@@ -77,40 +71,10 @@ export const LastPageLink = (props: PaginationElementProps) => {
   )
 }
 
-export const Ellipsis = (props: PaginationElementProps) => {
+export const PagiantionEllipsisLink = (props: PaginationElementProps) => {
   return (
     <PaginationElement {...props}>
       {PaginationElementValues.ELLISIS}
     </PaginationElement>
   )
-}
-
-export const renderPaginationElements = (
-  onChangeCb?: (value: number) => void,
-) => {
-  const itemTypeToComponent: Record<
-    PaginationElementsType,
-    (props: PaginationElementProps) => JSX.Element
-  > = {
-    [PaginationElementsType.PAGE]: PageLink,
-    [PaginationElementsType.ELLIPSIS]: Ellipsis,
-    [PaginationElementsType.FIRST]: FirstPageLink,
-    [PaginationElementsType.PREVIOUS]: PreviousPageLink,
-    [PaginationElementsType.NEXT]: NextPageLink,
-    [PaginationElementsType.LAST]: LastPageLink,
-  }
-
-  const handleClick = ({ value }: PaginationModel) => {
-    return () => (onChangeCb ? onChangeCb(value) : null)
-  }
-
-  return (props: PaginationModel) => {
-    const PaginationComponent = itemTypeToComponent[props.type]
-    const onItemClick = handleClick(props)
-    return (
-      <PaginationComponent onClick={onItemClick} {...props}>
-        {props.value}
-      </PaginationComponent>
-    )
-  }
 }

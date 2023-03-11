@@ -1,5 +1,5 @@
 import { paginationFactory } from 'shared/ui/Pagiantion/getPaginationModel'
-import { renderPaginationElements } from './PaginationElements'
+import { renderPaginationElements } from './renderPaginationElements'
 import type { PaginationModel } from './types'
 interface Props {
   currentPage: number
