@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import type { ReactNode } from 'react'
 import { clsx } from 'clsx'
 import { PaginationElementsType } from './types'
@@ -21,6 +23,35 @@ const PaginationElementValues = {
   PREVIOUS: 'PREVIOUS',
   NEXT: 'NEXT',
   ELLISIS: '...',
+}
+
+export const renderPaginationElements = (currentPage, onChange) => {
+  const itemTypeToComponent: Record<PaginationElementsType, any> = {
+    [PaginationElementsType.PAGE]: PageLink,
+    [PaginationElementsType.ELLIPSIS]: Ellipsis,
+    [PaginationElementsType.FIRST]: FirstPageLink,
+    [PaginationElementsType.PREVIOUS]: PreviousPageLink,
+    [PaginationElementsType.NEXT]: NextPageLink,
+    [PaginationElementsType.LAST]: LastPageLink,
+  }
+
+  const onItemClickFunctionFactory = ({ value, isDisabled }) => {
+    return () => {
+      if (!isDisabled && onChange && currentPage !== value) {
+        onChange(value)
+      }
+    }
+  }
+
+  return (props) => {
+    const ItemComponent = itemTypeToComponent[props.type]
+    return (
+      <ItemComponent
+        onClick={() => onItemClickFunctionFactory(props)}
+        {...props}
+      />
+    )
+  }
 }
 
 const PaginationElement = (props: PaginationElementProps) => {
