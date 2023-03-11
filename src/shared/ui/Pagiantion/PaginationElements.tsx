@@ -7,6 +7,8 @@ import { PaginationElementsType } from './types'
 interface PaginationElementProps {
   isActive?: boolean
   isDisabled?: boolean
+  currentPage: number
+  totalPages: number
   value: number | ReactNode
   onClick: () => void
 }
@@ -25,7 +27,7 @@ const PaginationElementValues = {
   ELLISIS: '...',
 }
 
-export const renderPaginationElements = (currentPage, onChange) => {
+export const renderPaginationElements = (currentPage, totalPages, onChangeCb) => {
   const itemTypeToComponent: Record<PaginationElementsType, any> = {
     [PaginationElementsType.PAGE]: PageLink,
     [PaginationElementsType.ELLIPSIS]: Ellipsis,
@@ -35,19 +37,19 @@ export const renderPaginationElements = (currentPage, onChange) => {
     [PaginationElementsType.LAST]: LastPageLink,
   }
 
-  const onItemClickFunctionFactory = ({ value, isDisabled }) => {
-    return () => {
-      if (!isDisabled && onChange && currentPage !== value) {
-        onChange(value)
-      }
-    }
+  const handleClick = ({ value }) => {
+    return () =>
+      onChangeCb && currentPage !== value ? onChangeCb(value) : null
   }
 
   return (props) => {
-    const ItemComponent = itemTypeToComponent[props.type]
+    const PaginationComponent = itemTypeToComponent[props.type]
+    const onItemClick = handleClick(props)
     return (
-      <ItemComponent
-        onClick={() => onItemClickFunctionFactory(props)}
+      <PaginationComponent
+        onClick={onItemClick}
+        currentPage={currentPage}
+        totalPages={totalPages}
         {...props}
       />
     )
@@ -79,41 +81,50 @@ export const PageLink = (props: PaginationElementProps) => (
 )
 
 export const FirstPageLink = (props: PaginationElementProps) => {
+  const isDisabled = props.currentPage === 1
   return (
     <PaginationElement
       {...props}
       value={PaginationElementValues.FIRST}
       isActive={false}
+      isDisabled={isDisabled}
     />
   )
 }
 
 export const PreviousPageLink = (props: PaginationElementProps) => {
+  const isDisabled = props.currentPage === 1
+
   return (
     <PaginationElement
       {...props}
       value={PaginationElementValues.PREVIOUS}
       isActive={false}
+      isDisabled={isDisabled}
     />
   )
 }
 
 export const NextPageLink = (props: PaginationElementProps) => {
+  const isDisabled = props.currentPage === props.totalPages
   return (
     <PaginationElement
       {...props}
       value={PaginationElementValues.NEXT}
       isActive={false}
+      isDisabled={isDisabled}
     />
   )
 }
 
 export const LastPageLink = (props: PaginationElementProps) => {
+  const isDisabled = props.currentPage === props.totalPages
   return (
     <PaginationElement
       {...props}
       value={PaginationElementValues.LAST}
       isActive={false}
+      isDisabled={isDisabled}
     />
   )
 }
