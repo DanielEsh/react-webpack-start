@@ -90,7 +90,7 @@ export const renderPaginationElements = (
 ) => {
   const itemTypeToComponent: Record<
     PaginationElementsType,
-    (props: PaginationElementProps) => ReactNode
+    (props: PaginationElementProps) => JSX.Element
   > = {
     [PaginationElementsType.PAGE]: PageLink,
     [PaginationElementsType.ELLIPSIS]: Ellipsis,
@@ -108,8 +108,6 @@ export const renderPaginationElements = (
     const PaginationComponent = itemTypeToComponent[props.type]
     const onItemClick = handleClick(props)
     return (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       <PaginationComponent onClick={onItemClick} {...props}>
         {props.value}
       </PaginationComponent>
