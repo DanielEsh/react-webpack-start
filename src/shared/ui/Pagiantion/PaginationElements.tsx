@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import type { ReactNode } from 'react'
 import { clsx } from 'clsx'
 import { PaginationElementsType } from './types'
@@ -25,39 +23,6 @@ const PaginationElementValues = {
   PREVIOUS: 'PREVIOUS',
   NEXT: 'NEXT',
   ELLISIS: '...',
-}
-
-export const renderPaginationElements = (
-  currentPage,
-  totalPages,
-  onChangeCb,
-) => {
-  const itemTypeToComponent: Record<PaginationElementsType, any> = {
-    [PaginationElementsType.PAGE]: PageLink,
-    [PaginationElementsType.ELLIPSIS]: Ellipsis,
-    [PaginationElementsType.FIRST]: FirstPageLink,
-    [PaginationElementsType.PREVIOUS]: PreviousPageLink,
-    [PaginationElementsType.NEXT]: NextPageLink,
-    [PaginationElementsType.LAST]: LastPageLink,
-  }
-
-  const handleClick = ({ value }) => {
-    return () =>
-      onChangeCb && currentPage !== value ? onChangeCb(value) : null
-  }
-
-  return (props) => {
-    const PaginationComponent = itemTypeToComponent[props.type]
-    const onItemClick = handleClick(props)
-    return (
-      <PaginationComponent
-        onClick={onItemClick}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        {...props}
-      />
-    )
-  }
 }
 
 const PaginationElement = (props: PaginationElementProps) => {
@@ -141,4 +106,42 @@ export const Ellipsis = (props: PaginationElementProps) => {
       isActive={false}
     />
   )
+}
+
+export const renderPaginationElements = (
+  currentPage: number,
+  totalPages: number,
+  onChangeCb?: (value: number) => void,
+) => {
+  const itemTypeToComponent: Record<
+    PaginationElementsType,
+    (props: PaginationElementProps) => ReactNode
+  > = {
+    [PaginationElementsType.PAGE]: PageLink,
+    [PaginationElementsType.ELLIPSIS]: Ellipsis,
+    [PaginationElementsType.FIRST]: FirstPageLink,
+    [PaginationElementsType.PREVIOUS]: PreviousPageLink,
+    [PaginationElementsType.NEXT]: NextPageLink,
+    [PaginationElementsType.LAST]: LastPageLink,
+  }
+
+  const handleClick = ({ value }: any) => {
+    return () =>
+      onChangeCb && currentPage !== value ? onChangeCb(value) : null
+  }
+
+  return (props: any) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const PaginationComponent = itemTypeToComponent[props.type]
+    const onItemClick = handleClick(props)
+    return (
+      <PaginationComponent
+        onClick={onItemClick}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        {...props}
+      />
+    )
+  }
 }

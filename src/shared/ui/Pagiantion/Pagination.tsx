@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-
 import { paginationFactory } from 'shared/ui/Pagiantion/getPaginationModel'
 import { renderPaginationElements } from './PaginationElements'
 interface Props {
   currentPage: number
   totalPages: number
-  onChange?: (item: string) => void
+  onChange?: (item: number) => void
 }
 
 export const Pagiantion = (props: Props) => {
