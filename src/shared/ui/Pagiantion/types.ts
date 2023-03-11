@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react'
-
 export enum PaginationElementsType {
   PAGE = 'PAGE',
   ELLIPSIS = 'ELLIPSIS',
@@ -27,6 +25,5 @@ export interface PaginationModel {
 }
 
 export interface PaginationElementProps extends PaginationModel {
-  children: ReactNode
   onClick: () => void
 }
