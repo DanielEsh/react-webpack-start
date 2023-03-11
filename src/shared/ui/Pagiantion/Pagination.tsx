@@ -2,6 +2,7 @@
 // @ts-nocheck
 
 // import { usePagination } from 'shared/lib/hooks/usePagination'
+import type { ReactNode } from 'react'
 import { paginationFactory } from 'shared/ui/Pagiantion/getPaginationModel'
 import {
   PageLink,
@@ -11,6 +12,8 @@ import {
   NextPageLink,
   LastPageLink,
 } from './PaginationElements'
+import { PaginationElementsType } from './types'
+
 interface Props {
   currentPage: number
   totalPages: number
@@ -60,13 +63,13 @@ export const Pagiantion = (props: Props) => {
 
   const buttonClasses = 'border border-stone-800 py-1 px-2'
 
-  const itemTypeToComponent = {
-    PAGE: PageLink,
-    ELLIPSIS: Ellipsis,
-    FIRST_PAGE_LINK: FirstPageLink,
-    PREVIOUS_PAGE_LINK: PreviousPageLink,
-    NEXT_PAGE_LINK: NextPageLink,
-    LAST_PAGE_LINK: LastPageLink,
+  const itemTypeToComponent: Record<PaginationElementsType, ReactNode> = {
+    [PaginationElementsType.PAGE]: PageLink,
+    [PaginationElementsType.ELLIPSIS]: Ellipsis,
+    [PaginationElementsType.FIRST]: FirstPageLink,
+    [PaginationElementsType.PREVIOUS]: PreviousPageLink,
+    [PaginationElementsType.NEXT]: NextPageLink,
+    [PaginationElementsType.LAST]: LastPageLink,
   }
 
   const renderItemComponent = renderItemComponentFunctionFactory(
