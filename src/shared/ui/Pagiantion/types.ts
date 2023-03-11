@@ -15,3 +15,10 @@ export enum PaginationElementsKeys {
   FIRST = 'FIRST',
   LAST = 'LAST',
 }
+
+export interface PaginationModel {
+  type: PaginationElementsType
+  key: PaginationElementsKeys | number
+  value: number
+  isActive: boolean
+}

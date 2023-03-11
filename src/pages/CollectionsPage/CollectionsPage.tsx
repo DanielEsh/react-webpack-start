@@ -41,7 +41,7 @@ const CollectionsPage = () => {
     })
   }
 
-  const handlePageClick = (page: string) => {
+  const handlePageClick = (page: number) => {
     const strPage = String(page)
     setSearchParams({ page: strPage })
   }

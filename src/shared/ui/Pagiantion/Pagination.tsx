@@ -1,5 +1,6 @@
 import { paginationFactory } from 'shared/ui/Pagiantion/getPaginationModel'
 import { renderPaginationElements } from './PaginationElements'
+import type { PaginationModel } from './types'
 interface Props {
   currentPage: number
   totalPages: number
@@ -25,7 +26,7 @@ export const Pagiantion = (props: Props) => {
 
   return (
     <ul className="mt-6 flex gap-3">
-      {paginationModel.map((itemModel) =>
+      {paginationModel.map((itemModel: PaginationModel) =>
         renderItemComponent({
           ...itemModel,
           isDisabled: false,

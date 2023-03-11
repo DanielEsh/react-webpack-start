@@ -20,7 +20,7 @@ const pagesClasses = (isActive = false, disabled = false) =>
 const PaginationElementValues = {
   FIRST: 'FIRST',
   LAST: 'LAST',
-  PREVIOUS: 'PREVIOUS',
+  PREVIOUS: 'PREV',
   NEXT: 'NEXT',
   ELLISIS: '...',
 }

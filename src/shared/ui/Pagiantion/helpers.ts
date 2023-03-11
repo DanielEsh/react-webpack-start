@@ -1,13 +1,10 @@
-import { PaginationElementsType, PaginationElementsKeys } from './types'
+import {
+  PaginationElementsType,
+  PaginationElementsKeys,
+  type PaginationModel,
+} from './types'
 
-interface CreateOptions {
-  type: PaginationElementsType
-  key: any
-  value: number
-  isActive: boolean
-}
-
-export const createPaginationElement = (options: CreateOptions) => {
+export const createPaginationElement = (options: PaginationModel) => {
   const { type, key, value, isActive } = options
   return {
     type,

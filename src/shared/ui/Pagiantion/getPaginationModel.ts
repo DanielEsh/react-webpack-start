@@ -8,6 +8,7 @@ import {
   createFirstEllipsis,
   createSecondEllipsis,
 } from './helpers'
+import type { PaginationModel } from './types'
 
 interface PaginationModelOptions {
   /**
@@ -34,7 +35,9 @@ interface PaginationModelOptions {
 const DEFAULT_SIBLING_COUNT = 1
 const DEFAULT_BOUNDARY_PAGES_RANGE = 1
 
-export function paginationFactory(options: PaginationModelOptions) {
+export function paginationFactory(
+  options: PaginationModelOptions,
+): PaginationModel[] {
   const {
     boundaryPagesRange = DEFAULT_BOUNDARY_PAGES_RANGE,
     siblingPagesRange = DEFAULT_SIBLING_COUNT,
