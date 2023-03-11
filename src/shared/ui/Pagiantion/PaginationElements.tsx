@@ -21,8 +21,16 @@ const pagesClasses = (isActive: boolean) =>
 
 const itemsClasses = (interactive = true) =>
   clsx('flex items-center justify-center py-1 px-2 border border-black', {
-    ['opacity-60']: !interactive,
+    ['bg-red-500']: !interactive,
   })
+
+const PaginationElementValues = {
+  FIRST: 'FIRST',
+  LAST: 'LAST',
+  PREVIOUS: 'PREVIOUS',
+  NEXT: 'NEXT',
+  ELLISIS: '...',
+}
 
 const PaginationElement = (props: PaginationElementProps) => {
   const { value, disabled, isActive = false, onClick = () => null } = props
@@ -44,21 +52,51 @@ export const PageLink = (props: PaginationElementProps) => (
 )
 
 export const FirstPageLink = (props: PaginationElementProps) => {
-  return <PaginationElement {...props} value="FIRST" isActive={false} />
+  return (
+    <PaginationElement
+      {...props}
+      value={PaginationElementValues.FIRST}
+      isActive={false}
+    />
+  )
 }
 
 export const PreviousPageLink = (props: PaginationElementProps) => {
-  return <PaginationElement {...props} value="PREVIOUS" isActive={false} />
+  return (
+    <PaginationElement
+      {...props}
+      value={PaginationElementValues.PREVIOUS}
+      isActive={false}
+    />
+  )
 }
 
 export const NextPageLink = (props: PaginationElementProps) => {
-  return <PaginationElement {...props} value="NEXT" isActive={false} />
+  return (
+    <PaginationElement
+      {...props}
+      value={PaginationElementValues.NEXT}
+      isActive={false}
+    />
+  )
 }
 
 export const LastPageLink = (props: PaginationElementProps) => {
-  return <PaginationElement {...props} value="LAST" isActive={false} />
+  return (
+    <PaginationElement
+      {...props}
+      value={PaginationElementValues.LAST}
+      isActive={false}
+    />
+  )
 }
 
 export const Ellipsis = (props: PaginationElementProps) => {
-  return <PaginationElement {...props} value="..." isActive={false} />
+  return (
+    <PaginationElement
+      {...props}
+      value={PaginationElementValues.ELLISIS}
+      isActive={false}
+    />
+  )
 }
