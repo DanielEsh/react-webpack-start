@@ -27,7 +27,11 @@ const PaginationElementValues = {
   ELLISIS: '...',
 }
 
-export const renderPaginationElements = (currentPage, totalPages, onChangeCb) => {
+export const renderPaginationElements = (
+  currentPage,
+  totalPages,
+  onChangeCb,
+) => {
   const itemTypeToComponent: Record<PaginationElementsType, any> = {
     [PaginationElementsType.PAGE]: PageLink,
     [PaginationElementsType.ELLIPSIS]: Ellipsis,
