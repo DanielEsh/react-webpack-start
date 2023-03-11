@@ -34,6 +34,8 @@ interface PaginationModelOptions {
 
 const DEFAULT_SIBLING_COUNT = 1
 const DEFAULT_BOUNDARY_PAGES_RANGE = 1
+const ELLIPSIS_SIZE = 1
+const FIRST_PAGE = 1
 
 export function paginationFactory(
   options: PaginationModelOptions,
@@ -45,7 +47,6 @@ export function paginationFactory(
     currentPage,
   } = options
 
-  const ellipsisSize = 1
   const paginationModel = []
 
   const createPage = createPageFactory(currentPage)
@@ -55,8 +56,7 @@ export function paginationFactory(
   const next = createNextPageLink(currentPage, totalPages)
 
   const makeFirstGroup = (groupEnd: number) => {
-    const firstPagesStart = 1
-    return createRange(firstPagesStart, groupEnd).map(createPage)
+    return createRange(FIRST_PAGE, groupEnd).map(createPage)
   }
 
   const makeLastGroup = (groupStart: number) => {
@@ -64,12 +64,12 @@ export function paginationFactory(
   }
 
   const createAllElements = () => {
-    return createRange(1, totalPages).map(createPage)
+    return createRange(FIRST_PAGE, totalPages).map(createPage)
   }
 
   // Simplify generation of pages if number of available items is equal or greater than total pages to show
   if (
-    1 + 2 * ellipsisSize + 2 * siblingPagesRange + 2 * boundaryPagesRange >=
+    1 + 2 * ELLIPSIS_SIZE + 2 * siblingPagesRange + 2 * boundaryPagesRange >=
     totalPages
   ) {
     paginationModel.push(...createAllElements())
@@ -86,9 +86,9 @@ export function paginationFactory(
     const mainPagesStart = Math.min(
       Math.max(
         currentPage - siblingPagesRange,
-        firstPagesEnd + ellipsisSize + 1,
+        firstPagesEnd + ELLIPSIS_SIZE + 1,
       ),
-      lastPagesStart - ellipsisSize - 2 * siblingPagesRange - 1,
+      lastPagesStart - ELLIPSIS_SIZE - 2 * siblingPagesRange - 1,
     )
     const mainPagesEnd = mainPagesStart + 2 * siblingPagesRange
     const mainPages = createRange(mainPagesStart, mainPagesEnd).map(createPage)
