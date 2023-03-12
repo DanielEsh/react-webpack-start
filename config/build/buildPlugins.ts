@@ -21,6 +21,8 @@ export function buildPlugins({
       IS_DEVELOPMENT: isDev,
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+    }),
   ]
 }
