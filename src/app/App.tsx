@@ -1,8 +1,9 @@
 import { StrictMode, Suspense } from 'react'
-import { BrowserRouter, Link } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { AppRouter } from 'app/providers/router'
 import { ErrorBoundary } from 'app/providers/ErrorBoundary'
 import { Sidebar } from 'widgets/Sidebar'
+import { Header } from 'widgets/Header'
 
 import './tailwind.css'
 import './global.css'
@@ -17,15 +18,7 @@ export const App = () => {
               <Sidebar />
 
               <div className="content relative w-full">
-                <div className="bg-neutral-800 text-white">
-                  <div>HEADER</div>
-                  <div className="flex gap-3">
-                    <Link to={'/'}>Главная</Link>
-                    <Link to={'/about'}>О сайте</Link>
-                    <Link to={'/collections'}>Collections</Link>
-                    <Link to={'/collections/1'}>Collections 1</Link>
-                  </div>
-                </div>
+                <Header />
 
                 <div className="page">
                   <AppRouter />
