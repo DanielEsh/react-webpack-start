@@ -12,14 +12,24 @@ export const App = () => {
       <Suspense fallback={<div>GLOBAL LOADER...</div>}>
         <BrowserRouter>
           <ErrorBoundary>
-            <div className="app">
-              <div className="flex gap-3">
-                <Link to={'/'}>Главная</Link>
-                <Link to={'/about'}>О сайте</Link>
-                <Link to={'/collections'}>Collections</Link>
-                <Link to={'/collections/1'}>Collections 1</Link>
+            <div className="app relative flex w-full">
+              <div className="h-screen w-[280px] bg-neutral-300">SIDEBAR</div>
+
+              <div className="content relative w-full">
+                <div className="bg-neutral-800 text-white">
+                  <div>HEADER</div>
+                  <div className="flex gap-3">
+                    <Link to={'/'}>Главная</Link>
+                    <Link to={'/about'}>О сайте</Link>
+                    <Link to={'/collections'}>Collections</Link>
+                    <Link to={'/collections/1'}>Collections 1</Link>
+                  </div>
+                </div>
+
+                <AppRouter />
+
+                <div className="bg-neutral-800 text-white">FOOTER</div>
               </div>
-              <AppRouter />
             </div>
           </ErrorBoundary>
         </BrowserRouter>
