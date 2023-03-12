@@ -2,6 +2,7 @@ import { StrictMode, Suspense } from 'react'
 import { BrowserRouter, Link } from 'react-router-dom'
 import { AppRouter } from 'app/providers/router'
 import { ErrorBoundary } from 'app/providers/ErrorBoundary'
+import { Sidebar } from 'widgets/Sidebar'
 
 import './tailwind.css'
 import './global.css'
@@ -13,11 +14,7 @@ export const App = () => {
         <BrowserRouter>
           <ErrorBoundary>
             <div className="app flex w-full">
-              <div className="relative h-screen min-w-[280px]">
-                <div className="fixed h-screen w-[280px] bg-neutral-300">
-                  SIDEBAR
-                </div>
-              </div>
+              <Sidebar />
 
               <div className="content relative w-full">
                 <div className="bg-neutral-800 text-white">
