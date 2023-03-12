@@ -1,0 +1,8 @@
+:root {
+    --default-header-height: 64px;
+    --default-footer-height: 48px;
+}
+
+.page {
+    min-height: calc(100vh - var(--default-header-height) - var(--default-footer-height));
+}
