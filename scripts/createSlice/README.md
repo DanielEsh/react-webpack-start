@@ -1,1 +1,1 @@
-```npm run generate:slice pages TestPage```
+`npm run generate:slice pages TestPage`
