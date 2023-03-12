@@ -4,6 +4,7 @@ import { AppRouter } from 'app/providers/router'
 import { ErrorBoundary } from 'app/providers/ErrorBoundary'
 import { Sidebar } from 'widgets/Sidebar'
 import { Header } from 'widgets/Header'
+import { Footer } from 'widgets/Footer'
 
 import './tailwind.css'
 import './global.css'
@@ -24,7 +25,7 @@ export const App = () => {
                   <AppRouter />
                 </div>
 
-                <div className="bg-neutral-800 text-white">FOOTER</div>
+                <Footer />
               </div>
             </div>
           </ErrorBoundary>
