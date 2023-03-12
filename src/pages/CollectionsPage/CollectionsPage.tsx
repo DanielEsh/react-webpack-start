@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { getTestData } from 'shared/api/api'
+
 import { useSearchParams } from 'react-router-dom'
+import { Pagiantion } from 'shared/ui/Pagiantion/Pagination'
 
 const CollectionsPage = () => {
   const [testData, setTestData] = useState<any>(null)
@@ -48,20 +50,16 @@ const CollectionsPage = () => {
     if (!testData) return
 
     return (
-      <div>
+      <>
         {beautifyRender()}
-        <div className="flex gap-3">
-          <div>Prev</div>
-          {testData.meta.pages.map((item: number, idx: number) => {
-            return (
-              <div key={idx} onClick={() => handlePageClick(item)}>
-                {item}
-              </div>
-            )
-          })}
-          <div>Next</div>
-        </div>
-      </div>
+        {testData && (
+          <Pagiantion
+            currentPage={parseInt(currentPage)}
+            totalPages={testData.meta.totalPages}
+            onChange={(item) => handlePageClick(item)}
+          />
+        )}
+      </>
     )
   }
 
