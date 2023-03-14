@@ -4,6 +4,7 @@ import { MainPage } from 'pages/MainPage/MainPage'
 import CollectionsPage from 'pages/CollectionsPage/CollectionsPage'
 import CollectionPage from 'pages/CollectionPage/CollectionPage'
 import { NotFoundPage } from 'pages/NotFound'
+import RootLayout from 'widgets/layouts/RootLayout'
 
 export type AppRoutesProps = RouteProps & {
   authOnly?: boolean
@@ -30,6 +31,10 @@ export const RoutePath: Record<AppRoutes, string> = {
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
     path: RoutePath.main,
+    element: <RootLayout />,
+  },
+  [AppRoutes.MAIN]: {
+    index: true,
     element: <MainPage />,
   },
   [AppRoutes.ABOUT]: {
