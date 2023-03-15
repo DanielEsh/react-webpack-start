@@ -11,7 +11,7 @@ export type AppRoutesProps = RouteProps & {
 }
 
 export enum AppRoutes {
-  MAIN = 'main',
+  HOME = 'home',
   ABOUT = 'about',
   COLLECTIONS = 'collections',
   COLLECTION = 'collection',
@@ -20,7 +20,7 @@ export enum AppRoutes {
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
-  [AppRoutes.MAIN]: '/',
+  [AppRoutes.HOME]: '/',
   [AppRoutes.ABOUT]: '/about',
   [AppRoutes.COLLECTIONS]: '/collections',
   [AppRoutes.COLLECTION]: '/collections/', // + :id
@@ -29,11 +29,11 @@ export const RoutePath: Record<AppRoutes, string> = {
 }
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
-  [AppRoutes.MAIN]: {
-    path: RoutePath.main,
+  [AppRoutes.HOME]: {
+    path: RoutePath.home,
     element: <RootLayout />,
   },
-  [AppRoutes.MAIN]: {
+  [AppRoutes.HOME]: {
     index: true,
     element: <MainPage />,
   },
