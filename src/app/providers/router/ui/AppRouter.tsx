@@ -15,6 +15,7 @@ import { MainPage } from 'pages/MainPage/MainPage'
 import { AboutPageAsync } from 'pages/AboutPage/AboutPage.async'
 import CollectionsPage from 'pages/CollectionsPage/CollectionsPage'
 import CollectionPage from 'pages/CollectionPage/CollectionPage'
+import { NotFoundPage } from 'pages/NotFound'
 
 const Faq = () => {
   return <div>faq</div>
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
           element={<Contact />}
         />
       </Route>
+
       <Route
         path="/"
         element={<RootLayout />}
@@ -61,6 +63,11 @@ const router = createBrowserRouter(
           element={<CollectionPage />}
         />
       </Route>
+
+      <Route
+        path="*"
+        element={<NotFoundPage />}
+      />
     </>,
   ),
 )
