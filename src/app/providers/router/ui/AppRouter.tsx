@@ -25,52 +25,104 @@ const Contact = () => {
   return <div>Contact</div>
 }
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route
-        path="/test"
-        element={<TestLayout />}
-      >
-        <Route
-          path="faq"
-          element={<Faq />}
-        />
-        <Route
-          path="contact"
-          element={<Contact />}
-        />
-      </Route>
+const testLayout = [
+  {
+    path: '/test',
+    element: <TestLayout />,
+    children: [
+      {
+        path: 'faq',
+        element: <Faq />,
+      },
+      {
+        path: 'contact',
+        element: <Contact />,
+      },
+    ],
+  },
+]
 
-      <Route
-        path="/"
-        element={<RootLayout />}
-      >
-        <Route
-          index
-          element={<MainPage />}
-        />
-        <Route
-          path="about"
-          element={<AboutPageAsync />}
-        />
-        <Route
-          path="collections"
-          element={<CollectionsPage />}
-        />
-        <Route
-          path="collections/:id"
-          element={<CollectionPage />}
-        />
-      </Route>
+const rootLayout = [
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <MainPage />,
+      },
+      {
+        path: 'about',
+        element: <AboutPageAsync />,
+      },
+      {
+        path: 'collections',
+        element: <CollectionsPage />,
+        children: [
+          {
+            path: ':id',
+            element: <CollectionPage />,
+          },
+        ],
+      },
+    ],
+  },
+]
 
-      <Route
-        path="*"
-        element={<NotFoundPage />}
-      />
-    </>,
-  ),
-)
+const r = [
+  ...testLayout,
+  ...rootLayout,
+  { paths: '*', element: <NotFoundPage /> },
+]
+
+const router = createBrowserRouter(r)
+
+// const router = createBrowserRouter(
+//   createRoutesFromElements(
+//     <>
+//       <Route
+//         path="/test"
+//         element={<TestLayout />}
+//       >
+//         <Route
+//           path="faq"
+//           element={<Faq />}
+//         />
+//         <Route
+//           path="contact"
+//           element={<Contact />}
+//         />
+//       </Route>
+
+//       <Route
+//         path="/"
+//         element={<RootLayout />}
+//       >
+//         <Route
+//           index
+//           element={<MainPage />}
+//         />
+//         <Route
+//           path="about"
+//           element={<AboutPageAsync />}
+//         />
+//         <Route
+//           path="collections"
+//           element={<CollectionsPage />}
+//         />
+//         <Route
+//           path="collections/:id"
+//           element={<CollectionPage />}
+//         />
+//       </Route>
+
+//       <Route
+//         path="*"
+//         element={<NotFoundPage />}
+//       />
+//     </>,
+//   ),
+// )
 
 const AppRouter = () => {
   const renderWithWrapper = useCallback((route: AppRoutesProps) => {
