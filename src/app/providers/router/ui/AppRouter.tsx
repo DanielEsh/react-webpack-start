@@ -16,7 +16,7 @@ import { MainPage } from 'pages/MainPage/MainPage'
 import { AboutPageAsync } from 'pages/AboutPage/AboutPage.async'
 import CollectionsPage from 'pages/CollectionsPage/CollectionsPage'
 import CollectionPage from 'pages/CollectionPage/CollectionPage'
-import { NotFoundPage } from 'pages/NotFound'
+import { GlobalNotFoundPage } from 'pages/GlobalNotFound'
 
 const Faq = () => {
   return <div>faq</div>
@@ -24,6 +24,10 @@ const Faq = () => {
 
 const Contact = () => {
   return <div>Contact</div>
+}
+
+const Layout404 = () => {
+  return <div>layout 404</div>
 }
 
 const testLayout = [
@@ -73,7 +77,7 @@ const rootLayout = [
 const r = [
   ...testLayout,
   ...rootLayout,
-  { path: '*', element: <NotFoundPage /> },
+  { path: '*', element: <GlobalNotFoundPage /> },
 ]
 
 const router = createBrowserRouter(r)

@@ -3,7 +3,7 @@ import { AboutPageAsync } from 'pages/AboutPage/AboutPage.async'
 import { MainPage } from 'pages/MainPage/MainPage'
 import CollectionsPage from 'pages/CollectionsPage/CollectionsPage'
 import CollectionPage from 'pages/CollectionPage/CollectionPage'
-import { NotFoundPage } from 'pages/NotFound'
+// import { NotFoundPage } from 'pages/NotFound'
 import RootLayout from 'widgets/layouts/RootLayout'
 
 export type AppRoutesProps = RouteProps & {
@@ -16,7 +16,7 @@ export enum AppRoutes {
   COLLECTIONS = 'collections',
   COLLECTION = 'collection',
   // should be last
-  NOT_FOUND = 'not_found',
+  // NOT_FOUND = 'not_found',
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
@@ -25,7 +25,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.COLLECTIONS]: '/collections',
   [AppRoutes.COLLECTION]: '/collections/', // + :id
   // should be last
-  [AppRoutes.NOT_FOUND]: '*',
+  // [AppRoutes.NOT_FOUND]: '*',
 }
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
@@ -53,8 +53,8 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     authOnly: true,
   },
   // should be last
-  [AppRoutes.NOT_FOUND]: {
-    path: RoutePath.not_found,
-    element: <NotFoundPage />,
-  },
+  // [AppRoutes.NOT_FOUND]: {
+  //   path: RoutePath.not_found,
+  //   element: <NotFoundPage />,
+  // },
 }
