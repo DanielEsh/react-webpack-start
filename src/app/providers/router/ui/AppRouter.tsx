@@ -5,6 +5,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
+  BrowserRouter,
 } from 'react-router-dom'
 import { AppRoutesProps, routeConfig } from '../config'
 import { RequireAuth } from 'app/providers/router/ui/RequireAuth'
@@ -72,7 +73,7 @@ const rootLayout = [
 const r = [
   ...testLayout,
   ...rootLayout,
-  { paths: '*', element: <NotFoundPage /> },
+  { path: '*', element: <NotFoundPage /> },
 ]
 
 const router = createBrowserRouter(r)
