@@ -10,7 +10,10 @@ export const MainPage = () => {
       <DataTable />
       <Counter />
       <ChangeLangButton />
-      <Ripple />
+      <Ripple.Container className="flex h-24 w-24 items-center justify-center rounded-md bg-black text-white">
+        children
+        <Ripple />
+      </Ripple.Container>
     </div>
   )
 }
