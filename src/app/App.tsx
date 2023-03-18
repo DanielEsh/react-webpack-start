@@ -1,6 +1,7 @@
 import { StrictMode, Suspense } from 'react'
 // import { BrowserRouter } from 'react-router-dom'
-import { AppRouter } from 'app/providers/router'
+// import { AppRouter } from 'app/providers/router'
+import { Router } from 'pages'
 // import { ErrorBoundary } from 'app/providers/ErrorBoundary'
 
 import './tailwind.css'
@@ -10,7 +11,7 @@ export const App = () => {
   return (
     <StrictMode>
       <Suspense fallback={<div>GLOBAL LOADER...</div>}>
-        <AppRouter />
+        <Router />
       </Suspense>
     </StrictMode>
   )

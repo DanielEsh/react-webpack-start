@@ -99,32 +99,32 @@ const router = createBrowserRouter(r)
 //         />
 //       </Route>
 
-//       <Route
-//         path="/"
-//         element={<RootLayout />}
-//       >
-//         <Route
-//           index
-//           element={<MainPage />}
-//         />
-//         <Route
-//           path="about"
-//           element={<AboutPageAsync />}
-//         />
-//         <Route
-//           path="collections"
-//           element={<CollectionsPage />}
-//         />
-//         <Route
-//           path="collections/:id"
-//           element={<CollectionPage />}
-//         />
-//       </Route>
+// <Route
+//   path="/"
+//   element={<RootLayout />}
+// >
+//   <Route
+//     index
+//     element={<MainPage />}
+//   />
+//   <Route
+//     path="about"
+//     element={<AboutPageAsync />}
+//   />
+//   <Route
+//     path="collections"
+//     element={<CollectionsPage />}
+//   />
+//   <Route
+//     path="collections/:id"
+//     element={<CollectionPage />}
+//   />
+//  </Route>
 
-//       <Route
-//         path="*"
-//         element={<NotFoundPage />}
-//       />
+// <Route
+//   path="*"
+//   element={<NotFoundPage />}
+// />
 //     </>,
 //   ),
 // )
