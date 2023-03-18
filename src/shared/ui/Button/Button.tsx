@@ -30,29 +30,29 @@ export interface ButtonProps
   children: ReactNode
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (props, ref) => {
-    const {
-      className,
-      variant,
-      size,
-      type = 'button',
-      children,
-      ...restProps
-    } = props
+export const Button = forwardRef<any, ButtonProps>((props, forwardedRef) => {
+  const {
+    className,
+    variant,
+    size,
+    type = 'button',
+    children,
+    ...restProps
+  } = props
 
-    const classes = classNames(buttonVariants({ variant, size, className }))
+  const classes = classNames(buttonVariants({ variant, size, className }))
 
-    return (
-      <button
-        className={classes}
-        ref={ref}
-        type={type}
-        {...restProps}
-      >
-        {children}
-      </button>
-    )
-  },
-)
+  return (
+    <Ripple.Container
+      as="button"
+      ref={forwardedRef}
+      className={classes}
+      type={type}
+      {...restProps}
+    >
+      {children}
+      <Ripple />
+    </Ripple.Container>
+  )
+})
 Button.displayName = 'Button'
