@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { ReactNode, useRef, useState, MouseEvent, useContext } from 'react'
 import { classNames } from 'shared/utils'
 import { useEventListener } from '../../hooks/useEventListener'
@@ -19,12 +17,12 @@ export type RippleProps = {
   children?: ReactNode
 }
 
-const addClass = (element: any, className: string) => {
-  if (element && className) {
-    if (element.classList) element.classList.add(className)
-    else element.className += ' ' + className
-  }
-}
+// const addClass = (element: any, className: string) => {
+//   if (element && className) {
+//     if (element.classList) element.classList.add(className)
+//     else element.className += ' ' + className
+//   }
+// }
 
 const removeClass = (element: any, className: string) => {
   if (element && className) {
@@ -40,7 +38,7 @@ const removeClass = (element: any, className: string) => {
   }
 }
 
-export const RippleRoot = ({ children }: RippleProps) => {
+export const RippleRoot = ({ className }: RippleProps) => {
   const [effect, setEffect] = useState(false)
   const rippleRef = useRef<HTMLElement | null>(null)
 
@@ -48,7 +46,7 @@ export const RippleRoot = ({ children }: RippleProps) => {
     return rippleRef.current && rippleRef.current.parentElement
   }
 
-  const { color, containerRef } = useContext<RippleContextType>(RippleContext)
+  const { containerRef } = useContext<RippleContextType>(RippleContext)
 
   const onMouseDown = (event: MouseEvent) => {
     if (!containerRef?.current) return
@@ -73,7 +71,7 @@ export const RippleRoot = ({ children }: RippleProps) => {
   }
 
   const activateRipple = (offsetX: number, offsetY: number) => {
-    if (!rippleRef.current && !containerRef?.current) {
+    if (!rippleRef.current || !containerRef?.current) {
       return
     }
 
@@ -95,8 +93,6 @@ export const RippleRoot = ({ children }: RippleProps) => {
     setEffect(true)
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   useEventListener('mousedown', onMouseDown)
 
   // useEffect(() => {
@@ -107,9 +103,13 @@ export const RippleRoot = ({ children }: RippleProps) => {
     setEffect(false)
   }
 
-  const classes = classNames('ripple-effect absolute block rounded-full', {
-    'animate-ripple': effect,
-  })
+  const classes = classNames(
+    'ripple-effect absolute block rounded-full',
+    className,
+    {
+      'animate-ripple': effect,
+    },
+  )
 
   return (
     <span
