@@ -4,6 +4,7 @@ import { ReactNode, useRef, useState, MouseEvent, useContext } from 'react'
 import { classNames } from 'shared/utils'
 import { useEventListener } from '../../hooks/useEventListener'
 import { RippleContext, RippleContextType } from './RippleContext'
+import { RippleContainer } from 'shared/ui/Ripple/RippleContainer'
 
 export type RippleProps = {
   className?: string
@@ -82,28 +83,6 @@ const removeClass = (element: any, className: string) => {
         ' ',
       )
   }
-}
-
-export const RippleContainer = ({ children, className }: RippleProps) => {
-  const containerRef = useRef<HTMLDivElement | null>(null)
-
-  const context: RippleContextType = {
-    color: 'primary',
-    containerRef,
-  }
-
-  const classes = classNames('ripple-root', className)
-
-  return (
-    <RippleContext.Provider value={context}>
-      <div
-        ref={containerRef}
-        className={classes}
-      >
-        {children}
-      </div>
-    </RippleContext.Provider>
-  )
 }
 
 export const RippleRoot = ({ children }: RippleProps) => {
