@@ -1,6 +1,7 @@
 import Counter from 'components/Counter'
 import { ChangeLangButton } from 'components/ChangeLangButton'
 import { DataTable } from 'components/DataTable'
+import { Ripple } from 'shared/ui/Ripple'
 
 export const MainPage = () => {
   return (
@@ -9,6 +10,7 @@ export const MainPage = () => {
       <DataTable />
       <Counter />
       <ChangeLangButton />
+      <Ripple />
     </div>
   )
 }
