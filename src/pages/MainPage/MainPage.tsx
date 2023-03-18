@@ -2,6 +2,7 @@ import Counter from 'components/Counter'
 import { ChangeLangButton } from 'components/ChangeLangButton'
 import { DataTable } from 'components/DataTable'
 import { Ripple } from 'shared/ui/Ripple'
+import { Button } from 'shared/ui/Button'
 
 export const MainPage = () => {
   return (
@@ -14,6 +15,7 @@ export const MainPage = () => {
         children
         <Ripple />
       </Ripple.Container>
+      <Button />
     </div>
   )
 }
