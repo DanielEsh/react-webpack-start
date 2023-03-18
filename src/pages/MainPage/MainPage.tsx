@@ -15,7 +15,7 @@ export const MainPage = () => {
         children
         <Ripple />
       </Ripple.Container>
-      <Button />
+      <Button>btn</Button>
     </div>
   )
 }
