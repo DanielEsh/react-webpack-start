@@ -17,27 +17,6 @@ export type RippleProps = {
   children?: ReactNode
 }
 
-// const addClass = (element: any, className: string) => {
-//   if (element && className) {
-//     if (element.classList) element.classList.add(className)
-//     else element.className += ' ' + className
-//   }
-// }
-
-const removeClass = (element: any, className: string) => {
-  if (element && className) {
-    if (element.classList) element.classList.remove(className)
-    else
-      element.className = element.className.replace(
-        new RegExp(
-          '(^|\\b)' + className.split(' ').join('|') + '(\\b|$)',
-          'gi',
-        ),
-        ' ',
-      )
-  }
-}
-
 export const RippleRoot = ({ className }: RippleProps) => {
   const [effect, setEffect] = useState(false)
   const rippleRef = useRef<HTMLElement | null>(null)
@@ -75,8 +54,6 @@ export const RippleRoot = ({ className }: RippleProps) => {
       return
     }
 
-    removeClass(rippleRef.current, 'animate-ripple')
-
     if (!getHeight(rippleRef.current) && !getWidth(rippleRef.current)) {
       const maxRippleValue = Math.max(
         getOuterWidth(containerRef.current),
@@ -94,10 +71,6 @@ export const RippleRoot = ({ className }: RippleProps) => {
   }
 
   useEventListener('mousedown', onMouseDown)
-
-  // useEffect(() => {
-  //   targetRef.current = getTargetElement()
-  // }, [])
 
   const onAnimationEnd = () => {
     setEffect(false)
