@@ -14,7 +14,7 @@ export const RippleContainer = ({ children, className }: RippleProps) => {
     containerRef,
   }
 
-  const classes = classNames('ripple-root', className)
+  const classes = classNames('relative overflow-hidden', className)
 
   return (
     <RippleContext.Provider value={context}>
