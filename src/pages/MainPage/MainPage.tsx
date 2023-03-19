@@ -3,6 +3,7 @@ import { ChangeLangButton } from 'components/ChangeLangButton'
 import { DataTable } from 'components/DataTable'
 import { Ripple } from 'shared/ui/Ripple'
 import { Button } from 'shared/ui/Button'
+import { Portal } from 'shared/ui/Portal/Portal'
 import StarIcon from 'shared/assets/icons/star.svg'
 
 export const MainPage = () => {
@@ -18,6 +19,10 @@ export const MainPage = () => {
       </Ripple.Container>
       <Button>btn</Button>
       <StarIcon />
+
+      <Portal>
+        <div>Element in Portal</div>
+      </Portal>
     </div>
   )
 }
