@@ -3,6 +3,7 @@ import { ChangeLangButton } from 'components/ChangeLangButton'
 import { DataTable } from 'components/DataTable'
 import { Ripple } from 'shared/ui/Ripple'
 import { Button } from 'shared/ui/Button'
+import StarIcon from 'shared/assets/icons/star.svg'
 
 export const MainPage = () => {
   return (
@@ -16,6 +17,7 @@ export const MainPage = () => {
         <Ripple />
       </Ripple.Container>
       <Button>btn</Button>
+      <StarIcon />
     </div>
   )
 }
