@@ -4,7 +4,7 @@ import {
   RippleContextType,
 } from 'shared/ui/Ripple/RippleContext'
 import { classNames } from 'shared/utils'
-import { useComposedRefs } from 'shared/hooks/useComposedRefs'
+import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 
 export interface RippleContainerProps {
   children: ReactNode

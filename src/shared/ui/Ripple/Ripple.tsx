@@ -1,6 +1,6 @@
 import { useRef, useState, MouseEvent, useContext } from 'react'
 import { classNames } from 'shared/utils'
-import { useEventListener } from 'shared/hooks/useEventListener'
+import { useEventListener } from 'shared/lib/hooks/useEventListener'
 import {
   getOffset,
   getHeight,
