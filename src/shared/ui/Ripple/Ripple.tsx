@@ -1,9 +1,6 @@
-import { ReactNode, useRef, useState, MouseEvent, useContext } from 'react'
+import { useRef, useState, MouseEvent, useContext } from 'react'
 import { classNames } from 'shared/utils'
-import { useEventListener } from '../../hooks/useEventListener'
-import { RippleContext, RippleContextType } from './RippleContext'
-import { RippleContainer } from 'shared/ui/Ripple/RippleContainer'
-
+import { useEventListener } from 'shared/hooks/useEventListener'
 import {
   getOffset,
   getHeight,
@@ -11,10 +8,11 @@ import {
   getOuterHeight,
   getOuterWidth,
 } from 'shared/utils/dom'
+import { RippleContext, RippleContextType } from './RippleContext'
+import { RippleContainer } from 'shared/ui/Ripple/RippleContainer'
 
-export type RippleProps = {
+export interface RippleProps {
   className?: string
-  children?: ReactNode
 }
 
 export const RippleRoot = ({ className }: RippleProps) => {
