@@ -2,7 +2,7 @@ import { createContext, MutableRefObject } from 'react'
 
 export interface RippleContextType {
   color: string
-  containerRef: MutableRefObject<HTMLDivElement | null> | null
+  containerRef: MutableRefObject<HTMLElement | null> | null
   rippleRef?: MutableRefObject<HTMLElement>
 }
 

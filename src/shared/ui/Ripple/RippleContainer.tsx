@@ -12,13 +12,15 @@ export interface RippleContainerProps {
   className?: string
 }
 
-export const RippleContainer = forwardRef<RippleContainerProps, any>(
+const DEFAULT_TAG = 'div'
+
+export const RippleContainer = forwardRef<HTMLElement, RippleContainerProps>(
   (props, forwardedRef) => {
-    const { children, as: Tag = 'div', className, ...restProps } = props
+    const { children, as: Tag = DEFAULT_TAG, className, ...restProps } = props
 
-    const containerRef = useRef<any | null>(null)
+    const containerRef = useRef<HTMLElement | null>(null)
 
-    const ref = useComposedRefs(containerRef, forwardedRef)
+    const ref = useComposedRefs<HTMLElement>(containerRef, forwardedRef)
 
     const context: RippleContextType = {
       color: 'primary',
