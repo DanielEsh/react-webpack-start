@@ -4,6 +4,7 @@ import { DataTable } from 'components/DataTable'
 import { Ripple } from 'shared/ui/Ripple'
 import { Button } from 'shared/ui/Button'
 import { Portal } from 'shared/ui/Portal/Portal'
+import { Popover } from 'shared/ui/Popover'
 import StarIcon from 'shared/assets/icons/star.svg'
 
 export const MainPage = () => {
@@ -20,6 +21,7 @@ export const MainPage = () => {
       <Button>btn</Button>
       <StarIcon />
 
+      <Popover />
       <Portal>
         <div>Element in Portal</div>
       </Portal>
