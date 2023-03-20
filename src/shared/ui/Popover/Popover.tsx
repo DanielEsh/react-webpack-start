@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useFloating, offset as floatingOffset } from '@floating-ui/react-dom'
 import type { Placement } from '@floating-ui/react-dom'
 import { Portal } from 'shared/ui/Portal/Portal'
+import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
+import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 
 type Offset = {
   side: number
@@ -38,6 +40,13 @@ export const Popover = (props: PopoverProps) => {
     ].filter(isDefined),
   })
 
+  const defaultRef = useRef<any>(null)
+  const composedRef = useComposedRefs(defaultRef, reference)
+
+  useClickOutside(defaultRef, () => {
+    setOpen(false)
+  })
+
   return (
     <div className="mt-6">
       {isOpen ? (
@@ -56,7 +65,7 @@ export const Popover = (props: PopoverProps) => {
         </Portal>
       ) : null}
       <div
-        ref={reference}
+        ref={composedRef}
         className="inline-flex"
         onClick={() => setOpen(!isOpen)}
       >
