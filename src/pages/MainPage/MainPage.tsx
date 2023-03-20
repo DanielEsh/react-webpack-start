@@ -21,10 +21,10 @@ export const MainPage = () => {
       <Button>btn</Button>
       <StarIcon />
 
-      <Popover />
-      <Portal>
-        <div>Element in Portal</div>
-      </Portal>
+      <Popover placement="top" />
+      <Popover placement="bottom" />
+      <Popover placement="left" />
+      <Popover placement="right" />
     </div>
   )
 }
