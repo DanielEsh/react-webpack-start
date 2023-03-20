@@ -4,6 +4,7 @@ import type { Placement } from '@floating-ui/react-dom'
 import { Portal } from 'shared/ui/Portal/Portal'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
+import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
 
 type Offset = {
   side: number
@@ -43,9 +44,13 @@ export const Popover = (props: PopoverProps) => {
   const defaultRef = useRef<any>(null)
   const composedRef = useComposedRefs(defaultRef, reference)
 
-  useClickOutside(defaultRef, () => {
+  const close = () => {
     setOpen(false)
-  })
+  }
+
+  useClickOutside(defaultRef, close)
+
+  useKeyPress(['Escape'], close)
 
   return (
     <div className="mt-6">
