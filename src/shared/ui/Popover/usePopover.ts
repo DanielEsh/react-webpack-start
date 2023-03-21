@@ -1,11 +1,6 @@
 import { useState } from 'react'
 import { useFloating, offset as floatingOffset } from '@floating-ui/react-dom'
-import type { Placement } from '@floating-ui/react-dom'
-
-type Offset = {
-  side: number
-  align: number
-}
+import type { Placement, Offset } from './types'
 
 interface Options {
   placement: Placement

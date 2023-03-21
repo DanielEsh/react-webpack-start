@@ -1,15 +1,10 @@
 import { useRef } from 'react'
-import type { Placement } from '@floating-ui/react-dom'
+import type { Placement, Offset } from './types'
 import { Portal } from 'shared/ui/Portal/Portal'
 import { usePopover } from './usePopover'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
-
-type Offset = {
-  side: number
-  align: number
-}
 
 export interface PopoverProps {
   placement: Placement
