@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react'
-import { useFloating, offset as floatingOffset } from '@floating-ui/react-dom'
+import { useRef } from 'react'
 import type { Placement } from '@floating-ui/react-dom'
 import { Portal } from 'shared/ui/Portal/Portal'
+import { usePopover } from './usePopover'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
@@ -16,10 +16,6 @@ export interface PopoverProps {
   offset?: Offset
 }
 
-function isDefined<T>(value: T | undefined): value is T {
-  return value !== undefined
-}
-
 const DEFAULT_OFFSET: Offset = {
   side: 10,
   align: 10,
@@ -28,24 +24,17 @@ const DEFAULT_OFFSET: Offset = {
 export const Popover = (props: PopoverProps) => {
   const { placement, offset = DEFAULT_OFFSET } = props
 
-  const [isOpen, setOpen] = useState(false)
-
-  const { reference, floating, strategy, x, y } = useFloating({
-    strategy: 'fixed',
-    placement,
-    middleware: [
-      floatingOffset({
-        mainAxis: offset.side,
-        alignmentAxis: offset.align,
-      }),
-    ].filter(isDefined),
-  })
+  const { isOpened, changeOpened, referenceRef, floatingRef, popoverStyles } =
+    usePopover({
+      placement,
+      offset,
+    })
 
   const defaultRef = useRef<any>(null)
-  const composedRef = useComposedRefs(defaultRef, reference)
+  const composedRef = useComposedRefs(defaultRef, referenceRef)
 
   const close = () => {
-    setOpen(false)
+    changeOpened(false)
   }
 
   useClickOutside(defaultRef, close)
@@ -54,16 +43,12 @@ export const Popover = (props: PopoverProps) => {
 
   return (
     <div className="mt-6">
-      {isOpen ? (
+      {isOpened ? (
         <Portal>
           <div
-            ref={floating}
-            style={{
-              position: strategy,
-              top: y ?? 0,
-              left: x ?? 0,
-              visibility: x == null ? 'hidden' : 'visible',
-            }}
+            ref={floatingRef}
+            className="flex rounded-md bg-neutral-800/80 p-2 text-white"
+            style={popoverStyles}
           >
             Popover floating
           </div>
@@ -72,7 +57,7 @@ export const Popover = (props: PopoverProps) => {
       <div
         ref={composedRef}
         className="inline-flex"
-        onClick={() => setOpen(!isOpen)}
+        onClick={() => changeOpened(!isOpened)}
       >
         Popover trigger
       </div>
