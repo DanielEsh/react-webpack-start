@@ -23,6 +23,8 @@ export function usePopover(options: Options) {
 
   const [isOpened, setOpened] = useState(visible)
 
+  const ARROW_HEIGHT = 4
+
   const {
     reference,
     floating,
@@ -36,7 +38,7 @@ export function usePopover(options: Options) {
     placement,
     middleware: [
       floatingUiOffset({
-        mainAxis: offset.side,
+        mainAxis: offset.side + ARROW_HEIGHT,
         alignmentAxis: offset.align,
       }),
       floatingUiArrow({ element: arrow, padding: arrowPadding }),
