@@ -30,14 +30,25 @@ export const PopoverRoot = (props: PopoverProps) => {
     children,
   } = props
 
-  const { isOpened, changeOpened, referenceRef, floatingRef, popoverStyles } =
-    usePopover({
-      placement,
-      offset,
-      visible,
-    })
-
   const defaultRef = useRef<any>(null)
+
+  const arrowRef = useRef<any>(null)
+
+  const {
+    isOpened,
+    changeOpened,
+    referenceRef,
+    floatingRef,
+    popoverStyles,
+    arrowStyles,
+  } = usePopover({
+    placement,
+    offset,
+    visible,
+    arrow: arrowRef,
+    arrowPadding: 0,
+  })
+
   const composedRef = useComposedRefs(defaultRef, referenceRef)
 
   const changePopover = (value: boolean) => {
@@ -51,8 +62,10 @@ export const PopoverRoot = (props: PopoverProps) => {
   const context: PopoverContextType = {
     referenceRef: composedRef,
     floatingRef: floatingRef,
+    arrowRef: arrowRef,
     isOpened: isOpened,
     popoverStyles: popoverStyles,
+    arrowStyles: arrowStyles,
     triggerType: triggerType,
     togglePopover: changePopover,
   }
