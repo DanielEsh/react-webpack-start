@@ -24,7 +24,10 @@ export const MainPage = () => {
         placement="top"
         visible
       />
-      <Popover placement="bottom" />
+      <Popover
+        placement="bottom"
+        triggerType="hover"
+      />
       <Popover placement="left" />
       <Popover placement="right" />
     </div>

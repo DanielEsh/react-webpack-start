@@ -6,3 +6,5 @@ export type Offset = {
 }
 
 export type Placement = FloatingPlacement
+
+export type Trigger = 'click' | 'hover'

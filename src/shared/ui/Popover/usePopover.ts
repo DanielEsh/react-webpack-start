@@ -36,7 +36,7 @@ export function usePopover(options: Options) {
 
   return {
     isOpened,
-    changeOpened: setOpened,
+    changeOpened: (val: boolean) => setOpened(val),
     referenceRef: reference,
     floatingRef: floating,
     popoverStyles: popoverStyles,

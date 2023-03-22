@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import type { Placement, Offset } from './types'
+import type { Placement, Offset, Trigger } from './types'
 import { Portal } from 'shared/ui/Portal/Portal'
 import { usePopover } from './usePopover'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
@@ -10,6 +10,7 @@ export interface PopoverProps {
   placement: Placement
   offset?: Offset
   visible?: boolean
+  triggerType?: Trigger
 }
 
 const DEFAULT_OFFSET: Offset = {
@@ -18,7 +19,12 @@ const DEFAULT_OFFSET: Offset = {
 }
 
 export const Popover = (props: PopoverProps) => {
-  const { placement, offset = DEFAULT_OFFSET, visible = false } = props
+  const {
+    placement,
+    offset = DEFAULT_OFFSET,
+    visible = false,
+    triggerType = 'click',
+  } = props
 
   const { isOpened, changeOpened, referenceRef, floatingRef, popoverStyles } =
     usePopover({
@@ -30,13 +36,25 @@ export const Popover = (props: PopoverProps) => {
   const defaultRef = useRef<any>(null)
   const composedRef = useComposedRefs(defaultRef, referenceRef)
 
-  const close = () => {
-    changeOpened(false)
+  const changePopover = (value: boolean) => {
+    changeOpened(value)
   }
 
-  useClickOutside(defaultRef, close)
+  const handleClick = () => {
+    if (triggerType === 'click') changePopover(true)
+  }
 
-  useKeyPress(['Escape'], close)
+  const handleMouseEnter = () => {
+    if (triggerType === 'hover') changePopover(true)
+  }
+
+  const handleMouseLeave = () => {
+    if (triggerType === 'hover') changePopover(false)
+  }
+
+  useClickOutside(defaultRef, () => changePopover(false))
+
+  useKeyPress(['Escape'], () => changePopover(false))
 
   return (
     <div className="mt-6">
@@ -51,10 +69,13 @@ export const Popover = (props: PopoverProps) => {
           </div>
         </Portal>
       ) : null}
+
       <div
         ref={composedRef}
         className="inline-flex"
-        onClick={() => changeOpened(!isOpened)}
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         Popover trigger
       </div>
