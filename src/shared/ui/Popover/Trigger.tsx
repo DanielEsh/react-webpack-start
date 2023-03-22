@@ -2,19 +2,19 @@ import { useContext, PropsWithChildren } from 'react'
 import { PopoverContext } from './Context'
 
 export const PopoverTrigger = (props: PropsWithChildren) => {
-  const { referenceRef, triggerType, togglePopover } =
+  const { referenceRef, triggerType, isOpened, togglePopover } =
     useContext(PopoverContext)
 
   const handleClick = () => {
-    if (triggerType === 'click' && togglePopover) togglePopover(true)
+    if (triggerType === 'click') togglePopover(!isOpened)
   }
 
   const handleMouseEnter = () => {
-    if (triggerType === 'hover' && togglePopover) togglePopover(true)
+    if (triggerType === 'hover') togglePopover(!isOpened)
   }
 
   const handleMouseLeave = () => {
-    if (triggerType === 'hover' && togglePopover) togglePopover(false)
+    if (triggerType === 'hover') togglePopover(!isOpened)
   }
 
   return (
