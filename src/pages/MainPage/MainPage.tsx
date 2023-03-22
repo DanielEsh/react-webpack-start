@@ -23,13 +23,28 @@ export const MainPage = () => {
       <Popover
         placement="top"
         visible
-      />
+      >
+        <Popover.Trigger>Trigger</Popover.Trigger>
+        <Popover.Content>Content</Popover.Content>
+      </Popover>
+
       <Popover
         placement="bottom"
         triggerType="hover"
-      />
-      <Popover placement="left" />
-      <Popover placement="right" />
+      >
+        <Popover.Trigger>Trigger</Popover.Trigger>
+        <Popover.Content>Content</Popover.Content>
+      </Popover>
+
+      <Popover placement="left">
+        <Popover.Trigger>Trigger</Popover.Trigger>
+        <Popover.Content>Content</Popover.Content>
+      </Popover>
+
+      <Popover placement="right">
+        <Popover.Trigger>Trigger</Popover.Trigger>
+        <Popover.Content>Content</Popover.Content>
+      </Popover>
     </div>
   )
 }

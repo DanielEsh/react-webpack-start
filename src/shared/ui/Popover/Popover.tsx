@@ -1,7 +1,9 @@
-import { useRef } from 'react'
+import { useRef, type ReactNode } from 'react'
 import type { Placement, Offset, Trigger } from './types'
-import { Portal } from 'shared/ui/Portal/Portal'
 import { usePopover } from './usePopover'
+import { PopoverContext, type PopoverContextType } from './Context'
+import { PopoverTrigger } from './Trigger'
+import { PopoverContent } from './Content'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
@@ -11,6 +13,7 @@ export interface PopoverProps {
   offset?: Offset
   visible?: boolean
   triggerType?: Trigger
+  children: ReactNode
 }
 
 const DEFAULT_OFFSET: Offset = {
@@ -18,12 +21,13 @@ const DEFAULT_OFFSET: Offset = {
   align: 10,
 }
 
-export const Popover = (props: PopoverProps) => {
+export const PopoverRoot = (props: PopoverProps) => {
   const {
     placement,
     offset = DEFAULT_OFFSET,
     visible = false,
     triggerType = 'click',
+    children,
   } = props
 
   const { isOpened, changeOpened, referenceRef, floatingRef, popoverStyles } =
@@ -40,45 +44,29 @@ export const Popover = (props: PopoverProps) => {
     changeOpened(value)
   }
 
-  const handleClick = () => {
-    if (triggerType === 'click') changePopover(true)
-  }
-
-  const handleMouseEnter = () => {
-    if (triggerType === 'hover') changePopover(true)
-  }
-
-  const handleMouseLeave = () => {
-    if (triggerType === 'hover') changePopover(false)
-  }
-
   useClickOutside(defaultRef, () => changePopover(false))
 
   useKeyPress(['Escape'], () => changePopover(false))
 
+  const context: PopoverContextType = {
+    referenceRef: composedRef,
+    floatingRef: floatingRef,
+    isOpened: isOpened,
+    popoverStyles: popoverStyles,
+    triggerType: triggerType,
+    togglePopover: changePopover,
+  }
+
   return (
     <div className="mt-6">
-      {isOpened ? (
-        <Portal>
-          <div
-            ref={floatingRef}
-            className="flex rounded-md bg-neutral-800/80 p-2 text-white"
-            style={popoverStyles}
-          >
-            Popover floating
-          </div>
-        </Portal>
-      ) : null}
-
-      <div
-        ref={composedRef}
-        className="inline-flex"
-        onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        Popover trigger
-      </div>
+      <PopoverContext.Provider value={context}>
+        {children}
+      </PopoverContext.Provider>
     </div>
   )
 }
+
+export const Popover = Object.assign(PopoverRoot, {
+  Trigger: PopoverTrigger,
+  Content: PopoverContent,
+})
