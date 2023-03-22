@@ -20,7 +20,10 @@ export const MainPage = () => {
       <Button>btn</Button>
       <StarIcon />
 
-      <Popover placement="top" />
+      <Popover
+        placement="top"
+        visible
+      />
       <Popover placement="bottom" />
       <Popover placement="left" />
       <Popover placement="right" />

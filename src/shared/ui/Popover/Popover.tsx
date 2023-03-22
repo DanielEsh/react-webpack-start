@@ -9,6 +9,7 @@ import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
 export interface PopoverProps {
   placement: Placement
   offset?: Offset
+  visible?: boolean
 }
 
 const DEFAULT_OFFSET: Offset = {
@@ -17,12 +18,13 @@ const DEFAULT_OFFSET: Offset = {
 }
 
 export const Popover = (props: PopoverProps) => {
-  const { placement, offset = DEFAULT_OFFSET } = props
+  const { placement, offset = DEFAULT_OFFSET, visible = false } = props
 
   const { isOpened, changeOpened, referenceRef, floatingRef, popoverStyles } =
     usePopover({
       placement,
       offset,
+      visible,
     })
 
   const defaultRef = useRef<any>(null)

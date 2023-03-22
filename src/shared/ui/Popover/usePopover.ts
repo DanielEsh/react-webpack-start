@@ -5,6 +5,7 @@ import type { Placement, Offset } from './types'
 interface Options {
   placement: Placement
   offset: Offset
+  visible: boolean
 }
 
 function isDefined<T>(value: T | undefined): value is T {
@@ -12,9 +13,9 @@ function isDefined<T>(value: T | undefined): value is T {
 }
 
 export function usePopover(options: Options) {
-  const { placement, offset } = options
+  const { placement, offset, visible = false } = options
 
-  const [isOpened, setOpened] = useState(false)
+  const [isOpened, setOpened] = useState(visible)
 
   const { reference, floating, strategy, x, y } = useFloating({
     strategy: 'fixed',
