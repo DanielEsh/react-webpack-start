@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { HeaderUser } from './HeaderUser'
 
 export const Header = () => {
   return (
@@ -17,9 +18,7 @@ export const Header = () => {
       </div>
 
       <div className="flex gap-3">
-        <div className="flex items-center justify-center rounded bg-neutral-300 p-5 text-black">
-          USER INFO
-        </div>
+        <HeaderUser />
       </div>
     </div>
   )
