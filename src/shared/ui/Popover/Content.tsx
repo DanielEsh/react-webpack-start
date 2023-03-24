@@ -31,6 +31,10 @@ export const PopoverContent = (props: PropsWithChildren) => {
             className="flex rounded-md bg-neutral-800 p-2 text-white"
             style={popoverStyles}
             variants={fade}
+            transition={{
+              delay: 0.2,
+              delayChildren: 0.2,
+            }}
             {...fade}
           >
             {props.children}
