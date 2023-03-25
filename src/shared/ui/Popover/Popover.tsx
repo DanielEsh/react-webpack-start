@@ -1,12 +1,12 @@
 import { useRef, type ReactNode } from 'react'
+import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
+import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
+import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
 import type { Placement, Offset, Trigger, Delay } from './types'
 import { usePopover } from './usePopover'
 import { PopoverContext, type PopoverContextType } from './Context'
 import { PopoverTrigger } from './Trigger'
 import { PopoverFloating } from './Floating'
-import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
-import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
-import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
 import {
   DEFAULT_OFFSET,
   DEFAULT_DELAY,
@@ -34,9 +34,9 @@ export const PopoverRoot = (props: PopoverProps) => {
     children,
   } = props
 
-  const defaultRef = useRef<any>(null)
+  const defaultRef = useRef<HTMLElement>(null)
 
-  const arrowRef = useRef<any>(null)
+  const arrowRef = useRef<HTMLSpanElement>(null)
 
   const timeoutDelayRef = useRef<any>(null)
 
