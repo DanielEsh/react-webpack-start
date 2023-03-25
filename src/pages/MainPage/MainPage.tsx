@@ -25,7 +25,7 @@ export const MainPage = () => {
         visible
       >
         <Popover.Trigger>Trigger</Popover.Trigger>
-        <Popover.Content>Content</Popover.Content>
+        <Popover.Floating>Content</Popover.Floating>
       </Popover>
 
       <Popover
@@ -33,17 +33,17 @@ export const MainPage = () => {
         triggerType="hover"
       >
         <Popover.Trigger>Trigger</Popover.Trigger>
-        <Popover.Content>Content</Popover.Content>
+        <Popover.Floating>Content</Popover.Floating>
       </Popover>
 
       <Popover placement="left">
         <Popover.Trigger>Trigger</Popover.Trigger>
-        <Popover.Content>Content</Popover.Content>
+        <Popover.Floating>Content</Popover.Floating>
       </Popover>
 
       <Popover placement="right">
         <Popover.Trigger>Trigger</Popover.Trigger>
-        <Popover.Content>Content</Popover.Content>
+        <Popover.Floating>Content</Popover.Floating>
       </Popover>
     </div>
   )

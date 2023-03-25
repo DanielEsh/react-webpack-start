@@ -1,8 +1,10 @@
-import { useContext, PropsWithChildren } from 'react'
+import { useContext, forwardRef, useImperativeHandle, useRef } from 'react'
 import { Portal } from 'shared/ui/Portal/Portal'
 import { PopoverContext } from './Context'
 import { PopoverArrow } from './Arrow'
+import { TypeWithChidlren } from './types'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 
 const fade = {
   initial: {
@@ -19,7 +21,14 @@ const fade = {
   },
 }
 
-export const PopoverContent = (props: PropsWithChildren) => {
+export const PopoverFloating = forwardRef<
+  HTMLDivElement | null,
+  TypeWithChidlren
+>(({ children }, forwardedRef) => {
+  const innerRef = useRef<any>(null)
+
+  useImperativeHandle(forwardedRef, () => innerRef.current)
+
   const {
     floatingRef,
     onFloatingEnter,
@@ -29,12 +38,14 @@ export const PopoverContent = (props: PropsWithChildren) => {
     portalNode,
   } = useContext(PopoverContext)
 
+  const composedRef = useComposedRefs(innerRef, floatingRef)
+
   return (
     <AnimatePresence>
       {isOpened ? (
         <Portal container={portalNode}>
           <motion.div
-            ref={floatingRef}
+            ref={composedRef}
             className="flex rounded-md bg-neutral-800 p-2 text-white"
             style={popoverStyles}
             variants={fade}
@@ -42,7 +53,7 @@ export const PopoverContent = (props: PropsWithChildren) => {
             onMouseEnter={onFloatingEnter}
             onMouseLeave={onFloatingLeave}
           >
-            {props.children}
+            {children}
 
             <PopoverArrow />
           </motion.div>
@@ -50,4 +61,4 @@ export const PopoverContent = (props: PropsWithChildren) => {
       ) : null}
     </AnimatePresence>
   )
-}
+})

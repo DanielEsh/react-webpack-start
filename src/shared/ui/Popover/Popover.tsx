@@ -3,7 +3,7 @@ import type { Placement, Offset, Trigger, Delay } from './types'
 import { usePopover } from './usePopover'
 import { PopoverContext, type PopoverContextType } from './Context'
 import { PopoverTrigger } from './Trigger'
-import { PopoverContent } from './Content'
+import { PopoverFloating } from './Floating'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
@@ -111,5 +111,5 @@ export const PopoverRoot = (props: PopoverProps) => {
 
 export const Popover = Object.assign(PopoverRoot, {
   Trigger: PopoverTrigger,
-  Content: PopoverContent,
+  Floating: PopoverFloating,
 })

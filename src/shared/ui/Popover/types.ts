@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import type { Placement as FloatingPlacement } from '@floating-ui/react-dom'
 
 export type Offset = {
@@ -13,3 +14,7 @@ export type Delay = {
 export type Placement = FloatingPlacement
 
 export type Trigger = 'click' | 'hover'
+
+export interface TypeWithChidlren {
+  children: ReactNode
+}
