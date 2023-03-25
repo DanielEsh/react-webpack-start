@@ -7,6 +7,11 @@ import { PopoverFloating } from './Floating'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
+import {
+  DEFAULT_OFFSET,
+  DEFAULT_DELAY,
+  DEFAULT_TRIGGER_TYPE,
+} from './constants'
 
 export interface PopoverProps {
   placement: Placement
@@ -18,16 +23,6 @@ export interface PopoverProps {
   children: ReactNode
 }
 
-const DEFAULT_OFFSET: Offset = {
-  side: 10,
-  align: 10,
-}
-
-const DEFAULT_DELAY: Delay = {
-  enter: 0,
-  leave: 200,
-}
-
 export const PopoverRoot = (props: PopoverProps) => {
   const {
     placement,
@@ -35,7 +30,7 @@ export const PopoverRoot = (props: PopoverProps) => {
     delay = DEFAULT_DELAY,
     visible = false,
     portalNode,
-    triggerType = 'click',
+    triggerType = DEFAULT_TRIGGER_TYPE,
     children,
   } = props
 
