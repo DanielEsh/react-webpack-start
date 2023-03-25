@@ -5,6 +5,11 @@ export type Offset = {
   align: number
 }
 
+export type Delay = {
+  enter: number
+  leave: number
+}
+
 export type Placement = FloatingPlacement
 
 export type Trigger = 'click' | 'hover'

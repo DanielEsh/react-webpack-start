@@ -1,5 +1,5 @@
 import { useRef, type ReactNode } from 'react'
-import type { Placement, Offset, Trigger } from './types'
+import type { Placement, Offset, Trigger, Delay } from './types'
 import { usePopover } from './usePopover'
 import { PopoverContext, type PopoverContextType } from './Context'
 import { PopoverTrigger } from './Trigger'
@@ -11,6 +11,7 @@ import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
 export interface PopoverProps {
   placement: Placement
   offset?: Offset
+  delay?: Delay
   visible?: boolean
   triggerType?: Trigger
   children: ReactNode
@@ -21,10 +22,16 @@ const DEFAULT_OFFSET: Offset = {
   align: 10,
 }
 
+const DEFAULT_DELAY: Delay = {
+  enter: 0,
+  leave: 200,
+}
+
 export const PopoverRoot = (props: PopoverProps) => {
   const {
     placement,
     offset = DEFAULT_OFFSET,
+    delay = DEFAULT_DELAY,
     visible = false,
     triggerType = 'click',
     children,
