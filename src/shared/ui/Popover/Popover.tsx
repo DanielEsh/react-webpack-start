@@ -1,5 +1,5 @@
 import { useRef, type ReactNode } from 'react'
-import type { Placement, Offset, Trigger } from './types'
+import type { Placement, Offset, Trigger, Delay } from './types'
 import { usePopover } from './usePopover'
 import { PopoverContext, type PopoverContextType } from './Context'
 import { PopoverTrigger } from './Trigger'
@@ -8,17 +8,13 @@ import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutsid
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
 
-type Delay = {
-  enter: number
-  leave: number
-}
-
 export interface PopoverProps {
   placement: Placement
   offset?: Offset
   delay?: Delay
   visible?: boolean
   triggerType?: Trigger
+  portalNode?: HTMLElement | null
   children: ReactNode
 }
 
@@ -38,6 +34,7 @@ export const PopoverRoot = (props: PopoverProps) => {
     offset = DEFAULT_OFFSET,
     delay = DEFAULT_DELAY,
     visible = false,
+    portalNode,
     triggerType = 'click',
     children,
   } = props
@@ -97,6 +94,7 @@ export const PopoverRoot = (props: PopoverProps) => {
     popoverStyles: popoverStyles,
     arrowStyles: arrowStyles,
     triggerType: triggerType,
+    portalNode: portalNode,
     togglePopover: changePopover,
     onFloatingEnter: handleFloatingEnter,
     onFloatingLeave: handleFloatingLeave,

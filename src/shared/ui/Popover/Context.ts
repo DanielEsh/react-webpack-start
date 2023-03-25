@@ -9,6 +9,7 @@ export interface PopoverContextType {
   arrowStyles: CSSProperties
   triggerType: Trigger
   isOpened: boolean
+  portalNode?: HTMLElement | null
   onFloatingEnter?: () => void
   onFloatingLeave?: () => void
   togglePopover: (value: boolean) => void

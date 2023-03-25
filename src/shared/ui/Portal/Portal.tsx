@@ -7,7 +7,7 @@ const portalElement = document.getElementById(DEFAULT_APP_INSTANCE_ID)
 
 export interface PortalProps {
   children: ReactElement
-  container?: HTMLElement
+  container?: HTMLElement | null
 }
 
 export const Portal = (props: PortalProps) => {

@@ -26,12 +26,13 @@ export const PopoverContent = (props: PropsWithChildren) => {
     onFloatingLeave,
     popoverStyles,
     isOpened,
+    portalNode,
   } = useContext(PopoverContext)
 
   return (
     <AnimatePresence>
       {isOpened ? (
-        <Portal>
+        <Portal container={portalNode}>
           <motion.div
             ref={floatingRef}
             className="flex rounded-md bg-neutral-800 p-2 text-white"
