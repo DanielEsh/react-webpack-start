@@ -2,11 +2,16 @@ import { useContext, forwardRef, useImperativeHandle, useRef } from 'react'
 import { TypeWithChidlren } from './types'
 import { PopoverContext } from './Context'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
+import { classNames } from 'shared/utils'
+
+export interface PopoverTriggerProps extends TypeWithChidlren {
+  className?: string
+}
 
 export const PopoverTrigger = forwardRef<
   HTMLDivElement | null,
-  TypeWithChidlren
->(({ children }, forwardedRef) => {
+  PopoverTriggerProps
+>(({ children, className }, forwardedRef) => {
   const innerRef = useRef<any>(null)
 
   useImperativeHandle(forwardedRef, () => innerRef.current)
@@ -31,7 +36,7 @@ export const PopoverTrigger = forwardRef<
   return (
     <div
       ref={composedRef}
-      className="inline-flex"
+      className={classNames('inline-flex', className)}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

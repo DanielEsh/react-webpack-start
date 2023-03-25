@@ -101,11 +101,9 @@ export const PopoverRoot = (props: PopoverProps) => {
   }
 
   return (
-    <div className="mt-6">
-      <PopoverContext.Provider value={context}>
-        {children}
-      </PopoverContext.Provider>
-    </div>
+    <PopoverContext.Provider value={context}>
+      {children}
+    </PopoverContext.Provider>
   )
 }
 

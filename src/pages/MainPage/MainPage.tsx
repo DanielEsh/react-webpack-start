@@ -20,31 +20,39 @@ export const MainPage = () => {
       <Button>btn</Button>
       <StarIcon />
 
-      <Popover
-        placement="top"
-        visible
-      >
-        <Popover.Trigger>Trigger</Popover.Trigger>
-        <Popover.Floating>Content</Popover.Floating>
-      </Popover>
+      <div>
+        <Popover
+          placement="top"
+          visible
+        >
+          <Popover.Trigger>Trigger</Popover.Trigger>
+          <Popover.Floating>Content</Popover.Floating>
+        </Popover>
+      </div>
 
-      <Popover
-        placement="bottom"
-        triggerType="hover"
-      >
-        <Popover.Trigger>Trigger</Popover.Trigger>
-        <Popover.Floating>Content</Popover.Floating>
-      </Popover>
+      <div>
+        <Popover
+          placement="bottom"
+          triggerType="hover"
+        >
+          <Popover.Trigger className="mt-5">Trigger</Popover.Trigger>
+          <Popover.Floating>Content</Popover.Floating>
+        </Popover>
+      </div>
 
-      <Popover placement="left">
-        <Popover.Trigger>Trigger</Popover.Trigger>
-        <Popover.Floating>Content</Popover.Floating>
-      </Popover>
+      <div>
+        <Popover placement="left">
+          <Popover.Trigger className="mt-5">Trigger</Popover.Trigger>
+          <Popover.Floating>Content</Popover.Floating>
+        </Popover>
+      </div>
 
-      <Popover placement="right">
-        <Popover.Trigger>Trigger</Popover.Trigger>
-        <Popover.Floating>Content</Popover.Floating>
-      </Popover>
+      <div>
+        <Popover placement="right">
+          <Popover.Trigger className="mt-5">Trigger</Popover.Trigger>
+          <Popover.Floating>Content</Popover.Floating>
+        </Popover>
+      </div>
     </div>
   )
 }
