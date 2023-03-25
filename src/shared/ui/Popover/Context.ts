@@ -9,6 +9,8 @@ export interface PopoverContextType {
   arrowStyles: CSSProperties
   triggerType: Trigger
   isOpened: boolean
+  onFloatingEnter?: () => void
+  onFloatingLeave?: () => void
   togglePopover: (value: boolean) => void
 }
 

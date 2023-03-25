@@ -1,5 +1,5 @@
 import { useRef, type ReactNode } from 'react'
-import type { Placement, Offset, Trigger, Delay } from './types'
+import type { Placement, Offset, Trigger } from './types'
 import { usePopover } from './usePopover'
 import { PopoverContext, type PopoverContextType } from './Context'
 import { PopoverTrigger } from './Trigger'
@@ -7,6 +7,11 @@ import { PopoverContent } from './Content'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
+
+type Delay = {
+  enter: number
+  leave: number
+}
 
 export interface PopoverProps {
   placement: Placement
@@ -41,6 +46,8 @@ export const PopoverRoot = (props: PopoverProps) => {
 
   const arrowRef = useRef<any>(null)
 
+  const timeoutDelayRef = useRef<any>(null)
+
   const {
     isOpened,
     changeOpened,
@@ -59,7 +66,23 @@ export const PopoverRoot = (props: PopoverProps) => {
   const composedRef = useComposedRefs(defaultRef, referenceRef)
 
   const changePopover = (value: boolean) => {
-    changeOpened(value)
+    if (!value) {
+      timeoutDelayRef.current = setTimeout(() => {
+        changeOpened(value)
+      }, delay.leave)
+    } else {
+      setTimeout(() => {
+        changeOpened(value)
+      }, delay.enter)
+    }
+  }
+
+  const handleFloatingEnter = () => {
+    clearTimeout(timeoutDelayRef.current)
+  }
+
+  const handleFloatingLeave = () => {
+    changePopover(false)
   }
 
   useClickOutside(defaultRef, () => changePopover(false))
@@ -75,6 +98,8 @@ export const PopoverRoot = (props: PopoverProps) => {
     arrowStyles: arrowStyles,
     triggerType: triggerType,
     togglePopover: changePopover,
+    onFloatingEnter: handleFloatingEnter,
+    onFloatingLeave: handleFloatingLeave,
   }
 
   return (

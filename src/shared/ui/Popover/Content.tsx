@@ -20,7 +20,13 @@ const fade = {
 }
 
 export const PopoverContent = (props: PropsWithChildren) => {
-  const { floatingRef, popoverStyles, isOpened } = useContext(PopoverContext)
+  const {
+    floatingRef,
+    onFloatingEnter,
+    onFloatingLeave,
+    popoverStyles,
+    isOpened,
+  } = useContext(PopoverContext)
 
   return (
     <AnimatePresence>
@@ -31,11 +37,9 @@ export const PopoverContent = (props: PropsWithChildren) => {
             className="flex rounded-md bg-neutral-800 p-2 text-white"
             style={popoverStyles}
             variants={fade}
-            transition={{
-              delay: 0.2,
-              delayChildren: 0.2,
-            }}
             {...fade}
+            onMouseEnter={onFloatingEnter}
+            onMouseLeave={onFloatingLeave}
           >
             {props.children}
 
