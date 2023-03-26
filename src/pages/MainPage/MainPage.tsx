@@ -55,7 +55,7 @@ export const MainPage = () => {
         </Popover>
       </div>
 
-      <div>
+      <div className="inline-flex flex-col">
         <span> MENU </span>
 
         <Menu>
