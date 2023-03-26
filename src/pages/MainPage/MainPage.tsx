@@ -4,6 +4,7 @@ import { DataTable } from 'components/DataTable'
 import { Ripple } from 'shared/ui/Ripple'
 import { Button } from 'shared/ui/Button'
 import { Popover } from 'shared/ui/Popover'
+import { Menu } from 'shared/ui/Menu'
 import StarIcon from 'shared/assets/icons/star.svg'
 
 export const MainPage = () => {
@@ -52,6 +53,19 @@ export const MainPage = () => {
           <Popover.Trigger className="mt-5">Trigger</Popover.Trigger>
           <Popover.Floating>Content</Popover.Floating>
         </Popover>
+      </div>
+
+      <div>
+        <span> MENU </span>
+
+        <Menu>
+          <Menu.Trigger>Menu Trigger</Menu.Trigger>
+
+          <Menu.Dropdown>
+            <Menu.Label />
+            <Menu.Item />
+          </Menu.Dropdown>
+        </Menu>
       </div>
     </div>
   )
