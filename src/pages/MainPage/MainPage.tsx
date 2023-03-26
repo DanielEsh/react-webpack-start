@@ -62,10 +62,10 @@ export const MainPage = () => {
           <Menu.Trigger>Menu Trigger</Menu.Trigger>
 
           <Menu.Dropdown>
-            <Menu.Label />
-            <Menu.Item />
-            <Menu.Item />
-            <Menu.Item />
+            <Menu.Label> Label </Menu.Label>
+            <Menu.Item>item1</Menu.Item>
+            <Menu.Item>item2</Menu.Item>
+            <Menu.Item>item3</Menu.Item>
           </Menu.Dropdown>
         </Menu>
       </div>

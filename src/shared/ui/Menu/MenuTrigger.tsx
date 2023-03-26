@@ -1,7 +1,8 @@
-import { forwardRef, PropsWithChildren } from 'react'
+import { forwardRef } from 'react'
 import { Popover } from 'shared/ui/Popover'
+import { TypeWithChidlren } from 'shared/ui/types'
 
-type MenuTriggerProps = PropsWithChildren
+type MenuTriggerProps = TypeWithChidlren
 
 const COMPONENT_NAME = 'MenuTrigger'
 

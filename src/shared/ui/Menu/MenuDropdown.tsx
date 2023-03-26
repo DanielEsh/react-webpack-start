@@ -9,9 +9,9 @@ export const MenuDropdown = forwardRef<HTMLDivElement, MenuDropdownProps>(
   ({ children }, forwardedRef) => {
     return (
       <Popover.Floating ref={forwardedRef}>
-        <div className="flex flex-col rounded-md bg-neutral-800 p-2 text-white">
+        <ul className="flex flex-col rounded-md bg-neutral-800 p-2 text-white">
           {children}
-        </div>
+        </ul>
       </Popover.Floating>
     )
   },

@@ -1,5 +1,5 @@
 import { useContext, forwardRef, useImperativeHandle, useRef } from 'react'
-import { TypeWithChidlren } from './types'
+import { TypeWithChidlren } from 'shared/ui/types'
 import { PopoverContext } from './Context'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { classNames } from 'shared/utils'
