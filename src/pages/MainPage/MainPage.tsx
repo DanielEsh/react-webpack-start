@@ -64,6 +64,8 @@ export const MainPage = () => {
           <Menu.Dropdown>
             <Menu.Label />
             <Menu.Item />
+            <Menu.Item />
+            <Menu.Item />
           </Menu.Dropdown>
         </Menu>
       </div>

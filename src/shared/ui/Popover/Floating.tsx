@@ -46,7 +46,6 @@ export const PopoverFloating = forwardRef<
         <Portal container={portalNode}>
           <motion.div
             ref={composedRef}
-            className="flex rounded-md bg-neutral-800 p-2 text-white"
             style={popoverStyles}
             variants={fade}
             {...fade}
