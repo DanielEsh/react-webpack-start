@@ -2,6 +2,7 @@ import { useState } from 'react'
 import {
   useFloating,
   offset as floatingUiOffset,
+  flip,
   arrow as floatingUiArrow,
 } from '@floating-ui/react-dom'
 import type { Placement, Offset } from './types'
@@ -42,6 +43,7 @@ export function usePopover(options: Options) {
         alignmentAxis: offset.align,
       }),
       floatingUiArrow({ element: arrow, padding: arrowPadding }),
+      flip(),
     ].filter(isDefined),
   })
 
