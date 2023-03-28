@@ -1,11 +1,11 @@
-import { createContext, type CSSProperties } from 'react'
+import { createContext, type CSSProperties, type MutableRefObject } from 'react'
 import { Trigger } from './types'
 import { DEFAULT_TRIGGER_TYPE } from './constants'
 
 export interface PopoverContextType {
-  referenceRef?: any
-  floatingRef?: any
-  arrowRef?: any
+  referenceRef?: (node: Element) => void
+  floatingRef?: (node: HTMLElement | null) => void
+  arrowRef?: MutableRefObject<HTMLSpanElement | null>
 
   popoverStyles: CSSProperties
   arrowStyles: CSSProperties

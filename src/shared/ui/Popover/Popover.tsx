@@ -1,4 +1,4 @@
-import { useRef, type ReactNode } from 'react'
+import { MutableRefObject, useRef, type ReactNode } from 'react'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
 import type { Placement, Offset, Trigger, Delay } from './types'
@@ -54,7 +54,9 @@ const PopoverRoot = (props: PopoverProps) => {
 
   const composedRef = useComposedRefs(defaultRef, referenceRef)
 
-  const timeoutDelayRef = useRef<any>(null)
+  const timeoutDelayRef = useRef() as MutableRefObject<
+    ReturnType<typeof setTimeout>
+  >
 
   const delayClose = () => {
     timeoutDelayRef.current = setTimeout(() => {
