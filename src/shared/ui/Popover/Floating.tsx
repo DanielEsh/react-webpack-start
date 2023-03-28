@@ -5,6 +5,7 @@ import { PopoverArrow } from './Arrow'
 import { TypeWithChidlren } from 'shared/ui/types'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
+import { useClickOutside } from 'shared/lib/hooks/useClickOutside'
 
 const fade = {
   initial: {
@@ -36,9 +37,12 @@ export const PopoverFloating = forwardRef<
     popoverStyles,
     isOpened,
     portalNode,
+    togglePopover,
   } = useContext(PopoverContext)
 
-  const composedRef = useComposedRefs(innerRef, floatingRef)
+  const outsideRef = useClickOutside(() => togglePopover(false))
+
+  const composedRef = useComposedRefs(innerRef, floatingRef, outsideRef)
 
   return (
     <AnimatePresence>

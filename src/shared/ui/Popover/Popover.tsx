@@ -1,5 +1,4 @@
 import { useRef, type ReactNode } from 'react'
-import { useClickOutside } from 'shared/lib/hooks/useClickOutside/useClickOutside'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { useKeyPress } from 'shared/lib/hooks/useKeyPress'
 import type { Placement, Offset, Trigger, Delay } from './types'
@@ -76,8 +75,6 @@ export const PopoverRoot = (props: PopoverProps) => {
   const handleFloatingLeave = () => {
     changePopover(false)
   }
-
-  useClickOutside(defaultRef, () => changePopover(false))
 
   useKeyPress(['Escape'], () => changePopover(false))
 

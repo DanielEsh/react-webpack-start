@@ -21,7 +21,7 @@ export const MainPage = () => {
       <Button>btn</Button>
       <StarIcon />
 
-      <div>
+      {/* <div>
         <Popover
           placement="top"
           visible
@@ -53,7 +53,7 @@ export const MainPage = () => {
           <Popover.Trigger className="mt-5">Trigger</Popover.Trigger>
           <Popover.Floating>Content</Popover.Floating>
         </Popover>
-      </div>
+      </div> */}
 
       <div className="inline-flex flex-col">
         <span> MENU </span>
@@ -65,7 +65,6 @@ export const MainPage = () => {
             <Menu.Label> Label </Menu.Label>
             <Menu.Item>item1</Menu.Item>
             <Menu.Item>item2</Menu.Item>
-            <Menu.Item>item3</Menu.Item>
           </Menu.Dropdown>
         </Menu>
       </div>
