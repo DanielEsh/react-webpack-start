@@ -22,7 +22,7 @@ export interface PopoverProps {
   children: ReactNode
 }
 
-export const PopoverRoot = (props: PopoverProps) => {
+const PopoverRoot = (props: PopoverProps) => {
   const {
     placement,
     offset = DEFAULT_OFFSET,
@@ -36,8 +36,6 @@ export const PopoverRoot = (props: PopoverProps) => {
   const defaultRef = useRef<HTMLElement>(null)
 
   const arrowRef = useRef<HTMLSpanElement>(null)
-
-  const timeoutDelayRef = useRef<any>(null)
 
   const {
     isOpened,
@@ -56,20 +54,27 @@ export const PopoverRoot = (props: PopoverProps) => {
 
   const composedRef = useComposedRefs(defaultRef, referenceRef)
 
-  const changePopover = (value: boolean) => {
-    if (!value) {
-      timeoutDelayRef.current = setTimeout(() => {
-        changeOpened(value)
-      }, delay.leave)
-    } else {
-      setTimeout(() => {
-        changeOpened(value)
-      }, delay.enter)
-    }
+  const timeoutDelayRef = useRef<any>(null)
+
+  const delayClose = () => {
+    timeoutDelayRef.current = setTimeout(() => {
+      changeOpened(false)
+    }, delay.leave)
   }
 
   const clearCloseTimeout = () => {
     clearTimeout(timeoutDelayRef.current)
+  }
+
+  const delayOpen = () => {
+    setTimeout(() => {
+      changeOpened(true)
+    }, delay.enter)
+  }
+
+  const changePopover = (value: boolean) => {
+    if (!value) return delayClose()
+    return delayOpen()
   }
 
   useKeyPress(['Escape'], () => changePopover(false))
