@@ -68,12 +68,8 @@ export const PopoverRoot = (props: PopoverProps) => {
     }
   }
 
-  const handleFloatingEnter = () => {
+  const clearCloseTimeout = () => {
     clearTimeout(timeoutDelayRef.current)
-  }
-
-  const handleFloatingLeave = () => {
-    changePopover(false)
   }
 
   useKeyPress(['Escape'], () => changePopover(false))
@@ -82,14 +78,16 @@ export const PopoverRoot = (props: PopoverProps) => {
     referenceRef: composedRef,
     floatingRef: floatingRef,
     arrowRef: arrowRef,
-    isOpened: isOpened,
+
     popoverStyles: popoverStyles,
     arrowStyles: arrowStyles,
+
+    isOpened: isOpened,
+    togglePopover: changePopover,
+    clearCloseTimeout: clearCloseTimeout,
+
     triggerType: triggerType,
     portalNode: portalNode,
-    togglePopover: changePopover,
-    onFloatingEnter: handleFloatingEnter,
-    onFloatingLeave: handleFloatingLeave,
   }
 
   return (

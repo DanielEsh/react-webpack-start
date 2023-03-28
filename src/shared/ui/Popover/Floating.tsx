@@ -32,17 +32,27 @@ export const PopoverFloating = forwardRef<
 
   const {
     floatingRef,
-    onFloatingEnter,
-    onFloatingLeave,
+
     popoverStyles,
+
     isOpened,
-    portalNode,
     togglePopover,
+    clearCloseTimeout,
+
+    portalNode,
   } = useContext(PopoverContext)
 
   const outsideRef = useClickOutside(() => togglePopover(false))
 
   const composedRef = useComposedRefs(innerRef, floatingRef, outsideRef)
+
+  const handleMouseEnter = () => {
+    clearCloseTimeout()
+  }
+
+  const handleMouseLeave = () => {
+    togglePopover(false)
+  }
 
   return (
     <AnimatePresence>
@@ -53,8 +63,8 @@ export const PopoverFloating = forwardRef<
             style={popoverStyles}
             variants={fade}
             {...fade}
-            onMouseEnter={onFloatingEnter}
-            onMouseLeave={onFloatingLeave}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             {children}
 
