@@ -7,8 +7,11 @@ import { Popover } from 'shared/ui/Popover'
 import { Modal } from 'shared/ui/Modal'
 import { Menu } from 'shared/ui/Menu'
 import StarIcon from 'shared/assets/icons/star.svg'
+import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 
 export const MainPage = () => {
+  const [opened, { open, close }] = useDisclosure(false)
+
   return (
     <div>
       <h1>MainPage</h1>
@@ -19,7 +22,7 @@ export const MainPage = () => {
         children
         <Ripple />
       </Ripple.Container>
-      <Button>btn</Button>
+      <Button onClick={open}>btn</Button>
       <StarIcon />
 
       {/* <div>
@@ -69,7 +72,12 @@ export const MainPage = () => {
           </Menu.Dropdown>
         </Menu>
 
-        <Modal />
+        <Modal
+          opened={opened}
+          onClose={close}
+        >
+          Base Modal
+        </Modal>
       </div>
     </div>
   )
