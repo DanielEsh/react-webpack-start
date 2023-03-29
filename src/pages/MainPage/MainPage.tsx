@@ -4,6 +4,7 @@ import { DataTable } from 'components/DataTable'
 import { Ripple } from 'shared/ui/Ripple'
 import { Button } from 'shared/ui/Button'
 import { Popover } from 'shared/ui/Popover'
+import { Modal } from 'shared/ui/Modal'
 import { Menu } from 'shared/ui/Menu'
 import StarIcon from 'shared/assets/icons/star.svg'
 
@@ -67,6 +68,8 @@ export const MainPage = () => {
             <Menu.Item>item2</Menu.Item>
           </Menu.Dropdown>
         </Menu>
+
+        <Modal />
       </div>
     </div>
   )
