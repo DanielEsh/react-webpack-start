@@ -1,5 +1,6 @@
 import { Portal } from 'shared/ui/Portal/Portal'
 import { classNames } from 'shared/utils'
+import { useClickOutside } from 'shared/lib/hooks/useClickOutside'
 import { UiDefaultProps } from '../types'
 
 interface ModalProps extends UiDefaultProps {
@@ -23,10 +24,15 @@ export const Modal = (props: ModalProps) => {
     onClose()
   }
 
+  const outsideRef = useClickOutside(handleClose)
+
   return opened ? (
     <Portal>
       <div className="fixed inset-0 overflow-hidden bg-neutral-800/50">
-        <div className={classes}>
+        <div
+          ref={outsideRef}
+          className={classes}
+        >
           <button onClick={handleClose}>Close</button>
           {children}
         </div>
