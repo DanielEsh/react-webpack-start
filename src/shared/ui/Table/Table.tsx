@@ -92,7 +92,6 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   return (
     <TableContext.Provider value={context}>
       <div className="p-2">
-        <TableVisibilityChanger<TData> />
         {props.renderHeader}
         <table
           {...{

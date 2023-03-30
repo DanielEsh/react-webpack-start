@@ -1,5 +1,17 @@
 import { Button } from 'shared/ui/Button'
+import { Menu } from 'shared/ui/Menu'
+import { TableVisibilityChanger } from './TableVisibilityChanger'
 
 export const TableSettingsButton = () => {
-  return <Button> Settings </Button>
+  return (
+    <Menu>
+      <Menu.Trigger>
+        <Button> Settings </Button>
+      </Menu.Trigger>
+
+      <Menu.Dropdown>
+        <TableVisibilityChanger />
+      </Menu.Dropdown>
+    </Menu>
+  )
 }

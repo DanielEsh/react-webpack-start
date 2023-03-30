@@ -30,7 +30,10 @@ export const TableVisibilityChanger = <TData extends BaseData>() => {
       </div>
       {columns?.map((column) => {
         return (
-          <div key={column.id} className="px-1">
+          <div
+            key={column.id}
+            className="px-1"
+          >
             <label>
               <input
                 onChange={(event) => handleChange(event, column)}
