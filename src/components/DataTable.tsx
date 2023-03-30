@@ -51,7 +51,8 @@ const columns: ColumnDef<Person>[] = [
           // and paddingLeft to visually indicate the depth
           // of the row
           paddingLeft: `${row.depth * 2}rem`,
-        }}>
+        }}
+      >
         {getValue<string>()}
       </div>
     ),
@@ -109,19 +110,22 @@ const columns: ColumnDef<Person>[] = [
               onClick: () => {
                 console.log('row', row)
               },
-            }}>
+            }}
+          >
             🔵
           </button>
           <button
             {...{
               style: { cursor: 'pointer' },
-            }}>
+            }}
+          >
             button 2
           </button>
           <button
             {...{
               style: { cursor: 'pointer' },
-            }}>
+            }}
+          >
             button 3
           </button>
         </div>

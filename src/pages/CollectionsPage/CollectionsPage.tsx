@@ -3,6 +3,7 @@ import { getTestData } from 'shared/api/api'
 
 import { useSearchParams } from 'react-router-dom'
 import { Pagiantion } from 'shared/ui/Pagiantion/Pagination'
+import { CollectionsTable } from 'entities/Collection'
 
 type RowsPerPage = 2 | 5 | 10
 
@@ -62,26 +63,30 @@ const CollectionsPage = () => {
       <>
         {beautifyRender()}
         {testData && (
-          <div className="mt-6 flex gap-3">
-            <label>
-              Rows per Page:
-              <select
-                name="select"
-                value={rowsPerPage}
-                onChange={handleSelectRowsChange}
-              >
-                <option value="2">2</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-              </select>
-            </label>
+          <>
+            <div className="mt-6 flex gap-3">
+              <label>
+                Rows per Page:
+                <select
+                  name="select"
+                  value={rowsPerPage}
+                  onChange={handleSelectRowsChange}
+                >
+                  <option value="2">2</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                </select>
+              </label>
 
-            <Pagiantion
-              currentPage={parseInt(currentPage)}
-              totalPages={testData.meta.totalPages}
-              onChange={(item) => handlePageClick(item)}
-            />
-          </div>
+              <Pagiantion
+                currentPage={parseInt(currentPage)}
+                totalPages={testData.meta.totalPages}
+                onChange={(item) => handlePageClick(item)}
+              />
+            </div>
+
+            <CollectionsTable collection={testData.items} />
+          </>
         )}
       </>
     )
