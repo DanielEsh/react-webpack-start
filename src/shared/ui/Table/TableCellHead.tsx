@@ -13,9 +13,10 @@ export const TableCellHead = ({ header }: TableCellHead) => {
 
   return (
     <th
-      className="relative border border-red-500 bg-slate-400"
+      className="relative h-[40px] border border-neutral-300 bg-neutral-800 text-white"
       colSpan={header.colSpan}
-      style={{ width: header.getSize() }}>
+      style={{ width: header.getSize() }}
+    >
       {header.isPlaceholder
         ? null
         : flexRender(header.column.columnDef.header, header.getContext())}

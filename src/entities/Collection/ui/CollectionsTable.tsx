@@ -88,7 +88,6 @@ interface Props {
 }
 
 export const CollectionsTable = (props: Props) => {
-
   const { collection, onPageChange } = props
 
   const renderHeader = () => (

@@ -7,8 +7,9 @@ export interface TableCell {
 export const TableCell = ({ cell }: TableCell) => {
   return (
     <td
-      className="border border-red-500 bg-yellow-400"
-      style={{ width: cell.column.getSize() }}>
+      className="h-[40px] border border-neutral-300"
+      style={{ width: cell.column.getSize() }}
+    >
       {flexRender(cell.column.columnDef.cell, cell.getContext())}
     </td>
   )
