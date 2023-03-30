@@ -10,7 +10,6 @@ import { TableBody } from 'shared/ui/Table/TableBody'
 import { TableContext, TableContextType } from 'shared/ui/Table/TableContext'
 
 import 'shared/ui/Table/table.css'
-import { TableVisibilityChanger } from 'shared/ui/Table/TableVisibilityChanger'
 
 type BaseData = unknown | object
 
