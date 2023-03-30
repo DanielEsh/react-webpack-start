@@ -17,38 +17,30 @@ const columns: ColumnDef<Collection>[] = [
   {
     id: 'id',
     accessorKey: 'id',
-    header: 'ID',
-    cell: ({ row, getValue }) => (
-      <div
-        style={{
-          // Since rows are flattened by default,
-          // we can use the row.depth property
-          // and paddingLeft to visually indicate the depth
-          // of the row
-          paddingLeft: `${row.depth * 2}rem`,
-        }}
-      >
-        {getValue<string>()}
-      </div>
-    ),
+    cell: (info) => info.getValue(),
+    minSize: 60,
+    header: () => <span>Id</span>,
   },
   {
     accessorFn: (row) => row.slug,
     id: 'slug',
     cell: (info) => info.getValue(),
     header: () => <span>Slug</span>,
+    minSize: 180,
   },
   {
     accessorFn: (row) => row.name,
     id: 'name',
     cell: (info) => info.getValue(),
     header: () => <span>Name</span>,
+    minSize: 250,
   },
   {
     accessorFn: (row) => row.goodsCount,
     id: 'goodsCount',
     cell: (info) => info.getValue(),
     header: () => <span>goodsCount</span>,
+    minSize: 80,
   },
   {
     id: 'actions',

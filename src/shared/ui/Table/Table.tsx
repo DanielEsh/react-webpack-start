@@ -76,18 +76,6 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     columns: cols,
   }
 
-  /**
-   * TODO:
-   * types
-   * sync with lc +
-   * Header +
-   * Table settings (columns visible) +
-   * remove styles +
-   * fix wqrning +
-   *
-   * create column type with required id, size, minsize, max size
-   */
-
   return (
     <TableContext.Provider value={context}>
       <div className="p-2">
