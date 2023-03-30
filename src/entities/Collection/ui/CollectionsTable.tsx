@@ -3,6 +3,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { Table } from 'shared/ui/Table'
 import { Button } from 'shared/ui/Button'
 import { TableSettingsButton } from 'shared/ui/Table/TableSettingsButton'
+import { Pagiantion } from 'shared/ui/Pagiantion/Pagination'
 
 interface Collection {
   id: number
@@ -66,12 +67,38 @@ export const CollectionsTable = ({ collection }: Props) => {
     </div>
   )
 
+  const handlePageClick = (page: number) => {
+    console.log('PAGINATION', page)
+  }
+
   return (
-    <Table<Collection>
-      localStorageKey="CollectionData"
-      defaultData={collection}
-      columns={columns}
-      renderHeader={renderHeader()}
-    />
+    <div className="">
+      <Table<Collection>
+        localStorageKey="CollectionData"
+        defaultData={collection}
+        columns={columns}
+        renderHeader={renderHeader()}
+      />
+
+      <div className="mt-6 flex items-center justify-end gap-3 p-2">
+        <label>
+          Rows per Page:
+          <select
+            name="select"
+            value={2}
+          >
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
+        </label>
+
+        <Pagiantion
+          currentPage={1}
+          totalPages={10}
+          onChange={(item) => handlePageClick(item)}
+        />
+      </div>
+    </div>
   )
 }

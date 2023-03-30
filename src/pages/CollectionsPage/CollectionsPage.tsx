@@ -62,32 +62,7 @@ const CollectionsPage = () => {
     return (
       <>
         {beautifyRender()}
-        {testData && (
-          <>
-            <div className="mt-6 flex gap-3">
-              <label>
-                Rows per Page:
-                <select
-                  name="select"
-                  value={rowsPerPage}
-                  onChange={handleSelectRowsChange}
-                >
-                  <option value="2">2</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                </select>
-              </label>
-
-              <Pagiantion
-                currentPage={parseInt(currentPage)}
-                totalPages={testData.meta.totalPages}
-                onChange={(item) => handlePageClick(item)}
-              />
-            </div>
-
-            <CollectionsTable collection={testData.items} />
-          </>
-        )}
+        {testData && <CollectionsTable collection={testData.items} />}
       </>
     )
   }
