@@ -1,3 +1,3 @@
-import { CollectionsTable } from './ui/ColectionsTable'
+import { CollectionsTable } from './ui/CollectionsTable'
 
 export { CollectionsTable }

@@ -1,6 +1,8 @@
 import { ColumnDef } from '@tanstack/react-table'
 
 import { Table } from 'shared/ui/Table'
+import { Button } from 'shared/ui/Button'
+import { TableSettingsButton } from 'shared/ui/Table/TableSettingsButton'
 
 interface Collection {
   id: number
@@ -53,11 +55,23 @@ interface Props {
 }
 
 export const CollectionsTable = ({ collection }: Props) => {
+  const renderHeader = () => (
+    <div className="mt-4 mb-2 flex items-center justify-between">
+      <h1 className="text-2xl">Collections</h1>
+
+      <div className="flex gap-3">
+        <Button>Create Button</Button>
+        <TableSettingsButton />
+      </div>
+    </div>
+  )
+
   return (
     <Table<Collection>
       localStorageKey="CollectionData"
       defaultData={collection}
       columns={columns}
+      renderHeader={renderHeader()}
     />
   )
 }

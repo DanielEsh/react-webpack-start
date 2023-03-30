@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, ReactNode } from 'react'
 import {
   getCoreRowModel,
   ColumnDef,
@@ -18,6 +18,8 @@ interface TableProps<TData> {
   localStorageKey: string
   defaultData: TData[]
   columns: ColumnDef<TData>[]
+  // FIXME: render props
+  renderHeader?: ReactNode
 }
 
 export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
@@ -91,19 +93,14 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     <TableContext.Provider value={context}>
       <div className="p-2">
         <TableVisibilityChanger<TData> />
-        <div className="flex justify-between">
-          <div>Persons</div>
-
-          <div className="flex gap-3">
-            <button onClick={() => setColumnSizing({})}>reset Size</button>
-          </div>
-        </div>
+        {props.renderHeader}
         <table
           {...{
             style: {
               width: table.getCenterTotalSize(),
             },
-          }}>
+          }}
+        >
           <TableHead />
           <TableBody />
         </table>
