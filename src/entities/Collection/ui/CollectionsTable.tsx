@@ -84,9 +84,13 @@ const columns: ColumnDef<Collection>[] = [
 
 interface Props {
   collection: Collection[]
+  onPageChange: (page: number) => void
 }
 
-export const CollectionsTable = ({ collection }: Props) => {
+export const CollectionsTable = (props: Props) => {
+
+  const { collection, onPageChange } = props
+
   const renderHeader = () => (
     <div className="mt-4 mb-2 flex items-center justify-between">
       <h1 className="text-2xl">Collections</h1>
@@ -99,7 +103,7 @@ export const CollectionsTable = ({ collection }: Props) => {
   )
 
   const handlePageClick = (page: number) => {
-    console.log('PAGINATION', page)
+    onPageChange(page)
   }
 
   return (

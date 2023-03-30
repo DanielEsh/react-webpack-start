@@ -45,12 +45,6 @@ const CollectionsPage = () => {
     setSearchParams({ limit: event.target.value })
   }
 
-  const beautifyRender = () => {
-    return testData.items.map((item: any, idx: number) => {
-      return <div key={idx}>{JSON.stringify(item, null, '\t')}</div>
-    })
-  }
-
   const handlePageClick = (page: number) => {
     const strPage = String(page)
     setSearchParams({ page: strPage })
@@ -61,8 +55,13 @@ const CollectionsPage = () => {
 
     return (
       <>
-        {beautifyRender()}
-        {testData && <CollectionsTable collection={testData.items} />}
+        {testData && (
+          <CollectionsTable
+            key={currentPage}
+            collection={testData.items}
+            onPageChange={handlePageClick}
+          />
+        )}
       </>
     )
   }

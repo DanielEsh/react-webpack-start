@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react'
 import { clsx } from 'clsx'
 import type { PaginationElementProps, PaginationElementsType } from './types'
+import { Button } from 'shared/ui/Button'
 
 const pagesClasses = (isActive = false, disabled = false) =>
-  clsx('flex items-center justify-center py-1 px-2 border border-black', {
+  clsx('flex items-center justify-center', {
     ['bg-black text-white']: isActive,
-    ['bg-red-500']: disabled,
+    ['']: disabled,
   })
 
 export const PaginationElement = (props: PaginationElementProps) => {
@@ -28,12 +29,13 @@ export const PaginationElement = (props: PaginationElementProps) => {
 
   return (
     <li>
-      <button
+      <Button
         className={pagesClasses(isActive, isDisabled)}
         onClick={onClick}
-        disabled={isDisabled}>
+        disabled={isDisabled}
+      >
         {mergeContentToType[type]}
-      </button>
+      </Button>
     </li>
   )
 }
