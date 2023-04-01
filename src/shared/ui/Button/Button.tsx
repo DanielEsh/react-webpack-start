@@ -5,11 +5,11 @@ import { Ripple } from 'shared/ui/Ripple'
 import { classNames } from 'shared/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors',
+  'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors',
   {
     variants: {
       variant: {
-        default: 'bg-neutral-800 text-white',
+        default: 'bg-white border border-slate-300 text-gray-700',
       },
       size: {
         default: 'h-10 py-2 px-4',
