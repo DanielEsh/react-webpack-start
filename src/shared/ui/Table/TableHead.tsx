@@ -12,7 +12,10 @@ export const TableHead = () => {
         headerGroups.map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <TableCellHead key={header.id} header={header} />
+              <TableCellHead
+                key={header.id}
+                header={header}
+              />
             ))}
           </tr>
         ))}
