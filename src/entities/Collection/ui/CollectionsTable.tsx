@@ -97,6 +97,28 @@ export const CollectionsTable = (props: Props) => {
     onPageChange(page)
   }
 
+  const renderFooter = () => (
+    <div className="flex items-center justify-end gap-3">
+      <label>
+        Rows per Page:
+        <select
+          name="select"
+          value={2}
+        >
+          <option value="2">2</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+        </select>
+      </label>
+
+      <Pagiantion
+        currentPage={1}
+        totalPages={10}
+        onChange={(item) => handlePageClick(item)}
+      />
+    </div>
+  )
+
   return (
     <div className="">
       <Table<Collection>
@@ -104,27 +126,8 @@ export const CollectionsTable = (props: Props) => {
         defaultData={collection}
         columns={columns}
         renderHeader={renderHeader()}
+        renderFooter={renderFooter()}
       />
-
-      <div className="mt-6 flex items-center justify-end gap-3 p-2">
-        <label>
-          Rows per Page:
-          <select
-            name="select"
-            value={2}
-          >
-            <option value="2">2</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-          </select>
-        </label>
-
-        <Pagiantion
-          currentPage={1}
-          totalPages={10}
-          onChange={(item) => handlePageClick(item)}
-        />
-      </div>
     </div>
   )
 }

@@ -19,6 +19,7 @@ interface TableProps<TData> {
   columns: ColumnDef<TData>[]
   // FIXME: render props
   renderHeader?: ReactNode
+  renderFooter: ReactNode
 }
 
 export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
@@ -80,13 +81,13 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     <TableContext.Provider value={context}>
       <div className="p-2">
         {props.renderHeader}
-        <div className="overflow-hidden rounded-lg border border-transparent shadow-md">
+        <div className="overflow-hidden rounded-lg border border-transparent">
           <table className="w-full">
             <TableHead />
             <TableBody />
           </table>
 
-          <div className="h-[68px]">Footer</div>
+          <div className="h-[68px]">{props.renderFooter}</div>
         </div>
       </div>
     </TableContext.Provider>
