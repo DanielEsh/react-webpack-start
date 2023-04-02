@@ -1,16 +1,17 @@
 import { forwardRef, ButtonHTMLAttributes, ReactNode } from 'react'
 import { VariantProps, cva } from 'class-variance-authority'
 import { Ripple } from 'shared/ui/Ripple'
-
 import { classNames } from 'shared/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium transition-colors',
+  'inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium transition-colors disabled:cursor-not-allowed',
   {
     variants: {
       variant: {
-        default: 'bg-white border border-slate-300 text-gray-700',
+        default:
+          'bg-white border border-slate-300 text-gray-700 disabled:bg-slate-100',
         ghost: 'bg-transparent border-none',
+        primary: 'bg-neutral-800 border border-neutral-800 text-white',
       },
       size: {
         default: 'h-10 py-2 px-4',

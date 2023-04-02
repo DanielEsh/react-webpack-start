@@ -1,17 +1,10 @@
 import type { ReactNode } from 'react'
-import { clsx } from 'clsx'
-import type { PaginationElementProps, PaginationElementsType } from './types'
+import { PaginationElementProps, PaginationElementsType } from './types'
 import { Button } from 'shared/ui/Button'
 import IconChevronLeft from 'shared/assets/icons/chevron-left.svg'
 import IconChevronRight from 'shared/assets/icons/chevron-right.svg'
 import IconDoubleChevronLeft from 'shared/assets/icons/chevron-left-double.svg'
 import IconDoubleChevronRight from 'shared/assets/icons/chevron-right-double.svg'
-
-const pagesClasses = (isActive = false, disabled = false) =>
-  clsx('flex items-center justify-center', {
-    ['bg-black text-white']: isActive,
-    ['']: disabled,
-  })
 
 export const PaginationElement = (props: PaginationElementProps) => {
   const {
@@ -31,12 +24,33 @@ export const PaginationElement = (props: PaginationElementProps) => {
     PAGE: value,
   }
 
+  const getVariant = () => {
+    let variants = {}
+
+    if (
+      type !== PaginationElementsType.PAGE &&
+      PaginationElementsType.ELLIPSIS
+    ) {
+      variants = {
+        variant: 'ghost',
+      }
+    }
+
+    if (isActive) {
+      variants = {
+        variant: 'primary',
+      }
+    }
+
+    return variants
+  }
+
   return (
     <li>
       <Button
-        className={pagesClasses(isActive, isDisabled)}
-        onClick={onClick}
         disabled={isDisabled}
+        onClick={onClick}
+        {...getVariant()}
       >
         {mergeContentToType[type]}
       </Button>
