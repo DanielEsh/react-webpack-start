@@ -5,7 +5,7 @@ import { Ripple } from 'shared/ui/Ripple'
 import { classNames } from 'shared/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors',
+  'inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium transition-colors',
   {
     variants: {
       variant: {
@@ -27,12 +27,22 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  addonLeft?: ReactNode
+  addonRight?: ReactNode
   children: ReactNode
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, forwardedRef) => {
-    const { className, variant, size, children, ...restProps } = props
+    const {
+      className,
+      variant,
+      size,
+      children,
+      addonLeft,
+      addonRight,
+      ...restProps
+    } = props
 
     const classes = classNames(buttonVariants({ variant, size, className }))
 
@@ -43,7 +53,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={classes}
         {...restProps}
       >
-        {children}
+        {addonLeft && <span>{addonLeft}</span>}
+
+        <span>{children}</span>
+
+        {addonRight && <span>{addonRight}</span>}
         <Ripple />
       </Ripple.Container>
     )

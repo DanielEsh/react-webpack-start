@@ -5,6 +5,8 @@ import { Button } from 'shared/ui/Button'
 import { TableSettingsButton } from 'shared/ui/Table/TableSettingsButton'
 import { Pagiantion } from 'shared/ui/Pagiantion/Pagination'
 import IconPlus from 'shared/assets/icons/plus.svg'
+import IconEdit from 'shared/assets/icons/edit.svg'
+import IconTrash from 'shared/assets/icons/trash.svg'
 
 interface Collection {
   id: number
@@ -49,7 +51,7 @@ const columns: ColumnDef<Collection>[] = [
     footer: (props) => props.column.id,
     cell: ({ row }) => {
       return (
-        <div className="flex gap-2">
+        <div className="flex justify-end gap-2">
           <Button
             {...{
               onClick: () => {
@@ -57,7 +59,7 @@ const columns: ColumnDef<Collection>[] = [
               },
             }}
           >
-            <IconPlus />
+            <IconEdit />
           </Button>
           <Button
             {...{
@@ -66,7 +68,7 @@ const columns: ColumnDef<Collection>[] = [
               },
             }}
           >
-            Удалить
+            <IconTrash />
           </Button>
         </div>
       )
@@ -87,7 +89,7 @@ export const CollectionsTable = (props: Props) => {
       <h1 className="text-2xl">Collections</h1>
 
       <div className="flex gap-3">
-        <Button>Create Button</Button>
+        <Button addonLeft={<IconPlus />}>Create Button</Button>
         <TableSettingsButton />
       </div>
     </div>
