@@ -10,6 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-white border border-slate-300 text-gray-700',
+        ghost: 'bg-transparent border-none',
       },
       size: {
         default: 'h-10 py-2 px-4',

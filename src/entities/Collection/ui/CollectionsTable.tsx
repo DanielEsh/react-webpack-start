@@ -46,8 +46,9 @@ const columns: ColumnDef<Collection>[] = [
     footer: (props) => props.column.id,
     cell: ({ row }) => {
       return (
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-1">
           <Button
+            variant="ghost"
             {...{
               onClick: () => {
                 console.log('row', row)
@@ -57,6 +58,7 @@ const columns: ColumnDef<Collection>[] = [
             <IconEdit />
           </Button>
           <Button
+            variant="ghost"
             {...{
               onClick: () => {
                 console.log('row', row)
