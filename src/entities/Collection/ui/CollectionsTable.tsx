@@ -98,24 +98,26 @@ export const CollectionsTable = (props: Props) => {
   }
 
   const renderFooter = () => (
-    <div className="flex items-center justify-end gap-3">
-      <label>
-        Rows per Page:
-        <select
-          name="select"
-          value={2}
-        >
-          <option value="2">2</option>
-          <option value="5">5</option>
-          <option value="10">10</option>
-        </select>
-      </label>
-
-      <Pagiantion
-        currentPage={1}
-        totalPages={10}
-        onChange={(item) => handlePageClick(item)}
-      />
+    <div className="flex items-center justify-between gap-3">
+      <div>Всего: 20 </div>
+      <div className="flex items-center gap-3">
+        <label>
+          Rows per Page:
+          <select
+            name="select"
+            value={2}
+          >
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
+        </label>
+        <Pagiantion
+          currentPage={1}
+          totalPages={10}
+          onChange={(item) => handlePageClick(item)}
+        />
+      </div>
     </div>
   )
 

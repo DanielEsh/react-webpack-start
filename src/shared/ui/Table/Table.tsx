@@ -81,14 +81,13 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     <TableContext.Provider value={context}>
       <div className="p-2">
         {props.renderHeader}
-        <div className="overflow-hidden rounded-lg border border-transparent">
+        <div className="overflow-hidden rounded-lg border border-slate-100 shadow-md">
           <table className="w-full">
             <TableHead />
             <TableBody />
           </table>
-
-          <div className="h-[68px]">{props.renderFooter}</div>
         </div>
+        <div className="h-[68px]">{props.renderFooter}</div>
       </div>
     </TableContext.Provider>
   )

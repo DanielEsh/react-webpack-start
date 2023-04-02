@@ -13,7 +13,7 @@ export const TableCellHead = ({ header }: TableCellHead) => {
 
   return (
     <th
-      className="relative h-[40px] border-b border-[#EAECF0] bg-[#EAECF0] text-gray-700"
+      className="relative h-[44px] border-b border-slate-200 bg-slate-100 text-gray-700"
       colSpan={header.colSpan}
       style={{ width: header.getSize() }}
     >

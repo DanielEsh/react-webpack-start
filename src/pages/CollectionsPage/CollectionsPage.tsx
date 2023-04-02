@@ -12,12 +12,12 @@ const CollectionsPage = () => {
   const [isLoading, setLoading] = useState(true)
   const [isError, setIsError] = useState(false)
 
-  const [rowsPerPage, setRowsPerPage] = useState<RowsPerPage>(2)
+  const [rowsPerPage, setRowsPerPage] = useState<RowsPerPage>(5)
 
   const [searchParams, setSearchParams] = useSearchParams()
 
   const currentPage = searchParams.get('page') ?? '1'
-  const limit = searchParams.get('limit') ?? '2'
+  const limit = searchParams.get('limit') ?? '5'
 
   useEffect(() => {
     async function fetchData() {
