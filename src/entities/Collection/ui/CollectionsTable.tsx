@@ -16,6 +16,7 @@ const columns: ColumnDef<Collection>[] = [
     accessorKey: 'id',
     cell: (info) => info.getValue(),
     minSize: 60,
+    size: 60,
     header: () => <span>Id</span>,
   },
   {
@@ -38,11 +39,13 @@ const columns: ColumnDef<Collection>[] = [
     cell: (info) => info.getValue(),
     header: () => <span>goodsCount</span>,
     minSize: 80,
+    size: 80,
   },
   {
     id: 'actions',
     header: 'Actions',
     minSize: 180,
+    size: 180,
     footer: (props) => props.column.id,
     cell: ({ row }) => {
       return (

@@ -12,7 +12,7 @@ export const TableBody = () => {
         rows.map((row) => (
           <tr
             key={row.id}
-            className="border-b border-slate-100 last:border-none even:bg-slate-100"
+            className="border-b border-slate-300 last:border-none even:bg-slate-100"
           >
             {row.getVisibleCells().map((cell) => (
               <TableCell
