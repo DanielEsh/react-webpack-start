@@ -10,6 +10,11 @@ export const renderPaginationElements = (
 
   return (props: PaginationModel) => {
     const onItemClick = handleClick(props)
-    return <PaginationElement onClick={onItemClick} {...props} />
+    return (
+      <PaginationElement
+        onClick={onItemClick}
+        {...props}
+      />
+    )
   }
 }
