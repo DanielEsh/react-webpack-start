@@ -77,11 +77,20 @@ interface Props {
   items: Collection[]
   meta: Meta
   currentPage: number
+  rowPerPage: number
   onPageChange: (page: number) => void
+  onRowsPerPageChange: (event: any) => void
 }
 
 export const CollectionsTable = (props: Props) => {
-  const { items, meta, currentPage, onPageChange } = props
+  const {
+    items,
+    meta,
+    currentPage,
+    rowPerPage,
+    onRowsPerPageChange,
+    onPageChange,
+  } = props
 
   const renderHeader = () => (
     <div className="mt-4 mb-2 flex items-center justify-between">
@@ -101,16 +110,18 @@ export const CollectionsTable = (props: Props) => {
   const renderFooter = () => (
     <div className="flex items-center justify-between gap-3">
       <div>Всего: {meta.totalCount} </div>
+
       <div className="flex items-center gap-3">
         <label>
           Rows per Page:
           <select
             name="select"
-            value={2}
+            value={rowPerPage}
+            onChange={onRowsPerPageChange}
           >
-            <option value="2">2</option>
             <option value="5">5</option>
             <option value="10">10</option>
+            <option value="25">25</option>
           </select>
         </label>
 

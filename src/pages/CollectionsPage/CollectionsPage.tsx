@@ -2,10 +2,9 @@ import { useState, useEffect } from 'react'
 import { getTestData } from 'shared/api/api'
 
 import { useSearchParams } from 'react-router-dom'
-import { Pagiantion } from 'shared/ui/Pagiantion/Pagination'
 import { CollectionsTable } from 'entities/Collection'
 
-type RowsPerPage = 2 | 5 | 10
+type RowsPerPage = 5 | 10 | 25
 
 import { Data } from 'entities/Collection/types'
 
@@ -42,7 +41,7 @@ const CollectionsPage = () => {
     }, 2000)
   }, [currentPage, limit])
 
-  const handleSelectRowsChange = (event: any) => {
+  const handleRowPerPageChange = (event: any) => {
     setRowsPerPage(event.target.value)
     setSearchParams({ limit: event.target.value })
   }
@@ -50,23 +49,6 @@ const CollectionsPage = () => {
   const handlePageClick = (page: number) => {
     const strPage = String(page)
     setSearchParams({ page: strPage })
-  }
-
-  const render = () => {
-    if (!testData) return
-
-    return (
-      <>
-        {testData && (
-          <CollectionsTable
-            currentPage={Number(currentPage)}
-            items={testData.items}
-            meta={testData.meta}
-            onPageChange={handlePageClick}
-          />
-        )}
-      </>
-    )
   }
 
   return (
@@ -78,7 +60,16 @@ const CollectionsPage = () => {
 
         {isLoading && <div>Loading...</div>}
         {isError && <div>Error loading</div>}
-        {testData ? render() : null}
+        {testData && (
+          <CollectionsTable
+            currentPage={Number(currentPage)}
+            items={testData.items}
+            meta={testData.meta}
+            rowPerPage={rowsPerPage}
+            onPageChange={handlePageClick}
+            onRowsPerPageChange={handleRowPerPageChange}
+          />
+        )}
       </div>
     </div>
   )
