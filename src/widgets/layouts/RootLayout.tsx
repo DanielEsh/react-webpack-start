@@ -11,8 +11,7 @@ export default function RootLayout() {
       <div className="content relative w-full">
         <Header />
 
-        <div className="page">
-          ROOT LAYOUT
+        <div className="page p-6">
           <Outlet />
         </div>
 

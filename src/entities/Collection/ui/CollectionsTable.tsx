@@ -8,12 +8,7 @@ import IconPlus from 'shared/assets/icons/plus.svg'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
 
-interface Collection {
-  id: number
-  slug: string
-  name: number
-  goodsCount: number
-}
+import { Collection, Meta } from '../types'
 
 const columns: ColumnDef<Collection>[] = [
   {
@@ -77,12 +72,14 @@ const columns: ColumnDef<Collection>[] = [
 ]
 
 interface Props {
-  collection: Collection[]
+  items: Collection[]
+  meta: Meta
+  currentPage: number
   onPageChange: (page: number) => void
 }
 
 export const CollectionsTable = (props: Props) => {
-  const { collection, onPageChange } = props
+  const { items, meta, currentPage, onPageChange } = props
 
   const renderHeader = () => (
     <div className="mt-4 mb-2 flex items-center justify-between">
@@ -101,7 +98,7 @@ export const CollectionsTable = (props: Props) => {
 
   const renderFooter = () => (
     <div className="flex items-center justify-between gap-3">
-      <div>Всего: 20 </div>
+      <div>Всего: {meta.totalCount} </div>
       <div className="flex items-center gap-3">
         <label>
           Rows per Page:
@@ -114,9 +111,10 @@ export const CollectionsTable = (props: Props) => {
             <option value="10">10</option>
           </select>
         </label>
+
         <Pagiantion
-          currentPage={1}
-          totalPages={10}
+          key={currentPage}          currentPage={currentPage}
+          totalPages={meta.totalPages}
           onChange={(item) => handlePageClick(item)}
         />
       </div>
@@ -127,7 +125,7 @@ export const CollectionsTable = (props: Props) => {
     <div className="">
       <Table<Collection>
         localStorageKey="CollectionData"
-        defaultData={collection}
+        defaultData={items}
         columns={columns}
         renderHeader={renderHeader()}
         renderFooter={renderFooter()}

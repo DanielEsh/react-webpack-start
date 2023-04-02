@@ -7,8 +7,10 @@ import { CollectionsTable } from 'entities/Collection'
 
 type RowsPerPage = 2 | 5 | 10
 
+import { Data } from 'entities/Collection/types'
+
 const CollectionsPage = () => {
-  const [testData, setTestData] = useState<any>(null)
+  const [testData, setTestData] = useState<Data | null>(null)
   const [isLoading, setLoading] = useState(true)
   const [isError, setIsError] = useState(false)
 
@@ -57,8 +59,9 @@ const CollectionsPage = () => {
       <>
         {testData && (
           <CollectionsTable
-            key={currentPage}
-            collection={testData.items}
+            currentPage={Number(currentPage)}
+            items={testData.items}
+            meta={testData.meta}
             onPageChange={handlePageClick}
           />
         )}
@@ -69,7 +72,9 @@ const CollectionsPage = () => {
   return (
     <div>
       <div>
-        <h1>CollectionsPage</h1>
+        <pre>
+          <code>Breadcrumbs</code>
+        </pre>
 
         {isLoading && <div>Loading...</div>}
         {isError && <div>Error loading</div>}
