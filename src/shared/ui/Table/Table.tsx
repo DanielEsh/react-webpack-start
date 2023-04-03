@@ -9,8 +9,6 @@ import { TableHead } from 'shared/ui/Table/TableHead'
 import { TableBody } from 'shared/ui/Table/TableBody'
 import { TableContext, TableContextType } from 'shared/ui/Table/TableContext'
 
-import 'shared/ui/Table/table.css'
-
 type BaseData = unknown | object
 
 interface TableProps<TData> {
