@@ -1,3 +1,4 @@
+import type { TouchEvent, MouseEvent } from 'react'
 import { Header } from '@tanstack/react-table'
 import { classNames } from 'shared/utils'
 
@@ -6,7 +7,7 @@ export interface TableResizerProps {
 }
 
 export const TableResizer = ({ header }: TableResizerProps) => {
-  const handleResize = (event: any) => {
+  const handleResize = (event: TouchEvent | MouseEvent) => {
     const changeColumnSesizeFn = header.getResizeHandler()
     changeColumnSesizeFn(event)
   }
