@@ -141,7 +141,7 @@ export const CollectionsTable = (props: Props) => {
     <div className="">
       <Table<Collection>
         localStorageKey="CollectionData"
-        defaultData={items}
+        data={items}
         columns={columns}
         renderHeader={renderHeader()}
         renderFooter={renderFooter()}

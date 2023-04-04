@@ -1,4 +1,4 @@
-import { useState, ReactNode } from 'react'
+import { useState, ReactNode, useMemo } from 'react'
 import {
   getCoreRowModel,
   ColumnDef,
@@ -13,7 +13,7 @@ type BaseData = unknown | object
 
 interface TableProps<TData> {
   localStorageKey: string
-  defaultData: TData[]
+  data: TData[]
   columns: ColumnDef<TData>[]
   // FIXME: render props
   renderHeader?: ReactNode
@@ -21,9 +21,9 @@ interface TableProps<TData> {
 }
 
 export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
-  const { localStorageKey, defaultData, columns } = props
+  const { localStorageKey, data = [], columns } = props
 
-  const [data, setData] = useState(() => [...defaultData])
+  const rowData = useMemo(() => data, [data])
 
   const emptyValues = {
     columnVisibility: {},
@@ -44,7 +44,7 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   const [columnSizing, setColumnSizing] = useState(defaultColumnSizing)
 
   const table = useReactTable({
-    data,
+    data: rowData,
     columns,
     state: {
       columnVisibility,
@@ -54,6 +54,7 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     onColumnSizingChange: setColumnSizing,
     columnResizeMode: 'onChange',
     getCoreRowModel: getCoreRowModel(),
+    manualPagination: true,
   })
 
   const headerGroups = table.getHeaderGroups()
