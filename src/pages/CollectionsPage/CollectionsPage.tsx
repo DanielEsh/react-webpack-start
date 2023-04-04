@@ -10,7 +10,7 @@ import { Data } from 'entities/Collection/types'
 
 const CollectionsPage = () => {
   const [testData, setTestData] = useState<Data | null>(null)
-  // const [isLoading, setLoading] = useState(true)
+  const [isLoading, setLoading] = useState(true)
   const [isError, setIsError] = useState(false)
 
   const [rowsPerPage, setRowsPerPage] = useState<RowsPerPage>(5)
