@@ -10,7 +10,10 @@ export const TableHead = () => {
     <thead>
       {headerGroups &&
         headerGroups.map((headerGroup) => (
-          <tr key={headerGroup.id}>
+          <tr
+            key={headerGroup.id}
+            className="border-b border-slate-300 bg-slate-100"
+          >
             {headerGroup.headers.map((header) => (
               <TableCellHead
                 key={header.id}
