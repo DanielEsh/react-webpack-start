@@ -95,57 +95,50 @@ export const CollectionsTable = (props: Props) => {
     onPageChange,
   } = props
 
-  const renderHeader = () => (
-    <div className="mt-4 mb-2 flex items-center justify-between">
-      <h1 className="text-2xl">Collections</h1>
-
-      <div className="flex gap-3">
-        <Button addonLeft={<IconPlus />}>Create Button</Button>
-        <TableSettingsButton />
-      </div>
-    </div>
-  )
-
   const handlePageClick = (page: number) => {
     onPageChange(page)
   }
 
-  const renderFooter = () => (
-    <div className="flex items-center justify-between gap-3">
-      <div>Всего: {meta.totalCount} </div>
-
-      <div className="flex items-center gap-3">
-        <label>
-          Rows per Page:
-          <select
-            name="select"
-            value={rowPerPage}
-            onChange={onRowsPerPageChange}
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="25">25</option>
-          </select>
-        </label>
-
-        <Pagiantion
-          currentPage={currentPage}
-          totalPages={meta.totalPages}
-          onChange={(item) => handlePageClick(item)}
-        />
-      </div>
-    </div>
-  )
-
   return (
     <div className="">
+      <div className="mt-4 mb-2 flex items-center justify-between">
+        <h1 className="text-2xl">Collections</h1>
+
+        <div className="flex gap-3">
+          <Button addonLeft={<IconPlus />}>Create Button</Button>
+        </div>
+      </div>
+
       <Table<Collection>
         localStorageKey="CollectionData"
         data={items}
         columns={columns}
-        renderHeader={renderHeader()}
-        renderFooter={renderFooter()}
       />
+
+      <div className="flex items-center justify-between gap-3">
+        <div>Всего: {meta.totalCount} </div>
+
+        <div className="flex items-center gap-3">
+          <label>
+            Rows per Page:
+            <select
+              name="select"
+              value={rowPerPage}
+              onChange={onRowsPerPageChange}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+            </select>
+          </label>
+
+          <Pagiantion
+            currentPage={currentPage}
+            totalPages={meta.totalPages}
+            onChange={(item) => handlePageClick(item)}
+          />
+        </div>
+      </div>
     </div>
   )
 }

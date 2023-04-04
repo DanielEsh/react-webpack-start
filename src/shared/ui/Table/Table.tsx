@@ -1,4 +1,4 @@
-import { useState, ReactNode, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import {
   getCoreRowModel,
   ColumnDef,
@@ -15,9 +15,6 @@ interface TableProps<TData> {
   localStorageKey: string
   data: TData[]
   columns: ColumnDef<TData>[]
-  // FIXME: render props
-  renderHeader?: ReactNode
-  renderFooter: ReactNode
 }
 
 export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
@@ -78,14 +75,12 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
 
   return (
     <TableContext.Provider value={context}>
-      {props.renderHeader}
       <div className="overflow-hidden rounded-lg border border-slate-300 shadow-md">
         <table className="w-full">
           <TableHead />
           <TableBody />
         </table>
       </div>
-      <div className="">{props.renderFooter}</div>
     </TableContext.Provider>
   )
 }
