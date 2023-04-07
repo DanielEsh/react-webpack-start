@@ -9,6 +9,12 @@ const getSlug = () => rand(['slug1', 'slug2', 'slug3', 'slug4'])
 const getName = () => rand(['name1', 'name2', 'name3', 'name4'])
 const getGoodsCount = () => randNumber({ min: 1, max: 100 })
 
+interface CreateForm {
+  slug: string
+  name: string
+  goodsCount: number
+}
+
 export const db = factory({
   collection: {
     id: primaryKey(() => getId()),
@@ -21,6 +27,21 @@ export const db = factory({
 const ITEMS_COUNT = 20
 
 for (let i = 0; i < ITEMS_COUNT; i++) db.collection.create()
+
+const create = (form?: CreateForm) => {
+  return rest.get(
+    'http://localhost:8000/api/collection/create',
+    (_req, res, ctx) => {
+      const createResult = db.collection.create({
+        slug: form?.slug,
+        name: form?.name,
+        goodsCount: form?.goodsCount,
+      })
+
+      return res(ctx.json(createResult))
+    },
+  )
+}
 
 const readAll = () => {
   return rest.get('http://localhost:8000/api/collection', (_req, res, ctx) => {
@@ -71,4 +92,4 @@ const readAll = () => {
   })
 }
 
-export const collectionHandlers = [readAll()]
+export const collectionHandlers = [create(), readAll()]
