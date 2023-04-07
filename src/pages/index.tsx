@@ -24,18 +24,20 @@ export const Router = () => {
             path="about"
             element={<AboutPageAsync />}
           />
+
           <Route
             path="collections"
             element={<CollectionsPage />}
-          />
-          <Route
-            path="collections/create"
-            element={<CollectionsCreate />}
-          />
-          <Route
-            path="collections/:id"
-            element={<CollectionPage />}
-          />
+          >
+            <Route
+              path="create"
+              element={<CollectionsCreate />}
+            />
+            <Route
+              path=":id"
+              element={<CollectionPage />}
+            />
+          </Route>
         </Route>
 
         <Route

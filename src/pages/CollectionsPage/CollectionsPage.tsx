@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getTestData } from 'shared/api/api'
 
-import { useSearchParams } from 'react-router-dom'
+import { Outlet, useSearchParams } from 'react-router-dom'
 import { CollectionsTable } from 'entities/Collection'
 
 type RowsPerPage = 5 | 10 | 25
@@ -70,6 +70,8 @@ const CollectionsPage = () => {
           />
         )}
       </div>
+
+      <Outlet />
     </div>
   )
 }
