@@ -8,6 +8,8 @@ import IconPlus from 'shared/assets/icons/plus.svg'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
 
+import { Link } from 'react-router-dom'
+
 import { Collection, Meta } from '../types'
 
 const columns: ColumnDef<Collection>[] = [
@@ -105,7 +107,8 @@ export const CollectionsTable = (props: Props) => {
         <h1 className="text-2xl">Collections</h1>
 
         <div className="flex gap-3">
-          <Button addonLeft={<IconPlus />}>Create Button</Button>
+          {/* <Button addonLeft={<IconPlus />}>Create Button</Button> */}
+          <Link to="create">Create Button</Link>
         </div>
       </div>
 
