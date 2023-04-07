@@ -29,7 +29,7 @@ const ITEMS_COUNT = 20
 for (let i = 0; i < ITEMS_COUNT; i++) db.collection.create()
 
 const create = (form?: CreateForm) => {
-  return rest.get(
+  return rest.post(
     'http://localhost:8000/api/collection/create',
     (_req, res, ctx) => {
       const createResult = db.collection.create({

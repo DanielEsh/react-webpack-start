@@ -12,3 +12,14 @@ export const getTestData = async (currentPage: string, limit: string) => {
   )
   return data
 }
+
+interface CreateForm {
+  slug: string
+  name: string
+  goodsCount: number
+}
+
+export const createCollection = async (form: CreateForm) => {
+  const { data } = await $api.post(`/collection/create`, form)
+  return data
+}
