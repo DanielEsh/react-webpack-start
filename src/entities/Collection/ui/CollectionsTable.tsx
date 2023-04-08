@@ -12,72 +12,6 @@ import { Link } from 'react-router-dom'
 
 import { Collection, Meta } from '../types'
 
-const columns: ColumnDef<Collection>[] = [
-  {
-    id: 'id',
-    accessorKey: 'id',
-    cell: (info) => info.getValue(),
-    minSize: 60,
-    size: 60,
-    header: () => <span>Id</span>,
-  },
-  {
-    accessorFn: (row) => row.slug,
-    id: 'slug',
-    cell: (info) => info.getValue(),
-    header: () => <span>Slug</span>,
-    minSize: 180,
-  },
-  {
-    accessorFn: (row) => row.name,
-    id: 'name',
-    cell: (info) => info.getValue(),
-    header: () => <span>Name</span>,
-    minSize: 250,
-  },
-  {
-    accessorFn: (row) => row.goodsCount,
-    id: 'goodsCount',
-    cell: (info) => info.getValue(),
-    header: () => <span>goodsCount</span>,
-    minSize: 80,
-    size: 80,
-  },
-  {
-    id: 'actions',
-    header: 'Actions',
-    minSize: 180,
-    size: 180,
-    footer: (props) => props.column.id,
-    cell: ({ row }) => {
-      return (
-        <div className="flex justify-end gap-1">
-          <Button
-            variant="ghost"
-            {...{
-              onClick: () => {
-                console.log('row', row)
-              },
-            }}
-          >
-            <IconEdit />
-          </Button>
-          <Button
-            variant="ghost"
-            {...{
-              onClick: () => {
-                console.log('row', row)
-              },
-            }}
-          >
-            <IconTrash />
-          </Button>
-        </div>
-      )
-    },
-  },
-]
-
 interface Props {
   items: Collection[]
   meta: Meta
@@ -100,6 +34,69 @@ export const CollectionsTable = (props: Props) => {
   const handlePageClick = (page: number) => {
     onPageChange(page)
   }
+
+  const handleItemClick = (id: number) => {
+    console.log('click on ', id)
+  }
+
+  const columns: ColumnDef<Collection>[] = [
+    {
+      id: 'id',
+      accessorKey: 'id',
+      cell: (info) => info.getValue(),
+      minSize: 60,
+      size: 60,
+      header: () => <span>Id</span>,
+    },
+    {
+      accessorFn: (row) => row.slug,
+      id: 'slug',
+      cell: (info) => info.getValue(),
+      header: () => <span>Slug</span>,
+      minSize: 180,
+    },
+    {
+      accessorFn: (row) => row.name,
+      id: 'name',
+      cell: (info) => info.getValue(),
+      header: () => <span>Name</span>,
+      minSize: 250,
+    },
+    {
+      accessorFn: (row) => row.goodsCount,
+      id: 'goodsCount',
+      cell: (info) => info.getValue(),
+      header: () => <span>goodsCount</span>,
+      minSize: 80,
+      size: 80,
+    },
+    {
+      id: 'actions',
+      header: 'Actions',
+      minSize: 180,
+      size: 180,
+      footer: (props) => props.column.id,
+      cell: ({ row }) => {
+        return (
+          <div className="flex justify-end gap-1">
+            <Link to={`/collections/${row.original.id}`}>
+              <IconEdit />
+            </Link>
+            <Button
+              variant="ghost"
+              {...{
+                onClick: () => {
+                  console.log('row', row)
+                },
+              }}
+            >
+              <IconTrash />
+            </Button>
+          </div>
+        )
+      },
+    },
+  ]
 
   return (
     <div className="">
