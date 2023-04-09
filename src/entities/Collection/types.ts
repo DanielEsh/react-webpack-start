@@ -11,6 +11,6 @@ export type Meta = {
 }
 
 export interface Data {
-  items: Collection[]
+  data: Collection[]
   meta: Meta
 }

@@ -1,15 +1,13 @@
 import axios from 'axios'
 
-const BASE_API_URL = 'http://localhost:8000/api'
+const BASE_API_URL = 'http://localhost:1337/api/'
 
 export const $api = axios.create({
   baseURL: BASE_API_URL,
 })
 
 export const getTestData = async (currentPage: string, limit: string) => {
-  const { data } = await $api.get(
-    `/collection?page=${currentPage}&limit=${limit}`,
-  )
+  const { data } = await $api.get(`/collections`)
   return data
 }
 
@@ -20,6 +18,6 @@ interface CreateForm {
 }
 
 export const createCollection = async (form: CreateForm) => {
-  const { data } = await $api.post(`/collection/create`, form)
+  const { data } = await $api.post(`/collections/create`, form)
   return data
 }

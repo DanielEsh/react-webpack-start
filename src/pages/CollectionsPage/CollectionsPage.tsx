@@ -62,7 +62,7 @@ const CollectionsPage = () => {
         {testData && (
           <CollectionsTable
             currentPage={Number(currentPage)}
-            items={testData.items}
+            items={testData.data}
             meta={testData.meta}
             rowPerPage={rowsPerPage}
             onPageChange={handlePageClick}

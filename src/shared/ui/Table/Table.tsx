@@ -40,12 +40,7 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     defaultColumnVisibility,
   )
   const [columnSizing, setColumnSizing] = useState(defaultColumnSizing)
-  const [sorting, setSorting] = useState<SortingState>([
-    {
-      id: 'slug',
-      desc: true,
-    },
-  ])
+  const [sorting, setSorting] = useState<SortingState>([])
 
   const table = useReactTable({
     data: rowData,
