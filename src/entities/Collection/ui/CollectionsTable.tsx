@@ -18,6 +18,7 @@ interface Props {
   currentPage: number
   rowPerPage: number
   onPageChange: (page: number) => void
+  onSortChange: (sort: any) => void
   onRowsPerPageChange: (event: any) => void
 }
 
@@ -29,6 +30,7 @@ export const CollectionsTable = (props: Props) => {
     rowPerPage,
     onRowsPerPageChange,
     onPageChange,
+    onSortChange,
   } = props
 
   const handlePageClick = (page: number) => {
@@ -98,6 +100,11 @@ export const CollectionsTable = (props: Props) => {
     },
   ]
 
+  const handleSort = (sort: any) => {
+    console.log('sort', sort)
+    onSortChange(sort)
+  }
+
   return (
     <div className="">
       <div className="mt-4 mb-2 flex items-center justify-between">
@@ -113,6 +120,7 @@ export const CollectionsTable = (props: Props) => {
         localStorageKey="CollectionData"
         data={items}
         columns={columns}
+        onSortChange={handleSort}
       />
 
       <div className="flex items-center justify-between gap-3">

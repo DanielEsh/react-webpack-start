@@ -51,6 +51,11 @@ const CollectionsPage = () => {
     setSearchParams({ page: strPage })
   }
 
+  const handleSortChange = async (sort: any) => {
+    const data = await getTestData(sort)
+    setTestData(data)
+  }
+
   return (
     <div>
       <div>
@@ -66,6 +71,7 @@ const CollectionsPage = () => {
             meta={testData.meta}
             rowPerPage={rowsPerPage}
             onPageChange={handlePageClick}
+            onSortChange={handleSortChange}
             onRowsPerPageChange={handleRowPerPageChange}
           />
         )}

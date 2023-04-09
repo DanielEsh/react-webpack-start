@@ -1,3 +1,8 @@
+import { useContext } from 'react'
+import {
+  TableContext,
+  type TableContextType,
+} from 'shared/ui/Table/TableContext'
 import { flexRender, type Header } from '@tanstack/react-table'
 import { TableResizer } from './TableResizer'
 
@@ -6,9 +11,10 @@ export interface TableCellHead {
 }
 
 export const TableCellHead = ({ header }: TableCellHead) => {
+  const { onSortChange } = useContext(TableContext)
+
   const handleClick = () => {
-    header.column.getToggleSortingHandler()
-    console.log('handle click', header.column.getCanSort())
+    header.column.toggleSorting()
   }
 
   return (

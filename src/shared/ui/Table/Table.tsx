@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import {
   getCoreRowModel,
   ColumnDef,
@@ -12,14 +12,20 @@ import { TableContext, TableContextType } from 'shared/ui/Table/TableContext'
 
 type BaseData = unknown | object
 
+type Sort = {
+  name: string
+  type: 'desc' | 'asc'
+} | null
+
 interface TableProps<TData> {
   localStorageKey: string
   data: TData[]
   columns: ColumnDef<TData>[]
+  onSortChange: (sort: Sort) => void
 }
 
 export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
-  const { localStorageKey, data = [], columns } = props
+  const { localStorageKey, data = [], columns, onSortChange } = props
 
   const rowData = useMemo(() => data, [data])
 
@@ -42,6 +48,18 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   const [columnSizing, setColumnSizing] = useState(defaultColumnSizing)
   const [sorting, setSorting] = useState<SortingState>([])
 
+  useEffect(() => {
+    console.log('SORTING', sorting)
+    onSortChange(
+      sorting.length
+        ? {
+            name: sorting[0].id,
+            type: sorting[0].desc ? 'desc' : 'asc',
+          }
+        : null,
+    )
+  }, [sorting])
+
   const table = useReactTable({
     data: rowData,
     columns,
@@ -57,6 +75,7 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
     manualSorting: true,
+    enableSorting: true,
     debugAll: true,
   })
 
