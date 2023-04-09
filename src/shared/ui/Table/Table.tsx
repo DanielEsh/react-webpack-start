@@ -3,6 +3,7 @@ import {
   getCoreRowModel,
   ColumnDef,
   useReactTable,
+  SortingState,
 } from '@tanstack/react-table'
 
 import { TableHead } from 'shared/ui/Table/TableHead'
@@ -39,6 +40,12 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     defaultColumnVisibility,
   )
   const [columnSizing, setColumnSizing] = useState(defaultColumnSizing)
+  const [sorting, setSorting] = useState<SortingState>([
+    {
+      id: 'slug',
+      desc: true,
+    },
+  ])
 
   const table = useReactTable({
     data: rowData,
@@ -46,12 +53,16 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
     state: {
       columnVisibility,
       columnSizing,
+      sorting,
     },
+    onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
     onColumnSizingChange: setColumnSizing,
     columnResizeMode: 'onChange',
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
+    manualSorting: true,
+    debugAll: true,
   })
 
   const headerGroups = table.getHeaderGroups()
