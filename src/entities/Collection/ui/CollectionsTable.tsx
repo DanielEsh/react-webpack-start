@@ -78,6 +78,7 @@ export const CollectionsTable = (props: Props) => {
       minSize: 180,
       size: 180,
       footer: (props) => props.column.id,
+      enableSorting: false,
       cell: ({ row }) => {
         return (
           <div className="flex justify-end gap-1">
