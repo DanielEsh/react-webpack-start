@@ -25,7 +25,7 @@ const CollectionsPage = () => {
       setLoading(true)
 
       try {
-        const data = await getTestData(currentPage, limit)
+        const data = await getTestData({})
         console.log('data', data)
         setTestData(data)
         setLoading(false)

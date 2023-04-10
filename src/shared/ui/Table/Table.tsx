@@ -9,22 +9,18 @@ import {
 import { TableHead } from 'shared/ui/Table/TableHead'
 import { TableBody } from 'shared/ui/Table/TableBody'
 import { TableContext, TableContextType } from 'shared/ui/Table/TableContext'
-
-type BaseData = unknown | object
-
-type Sort = {
-  name: string
-  type: 'desc' | 'asc'
-} | null
+import { BaseTableData, TableSort } from 'shared/ui/Table/types'
 
 interface TableProps<TData> {
   localStorageKey: string
   data: TData[]
   columns: ColumnDef<TData>[]
-  onSortChange: (sort: Sort) => void
+  onSortChange: (sort: TableSort) => void
 }
 
-export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
+export const Table = <TData extends BaseTableData>(
+  props: TableProps<TData>,
+) => {
   const { localStorageKey, data = [], columns, onSortChange } = props
 
   const rowData = useMemo(() => data, [data])
@@ -49,7 +45,6 @@ export const Table = <TData extends BaseData>(props: TableProps<TData>) => {
   const [sorting, setSorting] = useState<SortingState>([])
 
   useEffect(() => {
-    console.log('SORTING', sorting)
     onSortChange(
       sorting.length
         ? {
