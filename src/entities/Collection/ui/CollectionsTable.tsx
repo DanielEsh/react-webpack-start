@@ -2,7 +2,6 @@ import { ColumnDef } from '@tanstack/react-table'
 
 import { Table } from 'shared/ui/Table'
 import { Button } from 'shared/ui/Button'
-import { TableSettingsButton } from 'shared/ui/Table/TableSettingsButton'
 import { Pagiantion } from 'shared/ui/Pagiantion/Pagination'
 import IconPlus from 'shared/assets/icons/plus.svg'
 import IconEdit from 'shared/assets/icons/edit.svg'
@@ -113,7 +112,12 @@ export const CollectionsTable = (props: Props) => {
 
         <div className="flex gap-3">
           {/* <Button addonLeft={<IconPlus />}>Create Button</Button> */}
-          <Link to="create">Create Button</Link>
+          <Link
+            to="create"
+            className="flex gap-2"
+          >
+            <IconPlus /> Create Button
+          </Link>
         </div>
       </div>
 
