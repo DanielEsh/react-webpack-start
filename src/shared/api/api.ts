@@ -1,9 +1,8 @@
 import axios from 'axios'
-
-const BASE_API_URL = 'http://localhost:1337/api/'
+import { getBaseUrl } from 'shared/api'
 
 export const $api = axios.create({
-  baseURL: BASE_API_URL,
+  baseURL: getBaseUrl(),
 })
 
 export const getTestData = async (sort?: any) => {
