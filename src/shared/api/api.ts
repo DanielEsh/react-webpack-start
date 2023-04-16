@@ -5,7 +5,7 @@ export const $api = axios.create({
   baseURL: getBaseUrl(),
 })
 
-export const getTestData = async (sort?: any) => {
+export const getCollections = async (sort?: any) => {
   let URL = '/collections'
 
   if (sort) {

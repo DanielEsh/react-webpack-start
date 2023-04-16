@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { getTestData } from 'shared/api/api'
+import { useState } from 'react'
+import { useGetCollections } from 'entities/Collection/api'
 
 import { Outlet, useSearchParams } from 'react-router-dom'
 import { CollectionsTable } from 'entities/Collection'
@@ -9,37 +9,14 @@ type RowsPerPage = 5 | 10 | 25
 import { Data } from 'entities/Collection/types'
 
 const CollectionsPage = () => {
-  const [testData, setTestData] = useState<Data | null>(null)
-  const [isLoading, setLoading] = useState(true)
-  const [isError, setIsError] = useState(false)
+  const { isLoading, isError, data } = useGetCollections()
 
   const [rowsPerPage, setRowsPerPage] = useState<RowsPerPage>(5)
 
   const [searchParams, setSearchParams] = useSearchParams()
 
   const currentPage = searchParams.get('page') ?? '1'
-  const limit = searchParams.get('limit') ?? '5'
-
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true)
-
-      try {
-        const data = await getTestData({})
-        console.log('data', data)
-        setTestData(data)
-        setLoading(false)
-      } catch (e) {
-        setLoading(false)
-        setIsError(true)
-      }
-    }
-
-    fetchData()
-    setTimeout(() => {
-      console.log('testData', testData)
-    }, 2000)
-  }, [currentPage, limit])
+  // const limit = searchParams.get('limit') ?? '5'
 
   const handleRowPerPageChange = (event: any) => {
     setRowsPerPage(event.target.value)
@@ -52,8 +29,9 @@ const CollectionsPage = () => {
   }
 
   const handleSortChange = async (sort: any) => {
-    const data = await getTestData(sort)
-    setTestData(data)
+    console.log('SORT', sort)
+    // const data = await getTestData(sort)
+    // setTestData(data)
   }
 
   return (
@@ -64,11 +42,11 @@ const CollectionsPage = () => {
         </pre>
 
         {isError && <div>Error loading</div>}
-        {testData && (
+        {data && (
           <CollectionsTable
             currentPage={Number(currentPage)}
-            items={testData.data}
-            meta={testData.meta}
+            items={data.data}
+            meta={data.meta}
             rowPerPage={rowsPerPage}
             onPageChange={handlePageClick}
             onSortChange={handleSortChange}
