@@ -7,6 +7,10 @@ export interface TableResizerProps {
 }
 
 export const TableResizer = ({ header }: TableResizerProps) => {
+  const handleClick = (event: TouchEvent | MouseEvent) => {
+    event.stopPropagation()
+  }
+
   const handleResize = (event: TouchEvent | MouseEvent) => {
     const changeColumnSesizeFn = header.getResizeHandler()
     changeColumnSesizeFn(event)
@@ -24,6 +28,7 @@ export const TableResizer = ({ header }: TableResizerProps) => {
       className={classes}
       onTouchStart={(event) => handleResize(event)}
       onMouseDown={(event) => handleResize(event)}
+      onClick={handleClick}
     />
   )
 }
