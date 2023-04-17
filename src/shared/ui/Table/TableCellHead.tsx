@@ -1,5 +1,6 @@
 import { flexRender, type Header } from '@tanstack/react-table'
 import { TableResizer } from './TableResizer'
+import { TableSort } from './TableSort'
 
 export interface TableCellHead {
   header: Header<any, unknown>
@@ -19,14 +20,13 @@ export const TableCellHead = ({ header }: TableCellHead) => {
       style={{ width: header.getSize() }}
       onClick={handleClick}
     >
-      {header.isPlaceholder
-        ? null
-        : flexRender(header.column.columnDef.header, header.getContext())}
+      <div className="flex gap-3">
+        {header.isPlaceholder
+          ? null
+          : flexRender(header.column.columnDef.header, header.getContext())}
 
-      {{
-        asc: 'ASC',
-        desc: 'DESC',
-      }[header.column.getIsSorted() as string] ?? null}
+        <TableSort direction={header.column.getIsSorted()} />
+      </div>
 
       <TableResizer header={header} />
     </th>
