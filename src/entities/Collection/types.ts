@@ -1,13 +1,19 @@
-export type Collection = {
+export interface Collection {
   id: number
   slug: string
   name: string
   goodsCount: number
 }
 
-export type Meta = {
-  totalCount: number
-  totalPages: number
+export interface Pagination {
+  page: number
+  pageSize: number
+  pageCount: number
+  total: number
+}
+
+export interface Meta {
+  pagination: Pagination
 }
 
 export interface Data {
