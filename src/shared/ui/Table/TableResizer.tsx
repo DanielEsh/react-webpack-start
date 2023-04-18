@@ -1,9 +1,9 @@
 import type { TouchEvent, MouseEvent } from 'react'
-import { Header } from '@tanstack/react-table'
 import { classNames } from 'shared/utils'
+import { TableHeaderType } from './types'
 
 export interface TableResizerProps {
-  header: Header<any, unknown>
+  header: TableHeaderType
 }
 
 export const TableResizer = ({ header }: TableResizerProps) => {

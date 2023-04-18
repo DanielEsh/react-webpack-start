@@ -1,9 +1,10 @@
-import { flexRender, type Header } from '@tanstack/react-table'
+import { flexRender } from '@tanstack/react-table'
 import { TableResizer } from './TableResizer'
 import { TableSort } from './TableSort'
+import type { TableHeaderType } from './types'
 
 export interface TableCellHead {
-  header: Header<any, unknown>
+  header: TableHeaderType
 }
 
 export const TableCellHead = ({ header }: TableCellHead) => {

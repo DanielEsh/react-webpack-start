@@ -1,7 +1,8 @@
 import { Cell, flexRender } from '@tanstack/react-table'
+import type { TableExternalData, TableExternalValue } from './types'
 
 export interface TableCell {
-  cell: Cell<any, unknown>
+  cell: Cell<TableExternalData, TableExternalValue>
 }
 
 export const TableCell = ({ cell }: TableCell) => {
