@@ -9,7 +9,9 @@ const CollectionsCreate = () => {
     navigate('/collections')
   }
 
-  async function createNewCollection() {
+  async function createNewCollection(event: any) {
+    event.preventDefault()
+
     try {
       const data = await createCollection({
         slug: 'new-slug',
@@ -28,7 +30,25 @@ const CollectionsCreate = () => {
       opened={true}
       onClose={handleClose}
     >
-      <span onClick={createNewCollection}>create</span>
+      <form onSubmit={createNewCollection}>
+        <div>
+          <input
+            type="text"
+            placeholder="Slug"
+          />
+        </div>
+
+        <div>
+          <input
+            type="text"
+            placeholder="name"
+          />
+        </div>
+
+        <div>
+          <button type="submit">create</button>
+        </div>
+      </form>
     </Modal>
   )
 }
