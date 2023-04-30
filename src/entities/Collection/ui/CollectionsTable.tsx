@@ -13,7 +13,8 @@ import { Collection, Meta } from '../types'
 
 interface Props {
   items: Collection[]
-  meta: Meta
+  // FIXME: any
+  meta: any
   currentPage: number
   rowPerPage: number
   onPageChange: (page: number) => void
@@ -129,7 +130,7 @@ export const CollectionsTable = (props: Props) => {
       />
 
       <div className="flex items-center justify-between gap-3">
-        <div>Всего: {meta.pagination.total} </div>
+        <div>Всего: {meta.itemCount} </div>
 
         <div className="flex items-center gap-3">
           <label>
@@ -147,7 +148,7 @@ export const CollectionsTable = (props: Props) => {
 
           <Pagiantion
             currentPage={currentPage}
-            totalPages={meta.pagination.pageCount}
+            totalPages={meta.totalPages}
             onChange={(item) => handlePageClick(item)}
           />
         </div>

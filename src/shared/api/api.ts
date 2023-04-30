@@ -6,10 +6,10 @@ export const $api = axios.create({
 })
 
 export const getCollections = async (sort?: any) => {
-  let URL = '/collections'
+  const URL = '/collections'
 
   if (sort) {
-    URL = `/collections?sort[0]=${sort.name}%3A${sort.type}`
+    // URL = `/collections?sort[0]=${sort.name}%3A${sort.type}`
   }
 
   const { data } = await $api.get(URL)

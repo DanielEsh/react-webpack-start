@@ -1,3 +1,3 @@
 export const getBaseUrl = () => {
-  return 'http://localhost:1337/api/'
+  return 'http://localhost:8000/api/'
 }
