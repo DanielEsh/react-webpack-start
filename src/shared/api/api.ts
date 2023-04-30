@@ -16,6 +16,10 @@ export const getCollections = async (sort?: any) => {
   return data
 }
 
+export const getCollectionById = async (id: number) => {
+  return (await $api.get(`/collections/${id}`)).data
+}
+
 interface CreateForm {
   slug: string
   name: string
