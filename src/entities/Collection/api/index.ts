@@ -3,6 +3,7 @@ import {
   getCollections,
   getCollectionById,
   createCollection,
+  deleteCollection,
 } from 'shared/api/api'
 
 export const useGetCollections = () => {
@@ -22,5 +23,11 @@ export const useGetCollectionDetails = (id: number) => {
 export const useCreateCollection = () => {
   return useMutation({
     mutationFn: createCollection,
+  })
+}
+
+export const useDeleteCollectionMutation = () => {
+  return useMutation({
+    mutationFn: deleteCollection,
   })
 }

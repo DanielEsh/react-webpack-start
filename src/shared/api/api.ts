@@ -28,3 +28,7 @@ interface CreateForm {
 export const createCollection = async (form: CreateForm) => {
   return await $api.post(`/collections`, form)
 }
+
+export const deleteCollection = async (id: number) => {
+  return (await $api.delete(`/collections/${id}`)).data
+}

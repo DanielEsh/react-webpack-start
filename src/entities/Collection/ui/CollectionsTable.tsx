@@ -1,4 +1,4 @@
-import { ColumnDef } from '@tanstack/react-table'
+import { ColumnDef, Row } from '@tanstack/react-table'
 
 import { Table } from 'shared/ui/Table'
 import { Button } from 'shared/ui/Button'
@@ -9,7 +9,10 @@ import IconTrash from 'shared/assets/icons/trash.svg'
 
 import { Link } from 'react-router-dom'
 
-import { Collection, Meta } from '../types'
+import { useDeleteCollectionMutation } from 'entities/Collection/api'
+import { useQueryClient } from '@tanstack/react-query'
+
+import { Collection } from '../types'
 
 interface Props {
   items: Collection[]
@@ -33,12 +36,21 @@ export const CollectionsTable = (props: Props) => {
     onSortChange,
   } = props
 
+  const { mutate: deleteMutate } = useDeleteCollectionMutation()
+  const queryClient = useQueryClient()
+
   const handlePageClick = (page: number) => {
     onPageChange(page)
   }
 
-  const handleItemClick = (id: number) => {
-    console.log('click on ', id)
+  const handleDeleteSuccess = (id: number) => {
+    console.log('DELETE', id)
+    queryClient.invalidateQueries({ queryKey: ['collections'] })
+  }
+
+  const handleDeleteClick = (row: Row<Collection>) => {
+    const id = row.original.id
+    deleteMutate(id, { onSuccess: () => handleDeleteSuccess(id) })
   }
 
   const columns: ColumnDef<Collection>[] = [
@@ -87,11 +99,7 @@ export const CollectionsTable = (props: Props) => {
             </Link>
             <Button
               variant="ghost"
-              {...{
-                onClick: () => {
-                  console.log('row', row)
-                },
-              }}
+              onClick={() => handleDeleteClick(row)}
             >
               <IconTrash />
             </Button>
