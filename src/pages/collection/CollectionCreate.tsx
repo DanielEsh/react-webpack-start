@@ -7,6 +7,7 @@ const CollectionsCreate = () => {
   const navigate = useNavigate()
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm()
@@ -15,17 +16,16 @@ const CollectionsCreate = () => {
     navigate('/collections')
   }
 
-  async function createNewCollection(event: any) {
-    event.preventDefault()
-
+  async function createNewCollection() {
     try {
       const data = await createCollection({
-        slug: 'new-slug',
-        name: 'new name',
-        goodsCount: 0,
+        slug: getValues('slug'),
+        name: getValues('exampleRequired'),
       })
 
-      console.log('CREATE', data)
+      console.log('SUCCESS CREATE', data)
+
+      handleClose()
     } catch (e) {
       console.log('CREATE ERROR', e)
     }

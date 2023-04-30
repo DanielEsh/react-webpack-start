@@ -19,10 +19,8 @@ export const getCollections = async (sort?: any) => {
 interface CreateForm {
   slug: string
   name: string
-  goodsCount: number
 }
 
 export const createCollection = async (form: CreateForm) => {
-  const { data } = await $api.post(`/collections/create`, form)
-  return data
+  return await $api.post(`/collections`, form)
 }
