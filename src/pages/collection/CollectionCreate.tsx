@@ -1,10 +1,14 @@
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { Modal } from 'shared/ui/Modal'
-import { createCollection } from 'shared/api/api'
+import { useCreateCollection } from 'entities/Collection/api'
+import { useQueryClient } from '@tanstack/react-query'
 
 const CollectionsCreate = () => {
   const navigate = useNavigate()
+  const { isLoading: isCreating, mutate: createCollection } =
+    useCreateCollection()
+
   const {
     register,
     getValues,
@@ -12,20 +16,29 @@ const CollectionsCreate = () => {
     formState: { errors },
   } = useForm()
 
+  const queryClient = useQueryClient()
+
   const handleClose = () => {
     navigate('/collections')
   }
 
+  const handleSuccessCreate = (data: any) => {
+    console.log('SUCCESS CREATE', data)
+    queryClient.invalidateQueries({ queryKey: ['collections'] })
+
+    handleClose()
+  }
+
   async function createNewCollection() {
     try {
-      const data = await createCollection({
+      const form = {
         slug: getValues('slug'),
         name: getValues('exampleRequired'),
+      }
+
+      return await createCollection(form, {
+        onSuccess: (data) => handleSuccessCreate(data),
       })
-
-      console.log('SUCCESS CREATE', data)
-
-      handleClose()
     } catch (e) {
       console.log('CREATE ERROR', e)
     }
@@ -57,6 +70,7 @@ const CollectionsCreate = () => {
         {errors.slug && <span>This field is required (slug)</span>}
         <div>
           <button type="submit">create</button>
+          {isCreating && <div>isCreating...</div>}
         </div>
       </form>
     </Modal>
