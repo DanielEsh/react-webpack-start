@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { getBaseUrl } from 'shared/api'
 
+import { UpdateCollectionForm } from 'entities/Collection/types'
+
 export const $api = axios.create({
   baseURL: getBaseUrl(),
 })
@@ -23,6 +25,13 @@ export const getCollectionById = async (id: number) => {
 interface CreateForm {
   slug: string
   name: string
+}
+
+export const updateCollection = async (
+  form: UpdateCollectionForm,
+  id: number,
+) => {
+  return (await $api.patch(`/collections/${id}`, form)).data
 }
 
 export const createCollection = async (form: CreateForm) => {
