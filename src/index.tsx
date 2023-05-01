@@ -5,10 +5,10 @@ import { App } from 'app'
 import 'shared/lib/l18n/i18'
 
 // msw
-import { initMsw } from '__mocks__'
+// import { initMsw } from '__mocks__'
 
 const initApp = async () => {
-  await initMsw()
+  // await initMsw()
 
   const APP_ROOT_ID = 'root'
 
