@@ -7,7 +7,13 @@ interface Props {
 }
 
 export const CollectionUpdateForm = ({ collection, onSubmit }: Props) => {
-  const { register, getValues, handleSubmit } = useForm()
+  const { register, getValues, handleSubmit } = useForm({
+    defaultValues: {
+      slug: collection.slug,
+      name: collection.name,
+      description: collection.description,
+    },
+  })
 
   const updateCollectionForm = () => {
     const form: UpdateCollectionForm = {
