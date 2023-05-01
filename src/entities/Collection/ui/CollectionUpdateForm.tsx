@@ -3,29 +3,24 @@ import { Collection, UpdateCollectionForm } from '../types'
 
 interface Props {
   collection: Collection
+  onSubmit: (form: UpdateCollectionForm) => void
 }
 
-export const CollectionUpdateForm = ({ collection }: Props) => {
-  const { register, getValues, handleSubmit, reset } = useForm()
+export const CollectionUpdateForm = ({ collection, onSubmit }: Props) => {
+  const { register, getValues, handleSubmit } = useForm()
 
-  reset({
-    slug: collection.slug,
-    name: collection.name,
-    description: collection.description,
-  })
-
-  const updateCollection = () => {
+  const updateCollectionForm = () => {
     const form: UpdateCollectionForm = {
       slug: getValues('slug'),
       name: getValues('name'),
       description: getValues('description'),
     }
 
-    console.log('FORM', form)
+    onSubmit(form)
   }
 
   return (
-    <form onSubmit={handleSubmit(updateCollection)}>
+    <form onSubmit={handleSubmit(updateCollectionForm)}>
       <div>
         <input
           type="text"
@@ -46,7 +41,7 @@ export const CollectionUpdateForm = ({ collection }: Props) => {
         <input
           type="text"
           placeholder="Description"
-          {...register('description', { required: true })}
+          {...register('description')}
         />
       </div>
 
@@ -54,6 +49,10 @@ export const CollectionUpdateForm = ({ collection }: Props) => {
 
       <div>{collection.created_at}</div>
       <div>{collection.updated_at}</div>
+
+      <div>
+        <button type="submit">submit</button>
+      </div>
     </form>
   )
 }

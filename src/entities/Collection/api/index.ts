@@ -22,12 +22,10 @@ export const useGetCollectionDetails = (id: number) => {
   })
 }
 
-export const useUpdateCollectionMutation = (
-  form: UpdateCollectionForm,
-  id: number,
-) => {
+export const useUpdateCollectionMutation = () => {
   return useMutation({
-    mutationFn: () => updateCollection(form, id),
+    mutationFn: ({ form, id }: { form: UpdateCollectionForm; id: number }) =>
+      updateCollection(form, id),
   })
 }
 
