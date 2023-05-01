@@ -2,7 +2,16 @@ export interface Collection {
   id: number
   slug: string
   name: string
-  goodsCount: number
+  description?: string
+  goodsCount?: number
+  created_at?: string
+  updated_at?: string
+}
+
+export interface UpdateCollectionForm {
+  slug: string
+  name: string
+  description?: string
 }
 
 export interface Pagination {

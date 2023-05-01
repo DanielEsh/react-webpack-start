@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useGetCollectionDetails } from 'entities/Collection/api'
 import { Modal } from 'shared/ui/Modal'
+import { CollectionUpdateForm } from 'entities/Collection'
 
 const CollectionPage = () => {
   const navigate = useNavigate()
@@ -17,12 +18,10 @@ const CollectionPage = () => {
       onClose={handleClose}
     >
       <div>id = {id}</div>
-      {isLoading && <div>Loading...</div>}
-      {data && (
-        <pre>
-          <div>Slug: {data.slug}</div>
-          <div>Name: {data.name}</div>
-        </pre>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <CollectionUpdateForm collection={data} />
       )}
     </Modal>
   )

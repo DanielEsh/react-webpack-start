@@ -1,3 +1,4 @@
 import { CollectionsTable } from './ui/CollectionsTable'
+import { CollectionUpdateForm } from './ui/CollectionUpdateForm'
 
-export { CollectionsTable }
+export { CollectionsTable, CollectionUpdateForm }
