@@ -15,10 +15,13 @@ export interface UpdateCollectionForm {
 }
 
 export interface Pagination {
-  page: number
-  pageSize: number
-  pageCount: number
-  total: number
+  totalItemsCount: number
+  itemCount: number
+  itemsPerPage: number
+  totalPages: number
+  currentPage: number
+  previous: number | null
+  next: number | null
 }
 
 export interface Meta {

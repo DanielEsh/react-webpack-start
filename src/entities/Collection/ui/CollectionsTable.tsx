@@ -12,12 +12,11 @@ import { Link } from 'react-router-dom'
 import { useDeleteCollectionMutation } from 'entities/Collection/api'
 import { useQueryClient } from '@tanstack/react-query'
 
-import { Collection } from '../types'
+import { Collection, Meta } from '../types'
 
 interface Props {
   items: Collection[]
-  // FIXME: any
-  meta: any
+  meta: Meta
   currentPage: number
   rowPerPage: number
   onPageChange: (page: number) => void
@@ -138,7 +137,7 @@ export const CollectionsTable = (props: Props) => {
       />
 
       <div className="flex items-center justify-between gap-3">
-        <div>Всего: {meta.itemCount} </div>
+        <div>Всего: {meta.pagination.totalItemsCount} </div>
 
         <div className="flex items-center gap-3">
           <label>
@@ -156,7 +155,7 @@ export const CollectionsTable = (props: Props) => {
 
           <Pagiantion
             currentPage={currentPage}
-            totalPages={meta.totalPages}
+            totalPages={meta.pagination.totalPages}
             onChange={(item) => handlePageClick(item)}
           />
         </div>
