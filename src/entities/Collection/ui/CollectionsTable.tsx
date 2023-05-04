@@ -153,11 +153,13 @@ export const CollectionsTable = (props: Props) => {
             </select>
           </label>
 
-          <Pagiantion
-            currentPage={currentPage}
-            totalPages={meta.pagination.totalPages}
-            onChange={(item) => handlePageClick(item)}
-          />
+          {meta.pagination.totalPages > 1 && (
+            <Pagiantion
+              currentPage={currentPage}
+              totalPages={meta.pagination.totalPages}
+              onChange={(item) => handlePageClick(item)}
+            />
+          )}
         </div>
       </div>
     </div>
