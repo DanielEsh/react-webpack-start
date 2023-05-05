@@ -7,7 +7,7 @@ import { CollectionsTable } from 'entities/Collection'
 type RowsPerPage = 5 | 10 | 25
 
 import { Data } from 'entities/Collection/types'
-import { objectToQuery } from 'shared/utils/objectToQuery'
+import { objectToQuery, queryToObject } from 'shared/utils/query'
 
 const test = () => {
   const obj = {
@@ -17,7 +17,10 @@ const test = () => {
     page: 2,
   }
 
-  console.log('test', objectToQuery(obj))
+  const qs = 'slug=asc&name=desc&limit=5&page=2'
+
+  console.log('[objectToQuery]', objectToQuery(obj))
+  console.log('[queryToObject]', queryToObject(qs))
 }
 
 const CollectionsPage = () => {
