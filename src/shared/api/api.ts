@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getBaseUrl } from 'shared/api'
+import qs from 'qs'
 
 import { UpdateCollectionForm } from 'entities/Collection/types'
 
@@ -7,14 +8,16 @@ export const $api = axios.create({
   baseURL: getBaseUrl(),
 })
 
-export const getCollections = async (sort?: any) => {
-  const URL = '/collections'
+interface Values {
+  currentPage: number
+  limit: number
+  sort_by: string[]
+  group_by: string[]
+}
 
-  if (sort) {
-    // URL = `/collections?sort[0]=${sort.name}%3A${sort.type}`
-  }
-
-  const { data } = await $api.get(URL)
+export const getCollections = async (values?: Values) => {
+  const BASE_URL = '/collections'
+  const { data } = await $api.get(`${BASE_URL}`)
   return data
 }
 

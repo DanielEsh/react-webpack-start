@@ -7,32 +7,27 @@ import { CollectionsTable } from 'entities/Collection'
 type RowsPerPage = 5 | 10 | 25
 
 import { Data } from 'entities/Collection/types'
-import { objectToQuery, queryToObject } from 'shared/utils/query'
 
-const test = () => {
-  const obj = {
-    slug: 'asc',
-    name: 'desc',
-    limit: 5,
-    page: 2,
-  }
-
-  const qs = 'slug=asc&name=desc&limit=5&page=2'
-
-  console.log('[objectToQuery]', objectToQuery(obj))
-  console.log('[queryToObject]', queryToObject(qs))
+interface Values {
+  currentPage: number
+  limit: number
+  sort_by: string[]
+  group_by: string[]
 }
 
 const CollectionsPage = () => {
-  test()
   const { isLoading, isError, data } = useGetCollections()
 
   const [rowsPerPage, setRowsPerPage] = useState<RowsPerPage>(5)
 
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const currentPage = searchParams.get('page') ?? '1'
-  // const limit = searchParams.get('limit') ?? '5'
+  const values: Values = {
+    currentPage: Number(searchParams.get('page')) ?? 1,
+    limit: Number(searchParams.get('limit')) ?? 5,
+    sort_by: [],
+    group_by: [],
+  }
 
   const handleRowPerPageChange = (event: any) => {
     setRowsPerPage(event.target.value)
@@ -46,8 +41,10 @@ const CollectionsPage = () => {
 
   const handleSortChange = async (sort: any) => {
     console.log('SORT', sort)
-    // const data = await getTestData(sort)
-    // setTestData(data)
+    if (!sort) return
+
+    values.sort_by.push(sort.name)
+    values.group_by.push(sort.type)
   }
 
   return (
@@ -60,7 +57,7 @@ const CollectionsPage = () => {
         {isError && <div>Error loading</div>}
         {data && (
           <CollectionsTable
-            currentPage={Number(currentPage)}
+            currentPage={values.currentPage}
             items={data.data}
             meta={data.meta}
             rowPerPage={rowsPerPage}
