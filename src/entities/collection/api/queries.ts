@@ -5,7 +5,7 @@ import {
   updateCollection,
   createCollection,
   deleteCollection,
-} from 'shared/api/api'
+} from './requests'
 import { UpdateCollectionForm } from 'entities/collection/types'
 
 interface Values {
