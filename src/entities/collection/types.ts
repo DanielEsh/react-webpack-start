@@ -8,10 +8,18 @@ export interface Collection {
   updated_at?: string
 }
 
-export interface UpdateCollectionForm {
-  slug: string
-  name: string
-  description?: string
+export type UpdateCollectionForm = Pick<
+  Collection,
+  'slug' | 'name' | 'description'
+>
+
+export type CreateCollectionForm = Pick<Collection, 'slug' | 'name'>
+
+export interface Values {
+  page: number
+  limit: number
+  sort_by: string[]
+  order_by: string[]
 }
 
 export interface Pagination {
