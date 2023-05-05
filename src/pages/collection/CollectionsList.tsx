@@ -19,7 +19,7 @@ const CollectionsPage = () => {
   const [rowsPerPage, setRowsPerPage] = useState<RowsPerPage>(5)
   const [searchParams, setSearchParams] = useSearchParams()
   const [values, setValues] = useState<Values>({
-    page: Number(searchParams.get('page')) ?? 1,
+    page: 1,
     limit: 5,
     sort_by: [],
     order_by: [],
