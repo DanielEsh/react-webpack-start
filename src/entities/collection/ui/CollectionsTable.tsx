@@ -9,7 +9,7 @@ import IconTrash from 'shared/assets/icons/trash.svg'
 
 import { Link } from 'react-router-dom'
 
-import { useDeleteCollectionMutation } from 'entities/Collection/api'
+import { useDeleteCollectionMutation } from 'entities/collection/api'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { Collection, Meta } from '../types'

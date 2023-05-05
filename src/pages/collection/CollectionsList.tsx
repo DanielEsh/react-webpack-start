@@ -3,7 +3,6 @@ import { useGetCollections } from 'entities/collection/api'
 
 import { Outlet, useSearchParams } from 'react-router-dom'
 import { CollectionsTable } from 'entities/collection'
-import { useQueryClient } from '@tanstack/react-query'
 
 type RowsPerPage = 5 | 10 | 25
 
