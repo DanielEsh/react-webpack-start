@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { useGetCollections } from 'entities/Collection/api'
+import { useGetCollections } from 'entities/collection/api'
 
 import { Outlet, useSearchParams } from 'react-router-dom'
-import { CollectionsTable } from 'entities/Collection'
+import { CollectionsTable } from 'entities/collection'
 import { useQueryClient } from '@tanstack/react-query'
 
 type RowsPerPage = 5 | 10 | 25
 
-import { Data } from 'entities/Collection/types'
+import { Data } from 'entities/collection/types'
 
 interface Values {
   page: number
@@ -61,6 +61,7 @@ const CollectionsPage = () => {
         </pre>
 
         {isError && <div>Error loading</div>}
+        {isLoading && <div>Loading...</div>}
         {data && (
           <CollectionsTable
             currentPage={values.page}

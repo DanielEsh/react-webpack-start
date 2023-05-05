@@ -6,7 +6,7 @@ import {
   createCollection,
   deleteCollection,
 } from 'shared/api/api'
-import { UpdateCollectionForm } from 'entities/Collection/types'
+import { UpdateCollectionForm } from 'entities/collection/types'
 
 interface Values {
   page: number
@@ -36,7 +36,7 @@ export const useUpdateCollectionMutation = () => {
   })
 }
 
-export const useCreateCollection = () => {
+export const useCreateCollectionMutation = () => {
   return useMutation({
     mutationFn: createCollection,
   })

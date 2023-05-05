@@ -2,10 +2,10 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   useGetCollectionDetails,
   useUpdateCollectionMutation,
-} from 'entities/Collection/api'
+} from 'entities/collection/api'
 import { Modal } from 'shared/ui/Modal'
-import { CollectionUpdateForm } from 'entities/Collection'
-import { UpdateCollectionForm } from 'entities/Collection/types'
+import { CollectionUpdateForm } from 'entities/collection'
+import { UpdateCollectionForm } from 'entities/collection/types'
 
 const CollectionPage = () => {
   const navigate = useNavigate()

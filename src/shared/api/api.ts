@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getBaseUrl } from 'shared/api'
 import qs from 'qs'
 
-import { UpdateCollectionForm } from 'entities/Collection/types'
+import { UpdateCollectionForm } from 'entities/collection/types'
 
 export const $api = axios.create({
   baseURL: getBaseUrl(),
