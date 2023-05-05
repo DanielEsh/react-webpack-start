@@ -35,7 +35,7 @@ export const updateCollection = async (
 }
 
 export const createCollection = async (form: CreateForm) => {
-  return await $api.post(`/collections`, form)
+  return (await $api.post(`/collections`, form)).data
 }
 
 export const deleteCollection = async (id: number) => {

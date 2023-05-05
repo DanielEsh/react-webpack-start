@@ -13,6 +13,7 @@ const CollectionsCreate = () => {
     register,
     getValues,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm()
 
@@ -20,6 +21,18 @@ const CollectionsCreate = () => {
 
   const handleClose = () => {
     navigate('/collections')
+  }
+
+  const handleErrorCreate = (data: any) => {
+    console.log('ERROR CREATE', data)
+
+    const error = data.response
+
+    if (error.statusText === 'Conflict') {
+      setError('slug', {
+        message: 'Дубликат',
+      })
+    }
   }
 
   const handleSuccessCreate = (data: any) => {
@@ -30,18 +43,15 @@ const CollectionsCreate = () => {
   }
 
   async function createNewCollection() {
-    try {
-      const form = {
-        slug: getValues('slug'),
-        name: getValues('exampleRequired'),
-      }
-
-      return await createCollection(form, {
-        onSuccess: (data) => handleSuccessCreate(data),
-      })
-    } catch (e) {
-      console.log('CREATE ERROR', e)
+    const form = {
+      slug: getValues('slug'),
+      name: getValues('exampleRequired'),
     }
+
+    return await createCollection(form, {
+      onSuccess: (data) => handleSuccessCreate(data),
+      onError: handleErrorCreate,
+    })
   }
 
   return (
@@ -67,7 +77,8 @@ const CollectionsCreate = () => {
         </div>
 
         {errors.exampleRequired && <span>This field is required</span>}
-        {errors.slug && <span>This field is required (slug)</span>}
+        {/* {errors.slug && <span>This field is required (slug)</span>} */}
+        {errors.slug?.message?.toString()}
         <div>
           <button type="submit">create</button>
           {isCreating && <div>isCreating...</div>}
