@@ -9,16 +9,18 @@ export const $api = axios.create({
 })
 
 interface Values {
-  currentPage: number
+  page: number
   limit: number
   sort_by: string[]
-  group_by: string[]
+  order_by: string[]
 }
 
 export const getCollections = async (values?: Values) => {
+  console.log('getCollections', values)
   const BASE_URL = '/collections'
-  const { data } = await $api.get(`${BASE_URL}`)
-  return data
+  const query = `${BASE_URL}?${qs.stringify(values)}`
+  console.log('QUERY', query)
+  return (await $api.get(query)).data
 }
 
 export const getCollectionById = async (id: number) => {

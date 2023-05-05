@@ -8,10 +8,17 @@ import {
 } from 'shared/api/api'
 import { UpdateCollectionForm } from 'entities/Collection/types'
 
-export const useGetCollections = () => {
+interface Values {
+  page: number
+  limit: number
+  sort_by: string[]
+  order_by: string[]
+}
+
+export const useGetCollections = (values: Values) => {
   return useQuery({
-    queryKey: ['collections'],
-    queryFn: getCollections,
+    queryKey: ['collections', values],
+    queryFn: () => getCollections(values),
   })
 }
 
