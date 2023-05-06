@@ -2,7 +2,6 @@ import { ColumnDef, Row } from '@tanstack/react-table'
 
 import { Table } from 'shared/ui/Table'
 import { Button } from 'shared/ui/Button'
-import { Pagiantion } from 'shared/ui/Pagiantion/Pagination'
 
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
@@ -15,6 +14,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Collection, Meta } from '../types'
 
 import { CollectionsTableHeader } from './CollectionsTableHeader'
+import { CollectionsTableFooter } from './CollectionsTableFooter'
 
 interface Props {
   items: Collection[]
@@ -126,32 +126,14 @@ export const CollectionsTable = (props: Props) => {
         onSortChange={handleSort}
       />
 
-      <div className="flex items-center justify-between gap-3">
-        <div>Всего: {meta.pagination.totalItemsCount} </div>
-
-        <div className="flex items-center gap-3">
-          <label>
-            Rows per Page:
-            <select
-              name="select"
-              value={rowPerPage}
-              onChange={onRowsPerPageChange}
-            >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="25">25</option>
-            </select>
-          </label>
-
-          {meta.pagination.totalPages > 1 && (
-            <Pagiantion
-              currentPage={currentPage}
-              totalPages={meta.pagination.totalPages}
-              onChange={(item) => handlePageClick(item)}
-            />
-          )}
-        </div>
-      </div>
+      <CollectionsTableFooter
+        totalItemsCount={meta.pagination.totalItemsCount}
+        currentPage={meta.pagination.currentPage}
+        rowPerPage={rowPerPage}
+        totalPages={meta.pagination.totalPages}
+        onRowPerPageChange={onRowsPerPageChange}
+        onPageClick={handlePageClick}
+      />
     </div>
   )
 }
