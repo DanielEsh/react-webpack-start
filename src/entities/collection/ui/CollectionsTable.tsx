@@ -3,7 +3,7 @@ import { ColumnDef, Row } from '@tanstack/react-table'
 import { Table } from 'shared/ui/Table'
 import { Button } from 'shared/ui/Button'
 import { Pagiantion } from 'shared/ui/Pagiantion/Pagination'
-import IconPlus from 'shared/assets/icons/plus.svg'
+
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
 
@@ -13,6 +13,8 @@ import { useDeleteCollectionMutation } from 'entities/collection/api'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { Collection, Meta } from '../types'
+
+import { CollectionsTableHeader } from './CollectionsTableHeader'
 
 interface Props {
   items: Collection[]
@@ -115,19 +117,7 @@ export const CollectionsTable = (props: Props) => {
 
   return (
     <div className="">
-      <div className="mt-4 mb-2 flex items-center justify-between">
-        <h1 className="text-2xl">Collections</h1>
-
-        <div className="flex gap-3">
-          {/* <Button addonLeft={<IconPlus />}>Create Button</Button> */}
-          <Link
-            to="create"
-            className="flex gap-2"
-          >
-            <IconPlus /> Create Button
-          </Link>
-        </div>
-      </div>
+      <CollectionsTableHeader />
 
       <Table<Collection>
         localStorageKey="CollectionData"
