@@ -1,4 +1,8 @@
+// ui
 import { CollectionsTable } from './ui/CollectionsTable'
 import { CollectionUpdateForm } from './ui/CollectionUpdateForm'
 
-export { CollectionsTable, CollectionUpdateForm }
+// hooks
+import { useUpdateCollectionsList } from './hooks'
+
+export { CollectionsTable, CollectionUpdateForm, useUpdateCollectionsList }

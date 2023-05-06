@@ -2,12 +2,14 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { Modal } from 'shared/ui/Modal'
 import { useCreateCollectionMutation } from 'entities/collection/api'
-import { useQueryClient } from '@tanstack/react-query'
+import { useUpdateCollectionsList } from 'entities/collection'
 
 const CollectionsCreate = () => {
   const navigate = useNavigate()
   const { isLoading: isCreating, mutate: createCollection } =
     useCreateCollectionMutation()
+
+  const { updateCollectionsList } = useUpdateCollectionsList()
 
   const {
     register,
@@ -16,8 +18,6 @@ const CollectionsCreate = () => {
     setError,
     formState: { errors },
   } = useForm()
-
-  const queryClient = useQueryClient()
 
   const handleClose = () => {
     navigate('/collections')
@@ -37,8 +37,7 @@ const CollectionsCreate = () => {
 
   const handleSuccessCreate = (data: any) => {
     console.log('SUCCESS CREATE', data)
-    queryClient.invalidateQueries({ queryKey: ['collections'] })
-
+    updateCollectionsList()
     handleClose()
   }
 
