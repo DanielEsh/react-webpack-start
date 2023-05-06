@@ -116,15 +116,17 @@ export const CollectionsTable = (props: Props) => {
   }
 
   return (
-    <div className="">
+    <div>
       <CollectionsTableHeader />
 
-      <Table<Collection>
-        localStorageKey="CollectionData"
-        data={items}
-        columns={columns}
-        onSortChange={handleSort}
-      />
+      <div className="min-h-[284px]">
+        <Table<Collection>
+          localStorageKey="CollectionData"
+          data={items}
+          columns={columns}
+          onSortChange={handleSort}
+        />
+      </div>
 
       <CollectionsTableFooter
         totalItemsCount={meta.pagination.totalItemsCount}
