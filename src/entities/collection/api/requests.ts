@@ -1,6 +1,12 @@
 import qs from 'qs'
 import { $api } from 'shared/api/api'
-import { Values, UpdateCollectionForm, CreateCollectionForm } from '../types'
+import {
+  Values,
+  UpdateCollectionForm,
+  CreateCollectionForm,
+  Collection,
+  ListRequest,
+} from '../types'
 
 export const createCollection = async (form: CreateCollectionForm) => {
   return (await $api.post(`/collections`, form)).data
@@ -11,20 +17,20 @@ export const getCollections = async (values?: Values) => {
   const BASE_URL = '/collections'
   const query = `${BASE_URL}?${qs.stringify(values)}`
   console.log('QUERY', query)
-  return (await $api.get(query)).data
+  return (await $api.get<ListRequest<Collection>>(query)).data
 }
 
 export const getCollectionById = async (id: number) => {
-  return (await $api.get(`/collections/${id}`)).data
+  return (await $api.get<Collection>(`/collections/${id}`)).data
 }
 
 export const updateCollection = async (
   form: UpdateCollectionForm,
   id: number,
 ) => {
-  return (await $api.patch(`/collections/${id}`, form)).data
+  return (await $api.patch<Collection>(`/collections/${id}`, form)).data
 }
 
 export const deleteCollection = async (id: number) => {
-  return (await $api.delete(`/collections/${id}`)).data
+  return (await $api.delete<Collection>(`/collections/${id}`)).data
 }

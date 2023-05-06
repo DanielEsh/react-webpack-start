@@ -4,16 +4,9 @@ import { useGetCollections } from 'entities/collection/api'
 import { Outlet, useSearchParams } from 'react-router-dom'
 import { CollectionsTable } from 'entities/collection'
 
+import { Values } from 'entities/collection/types'
+
 type RowsPerPage = 5 | 10 | 25
-
-import { Data } from 'entities/collection/types'
-
-interface Values {
-  page: number
-  limit: number
-  sort_by: string[]
-  order_by: string[]
-}
 
 const CollectionsPage = () => {
   const [rowsPerPage, setRowsPerPage] = useState<RowsPerPage>(5)

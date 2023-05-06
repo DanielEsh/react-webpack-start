@@ -36,7 +36,7 @@ export interface Meta {
   pagination: Pagination
 }
 
-export interface Data {
-  data: Collection[]
+export interface ListRequest<TypeData> {
+  data: TypeData[]
   meta: Meta
 }
