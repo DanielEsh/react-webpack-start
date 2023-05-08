@@ -15,13 +15,14 @@ interface TableProps<TData> {
   localStorageKey: string
   data: TData[]
   columns: ColumnDef<TData>[]
+  sort: any[]
   onSortChange: (sort: TableSort) => void
 }
 
 export const Table = <TData extends BaseTableData>(
   props: TableProps<TData>,
 ) => {
-  const { localStorageKey, data = [], columns, onSortChange } = props
+  const { localStorageKey, data = [], columns, sort = [], onSortChange } = props
 
   const rowData = useMemo(() => data, [data])
 
@@ -42,7 +43,7 @@ export const Table = <TData extends BaseTableData>(
     defaultColumnVisibility,
   )
   const [columnSizing, setColumnSizing] = useState(defaultColumnSizing)
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [sorting, setSorting] = useState<SortingState>(sort)
 
   useEffect(() => {
     onSortChange(

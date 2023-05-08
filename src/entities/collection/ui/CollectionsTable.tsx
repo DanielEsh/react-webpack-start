@@ -19,6 +19,7 @@ import { CollectionsTableFooter } from './CollectionsTableFooter'
 interface Props {
   items: Collection[]
   meta: Meta
+  sort: any
   currentPage: number
   rowPerPage: number
   onPageChange: (page: number) => void
@@ -30,7 +31,7 @@ export const CollectionsTable = (props: Props) => {
   const {
     items,
     meta,
-    currentPage,
+    sort,
     rowPerPage,
     onRowsPerPageChange,
     onPageChange,
@@ -124,6 +125,7 @@ export const CollectionsTable = (props: Props) => {
           localStorageKey="CollectionData"
           data={items}
           columns={columns}
+          sort={sort}
           onSortChange={handleSort}
         />
       </div>

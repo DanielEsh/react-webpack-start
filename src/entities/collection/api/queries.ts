@@ -19,6 +19,7 @@ export const useGetCollections = (values: Values) => {
   return useQuery({
     queryKey: ['collections', values],
     queryFn: () => getCollections(values),
+    keepPreviousData: true,
   })
 }
 

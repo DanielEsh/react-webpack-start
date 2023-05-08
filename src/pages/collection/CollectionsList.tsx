@@ -14,8 +14,8 @@ const CollectionsPage = () => {
   const [values, setValues] = useState<Values>({
     page: 1,
     limit: 5,
-    sort_by: [],
-    order_by: [],
+    sort_by: ['id'],
+    order_by: ['asc'],
   })
 
   const { isLoading, isError, data } = useGetCollections(values)
@@ -36,13 +36,39 @@ const CollectionsPage = () => {
 
   const handleSortChange = async (sort: any) => {
     console.log('SORT', sort)
-    if (!sort) return
+    if (!sort) {
+      setValues({
+        ...values,
+        sort_by: [],
+        order_by: [],
+      })
 
-    setValues({
-      ...values,
-      sort_by: [sort.name],
-      order_by: [sort.type],
-    })
+      setSearchParams({ sort_by: [], order_by: [] })
+      getTableSort()
+      return
+    }
+
+    if (sort.name && sort.type) {
+      setValues({
+        ...values,
+        sort_by: [sort.name],
+        order_by: [sort.type],
+      })
+
+      setSearchParams({ sort_by: [sort.name], order_by: [sort.type] })
+      getTableSort()
+    }
+  }
+
+  const getTableSort = () => {
+    const result = [
+      {
+        id: searchParams.getAll('sort_by')[0],
+        desc: searchParams.getAll('order_by')[0] === 'desc' ? true : false,
+      },
+    ]
+    console.log('RES', result)
+    return result
   }
 
   return (
@@ -57,6 +83,7 @@ const CollectionsPage = () => {
         {data && (
           <CollectionsTable
             currentPage={values.page}
+            sort={getTableSort()}
             items={data.data}
             meta={data.meta}
             rowPerPage={rowsPerPage}
