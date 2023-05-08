@@ -5,12 +5,12 @@ import {
 } from 'entities/collection/api'
 import { Modal } from 'shared/ui/Modal'
 import { CollectionUpdateForm } from 'entities/collection'
-import { UpdateCollectionForm } from 'entities/collection/types'
+import { Collection, UpdateCollectionForm } from 'entities/collection/types'
 
 const CollectionPage = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const { isLoading, data } = useGetCollectionDetails(Number(id))
+  const { isLoading, isError, data } = useGetCollectionDetails(Number(id))
   const { mutate: updateCollection } = useUpdateCollectionMutation()
 
   const handleClose = () => {
@@ -39,9 +39,10 @@ const CollectionPage = () => {
       onClose={handleClose}
     >
       <div>id = {id}</div>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
+      {isError && <div>Error</div>}
+      {isLoading && <div>Loading...</div>}
+
+      {!isLoading && data && (
         <CollectionUpdateForm
           collection={data}
           onSubmit={handleUpdate}

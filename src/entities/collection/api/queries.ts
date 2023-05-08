@@ -27,6 +27,7 @@ export const useGetCollectionDetails = (id: number) => {
   return useQuery({
     queryKey: ['collections', id],
     queryFn: () => getCollectionById(id),
+    retry: 1,
   })
 }
 
