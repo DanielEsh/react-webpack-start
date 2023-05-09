@@ -2,7 +2,11 @@ import { useState } from 'react'
 import { useGetCollections } from 'entities/collection/api'
 
 import { Outlet, useSearchParams } from 'react-router-dom'
-import { CollectionsTable } from 'entities/collection'
+import {
+  CollectionsTable,
+  CollectionsTableHeader,
+  CollectionsTableFooter,
+} from 'entities/collection'
 
 import { Values } from 'entities/collection/types'
 
@@ -81,16 +85,28 @@ const CollectionsPage = () => {
         {isError && <div>Error loading</div>}
         {isLoading && <div>Loading...</div>}
         {data && (
-          <CollectionsTable
-            currentPage={values.page}
-            sort={getTableSort()}
-            items={data.data}
-            meta={data.meta}
-            rowPerPage={rowsPerPage}
-            onPageChange={handlePageClick}
-            onSortChange={handleSortChange}
-            onRowsPerPageChange={handleRowPerPageChange}
-          />
+          <>
+            <CollectionsTableHeader />
+            <CollectionsTable
+              currentPage={values.page}
+              sort={getTableSort()}
+              items={data.data}
+              meta={data.meta}
+              rowPerPage={rowsPerPage}
+              onPageChange={handlePageClick}
+              onSortChange={handleSortChange}
+              onRowsPerPageChange={handleRowPerPageChange}
+            />
+
+            <CollectionsTableFooter
+              totalItemsCount={data.meta.pagination.totalItemsCount}
+              currentPage={data.meta.pagination.currentPage}
+              rowPerPage={rowsPerPage}
+              totalPages={data.meta.pagination.totalPages}
+              onRowPerPageChange={handleRowPerPageChange}
+              onPageClick={handlePageClick}
+            />
+          </>
         )}
       </div>
 
