@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
 
-import { Table } from 'shared/ui/Table'
+import { Table } from 'shared/ui-kit/Table'
 
 import { CollectionsTableActions } from './CollectionsTableActions'
 import { useDeleteCollectionMutation } from 'entities/collection/api'

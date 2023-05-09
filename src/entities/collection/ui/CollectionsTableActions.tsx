@@ -1,6 +1,6 @@
 import { Row } from '@tanstack/react-table'
 import { Link } from 'react-router-dom'
-import { Button } from 'shared/ui/Button'
+import { Button } from 'shared/ui-kit/Button'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
 import { Collection } from '../types'

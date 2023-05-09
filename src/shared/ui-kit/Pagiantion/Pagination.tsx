@@ -1,4 +1,4 @@
-import { getPaginationModel } from 'shared/ui/Pagiantion/getPaginationModel'
+import { getPaginationModel } from 'shared/ui-kit/Pagiantion/getPaginationModel'
 import { renderPaginationElements } from './renderPaginationElements'
 import type { PaginationModel } from './types'
 interface Props {

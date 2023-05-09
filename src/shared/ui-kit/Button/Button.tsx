@@ -1,6 +1,6 @@
 import { forwardRef, ButtonHTMLAttributes, ReactNode } from 'react'
 import { VariantProps, cva } from 'class-variance-authority'
-import { Ripple } from 'shared/ui/Ripple'
+import { Ripple } from 'shared/ui-kit/Ripple'
 import { classNames } from 'shared/utils'
 
 const buttonVariants = cva(

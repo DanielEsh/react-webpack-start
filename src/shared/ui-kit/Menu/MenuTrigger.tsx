@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
-import { Popover } from 'shared/ui/Popover'
-import { TypeWithChidlren } from 'shared/ui/types'
+import { Popover } from 'shared/ui-kit/Popover'
+import { TypeWithChidlren } from 'shared/ui-kit/types'
 
 type MenuTriggerProps = TypeWithChidlren
 

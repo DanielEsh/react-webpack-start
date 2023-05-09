@@ -2,7 +2,7 @@ import { ElementType, forwardRef, ReactNode, useRef } from 'react'
 import {
   RippleContext,
   RippleContextType,
-} from 'shared/ui/Ripple/RippleContext'
+} from 'shared/ui-kit/Ripple/RippleContext'
 import { classNames } from 'shared/utils'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 

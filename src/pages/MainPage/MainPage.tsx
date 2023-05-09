@@ -1,11 +1,9 @@
 import Counter from 'components/Counter'
 import { ChangeLangButton } from 'components/ChangeLangButton'
-import { DataTable } from 'components/DataTable'
-import { Ripple } from 'shared/ui/Ripple'
-import { Button } from 'shared/ui/Button'
-import { Popover } from 'shared/ui/Popover'
-import { Modal } from 'shared/ui/Modal'
-import { Menu } from 'shared/ui/Menu'
+import { Ripple } from 'shared/ui-kit/Ripple'
+import { Button } from 'shared/ui-kit/Button'
+import { Modal } from 'shared/ui-kit/Modal'
+import { Menu } from 'shared/ui-kit/Menu'
 import StarIcon from 'shared/assets/icons/star.svg'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 
@@ -15,7 +13,6 @@ export const MainPage = () => {
   return (
     <div>
       <h1>MainPage</h1>
-      <DataTable />
       <Counter />
       <ChangeLangButton />
       <Ripple.Container className="flex h-24 w-24 items-center justify-center rounded-md bg-black text-white">

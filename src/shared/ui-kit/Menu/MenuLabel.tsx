@@ -1,5 +1,5 @@
 import { classNames } from 'shared/utils'
-import type { UiDefaultProps } from 'shared/ui/types'
+import type { UiDefaultProps } from 'shared/ui-kit/types'
 
 const COMPONENT_NAME = 'MenuLabel'
 

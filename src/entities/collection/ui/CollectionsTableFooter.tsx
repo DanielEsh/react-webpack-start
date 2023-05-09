@@ -1,4 +1,4 @@
-import { Pagiantion } from 'shared/ui/Pagiantion/Pagination'
+import { Pagiantion } from 'shared/ui-kit/Pagiantion/Pagination'
 
 interface Props {
   totalItemsCount: number

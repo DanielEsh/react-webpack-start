@@ -3,7 +3,7 @@ import {
   useGetCollectionDetails,
   useUpdateCollectionMutation,
 } from 'entities/collection/api'
-import { Modal } from 'shared/ui/Modal'
+import { Modal } from 'shared/ui-kit/Modal'
 import { CollectionUpdateForm } from 'entities/collection'
 import { Collection, UpdateCollectionForm } from 'entities/collection/types'
 

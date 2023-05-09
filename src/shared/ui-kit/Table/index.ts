@@ -1,1 +1,1 @@
-export * from 'shared/ui/Table/Table'
+export * from 'shared/ui-kit/Table/Table'

@@ -9,7 +9,7 @@ import {
   getOuterWidth,
 } from 'shared/utils/dom'
 import { RippleContext, RippleContextType } from './RippleContext'
-import { RippleContainer } from 'shared/ui/Ripple/RippleContainer'
+import { RippleContainer } from 'shared/ui-kit/Ripple/RippleContainer'
 
 export interface RippleProps {
   className?: string
