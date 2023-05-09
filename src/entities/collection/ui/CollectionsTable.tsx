@@ -1,13 +1,8 @@
-import { ColumnDef, Row } from '@tanstack/react-table'
+import { ColumnDef } from '@tanstack/react-table'
 
 import { Table } from 'shared/ui/Table'
-import { Button } from 'shared/ui/Button'
 
-import IconEdit from 'shared/assets/icons/edit.svg'
-import IconTrash from 'shared/assets/icons/trash.svg'
-
-import { Link } from 'react-router-dom'
-
+import { CollectionsTableActions } from './CollectionsTableActions'
 import { useDeleteCollectionMutation } from 'entities/collection/api'
 import { useQueryClient } from '@tanstack/react-query'
 
@@ -32,8 +27,7 @@ export const CollectionsTable = (props: Props) => {
     queryClient.invalidateQueries({ queryKey: ['collections'] })
   }
 
-  const handleDeleteClick = (row: Row<Collection>) => {
-    const id = row.original.id
+  const handleDeleteClick = (id: number) => {
     deleteMutate(id, { onSuccess: () => handleDeleteSuccess(id) })
   }
 
@@ -75,21 +69,12 @@ export const CollectionsTable = (props: Props) => {
       size: 180,
       footer: (props) => props.column.id,
       enableSorting: false,
-      cell: ({ row }) => {
-        return (
-          <div className="flex justify-end gap-1">
-            <Link to={`/collections/${row.original.id}`}>
-              <IconEdit />
-            </Link>
-            <Button
-              variant="ghost"
-              onClick={() => handleDeleteClick(row)}
-            >
-              <IconTrash />
-            </Button>
-          </div>
-        )
-      },
+      cell: ({ row }) => (
+        <CollectionsTableActions
+          row={row}
+          onDeleteClick={handleDeleteClick}
+        />
+      ),
     },
   ]
 

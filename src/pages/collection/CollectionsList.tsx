@@ -91,11 +91,8 @@ const CollectionsPage = () => {
               currentPage={values.page}
               sort={getTableSort()}
               items={data.data}
-              meta={data.meta}
               rowPerPage={rowsPerPage}
-              onPageChange={handlePageClick}
               onSortChange={handleSortChange}
-              onRowsPerPageChange={handleRowPerPageChange}
             />
 
             <CollectionsTableFooter
