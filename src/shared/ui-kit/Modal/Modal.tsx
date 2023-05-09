@@ -3,6 +3,7 @@ import { classNames } from 'shared/utils'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside'
 import { UiDefaultProps } from '../types'
 import { CloseButton } from './CloseButton'
+import { ModalOverlay } from './ModalOverlay'
 
 interface ModalProps extends UiDefaultProps {
   opened: boolean
@@ -29,7 +30,7 @@ export const Modal = (props: ModalProps) => {
 
   return opened ? (
     <Portal>
-      <div className="fixed inset-0 overflow-hidden bg-neutral-800/50">
+      <ModalOverlay>
         <div
           ref={outsideRef}
           className={classes}
@@ -37,7 +38,7 @@ export const Modal = (props: ModalProps) => {
           <CloseButton onClick={handleClose} />
           {children}
         </div>
-      </div>
+      </ModalOverlay>
     </Portal>
   ) : null
 }
