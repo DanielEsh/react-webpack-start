@@ -7,6 +7,8 @@ import { useDeleteCollectionMutation } from 'entities/collection/api'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { Collection } from '../types'
+import { Dialog } from 'shared/ui-kit/Modal/Dialog'
+import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 
 interface Props {
   items: Collection[]
@@ -19,6 +21,8 @@ interface Props {
 export const CollectionsTable = (props: Props) => {
   const { items, sort, onSortChange } = props
 
+  const [opened, { open, close }] = useDisclosure(false)
+
   const { mutate: deleteMutate } = useDeleteCollectionMutation()
   const queryClient = useQueryClient()
 
@@ -28,7 +32,9 @@ export const CollectionsTable = (props: Props) => {
   }
 
   const handleDeleteClick = (id: number) => {
-    deleteMutate(id, { onSuccess: () => handleDeleteSuccess(id) })
+    console.log('DELETE', id)
+    open()
+    // deleteMutate(id, { onSuccess: () => handleDeleteSuccess(id) })
   }
 
   const columns: ColumnDef<Collection>[] = [
@@ -92,6 +98,13 @@ export const CollectionsTable = (props: Props) => {
         sort={sort}
         onSortChange={handleSort}
       />
+
+      <Dialog
+        opened={opened}
+        onClose={close}
+      >
+        123
+      </Dialog>
     </div>
   )
 }
