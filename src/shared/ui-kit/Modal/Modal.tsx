@@ -1,19 +1,26 @@
 import { Portal } from 'shared/ui-kit/Portal/Portal'
 import { classNames } from 'shared/utils'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside'
-import { UiDefaultProps } from '../types'
+import type { UiDefaultProps } from '../types'
 import { CloseButton } from './CloseButton'
 import { ModalOverlay } from './ModalOverlay'
 
 interface ModalProps extends UiDefaultProps {
   opened: boolean
+  clickOutSideCanClose?: boolean
   onClose?: () => void
 }
 
 const COMPONENT_NAME = 'Modal'
 
 export const Modal = (props: ModalProps) => {
-  const { opened, className, children, onClose } = props
+  const {
+    opened,
+    className,
+    clickOutSideCanClose = true,
+    children,
+    onClose,
+  } = props
 
   const classes = classNames(
     'absolute top-0 right-0 w-[880px] h-full p-4 bg-white',
@@ -26,7 +33,13 @@ export const Modal = (props: ModalProps) => {
     onClose()
   }
 
-  const outsideRef = useClickOutside(handleClose)
+  const handleClickOutside = () => {
+    if (!clickOutSideCanClose) return
+
+    handleClose()
+  }
+
+  const outsideRef = useClickOutside(handleClickOutside)
 
   return opened ? (
     <Portal>
