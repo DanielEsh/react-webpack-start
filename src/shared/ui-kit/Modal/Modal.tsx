@@ -5,7 +5,7 @@ import type { UiDefaultProps } from '../types'
 import { CloseButton } from './CloseButton'
 import { ModalOverlay } from './ModalOverlay'
 
-interface ModalProps extends UiDefaultProps {
+export interface ModalProps extends UiDefaultProps {
   opened: boolean
   clickOutSideCanClose?: boolean
   onClose?: () => void
@@ -22,10 +22,7 @@ export const Modal = (props: ModalProps) => {
     onClose,
   } = props
 
-  const classes = classNames(
-    'absolute top-0 right-0 w-[880px] h-full p-4 bg-white',
-    className,
-  )
+  const classes = classNames('', className)
 
   const handleClose = () => {
     if (!onClose) return

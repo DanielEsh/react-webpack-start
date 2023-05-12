@@ -3,7 +3,7 @@ import {
   useGetCollectionDetails,
   useUpdateCollectionMutation,
 } from 'entities/collection/api'
-import { Modal } from 'shared/ui-kit/Modal'
+import { Drawer } from 'shared/ui-kit/Modal/Drawer'
 import { CollectionUpdateForm } from 'entities/collection'
 import { Collection, UpdateCollectionForm } from 'entities/collection/types'
 
@@ -34,7 +34,7 @@ const CollectionPage = () => {
   }
 
   return (
-    <Modal
+    <Drawer
       opened={true}
       onClose={handleClose}
     >
@@ -48,7 +48,7 @@ const CollectionPage = () => {
           onSubmit={handleUpdate}
         />
       )}
-    </Modal>
+    </Drawer>
   )
 }
 

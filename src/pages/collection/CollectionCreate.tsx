@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { Modal } from 'shared/ui-kit/Modal'
+import { Drawer } from 'shared/ui-kit/Modal/Drawer'
 import { useCreateCollectionMutation } from 'entities/collection/api'
 import { useUpdateCollectionsList } from 'entities/collection'
 
@@ -54,7 +54,7 @@ const CollectionsCreate = () => {
   }
 
   return (
-    <Modal
+    <Drawer
       opened={true}
       onClose={handleClose}
     >
@@ -83,7 +83,7 @@ const CollectionsCreate = () => {
           {isCreating && <div>isCreating...</div>}
         </div>
       </form>
-    </Modal>
+    </Drawer>
   )
 }
 
