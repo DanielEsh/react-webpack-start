@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 
 import { Table } from 'shared/ui-kit/Table'
@@ -22,6 +23,7 @@ export const CollectionsTable = (props: Props) => {
   const { items, sort, onSortChange } = props
 
   const [opened, { open, close }] = useDisclosure(false)
+  const [deleteId, setDeleteId] = useState<number | null>(null)
 
   const { mutate: deleteMutate } = useDeleteCollectionMutation()
   const queryClient = useQueryClient()
@@ -31,10 +33,15 @@ export const CollectionsTable = (props: Props) => {
     queryClient.invalidateQueries({ queryKey: ['collections'] })
   }
 
+  const handleConfirmDelete = () => {
+    const id = deleteId as number
+    console.log('handleConfirmDelete', id)
+    deleteMutate(id, { onSuccess: () => handleDeleteSuccess(id) })
+  }
+
   const handleDeleteClick = (id: number) => {
-    console.log('DELETE', id)
     open()
-    // deleteMutate(id, { onSuccess: () => handleDeleteSuccess(id) })
+    setDeleteId(id)
   }
 
   const columns: ColumnDef<Collection>[] = [
@@ -102,9 +109,8 @@ export const CollectionsTable = (props: Props) => {
       <Dialog
         opened={opened}
         onClose={close}
-      >
-        123
-      </Dialog>
+        onConfirm={handleConfirmDelete}
+      />
     </div>
   )
 }
