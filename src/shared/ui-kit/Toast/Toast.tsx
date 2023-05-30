@@ -1,8 +1,8 @@
-import { NotificationType } from './event'
+import { ToastType } from './types'
 
 const COMPONENT_NAME = 'Toast'
 
-export const Toast = (props: NotificationType) => {
+export const Toast = (props: ToastType) => {
   const { id, title, message } = props
 
   return (
