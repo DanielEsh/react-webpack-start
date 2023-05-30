@@ -7,8 +7,23 @@ import { Menu } from 'shared/ui-kit/Menu'
 import StarIcon from 'shared/assets/icons/star.svg'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 
+import { useStore } from 'effector-react'
+import { $notifications, showNotification } from 'shared/ui-kit/Toast/event'
+
 export const MainPage = () => {
   const [opened, { open, close }] = useDisclosure(false)
+  const notifications = useStore($notifications)
+
+  const openNotification = () => {
+    console.log('Notification')
+    showNotification({
+      id: 'test',
+      title: 'test',
+      message: 'test',
+    })
+
+    console.log('RESULT', notifications)
+  }
 
   return (
     <div>
@@ -22,6 +37,9 @@ export const MainPage = () => {
       <Button onClick={open}>btn</Button>
       <StarIcon />
 
+      <div>
+        <Button onClick={openNotification}>Notification</Button>
+      </div>
       {/* <div>
         <Popover
           placement="top"
