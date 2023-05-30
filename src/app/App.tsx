@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import './tailwind.css'
 import './global.css'
+import { ToastRoot } from 'shared/ui-kit/Toast/ToastRoot'
 
 const queryClient = new QueryClient()
 
@@ -16,6 +17,7 @@ export const App = () => {
       <QueryClientProvider client={queryClient}>
         <Suspense fallback={<div>GLOBAL LOADER...</div>}>
           <Router />
+          <ToastRoot />
         </Suspense>
       </QueryClientProvider>
     </StrictMode>

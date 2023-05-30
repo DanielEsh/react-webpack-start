@@ -1,4 +1,4 @@
-import { createEvent, createStore } from 'effector'
+import { createStore, createApi } from 'effector'
 
 export interface NotificationType {
   id: string
@@ -6,12 +6,13 @@ export interface NotificationType {
   message: string
 }
 
-export const showNotification = createEvent<NotificationType>()
+export const $notifications = createStore<NotificationType[]>([])
 
-export const $notifications = createStore<NotificationType[]>([]).on(
-  showNotification,
-  (state, payload) => {
-    console.log('SHOW NOTIFICATIONS', payload)
-    state.push(payload)
+export const { show } = createApi($notifications, {
+  show(list, payload: NotificationType) {
+    console.log('show', list, payload)
+    const result = [...list]
+    result.push(payload)
+    return result
   },
-)
+})
