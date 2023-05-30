@@ -6,7 +6,10 @@ export interface NotificationType {
   message: string
 }
 
-export const $notifications = createStore<NotificationType[]>([])
+export const $notifications = createStore<NotificationType[]>([
+  { id: 'test', message: 'message', title: 'title' },
+  { id: 'test2', message: 'message', title: 'title' },
+])
 
 export const { show } = createApi($notifications, {
   show(list, payload: NotificationType) {

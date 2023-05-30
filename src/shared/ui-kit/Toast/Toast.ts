@@ -1,3 +1,0 @@
-interface ToastProps {
-  duration: number
-}

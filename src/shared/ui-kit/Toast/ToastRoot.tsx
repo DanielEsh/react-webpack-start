@@ -1,27 +1,20 @@
-import { PropsWithChildren } from 'react'
 import { Portal } from '../Portal'
 import { useList } from 'effector-react'
 import { $notifications } from './event'
-
-type ToastViewportProps = PropsWithChildren
+import { Toast } from './Toast'
 
 const COMPONENT_NAME = 'ToastRoot'
 
 export const ToastRoot = () => {
-  const toasts = useList($notifications, (toast) => (
-    <div key={toast.id}>
-      <div>{toast.title}</div>
-      <div>{toast.message}</div>
-    </div>
-  ))
+  const toasts = useList($notifications, (toast) => <Toast {...toast} />)
 
   console.log('TOAST', toasts)
 
   return (
     <Portal>
-      <div className="fixed top-[16px] right-[16px] flex flex-col">
+      <ol className="fixed top-[16px] right-[16px] flex flex-col gap-4">
         {toasts}
-      </div>
+      </ol>
     </Portal>
   )
 }
