@@ -6,24 +6,10 @@ import { Modal } from 'shared/ui-kit/Modal'
 import { Menu } from 'shared/ui-kit/Menu'
 import StarIcon from 'shared/assets/icons/star.svg'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
-
-import { $notifications, show } from 'shared/ui-kit/Toast/event'
-import { useStore } from 'effector-react'
+import { ToastButtons } from './ToastButtons'
 
 export const MainPage = () => {
   const [opened, { open, close }] = useDisclosure(false)
-  const notifications = useStore($notifications)
-
-  const openNotification = () => {
-    console.log('Notification')
-    show({
-      id: 'test',
-      title: 'title',
-      message: 'message',
-    })
-
-    console.log('RESULT', notifications.state)
-  }
 
   return (
     <div>
@@ -37,9 +23,7 @@ export const MainPage = () => {
       <Button onClick={open}>btn</Button>
       <StarIcon />
 
-      <div>
-        <Button onClick={openNotification}>Notification</Button>
-      </div>
+      <ToastButtons />
       {/* <div>
         <Popover
           placement="top"
