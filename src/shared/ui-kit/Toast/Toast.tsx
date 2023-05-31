@@ -20,10 +20,7 @@ export const Toast = (props: Props) => {
   }
 
   return (
-    <li
-      className="rounded-md bg-blue-500 p-2"
-      key={index}
-    >
+    <li className="rounded-md bg-blue-500 p-2">
       <div>{title}</div>
       <div>{message}</div>
       <ToastCloseButton onClick={handleHide} />
