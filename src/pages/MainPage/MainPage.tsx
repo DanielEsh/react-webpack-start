@@ -8,17 +8,11 @@ import StarIcon from 'shared/assets/icons/star.svg'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 
 import { $notifications, show } from 'shared/ui-kit/Toast/event'
-import { useList, useStore } from 'effector-react'
+import { useStore } from 'effector-react'
 
 export const MainPage = () => {
   const [opened, { open, close }] = useDisclosure(false)
   const notifications = useStore($notifications)
-  const toasts = useList($notifications, (toast) => (
-    <div key={toast.id}>
-      <div>{toast.title}</div>
-      <div>{toast.message}</div>
-    </div>
-  ))
 
   const openNotification = () => {
     console.log('Notification')
@@ -28,8 +22,7 @@ export const MainPage = () => {
       message: 'message',
     })
 
-    console.log('RESULT', notifications)
-    console.log('RENDER', toasts)
+    console.log('RESULT', notifications.state)
   }
 
   return (

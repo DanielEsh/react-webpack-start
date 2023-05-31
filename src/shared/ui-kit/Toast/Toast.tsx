@@ -15,7 +15,7 @@ export const Toast = (props: Props) => {
     index,
   } = props
 
-  const handleClose = () => {
+  const handleHide = () => {
     hide(index)
   }
 
@@ -26,7 +26,7 @@ export const Toast = (props: Props) => {
     >
       <div>{title}</div>
       <div>{message}</div>
-      <ToastCloseButton onClick={handleClose} />
+      <ToastCloseButton onClick={handleHide} />
     </li>
   )
 }
