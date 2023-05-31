@@ -20,7 +20,7 @@ export const ToastRoot = () => {
 
   return (
     <Portal container={TOAST_ROOT_ELEMENT}>
-      <ol className="fixed top-[16px] right-[16px] flex flex-col gap-4">
+      <ol className="fixed top-[16px] right-[16px] flex min-w-[220px] flex-col gap-4">
         {renderToasts}
       </ol>
     </Portal>

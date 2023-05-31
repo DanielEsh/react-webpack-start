@@ -8,12 +8,12 @@ interface Props {
 export const ToastCloseButton = ({ onClick }: Props) => {
   return (
     <Button
+      className="absolute top-4 right-4"
       variant="ghost"
+      size="xs"
       onClick={onClick}
     >
-      <span className="w-[16px h-[16px]">
-        <IconClose />
-      </span>
+      <IconClose />
     </Button>
   )
 }

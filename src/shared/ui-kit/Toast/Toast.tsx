@@ -1,6 +1,8 @@
+import { VariantProps, cva } from 'class-variance-authority'
 import { ToastType } from './types'
 import { ToastCloseButton } from './ToastCloseButton'
 import { hide } from 'shared/ui-kit/Toast/event'
+import { classNames } from 'shared/utils'
 
 const COMPONENT_NAME = 'Toast'
 
@@ -15,14 +17,34 @@ export const Toast = (props: Props) => {
     index,
   } = props
 
+  const toastVariants = cva(
+    'group relative pointer-events-auto flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-4 pr-8 shadow-lg transition-all',
+    {
+      variants: {
+        variant: {
+          default: 'bg-white border',
+          destructive:
+            'group destructive border-destructive bg-destructive text-destructive-foreground',
+        },
+      },
+      defaultVariants: {
+        variant: 'default',
+      },
+    },
+  )
+
   const handleHide = () => {
     hide(index)
   }
 
+  const classes = classNames(toastVariants())
+
   return (
-    <li className="rounded-md bg-blue-500 p-2">
-      <div>{title}</div>
-      <div>{message}</div>
+    <li className={classes}>
+      <div className="grid gap-1">
+        <div>{title}</div>
+        <div>{message}</div>
+      </div>
       <ToastCloseButton onClick={handleHide} />
     </li>
   )
