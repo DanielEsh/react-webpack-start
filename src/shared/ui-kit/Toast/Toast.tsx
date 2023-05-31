@@ -16,7 +16,6 @@ export const Toast = (props: Props) => {
   } = props
 
   const handleClose = () => {
-    console.log('close', index)
     hide(index)
   }
 

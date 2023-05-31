@@ -5,6 +5,8 @@ import { Toast } from './Toast'
 
 const COMPONENT_NAME = 'ToastRoot'
 
+const TOAST_ROOT_ELEMENT = document.getElementById('toasts')
+
 export const ToastRoot = () => {
   const toasts = useList($notifications, (toast, index) => (
     <Toast
@@ -14,7 +16,7 @@ export const ToastRoot = () => {
   ))
 
   return (
-    <Portal>
+    <Portal container={TOAST_ROOT_ELEMENT}>
       <ol className="fixed top-[16px] right-[16px] flex flex-col gap-4">
         {toasts}
       </ol>
