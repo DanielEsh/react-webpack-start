@@ -12,6 +12,7 @@ export const ToastRoot = () => {
 
   const renderToasts = toasts.map((toast, index) => (
     <Toast
+      key={index}
       index={index}
       toast={toast}
     />
