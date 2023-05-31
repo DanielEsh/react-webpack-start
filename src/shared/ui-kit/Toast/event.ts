@@ -6,11 +6,16 @@ export const $notifications = createStore<ToastType[]>([
   { id: 'test2', message: 'message', title: 'title' },
 ])
 
-export const { show } = createApi($notifications, {
+export const { show, hide } = createApi($notifications, {
   show(list, payload: ToastType) {
     console.log('show', list, payload)
     const result = [...list]
     result.push(payload)
+    return result
+  },
+  hide(list, payload: number) {
+    const result = [...list]
+    result.splice(payload, 1)
     return result
   },
 })

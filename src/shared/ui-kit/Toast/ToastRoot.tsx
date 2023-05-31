@@ -6,9 +6,12 @@ import { Toast } from './Toast'
 const COMPONENT_NAME = 'ToastRoot'
 
 export const ToastRoot = () => {
-  const toasts = useList($notifications, (toast) => <Toast {...toast} />)
-
-  console.log('TOAST', toasts)
+  const toasts = useList($notifications, (toast, index) => (
+    <Toast
+      index={index}
+      toast={toast}
+    />
+  ))
 
   return (
     <Portal>
