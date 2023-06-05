@@ -46,6 +46,7 @@ export const Toast = (props: Props) => {
         <div>{message}</div>
       </div>
       <ToastCloseButton onClick={handleHide} />
+      <div className="absolute -left-4 bottom-0 h-4 w-full bg-blue-500"></div>
     </li>
   )
 }
