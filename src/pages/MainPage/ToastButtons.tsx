@@ -26,9 +26,9 @@ export const ToastButtons = () => {
   }
 
   return (
-    <div>
-      <Button onClick={openNotification}>Notification</Button>
-      <Button onClick={openOtherToast}>Notification</Button>
+    <div className="inline-flex flex-col gap-3">
+      <Button onClick={openNotification}>Notification 1</Button>
+      <Button onClick={openOtherToast}>Notification 2</Button>
     </div>
   )
 }
