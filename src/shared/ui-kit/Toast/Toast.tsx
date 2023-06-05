@@ -21,14 +21,17 @@ export const Toast = (props: Props) => {
     'group relative pointer-events-auto flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-4 pr-8 shadow-lg transition-all',
     {
       variants: {
-        variant: {
+        type: {
           default: 'bg-white border',
+          success: 'bg-green-500 border-green-500',
+          error: 'bg-red-500 border-red-500',
+          warning: 'bg-yellow-500 border-yellow-500',
           destructive:
             'group destructive border-destructive bg-destructive text-destructive-foreground',
         },
       },
       defaultVariants: {
-        variant: 'default',
+        type: props.toast.type || 'default',
       },
     },
   )
