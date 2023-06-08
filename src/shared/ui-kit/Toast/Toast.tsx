@@ -1,8 +1,10 @@
+import { memo, useCallback, useEffect, useRef } from 'react'
 import { VariantProps, cva } from 'class-variance-authority'
 import { ToastType } from './types'
 import { ToastCloseButton } from './ToastCloseButton'
-import { hide } from 'shared/ui-kit/Toast/event'
+import { $notifications, hide } from 'shared/ui-kit/Toast/event'
 import { classNames } from 'shared/utils'
+import { useStore } from 'effector-react'
 
 const COMPONENT_NAME = 'Toast'
 
@@ -11,14 +13,18 @@ interface Props {
   index: number
 }
 
-export const Toast = (props: Props) => {
+export const Toast = memo((props: Props) => {
   const {
     toast: { message, title },
     index,
   } = props
+  const hideTimeout = useRef<number>(5)
+  const closeTimerStartTimeRef = useRef(0)
+
+  const { state: toasts } = useStore($notifications)
 
   const toastVariants = cva(
-    'group relative pointer-events-auto flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-4 pr-8 shadow-lg transition-all',
+    'group relative pointer-events-auto flex w-full max-w-[280px] items-center justify-between space-x-4 overflow-hidden rounded-md border p-4 pr-8 shadow-lg transition-all',
     {
       variants: {
         type: {
@@ -38,9 +44,25 @@ export const Toast = (props: Props) => {
 
   const handleHide = () => {
     hide(index)
+    window.clearTimeout(hideTimeout.current)
   }
 
+  const cancelDelayedHide = () => {
+    clearTimeout(hideTimeout.current)
+  }
+
+  const startTimer = useCallback(() => {
+    closeTimerStartTimeRef.current = new Date().getTime()
+    hideTimeout.current = window.setTimeout(handleHide, 5_000)
+  }, [hideTimeout.current])
+
   const classes = classNames(toastVariants())
+
+  useEffect(() => {
+    startTimer()
+
+    return cancelDelayedHide
+  }, [toasts])
 
   return (
     <li className={classes}>
@@ -51,6 +73,6 @@ export const Toast = (props: Props) => {
       <ToastCloseButton onClick={handleHide} />
     </li>
   )
-}
+})
 
 Toast.displayName = COMPONENT_NAME
