@@ -15,6 +15,7 @@ export const useNotificationsState = () => {
   })
 
   const showNotification = (notification: ToastType) => {
+    console.log('ADD', notification)
     const id = notification.id
 
     update((notifications) => {

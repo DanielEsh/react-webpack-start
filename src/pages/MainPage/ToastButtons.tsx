@@ -1,9 +1,10 @@
 import { useStore } from 'effector-react'
+import { useContext } from 'react'
 import { Button } from 'shared/ui-kit/Button'
-import { $notifications, show } from 'shared/ui-kit/Toast/event'
+import { NotificationContext } from 'shared/ui-kit/Toast/ToastContext'
 
 export const ToastButtons = () => {
-  const notifications = useStore($notifications)
+  const { showNotification: show } = useContext(NotificationContext)
 
   const openNotification = () => {
     show({
@@ -36,7 +37,7 @@ export const ToastButtons = () => {
 
   const warningToast = () => {
     show({
-      id: 'successToast',
+      id: 'warningToast',
       title: 'Success toast',
       message: <div>Message Message Message Message Message</div>,
       type: 'warning',
@@ -45,7 +46,7 @@ export const ToastButtons = () => {
 
   const errorToast = () => {
     show({
-      id: 'successToast',
+      id: 'errorToast',
       title: 'Success toast',
       message: <div>Message Message Message Message Message</div>,
       type: 'error',
