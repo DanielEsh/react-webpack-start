@@ -11,13 +11,11 @@ const COMPONENT_NAME = 'Toast'
 interface Props {
   toast: ToastType
   index: number
+  onHide(id: string): void
 }
 
 export const Toast = memo((props: Props) => {
-  const {
-    toast: { message, title },
-    index,
-  } = props
+  const { toast, index, onHide } = props
   const hideTimeout = useRef<number>(5)
   const closeTimerStartTimeRef = useRef(0)
 
@@ -43,7 +41,8 @@ export const Toast = memo((props: Props) => {
   )
 
   const handleHide = () => {
-    hide(index)
+    // hide(index)
+    onHide(toast.id)
     window.clearTimeout(hideTimeout.current)
   }
 
@@ -67,8 +66,8 @@ export const Toast = memo((props: Props) => {
   return (
     <li className={classes}>
       <div className="grid gap-1">
-        <div>{title}</div>
-        <div>{message}</div>
+        <div>{toast.title}</div>
+        <div>{toast.message}</div>
       </div>
       <ToastCloseButton onClick={handleHide} />
     </li>

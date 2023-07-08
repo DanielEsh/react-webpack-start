@@ -1,4 +1,4 @@
-import { createStore, createApi } from 'effector'
+import { createStore, createApi, sample } from 'effector'
 import { ToastType } from './types'
 
 const initialValues = [
@@ -18,7 +18,7 @@ export const $notifications = createStore<Store>({
   queue: initialValues.slice(limit),
 })
 
-export const { show, hide } = createApi($notifications, {
+export const { show, hide, update } = createApi($notifications, {
   show(store, payload: ToastType) {
     const results = [...store.state, ...store.queue, payload]
 
@@ -30,6 +30,19 @@ export const { show, hide } = createApi($notifications, {
   hide(store, payload: number) {
     const results = [...store.state, ...store.queue]
     results.splice(payload, 1)
+
+    return {
+      state: results.slice(0, limit),
+      queue: results.slice(limit),
+    }
+  },
+  update(store, payload) {
+    const results = [
+      ...store.state,
+      ...store.queue,
+      ...payload.state,
+      ...payload.queue,
+    ]
 
     return {
       state: results.slice(0, limit),

@@ -5,4 +5,6 @@ export interface ToastType {
   title: string
   message: ReactNode
   type?: 'default' | 'success' | 'error' | 'warning'
+  onClose?(props: ToastType): void
+  onOpen?(props: ToastType): void
 }
