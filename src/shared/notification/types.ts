@@ -10,3 +10,5 @@ export interface NotificationType {
   onClose?(props: NotificationType): void
   onOpen?(props: NotificationType): void
 }
+
+export type CreatedNotificationType = Required<NotificationType>

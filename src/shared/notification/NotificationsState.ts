@@ -1,4 +1,4 @@
-import { NotificationType } from './types'
+import { NotificationType, CreatedNotificationType } from './types'
 import { useQueue } from '../ui-kit/Toast/useQueue'
 
 const LIMIT = 2
@@ -10,7 +10,7 @@ const initialValues: NotificationType[] = [
     message: 'message',
     title: 'title',
     autoClose: true,
-    duration: 5000,
+    duration: 5,
   },
   {
     id: 'test2',
@@ -18,7 +18,7 @@ const initialValues: NotificationType[] = [
     message: 'message',
     title: 'title',
     autoClose: true,
-    duration: 5000,
+    duration: 5,
   },
 ]
 
@@ -28,18 +28,48 @@ export const useNotificationsState = () => {
     limit: LIMIT,
   })
 
+  const createNotificationFactory = (
+    queueItem: NotificationType,
+  ): CreatedNotificationType => {
+    const DEFAULT_DURATION = 5
+    const {
+      id,
+      title,
+      type,
+      message,
+      autoClose = true,
+      duration = DEFAULT_DURATION,
+    } = queueItem
+
+    return {
+      id,
+      message,
+      autoClose,
+      duration,
+      title,
+      type,
+      onClose: () => {
+        throw new Error('not implement')
+      },
+      onOpen: () => {
+        throw new Error('not implement')
+      },
+    }
+  }
+
   const showNotification = (notification: NotificationType) => {
-    const id = notification.id
+    const createdNotification = createNotificationFactory(notification)
+    const id = createdNotification.id
 
     update((notifications) => {
       if (
-        notification.id &&
-        notifications.some((n) => n.id === notification.id)
+        createdNotification.id &&
+        notifications.some((n) => n.id === createdNotification.id)
       ) {
         return notifications
       }
 
-      return [...notifications, { ...notification, id }]
+      return [...notifications, { ...createdNotification, id }]
     })
 
     return id

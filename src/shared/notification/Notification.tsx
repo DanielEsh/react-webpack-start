@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
 import { Toast } from 'shared/ui-kit/Toast'
-import { NotificationType } from './types'
+import { CreatedNotificationType } from './types'
 
 const COMPONENT_NAME = 'Notification'
 
 interface Props {
-  notification: NotificationType
+  notification: CreatedNotificationType
   onHide(id: string): void
 }
 
@@ -23,7 +23,10 @@ export const Notification = (props: Props) => {
   }
 
   const handleDelayedHide = () => {
-    hideTimeout.current = window.setTimeout(handleHide, notification.duration)
+    hideTimeout.current = window.setTimeout(
+      handleHide,
+      notification.duration * 1000,
+    )
   }
 
   useEffect(() => {
