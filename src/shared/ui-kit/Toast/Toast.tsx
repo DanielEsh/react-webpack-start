@@ -1,87 +1,49 @@
-import { useEffect, useRef } from 'react'
-import { cva } from 'class-variance-authority'
-import { ToastType } from './types'
-import { ToastCloseButton } from './ToastCloseButton'
+import { ReactNode } from 'react'
+import { cva, VariantProps } from 'class-variance-authority'
 import { classNames } from 'shared/utils'
+import { ToastCloseButton } from './ToastCloseButton'
 
 const COMPONENT_NAME = 'Toast'
 
-interface Props {
-  toast: ToastType
-  index: number
-  autoClose: number | false
-  onHide(id: string): void
-}
-
-export function getAutoClose(
-  autoClose: boolean | number,
-  notificationAutoClose: boolean | number,
-) {
-  if (typeof notificationAutoClose === 'number') {
-    return notificationAutoClose
-  }
-
-  if (notificationAutoClose === false || autoClose === false) {
-    return false
-  }
-
-  return autoClose
-}
-
-export const Toast = (props: Props) => {
-  const { toast, onHide, autoClose } = props
-  const notificationAutoClose = toast.autoClose ?? false
-  const autoCloseTimeout = getAutoClose(autoClose, notificationAutoClose)
-  const hideTimeout = useRef(0)
-
-  const toastVariants = cva(
-    'group relative pointer-events-auto flex w-full max-w-[280px] items-center justify-between space-x-4 overflow-hidden rounded-md border p-4 pr-8 shadow-lg transition-all',
-    {
-      variants: {
-        type: {
-          default: 'bg-white border',
-          success: 'bg-green-500 border-green-500',
-          error: 'bg-red-500 border-red-500',
-          warning: 'bg-yellow-500 border-yellow-500',
-          destructive:
-            'group destructive border-destructive bg-destructive text-destructive-foreground',
-        },
-      },
-      defaultVariants: {
-        type: props.toast.type || 'default',
+const toastVariants = cva(
+  'group relative pointer-events-auto flex w-full max-w-[280px] items-center justify-between space-x-4 overflow-hidden rounded-md border p-4 pr-8 shadow-lg transition-all',
+  {
+    variants: {
+      type: {
+        default: 'bg-white border',
+        success: 'bg-green-500 border-green-500',
+        error: 'bg-red-500 border-red-500',
+        warning: 'bg-yellow-500 border-yellow-500',
+        destructive:
+          'group destructive border-destructive bg-destructive text-destructive-foreground',
       },
     },
-  )
+    defaultVariants: {
+      type: 'default',
+    },
+  },
+)
 
-  const handleHide = () => {
-    onHide(toast.id)
-    window.clearTimeout(hideTimeout.current)
-  }
+type ToastVariantProps = VariantProps<typeof toastVariants>
 
-  const cancelDelayedHide = () => {
-    clearTimeout(hideTimeout.current)
-  }
+export interface ToastProps extends Required<Pick<ToastVariantProps, 'type'>> {
+  title: ReactNode
+  message: ReactNode
+  onClose: () => void
+}
 
-  const handleDelayedHide = () => {
-    if (typeof autoCloseTimeout === 'number') {
-      hideTimeout.current = window.setTimeout(handleHide, autoCloseTimeout)
-    }
-  }
-
-  useEffect(() => {
-    handleDelayedHide()
-    return cancelDelayedHide
-  }, [autoClose, notificationAutoClose])
+export const Toast = (props: ToastProps) => {
+  const { title, message, onClose } = props
 
   const classes = classNames(toastVariants())
 
   return (
     <li className={classes}>
       <div className="grid gap-1">
-        <div>{toast.title}</div>
-        <div>{toast.message}</div>
+        <div>{title}</div>
+        <div>{message}</div>
       </div>
-      <ToastCloseButton onClick={handleHide} />
+      <ToastCloseButton onClick={onClose} />
     </li>
   )
 }

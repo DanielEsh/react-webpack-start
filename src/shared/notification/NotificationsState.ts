@@ -1,20 +1,34 @@
-import { ToastType } from './types'
-import { useQueue } from './useQueue'
+import { NotificationType } from './types'
+import { useQueue } from '../ui-kit/Toast/useQueue'
 
 const LIMIT = 2
 
-const initialValues: ToastType[] = [
-  { id: 'test', message: 'message', title: 'title', autoClose: 5000 },
-  { id: 'test2', message: 'message', title: 'title', autoClose: 5000 },
+const initialValues: NotificationType[] = [
+  {
+    id: 'test',
+    type: 'default',
+    message: 'message',
+    title: 'title',
+    autoClose: true,
+    duration: 5000,
+  },
+  {
+    id: 'test2',
+    type: 'default',
+    message: 'message',
+    title: 'title',
+    autoClose: true,
+    duration: 5000,
+  },
 ]
 
 export const useNotificationsState = () => {
-  const { state, queue, update, cleanQueue } = useQueue<ToastType>({
+  const { state, queue, update, cleanQueue } = useQueue<NotificationType>({
     initialValues: initialValues,
     limit: LIMIT,
   })
 
-  const showNotification = (notification: ToastType) => {
+  const showNotification = (notification: NotificationType) => {
     const id = notification.id
 
     update((notifications) => {
@@ -31,7 +45,7 @@ export const useNotificationsState = () => {
     return id
   }
 
-  const updateNotification = (notification: ToastType) =>
+  const updateNotification = (notification: NotificationType) =>
     update((notifications) => {
       const index = notifications.findIndex((n) => n.id === notification.id)
 

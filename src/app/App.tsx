@@ -4,25 +4,24 @@ import { StrictMode, Suspense } from 'react'
 import { Router } from 'pages'
 // import { ErrorBoundary } from 'app/providers/ErrorBoundary'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { NotificationRoot, NotificationProvider } from 'shared/notification'
 
 import './tailwind.css'
 import './global.css'
-import { ToastRoot } from 'shared/ui-kit/Toast/ToastRoot'
-import { ToastProvider } from 'shared/ui-kit/Toast/ToastContext'
 
 const queryClient = new QueryClient()
 
 export const App = () => {
   return (
     <StrictMode>
-      <ToastProvider>
+      <NotificationProvider>
         <QueryClientProvider client={queryClient}>
           <Suspense fallback={<div>GLOBAL LOADER...</div>}>
             <Router />
-            <ToastRoot />
+            <NotificationRoot />
           </Suspense>
         </QueryClientProvider>
-      </ToastProvider>
+      </NotificationProvider>
     </StrictMode>
   )
 }

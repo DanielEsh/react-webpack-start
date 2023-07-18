@@ -1,7 +1,6 @@
-import { useStore } from 'effector-react'
 import { useContext } from 'react'
 import { Button } from 'shared/ui-kit/Button'
-import { NotificationContext } from 'shared/ui-kit/Toast/ToastContext'
+import { NotificationContext } from 'shared/notification'
 
 export const ToastButtons = () => {
   const { showNotification: show } = useContext(NotificationContext)
@@ -11,7 +10,7 @@ export const ToastButtons = () => {
       id: 'test',
       title: 'title',
       message: 'message',
-      autoClose: 5000,
+      type: 'default',
     })
   }
 
@@ -24,7 +23,7 @@ export const ToastButtons = () => {
           Message as <span>element</span>
         </div>
       ),
-      autoClose: 5000,
+      type: 'default',
     })
   }
 
@@ -34,7 +33,6 @@ export const ToastButtons = () => {
       title: 'Success toast',
       message: <div>Message Message Message Message Message</div>,
       type: 'success',
-      autoClose: 5000,
     })
   }
 
@@ -44,7 +42,6 @@ export const ToastButtons = () => {
       title: 'Success toast',
       message: <div>Message Message Message Message Message</div>,
       type: 'warning',
-      autoClose: 5000,
     })
   }
 
@@ -54,7 +51,6 @@ export const ToastButtons = () => {
       title: 'Success toast',
       message: <div>Message Message Message Message Message</div>,
       type: 'error',
-      autoClose: 5000,
     })
   }
 
