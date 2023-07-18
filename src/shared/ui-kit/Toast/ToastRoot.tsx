@@ -18,19 +18,26 @@ export const ToastRoot = () => {
   const forceUpdate = useForceUpdate()
   const { notifications, hideNotification } = useContext(NotificationContext)
 
-  useDidUpdate(() => {
-    if (notifications.length > previousLength.current) {
-      setTimeout(() => forceUpdate(), 0)
-    }
-    previousLength.current = notifications.length
-  }, [notifications])
+  // useDidUpdate(() => {
+  //   console.log('PREV', previousLength.current)
+  //   console.log('CUR', notifications.length)
+  //   if (notifications.length > previousLength.current) {
+  //     setTimeout(() => {
+  //       forceUpdate()
+  //       console.log('force update')
+  //     }, 0)
+  //     console.log('DID UPDATE')
+  //     previousLength.current = notifications.length
+  //   }
+  // }, [notifications])
 
   const renderToasts = () =>
     notifications.map((toast, index) => (
       <Toast
-        key={index}
+        key={toast.id}
         index={index}
         toast={toast}
+        autoClose={5000}
         onHide={hideNotification}
       />
     ))
@@ -45,7 +52,3 @@ export const ToastRoot = () => {
 }
 
 ToastRoot.displayName = COMPONENT_NAME
-function forceUpdate(): void {
-  throw new Error('Function not implemented.')
-}
-

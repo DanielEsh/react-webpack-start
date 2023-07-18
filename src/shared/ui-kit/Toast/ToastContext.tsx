@@ -1,7 +1,18 @@
 import { PropsWithChildren, createContext } from 'react'
 import { useNotificationsState } from './NotificationsState'
+import { ToastType } from './types'
 
-export const NotificationContext = createContext({})
+export interface NotificationContextType {
+  notifications: ToastType[]
+  queue: ToastType[]
+  showNotification: (notification: ToastType) => void
+}
+
+export const NotificationContext = createContext<NotificationContextType>({
+  notifications: [],
+  queue: [],
+  showNotification: (notification) => notification,
+})
 
 export const ToastProvider = (props: PropsWithChildren) => {
   const {

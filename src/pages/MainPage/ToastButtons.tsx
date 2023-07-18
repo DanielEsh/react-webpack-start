@@ -11,6 +11,7 @@ export const ToastButtons = () => {
       id: 'test',
       title: 'title',
       message: 'message',
+      autoClose: 5000,
     })
   }
 
@@ -23,6 +24,7 @@ export const ToastButtons = () => {
           Message as <span>element</span>
         </div>
       ),
+      autoClose: 5000,
     })
   }
 
@@ -32,6 +34,7 @@ export const ToastButtons = () => {
       title: 'Success toast',
       message: <div>Message Message Message Message Message</div>,
       type: 'success',
+      autoClose: 5000,
     })
   }
 
@@ -41,6 +44,7 @@ export const ToastButtons = () => {
       title: 'Success toast',
       message: <div>Message Message Message Message Message</div>,
       type: 'warning',
+      autoClose: 5000,
     })
   }
 
@@ -50,6 +54,7 @@ export const ToastButtons = () => {
       title: 'Success toast',
       message: <div>Message Message Message Message Message</div>,
       type: 'error',
+      autoClose: 5000,
     })
   }
 

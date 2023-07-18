@@ -1,10 +1,8 @@
-import { memo, useCallback, useContext, useEffect, useRef } from 'react'
-import { VariantProps, cva } from 'class-variance-authority'
+import { useContext, useEffect, useRef } from 'react'
+import { cva } from 'class-variance-authority'
 import { ToastType } from './types'
 import { ToastCloseButton } from './ToastCloseButton'
-import { $notifications, hide } from 'shared/ui-kit/Toast/event'
 import { classNames } from 'shared/utils'
-import { useStore } from 'effector-react'
 import { NotificationContext } from './ToastContext'
 
 const COMPONENT_NAME = 'Toast'
@@ -12,13 +10,30 @@ const COMPONENT_NAME = 'Toast'
 interface Props {
   toast: ToastType
   index: number
+  autoClose: number | false
   onHide(id: string): void
 }
 
-export const Toast = memo((props: Props) => {
-  const { toast, index, onHide } = props
-  const hideTimeout = useRef<number>(5)
-  const closeTimerStartTimeRef = useRef(0)
+export function getAutoClose(
+  autoClose: boolean | number,
+  notificationAutoClose: boolean | number,
+) {
+  if (typeof notificationAutoClose === 'number') {
+    return notificationAutoClose
+  }
+
+  if (notificationAutoClose === false || autoClose === false) {
+    return false
+  }
+
+  return autoClose
+}
+
+export const Toast = (props: Props) => {
+  const { toast, onHide, autoClose } = props
+  const notificationAutoClose = toast.autoClose ?? false
+  const autoCloseTimeout = getAutoClose(autoClose, notificationAutoClose)
+  const hideTimeout = useRef(0)
 
   const { notifications } = useContext(NotificationContext)
 
@@ -51,19 +66,17 @@ export const Toast = memo((props: Props) => {
   }
 
   const handleDelayedHide = () => {
-    hideTimeout.current = window.setTimeout(handleHide, 5_000)
+    console.log('startTimeout', toast.id)
+    console.log(autoCloseTimeout, props.autoClose)
+    if (typeof autoCloseTimeout === 'number') {
+      hideTimeout.current = window.setTimeout(handleHide, autoCloseTimeout)
+    }
   }
-
-  // useEffect(() => {
-  //   if (typeof notification.onOpen === 'function') {
-  //     notification.onOpen(notification);
-  //   }
-  // }, []);
 
   useEffect(() => {
     handleDelayedHide()
     return cancelDelayedHide
-  }, [notifications])
+  }, [autoClose, notificationAutoClose])
 
   const classes = classNames(toastVariants())
 
@@ -72,10 +85,11 @@ export const Toast = memo((props: Props) => {
       <div className="grid gap-1">
         <div>{toast.title}</div>
         <div>{toast.message}</div>
+        <div>TIMEOUT: {hideTimeout.current}</div>
       </div>
       <ToastCloseButton onClick={handleHide} />
     </li>
   )
-})
+}
 
 Toast.displayName = COMPONENT_NAME

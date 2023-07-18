@@ -3,9 +3,9 @@ import { useQueue } from './useQueue'
 
 const LIMIT = 2
 
-const initialValues = [
-  { id: 'test', message: 'message', title: 'title' },
-  { id: 'test2', message: 'message', title: 'title' },
+const initialValues: ToastType[] = [
+  { id: 'test', message: 'message', title: 'title', autoClose: 5000 },
+  { id: 'test2', message: 'message', title: 'title', autoClose: 5000 },
 ]
 
 export const useNotificationsState = () => {
