@@ -1,9 +1,8 @@
-import { useContext, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { cva } from 'class-variance-authority'
 import { ToastType } from './types'
 import { ToastCloseButton } from './ToastCloseButton'
 import { classNames } from 'shared/utils'
-import { NotificationContext } from './ToastContext'
 
 const COMPONENT_NAME = 'Toast'
 
@@ -35,8 +34,6 @@ export const Toast = (props: Props) => {
   const autoCloseTimeout = getAutoClose(autoClose, notificationAutoClose)
   const hideTimeout = useRef(0)
 
-  const { notifications } = useContext(NotificationContext)
-
   const toastVariants = cva(
     'group relative pointer-events-auto flex w-full max-w-[280px] items-center justify-between space-x-4 overflow-hidden rounded-md border p-4 pr-8 shadow-lg transition-all',
     {
@@ -66,8 +63,6 @@ export const Toast = (props: Props) => {
   }
 
   const handleDelayedHide = () => {
-    console.log('startTimeout', toast.id)
-    console.log(autoCloseTimeout, props.autoClose)
     if (typeof autoCloseTimeout === 'number') {
       hideTimeout.current = window.setTimeout(handleHide, autoCloseTimeout)
     }
@@ -85,7 +80,6 @@ export const Toast = (props: Props) => {
       <div className="grid gap-1">
         <div>{toast.title}</div>
         <div>{toast.message}</div>
-        <div>TIMEOUT: {hideTimeout.current}</div>
       </div>
       <ToastCloseButton onClick={handleHide} />
     </li>
