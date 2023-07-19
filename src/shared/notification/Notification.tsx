@@ -44,6 +44,8 @@ export const Notification = (props: Props) => {
       type={notification.type}
       title={notification.title}
       message={notification.message}
+      onMouseEnter={cancelDelayedHide}
+      onMouseLeave={handleDelayedHide}
       onClose={handleHide}
     />
   )

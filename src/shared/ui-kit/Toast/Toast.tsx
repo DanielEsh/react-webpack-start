@@ -30,15 +30,20 @@ export interface ToastProps extends Required<Pick<ToastVariantProps, 'type'>> {
   title: ReactNode
   message: ReactNode
   onClose: () => void
+  onMouseEnter?: () => void
+  onMouseLeave?: () => void
 }
 
 export const Toast = (props: ToastProps) => {
-  const { type, title, message, onClose } = props
+  const { type, title, message, onClose, ...restProps } = props
 
   const classes = classNames(toastVariants({ type }))
 
   return (
-    <li className={classes}>
+    <li
+      className={classes}
+      {...restProps}
+    >
       <div className="grid gap-1">
         <div>{title}</div>
         <div>{message}</div>
