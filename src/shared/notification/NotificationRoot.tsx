@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { Portal } from 'shared/ui-kit/Portal'
 
 import { NotificationContext } from './NotificationContext'
-import { Notification } from './Notification'
+import { NotificationElement } from './NotificationElement'
 
 const COMPONENT_NAME = 'NotificationRoot'
 
@@ -16,7 +16,7 @@ export const NotificationRoot = () => {
     <Portal container={TOAST_ROOT_ELEMENT}>
       <ol className="fixed top-[16px] right-[16px] flex min-w-[220px] flex-col gap-4">
         {notifications.map((n) => (
-          <Notification
+          <NotificationElement
             key={n.id}
             notification={n}
             onHide={hideNotification}

@@ -8,7 +8,7 @@ export type NotificationVariants =
   | 'destructive'
   | null
 
-export interface NotificationType {
+export interface Notification {
   id: string
   title: string
   message: ReactNode
@@ -19,8 +19,8 @@ export interface NotificationType {
   onOpen?(): void
 }
 
-type RequiredValues = Required<Omit<NotificationType, 'onClose' | 'onOpen'>>
+type RequiredValues = Required<Omit<Notification, 'onClose' | 'onOpen'>>
 
-type EventsValues = Pick<NotificationType, 'onClose' | 'onOpen'>
+type EventsValues = Pick<Notification, 'onClose' | 'onOpen'>
 
-export type CreatedNotificationType = RequiredValues & EventsValues
+export type CreatedNotification = RequiredValues & EventsValues

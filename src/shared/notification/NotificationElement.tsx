@@ -1,15 +1,15 @@
 import { useEffect, useRef } from 'react'
 import { Toast } from 'shared/ui-kit/Toast'
-import { CreatedNotificationType } from './types'
+import { CreatedNotification } from './types'
 
-const COMPONENT_NAME = 'Notification'
+const COMPONENT_NAME = 'NotificationElement'
 
 interface Props {
-  notification: CreatedNotificationType
+  notification: CreatedNotification
   onHide(id: string): void
 }
 
-export const Notification = (props: Props) => {
+export const NotificationElement = (props: Props) => {
   const { notification, onHide } = props
   const hideTimeout = useRef(0)
 
@@ -51,4 +51,4 @@ export const Notification = (props: Props) => {
   )
 }
 
-Notification.displayName = COMPONENT_NAME
+NotificationElement.displayName = COMPONENT_NAME
