@@ -1,14 +1,26 @@
 import { ReactNode } from 'react'
 
+export type NotificationVariants =
+  | 'default'
+  | 'success'
+  | 'error'
+  | 'warning'
+  | 'destructive'
+  | null
+
 export interface NotificationType {
   id: string
   title: string
   message: ReactNode
-  type: 'default' | 'success' | 'error' | 'warning' | 'destructive' | null
+  type?: NotificationVariants
   autoClose?: boolean
   duration?: number
-  onClose?(props: NotificationType): void
-  onOpen?(props: NotificationType): void
+  onClose?(): void
+  onOpen?(): void
 }
 
-export type CreatedNotificationType = Required<NotificationType>
+type RequiredValues = Required<Omit<NotificationType, 'onClose' | 'onOpen'>>
+
+type EventsValues = Pick<NotificationType, 'onClose' | 'onOpen'>
+
+export type CreatedNotificationType = RequiredValues & EventsValues

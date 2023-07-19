@@ -33,9 +33,9 @@ export interface ToastProps extends Required<Pick<ToastVariantProps, 'type'>> {
 }
 
 export const Toast = (props: ToastProps) => {
-  const { title, message, onClose } = props
+  const { type, title, message, onClose } = props
 
-  const classes = classNames(toastVariants())
+  const classes = classNames(toastVariants({ type }))
 
   return (
     <li className={classes}>

@@ -10,7 +10,6 @@ export const ToastButtons = () => {
       id: 'test',
       title: 'title',
       message: 'message',
-      type: 'default',
     })
   }
 
@@ -23,7 +22,6 @@ export const ToastButtons = () => {
           Message as <span>element</span>
         </div>
       ),
-      type: 'default',
     })
   }
 
@@ -39,7 +37,7 @@ export const ToastButtons = () => {
   const warningToast = () => {
     show({
       id: 'warningToast',
-      title: 'Success toast',
+      title: 'Warning toast',
       message: <div>Message Message Message Message Message</div>,
       type: 'warning',
     })
@@ -48,7 +46,7 @@ export const ToastButtons = () => {
   const errorToast = () => {
     show({
       id: 'errorToast',
-      title: 'Success toast',
+      title: 'Error toast',
       message: <div>Message Message Message Message Message</div>,
       type: 'error',
     })

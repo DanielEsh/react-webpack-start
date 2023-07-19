@@ -15,6 +15,7 @@ export const Notification = (props: Props) => {
 
   const handleHide = () => {
     onHide(notification.id)
+    notification.onClose && notification.onClose()
     window.clearTimeout(hideTimeout.current)
   }
 
@@ -28,6 +29,10 @@ export const Notification = (props: Props) => {
       notification.duration * 1000,
     )
   }
+
+  useEffect(() => {
+    notification.onOpen && notification.onOpen()
+  }, [])
 
   useEffect(() => {
     handleDelayedHide()
