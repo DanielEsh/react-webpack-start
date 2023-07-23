@@ -5,7 +5,7 @@ import {
 } from 'entities/collection/api'
 import { Drawer } from 'shared/ui-kit/Modal/Drawer'
 import { CollectionUpdateForm } from 'entities/collection'
-import { Collection, UpdateCollectionForm } from 'entities/collection/types'
+import { UpdateCollectionForm } from 'entities/collection/types'
 
 const CollectionPage = () => {
   const navigate = useNavigate()
@@ -38,7 +38,9 @@ const CollectionPage = () => {
       opened={true}
       onClose={handleClose}
     >
-      <div>id = {id}</div>
+      <div>
+        <h2>категория: {data?.name}</h2>
+      </div>
       {isError && <div>Error</div>}
       {isLoading && <div>Loading...</div>}
 

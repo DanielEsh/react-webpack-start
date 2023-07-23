@@ -1,5 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { Collection, UpdateCollectionForm } from '../types'
+import { Input } from 'shared/ui-kit/input'
+import { TextArea } from 'shared/ui-kit/textarea'
+import { Button } from 'shared/ui-kit/Button'
 
 interface Props {
   collection: Collection
@@ -27,27 +30,22 @@ export const CollectionUpdateForm = ({ collection, onSubmit }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(updateCollectionForm)}>
-      <div>
-        <input
-          type="text"
-          placeholder="Slug"
-          {...register('slug', { required: true })}
+      <div className="mt-3.5 flex flex-col gap-3.5">
+        <Input
+          label="slug"
+          value={getValues('slug')}
         />
-      </div>
 
-      <div>
-        <input
-          type="text"
-          placeholder="Name"
-          {...register('name', { required: true })}
+        <Input
+          label="name"
+          placeholder="Введите name"
+          value={getValues('name')}
         />
-      </div>
 
-      <div>
-        <input
-          type="text"
-          placeholder="Description"
-          {...register('description')}
+        <TextArea
+          label="name"
+          placeholder="Введите description"
+          value={getValues('description')}
         />
       </div>
 
@@ -57,7 +55,7 @@ export const CollectionUpdateForm = ({ collection, onSubmit }: Props) => {
       <div>{collection.updated_at}</div>
 
       <div>
-        <button type="submit">submit</button>
+        <Button type="submit">Изменить</Button>
       </div>
     </form>
   )

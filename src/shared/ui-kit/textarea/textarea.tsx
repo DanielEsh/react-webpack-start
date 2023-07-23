@@ -1,8 +1,14 @@
-import { ChangeEvent, forwardRef, TextareaHTMLAttributes, useState } from "react";
+import {
+  ChangeEvent,
+  forwardRef,
+  TextareaHTMLAttributes,
+  useState,
+} from 'react'
 import { classNames } from 'shared/utils'
 
 export interface TextareaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label: string
   className?: string
 }
 
@@ -10,13 +16,13 @@ const COMPONENT_NAME = 'TextArea'
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, forwardedRef) => {
-    const { className, ...restProps } = props
+    const { label, className, value: externalValue, ...restProps } = props
 
-    const [value, setValue] = useState('')
+    const [internalValue, setInternalValue] = useState(externalValue)
     const [isFocused, setFocused] = useState(false)
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-      setValue(event.target.value)
+      setInternalValue(event.target.value)
     }
 
     const handleFocusManagement = (focus: boolean) => {
@@ -36,7 +42,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const labelClasses = classNames(
       'absolute left-3 top-1 bg-white transition-all duration-150 ease-linear',
       {
-        ['left-0 top-0 -translate-y-1/2 scale-75 px-2']: isFocused || value,
+        ['left-0 top-0 -translate-y-1/2 scale-75 px-2']:
+          isFocused || internalValue || props.placeholder,
       },
     )
 
@@ -52,7 +59,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             {...restProps}
           />
 
-          <span className={labelClasses}>label</span>
+          <span className={labelClasses}>{label}</span>
         </div>
       </label>
     )

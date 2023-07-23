@@ -3,6 +3,7 @@ import { classNames } from 'shared/utils'
 
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+  label: string
   className?: string
   onChange?: (value: string) => void
 }
@@ -11,13 +12,20 @@ const COMPONENT_NAME = 'Input'
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (props, forwardedRef) => {
-    const { className, type = 'text', onChange, ...restProps } = props
+    const {
+      label,
+      className,
+      type = 'text',
+      value: externalValue,
+      onChange,
+      ...restProps
+    } = props
 
-    const [value, setValue] = useState('')
+    const [internalValue, setInternalValue] = useState(externalValue)
     const [isFocused, setFocused] = useState(false)
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.value)
+      setInternalValue(event.target.value)
       onChange && onChange(event.target.value)
     }
 
@@ -38,7 +46,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const labelClasses = classNames(
       'absolute left-3 top-1/2 -translate-y-1/2 bg-white transition-all duration-150 ease-linear',
       {
-        ['left-0 top-0 -translate-y-1/2 scale-75 px-2']: isFocused || value,
+        ['left-0 top-0 -translate-y-1/2 scale-75 px-2']:
+          isFocused || internalValue || props.placeholder,
       },
     )
 
@@ -46,7 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <label>
         <div className="relative h-full w-full">
           <input
-            value={value}
+            value={internalValue}
             type={type}
             className={classes}
             ref={forwardedRef}
@@ -56,7 +65,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {...restProps}
           />
 
-          <span className={labelClasses}>label</span>
+          <span className={labelClasses}>{label}</span>
         </div>
       </label>
     )
