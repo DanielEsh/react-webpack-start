@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
 
-export interface TypeWithChidlren {
+export interface TypeWithChildren {
   children: ReactNode
 }
 
-export interface UiDefaultProps extends TypeWithChidlren {
+export interface UiDefaultProps extends TypeWithChildren {
   className?: string
 }

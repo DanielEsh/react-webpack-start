@@ -7,6 +7,7 @@ import { Menu } from 'shared/ui-kit/Menu'
 import StarIcon from 'shared/assets/icons/star.svg'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 import { ToastButtons } from './ToastButtons'
+import { Input } from "shared/ui-kit/input";
 
 export const MainPage = () => {
   const [opened, { open, close }] = useDisclosure(false)
@@ -24,6 +25,10 @@ export const MainPage = () => {
       <StarIcon />
 
       <ToastButtons />
+
+      <div className="w-[400px]">
+        <Input />
+      </div>
       {/* <div>
         <Popover
           placement="top"
