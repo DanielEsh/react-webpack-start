@@ -36,7 +36,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     )
 
     const labelClasses = classNames(
-      'absolute left-3 top-1/2 -translate-y-1/2 bg-white',
+      'absolute left-3 top-1/2 -translate-y-1/2 bg-white transition-all duration-150 ease-linear',
       {
         ['left-0 top-0 -translate-y-1/2 scale-75 px-2']: isFocused || value,
       },
