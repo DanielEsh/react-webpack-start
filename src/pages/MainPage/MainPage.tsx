@@ -26,7 +26,7 @@ export const MainPage = () => {
 
       <ToastButtons />
 
-      <div className="w-[400px]">
+      <div className="w-[400px] py-6">
         <Input />
       </div>
       {/* <div>
