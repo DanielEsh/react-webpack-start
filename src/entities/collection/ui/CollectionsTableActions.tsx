@@ -17,7 +17,7 @@ export const CollectionsTableActions = ({ row, onDeleteClick }: Props) => {
     <div className="flex justify-end gap-1">
       <div className="">
         <Link
-          className="inline-flex items-center justify-center px-4 py-2"
+          className="inline-flex h-[16px] w-[16px] items-center justify-center"
           to={`/collections/${id}`}
         >
           <IconEdit />
@@ -25,6 +25,7 @@ export const CollectionsTableActions = ({ row, onDeleteClick }: Props) => {
       </div>
 
       <Button
+        className="h-[16px] w-[16px]"
         variant="ghost"
         onClick={() => onDeleteClick(id)}
       >
