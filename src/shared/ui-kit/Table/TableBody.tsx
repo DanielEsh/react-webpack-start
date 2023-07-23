@@ -7,12 +7,12 @@ export const TableBody = () => {
   const { rows } = context
 
   return (
-    <tbody>
+    <tbody className="[&_tr:last-child]:border-0">
       {rows &&
         rows.map((row) => (
           <tr
             key={row.id}
-            className="border-b border-slate-300 last:border-none even:bg-slate-100"
+            className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
           >
             {row.getVisibleCells().map((cell) => (
               <TableCell

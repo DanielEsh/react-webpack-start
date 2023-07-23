@@ -3,6 +3,13 @@ module.exports = {
   content: ['./src/**/*.{html,js,tsx,ts}', './public/**/*.{html,js,tsx,ts}'],
   theme: {
     extend: {
+      colors: {
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+      },
+
       keyframes: {
         ripple: {
           '100%': {

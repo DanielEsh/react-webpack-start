@@ -83,10 +83,11 @@ export const CollectionsTable = (props: Props) => {
       footer: (props) => props.column.id,
       enableSorting: false,
       cell: ({ row }) => (
-        <CollectionsTableActions
-          row={row}
-          onDeleteClick={handleDeleteClick}
-        />
+        // <CollectionsTableActions
+        //   row={row}
+        //   onDeleteClick={handleDeleteClick}
+        // />
+        <div>actions</div>
       ),
     },
   ]

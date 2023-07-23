@@ -99,11 +99,13 @@ export const Table = <TData extends BaseTableData>(
 
   return (
     <TableContext.Provider value={context}>
-      <div className="overflow-hidden rounded-lg border border-slate-300 shadow-md">
-        <table className="w-full">
-          <TableHead />
-          <TableBody />
-        </table>
+      <div className="rounded-md border">
+        <div className="w-full overflow-auto">
+          <table className="caption-bottom w-full text-sm">
+            <TableHead />
+            <TableBody />
+          </table>
+        </div>
       </div>
     </TableContext.Provider>
   )

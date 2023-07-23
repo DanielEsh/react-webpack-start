@@ -7,12 +7,12 @@ export const TableHead = () => {
   const { headerGroups } = context
 
   return (
-    <thead>
+    <thead className="[&_tr]:border-b">
       {headerGroups &&
         headerGroups.map((headerGroup) => (
           <tr
             key={headerGroup.id}
-            className="border-b border-slate-300 bg-slate-100"
+            className="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
           >
             {headerGroup.headers.map((header) => (
               <TableCellHead
