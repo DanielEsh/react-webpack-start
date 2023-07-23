@@ -7,7 +7,8 @@ import { Menu } from 'shared/ui-kit/Menu'
 import StarIcon from 'shared/assets/icons/star.svg'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 import { ToastButtons } from './ToastButtons'
-import { Input } from "shared/ui-kit/input";
+import { Input } from 'shared/ui-kit/input'
+import { TextArea } from 'shared/ui-kit/textarea'
 
 export const MainPage = () => {
   const [opened, { open, close }] = useDisclosure(false)
@@ -28,6 +29,13 @@ export const MainPage = () => {
 
       <div className="w-[400px] py-6">
         <Input />
+      </div>
+
+      <div className="w-[400px] py-6">
+        <TextArea
+          value="value"
+          placeholder="placeholder"
+        />
       </div>
       {/* <div>
         <Popover
