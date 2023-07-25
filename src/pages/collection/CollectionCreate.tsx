@@ -4,11 +4,13 @@ import { Drawer } from 'shared/ui-kit/Modal/Drawer'
 import { useCreateCollectionMutation } from 'entities/collection/api'
 import { useUpdateCollectionsList } from 'entities/collection'
 import { Input } from 'shared/ui-kit/input'
+import { TextArea } from 'shared/ui-kit/textarea'
 import { DevTool } from '@hookform/devtools'
 
 interface CreateCollectionFormFields {
   slug: string
   name: string
+  description?: string
 }
 
 const CollectionsCreate = () => {
@@ -21,6 +23,7 @@ const CollectionsCreate = () => {
   const defaultValues: CreateCollectionFormFields = {
     slug: 'default slug',
     name: 'default name',
+    description: 'defaultDescription',
   }
 
   const {
@@ -76,8 +79,8 @@ const CollectionsCreate = () => {
       onClose={handleClose}
     >
       <form onSubmit={handleSubmit(createNewCollection)}>
-        <div className="mt-6 flex gap-3">
-          <div className="flex">
+        <div>
+          <div>
             {/*<Input*/}
             {/*  label="slug"*/}
             {/*  {...register('slug')}*/}
@@ -91,6 +94,7 @@ const CollectionsCreate = () => {
                 />
               )}
               control={control}
+              rules={{ required: 'Slug is required' }}
               name="slug"
             />
 
@@ -102,14 +106,34 @@ const CollectionsCreate = () => {
                 />
               )}
               control={control}
-              name="slug"
+              rules={{ required: 'Name is required' }}
+              name="name"
             />
+
+            <div>
+              <Controller
+                render={({ field }) => (
+                  <TextArea
+                    label="description"
+                    {...field}
+                  />
+                )}
+                control={control}
+                name="description"
+              />
+            </div>
 
             {/*<input*/}
             {/*  type="text"*/}
             {/*  placeholder="name"*/}
             {/*  {...register('slug')}*/}
             {/*/>*/}
+
+            <div>
+              <span>Errors</span>
+              <div>{errors.slug?.message}</div>
+              <div>{errors.name?.message}</div>
+            </div>
           </div>
         </div>
 
