@@ -5,7 +5,7 @@ export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label: string
   className?: string
-  onChange?: (value: string) => void
+  onChange?: (value: any) => void
 }
 
 const COMPONENT_NAME = 'Input'
@@ -26,7 +26,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
       setInternalValue(event.target.value)
-      onChange && onChange(event.target.value)
+      onChange && onChange(event)
     }
 
     const handleFocusManagement = (focus: boolean) => {

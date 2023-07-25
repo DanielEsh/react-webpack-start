@@ -1,8 +1,15 @@
 import { useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { Drawer } from 'shared/ui-kit/Modal/Drawer'
 import { useCreateCollectionMutation } from 'entities/collection/api'
 import { useUpdateCollectionsList } from 'entities/collection'
+import { Input } from 'shared/ui-kit/input'
+import { DevTool } from '@hookform/devtools'
+
+interface CreateCollectionFormFields {
+  slug: string
+  name: string
+}
 
 const CollectionsCreate = () => {
   const navigate = useNavigate()
@@ -11,13 +18,21 @@ const CollectionsCreate = () => {
 
   const { updateCollectionsList } = useUpdateCollectionsList()
 
+  const defaultValues: CreateCollectionFormFields = {
+    slug: 'default slug',
+    name: 'default name',
+  }
+
   const {
+    control,
     register,
     getValues,
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm()
+  } = useForm<CreateCollectionFormFields>({
+    defaultValues,
+  })
 
   const handleClose = () => {
     navigate('/collections')
@@ -42,15 +57,17 @@ const CollectionsCreate = () => {
   }
 
   async function createNewCollection() {
-    const form = {
+    const form: CreateCollectionFormFields = {
       slug: getValues('slug'),
-      name: getValues('exampleRequired'),
+      name: getValues('name'),
     }
 
-    return await createCollection(form, {
-      onSuccess: (data) => handleSuccessCreate(data),
-      onError: handleErrorCreate,
-    })
+    console.log('SUBMIT', form)
+
+    // return await createCollection(form, {
+    //   onSuccess: (data) => handleSuccessCreate(data),
+    //   onError: handleErrorCreate,
+    // })
   }
 
   return (
@@ -59,29 +76,49 @@ const CollectionsCreate = () => {
       onClose={handleClose}
     >
       <form onSubmit={handleSubmit(createNewCollection)}>
-        <div>
-          <input
-            type="text"
-            placeholder="Slug"
-            {...register('slug', { required: true })}
-          />
+        <div className="mt-6 flex gap-3">
+          <div className="flex">
+            {/*<Input*/}
+            {/*  label="slug"*/}
+            {/*  {...register('slug')}*/}
+            {/*/>*/}
+
+            <Controller
+              render={({ field }) => (
+                <Input
+                  label="slug"
+                  {...field}
+                />
+              )}
+              control={control}
+              name="slug"
+            />
+
+            <Controller
+              render={({ field }) => (
+                <Input
+                  label="name"
+                  {...field}
+                />
+              )}
+              control={control}
+              name="slug"
+            />
+
+            {/*<input*/}
+            {/*  type="text"*/}
+            {/*  placeholder="name"*/}
+            {/*  {...register('slug')}*/}
+            {/*/>*/}
+          </div>
         </div>
 
-        <div>
-          <input
-            type="text"
-            placeholder="name"
-            {...register('exampleRequired', { required: true })}
-          />
-        </div>
-
-        {errors.exampleRequired && <span>This field is required</span>}
-        {/* {errors.slug && <span>This field is required (slug)</span>} */}
-        {errors.slug?.message?.toString()}
         <div>
           <button type="submit">create</button>
           {isCreating && <div>isCreating...</div>}
         </div>
+
+        <DevTool control={control} />
       </form>
     </Drawer>
   )

@@ -13,6 +13,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@hookform/devtools": "^4.3.1",
     "@mswjs/data": "^0.11.2",
     "@ngneat/falso": "^6.4.0",
     "@svgr/webpack": "^6.5.1",

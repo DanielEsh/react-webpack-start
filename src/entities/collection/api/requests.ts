@@ -9,7 +9,8 @@ import {
 } from '../types'
 
 export const createCollection = async (form: CreateCollectionForm) => {
-  return (await $api.post(`/collections`, form)).data
+  // return (await $api.post(`/collections`, form)).data
+  console.log('CREATE', JSON.stringify(form, null, 2))
 }
 
 export const getCollections = async (values?: Values) => {

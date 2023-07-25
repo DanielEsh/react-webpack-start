@@ -8,22 +8,22 @@ import { useQueue } from '../ui-kit/Toast/useQueue'
 const LIMIT = 2
 
 const initialValues: CreatedNotification[] = [
-  {
-    id: 'test',
-    type: 'default',
-    message: 'message',
-    title: 'title',
-    autoClose: true,
-    duration: 5,
-  },
-  {
-    id: 'test2',
-    type: 'default',
-    message: 'message',
-    title: 'title',
-    autoClose: true,
-    duration: 5,
-  },
+  // {
+  //   id: 'test',
+  //   type: 'default',
+  //   message: 'message',
+  //   title: 'title',
+  //   autoClose: true,
+  //   duration: 5,
+  // },
+  // {
+  //   id: 'test2',
+  //   type: 'default',
+  //   message: 'message',
+  //   title: 'title',
+  //   autoClose: true,
+  //   duration: 5,
+  // },
 ]
 
 export const useNotificationsState = () => {
