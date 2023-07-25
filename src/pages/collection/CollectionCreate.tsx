@@ -8,8 +8,8 @@ import { TextArea } from 'shared/ui-kit/textarea'
 import { DevTool } from '@hookform/devtools'
 
 interface CreateCollectionFormFields {
-  slug: string
-  name: string
+  slug?: string
+  name?: string
   description?: string
 }
 
@@ -21,9 +21,9 @@ const CollectionsCreate = () => {
   const { updateCollectionsList } = useUpdateCollectionsList()
 
   const defaultValues: CreateCollectionFormFields = {
-    slug: 'default slug',
-    name: 'default name',
-    description: 'default Description',
+    slug: undefined,
+    name: undefined,
+    description: undefined,
   }
 
   const {
@@ -81,34 +81,39 @@ const CollectionsCreate = () => {
       <form onSubmit={handleSubmit(createNewCollection)}>
         <div>
           <div>
-            {/*<Input*/}
-            {/*  label="slug"*/}
-            {/*  {...register('slug')}*/}
-            {/*/>*/}
+            <div>
+              <Controller
+                render={({ field }) => (
+                  <Input
+                    label="slug"
+                    required
+                    {...field}
+                  />
+                )}
+                control={control}
+                rules={{ required: 'Slug is required' }}
+                name="slug"
+              />
 
-            <Controller
-              render={({ field }) => (
-                <Input
-                  label="slug"
-                  {...field}
-                />
-              )}
-              control={control}
-              rules={{ required: 'Slug is required' }}
-              name="slug"
-            />
+              <div>{errors.slug?.message}</div>
+            </div>
 
-            <Controller
-              render={({ field }) => (
-                <Input
-                  label="name"
-                  {...field}
-                />
-              )}
-              control={control}
-              rules={{ required: 'Name is required' }}
-              name="name"
-            />
+            <div>
+              <Controller
+                render={({ field }) => (
+                  <Input
+                    label="name"
+                    required
+                    {...field}
+                  />
+                )}
+                control={control}
+                rules={{ required: 'Name is required' }}
+                name="name"
+              />
+
+              <div>{errors.name?.message}</div>
+            </div>
 
             <div>
               <Controller
@@ -121,18 +126,8 @@ const CollectionsCreate = () => {
                 control={control}
                 name="description"
               />
-            </div>
 
-            {/*<input*/}
-            {/*  type="text"*/}
-            {/*  placeholder="name"*/}
-            {/*  {...register('slug')}*/}
-            {/*/>*/}
-
-            <div>
-              <span>Errors</span>
-              <div>{errors.slug?.message}</div>
-              <div>{errors.name?.message}</div>
+              <div>{errors.description?.message}</div>
             </div>
           </div>
         </div>
