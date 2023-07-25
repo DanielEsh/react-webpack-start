@@ -16,13 +16,20 @@ const COMPONENT_NAME = 'TextArea'
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, forwardedRef) => {
-    const { label, className, value: externalValue, ...restProps } = props
+    const {
+      label,
+      className,
+      value: externalValue,
+      onChange,
+      ...restProps
+    } = props
 
     const [internalValue, setInternalValue] = useState(externalValue)
     const [isFocused, setFocused] = useState(false)
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
       setInternalValue(event.target.value)
+      onChange && onChange(event)
     }
 
     const handleFocusManagement = (focus: boolean) => {
@@ -53,6 +60,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           <textarea
             className={classes}
             ref={forwardedRef}
+            value={internalValue}
             onChange={handleChange}
             onFocus={() => handleFocusManagement(true)}
             onBlur={() => handleFocusManagement(false)}

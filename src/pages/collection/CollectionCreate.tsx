@@ -23,7 +23,7 @@ const CollectionsCreate = () => {
   const defaultValues: CreateCollectionFormFields = {
     slug: 'default slug',
     name: 'default name',
-    description: 'defaultDescription',
+    description: 'default Description',
   }
 
   const {
