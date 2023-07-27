@@ -33,9 +33,9 @@ const CollectionsCreate = () => {
   const { updateCollectionsList } = useUpdateCollectionsList()
 
   const defaultValues: CreateCollectionFormFields = {
-    slug: undefined,
-    name: undefined,
-    description: undefined,
+    slug: '',
+    name: '',
+    description: '',
   }
 
   const {
@@ -98,7 +98,6 @@ const CollectionsCreate = () => {
                 render={({ field }) => (
                   <Input
                     label="slug"
-                    required
                     {...field}
                   />
                 )}
@@ -106,7 +105,7 @@ const CollectionsCreate = () => {
                 name="slug"
               />
 
-              <div>{errors.slug?.message}</div>
+              <div className="error">{errors.slug?.message}</div>
             </div>
 
             <div>
@@ -114,7 +113,6 @@ const CollectionsCreate = () => {
                 render={({ field }) => (
                   <Input
                     label="name"
-                    required
                     {...field}
                   />
                 )}
@@ -122,7 +120,7 @@ const CollectionsCreate = () => {
                 name="name"
               />
 
-              <div>{errors.name?.message}</div>
+              <div className="error">{errors.name?.message}</div>
             </div>
 
             <div>
@@ -137,7 +135,7 @@ const CollectionsCreate = () => {
                 name="description"
               />
 
-              <div>{errors.description?.message}</div>
+              <div className="error">{errors.description?.message}</div>
             </div>
           </div>
         </div>
