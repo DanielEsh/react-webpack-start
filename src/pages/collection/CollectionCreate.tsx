@@ -6,12 +6,24 @@ import { useUpdateCollectionsList } from 'entities/collection'
 import { Input } from 'shared/ui-kit/input'
 import { TextArea } from 'shared/ui-kit/textarea'
 import { DevTool } from '@hookform/devtools'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 interface CreateCollectionFormFields {
   slug?: string
   name?: string
   description?: string
 }
+
+const FormSchema = z.object({
+  slug: z.string().nonempty({
+    message: 'Must be required',
+  }),
+  name: z.string().nonempty({
+    message: 'Must be required',
+  }),
+  description: z.string().optional(),
+})
 
 const CollectionsCreate = () => {
   const navigate = useNavigate()
@@ -28,12 +40,12 @@ const CollectionsCreate = () => {
 
   const {
     control,
-    register,
     getValues,
     handleSubmit,
     setError,
     formState: { errors },
   } = useForm<CreateCollectionFormFields>({
+    resolver: zodResolver(FormSchema),
     defaultValues,
   })
 
@@ -80,7 +92,7 @@ const CollectionsCreate = () => {
     >
       <form onSubmit={handleSubmit(createNewCollection)}>
         <div>
-          <div>
+          <div className="mt-8 flex flex-col gap-2.5">
             <div>
               <Controller
                 render={({ field }) => (
@@ -91,7 +103,6 @@ const CollectionsCreate = () => {
                   />
                 )}
                 control={control}
-                rules={{ required: 'Slug is required' }}
                 name="slug"
               />
 
@@ -108,7 +119,6 @@ const CollectionsCreate = () => {
                   />
                 )}
                 control={control}
-                rules={{ required: 'Name is required' }}
                 name="name"
               />
 
