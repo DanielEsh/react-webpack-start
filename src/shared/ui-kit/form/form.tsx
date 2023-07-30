@@ -1,9 +1,10 @@
 import { forwardRef } from 'react'
 import { UiDefaultProps } from 'shared/ui-kit/types'
-import { useForm, FormProvider } from 'react-hook-form'
+import { FormProvider } from 'react-hook-form'
 
 interface FormProps extends UiDefaultProps {
-  onSubmit: () => void
+  methods: any
+  onSubmit: (event: any) => void
   onReset?: () => void
 }
 
@@ -11,17 +12,15 @@ const COMPONENT_NAME = 'Form'
 
 export const Form = forwardRef<HTMLFormElement, FormProps>(
   (props, forwardedRef) => {
-    const { children, className, onSubmit, onReset } = props
-
-    const methods = useForm()
+    const { children, className, methods, onSubmit, onReset } = props
 
     return (
       <FormProvider {...methods}>
         <form
-          className={className}
           ref={forwardedRef}
-          onSubmit={methods.handleSubmit(onSubmit)}
+          className={className}
           onReset={onReset}
+          onSubmit={methods.handleSubmit(onSubmit)}
         >
           {children}
         </form>
