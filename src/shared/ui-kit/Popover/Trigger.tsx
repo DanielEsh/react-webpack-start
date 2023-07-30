@@ -1,12 +1,10 @@
 import { useContext, forwardRef, useImperativeHandle, useRef } from 'react'
-import { TypeWithChidlren } from 'shared/ui-kit/types'
+import { UiDefaultProps } from 'shared/ui-kit/types'
 import { PopoverContext } from './Context'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { classNames } from 'shared/utils'
 
-export interface PopoverTriggerProps extends TypeWithChidlren {
-  className?: string
-}
+export type PopoverTriggerProps = UiDefaultProps
 
 export const PopoverTrigger = forwardRef<
   HTMLDivElement | null,

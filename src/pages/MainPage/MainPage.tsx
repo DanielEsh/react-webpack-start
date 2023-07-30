@@ -8,6 +8,7 @@ import StarIcon from 'shared/assets/icons/star.svg'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 import { ToastButtons } from './ToastButtons'
 import { FormExample } from 'pages/MainPage/FormExample'
+import { Select } from 'shared/ui-kit/form-controls/select/select'
 
 export const MainPage = () => {
   const [opened, { open, close }] = useDisclosure(false)
@@ -27,6 +28,7 @@ export const MainPage = () => {
       <ToastButtons />
 
       <FormExample />
+      <Select />
 
       {/* <div>
         <Popover
