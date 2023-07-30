@@ -4,7 +4,7 @@ import { Ripple } from 'shared/ui-kit/Ripple'
 import { classNames } from 'shared/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium transition-colors disabled:cursor-not-allowed',
+  'inline-flex items-center justify-center gap-1 rounded-lg text-sm transition-colors disabled:cursor-not-allowed',
   {
     variants: {
       variant: {

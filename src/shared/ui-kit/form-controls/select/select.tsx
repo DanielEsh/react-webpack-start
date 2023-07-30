@@ -1,5 +1,4 @@
 import { forwardRef, PropsWithChildren } from 'react'
-import { Input } from 'shared/ui-kit/form-controls'
 import { Popover } from 'shared/ui-kit/Popover'
 import { SelectOptions } from 'shared/ui-kit/form-controls/select/select-options'
 import { SelectOption } from 'shared/ui-kit/form-controls/select/select-option'
@@ -18,7 +17,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
           floatingClosable={false}
         >
           <Popover.Trigger>
-            <SelectValue />
+            <SelectValue>Select value</SelectValue>
           </Popover.Trigger>
           <SelectOptions>
             <SelectOption value="value1">value1</SelectOption>
