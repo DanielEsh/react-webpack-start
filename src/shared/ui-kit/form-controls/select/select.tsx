@@ -37,7 +37,12 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
           </Popover.Trigger>
           <SelectOptions>
             <SelectOption value="value1">value1</SelectOption>
-            <SelectOption value="value2">value2</SelectOption>
+            <SelectOption
+              value="value2"
+              disabled
+            >
+              value2
+            </SelectOption>
             <SelectOption value="value3">value3</SelectOption>
           </SelectOptions>
         </Popover>

@@ -3,16 +3,18 @@ import { UiDefaultProps } from 'shared/ui-kit/types'
 import { classNames } from 'shared/utils'
 import { SelectContext } from 'shared/ui-kit/form-controls/select/select-context'
 import { SelectType } from 'shared/ui-kit/form-controls/select/types'
+import { Button } from 'shared/ui-kit/Button'
 
 interface SelectItemProps extends UiDefaultProps {
   value: SelectType
+  disabled?: boolean
 }
 
 const COMPONENT_NAME = 'SelectOption'
 
 export const SelectOption = forwardRef<HTMLLIElement, SelectItemProps>(
   (props, forwardedRef) => {
-    const { className, children, value } = props
+    const { className, children, value, disabled } = props
 
     const { selectedValue, changeSelectedValue } = useContext(SelectContext)
 
@@ -28,7 +30,7 @@ export const SelectOption = forwardRef<HTMLLIElement, SelectItemProps>(
     )
 
     const buttonClasses = classNames(
-      'flex rounded-md py-1.5 pl-2 pr-8 hover:bg-blue-500',
+      'flex rounded-md py-1.5 pl-2 pr-8 hover:bg-blue-500 disabled:bg-blue-200',
       {
         ['bg-blue-500']: isSelected,
       },
@@ -39,12 +41,14 @@ export const SelectOption = forwardRef<HTMLLIElement, SelectItemProps>(
         ref={forwardedRef}
         className={classes}
       >
-        <button
+        <Button
+          variant="ghost"
           className={buttonClasses}
           onClick={handleClick}
+          disabled={disabled}
         >
           {children}
-        </button>
+        </Button>
       </li>
     )
   },
