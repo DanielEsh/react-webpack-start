@@ -2,9 +2,10 @@ import { forwardRef, useContext } from 'react'
 import { UiDefaultProps } from 'shared/ui-kit/types'
 import { classNames } from 'shared/utils'
 import { SelectContext } from 'shared/ui-kit/form-controls/select/select-context'
+import { SelectType } from 'shared/ui-kit/form-controls/select/types'
 
 interface SelectItemProps extends UiDefaultProps {
-  value: string | number
+  value: SelectType
 }
 
 const COMPONENT_NAME = 'SelectOption'

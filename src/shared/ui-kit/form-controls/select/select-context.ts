@@ -1,10 +1,11 @@
 import { createContext } from 'react'
+import { SelectType } from 'shared/ui-kit/form-controls/select/types'
 
 const COMPONENT_NAME = 'SelectContext'
 
 export interface SelectContextValues {
-  selectedValue?: string | number
-  changeSelectedValue: (value: string | number) => void
+  selectedValue?: SelectType
+  changeSelectedValue: (value: SelectType) => void
 }
 
 export const SelectContext = createContext<SelectContextValues>({
