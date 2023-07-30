@@ -28,7 +28,10 @@ export const MainPage = () => {
       <ToastButtons />
 
       <FormExample />
-      <Select defaultValue="value1" />
+      <Select
+        defaultValue="value1"
+        onChange={(value) => console.log('CHANGE', value)}
+      />
 
       {/* <div>
         <Popover
