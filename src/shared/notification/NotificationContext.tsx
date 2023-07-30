@@ -1,12 +1,12 @@
 import { PropsWithChildren, createContext } from 'react'
 import { useNotificationsState } from './NotificationsState'
-import { NotificationType } from './types'
+import { CreatedNotification } from './types'
 
 export interface NotificationContextType {
-  notifications: NotificationType[]
-  queue: NotificationType[]
-  showNotification: (notification: NotificationType) => void
-  updateNotification: (notification: NotificationType) => void
+  notifications: CreatedNotification[]
+  queue: CreatedNotification[]
+  showNotification: (notification: CreatedNotification) => void
+  updateNotification: (notification: CreatedNotification) => void
   hideNotification: (id: string) => void
   clean: () => void
   cleanQueue: () => void
