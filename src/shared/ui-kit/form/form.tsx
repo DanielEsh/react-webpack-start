@@ -1,17 +1,23 @@
 import { forwardRef } from 'react'
 import { UiDefaultProps } from 'shared/ui-kit/types'
-import { FormProvider } from 'react-hook-form'
+import {
+  FormProvider,
+  type FieldValues as ReactHookFormFieldValues,
+  type SubmitHandler,
+  type UseFormReturn,
+} from 'react-hook-form'
 import { FormField } from './form-field'
 
-export interface FormProps extends UiDefaultProps {
-  methods: any
-  onSubmit: (event: any) => void
+export interface FormProps<FieldValues extends ReactHookFormFieldValues>
+  extends UiDefaultProps {
+  methods: UseFormReturn<FieldValues>
   onReset?: () => void
+  onSubmit: SubmitHandler<FieldValues>
 }
 
 const COMPONENT_NAME = 'Form'
 
-export const _Form = forwardRef<HTMLFormElement, FormProps>(
+export const _Form = forwardRef<HTMLFormElement, FormProps<any>>(
   (props, forwardedRef) => {
     const { children, className, methods, onSubmit, onReset } = props
 

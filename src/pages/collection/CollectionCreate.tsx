@@ -18,7 +18,7 @@ const createCollectionFormSchema = z.object({
   description: z.string().optional(),
 })
 
-type createCollectionFormType = z.infer<typeof createCollectionFormSchema>
+type CreateCollectionFormType = z.infer<typeof createCollectionFormSchema>
 
 const CollectionsCreate = () => {
   const navigate = useNavigate()
@@ -27,13 +27,15 @@ const CollectionsCreate = () => {
 
   const { updateCollectionsList } = useUpdateCollectionsList()
 
-  const defaultValues: createCollectionFormType = {
+  const defaultValues: CreateCollectionFormType = {
     slug: '',
     name: '',
-    description: '',
   }
 
-  const formMethods = useForm(createCollectionFormSchema, defaultValues)
+  const formMethods = useForm<CreateCollectionFormType>(
+    createCollectionFormSchema,
+    defaultValues,
+  )
 
   const handleClose = () => {
     navigate('/collections')
@@ -57,7 +59,7 @@ const CollectionsCreate = () => {
     handleClose()
   }
 
-  async function createNewCollection(form: createCollectionFormType) {
+  async function createNewCollection(form: CreateCollectionFormType) {
     return createCollection(form, {
       onSuccess: (data) => handleSuccessCreate(data),
       onError: handleErrorCreate,
