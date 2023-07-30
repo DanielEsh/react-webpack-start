@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { useForm, Controller } from 'react-hook-form'
 import { Drawer } from 'shared/ui-kit/Modal/Drawer'
 import { useCreateCollectionMutation } from 'entities/collection/api'
 import { useUpdateCollectionsList } from 'entities/collection'
@@ -8,14 +7,12 @@ import { TextArea } from 'shared/ui-kit/textarea'
 import { DevTool } from '@hookform/devtools'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'shared/ui-kit/form/use-form'
+import { Form } from 'shared/ui-kit/form/form'
+import { FormField } from 'shared/ui-kit/form/form-field'
+import { Button } from 'shared/ui-kit/Button'
 
-interface CreateCollectionFormFields {
-  slug?: string
-  name?: string
-  description?: string
-}
-
-const FormSchema = z.object({
+const createCollectionFormSchema = z.object({
   slug: z.string().nonempty({
     message: 'Must be required',
   }),
@@ -25,6 +22,8 @@ const FormSchema = z.object({
   description: z.string().optional(),
 })
 
+type createCollectionFormType = z.infer<typeof createCollectionFormSchema>
+
 const CollectionsCreate = () => {
   const navigate = useNavigate()
   const { isLoading: isCreating, mutate: createCollection } =
@@ -32,22 +31,13 @@ const CollectionsCreate = () => {
 
   const { updateCollectionsList } = useUpdateCollectionsList()
 
-  const defaultValues: CreateCollectionFormFields = {
+  const defaultValues: createCollectionFormType = {
     slug: '',
     name: '',
     description: '',
   }
 
-  const {
-    control,
-    getValues,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm<CreateCollectionFormFields>({
-    resolver: zodResolver(FormSchema),
-    defaultValues,
-  })
+  const formMethods = useForm(createCollectionFormSchema, defaultValues)
 
   const handleClose = () => {
     navigate('/collections')
@@ -59,7 +49,7 @@ const CollectionsCreate = () => {
     const error = data.response
 
     if (error.statusText === 'Conflict') {
-      setError('slug', {
+      formMethods.setError('slug', {
         message: 'Дубликат',
       })
     }
@@ -71,12 +61,7 @@ const CollectionsCreate = () => {
     handleClose()
   }
 
-  async function createNewCollection() {
-    const form: CreateCollectionFormFields = {
-      slug: getValues('slug'),
-      name: getValues('name'),
-    }
-
+  async function createNewCollection(form: createCollectionFormType) {
     console.log('SUBMIT', form)
 
     // return await createCollection(form, {
@@ -90,64 +75,30 @@ const CollectionsCreate = () => {
       opened={true}
       onClose={handleClose}
     >
-      <form onSubmit={handleSubmit(createNewCollection)}>
-        <div>
-          <div className="mt-8 flex flex-col gap-2.5">
-            <div>
-              <Controller
-                render={({ field, fieldState }) => (
-                  <Input
-                    label="slug"
-                    invalid={fieldState.invalid}
-                    {...field}
-                  />
-                )}
-                control={control}
-                name="slug"
-              />
-
-              <div className="error">{errors.slug?.message}</div>
-            </div>
-
-            <div>
-              <Controller
-                render={({ field }) => (
-                  <Input
-                    label="name"
-                    {...field}
-                  />
-                )}
-                control={control}
-                name="name"
-              />
-
-              <div className="error">{errors.name?.message}</div>
-            </div>
-
-            <div>
-              <Controller
-                render={({ field }) => (
-                  <TextArea
-                    label="description"
-                    {...field}
-                  />
-                )}
-                control={control}
-                name="description"
-              />
-
-              <div className="error">{errors.description?.message}</div>
-            </div>
-          </div>
-        </div>
+      <Form
+        className="mt-12 flex flex-col gap-2"
+        methods={formMethods}
+        onSubmit={createNewCollection}
+      >
+        <FormField name="slug">
+          <Input label="slug" />
+        </FormField>
+        <FormField name="name">
+          <Input label="name" />
+        </FormField>
+        <FormField name="description">
+          <TextArea label="description" />
+        </FormField>
 
         <div>
-          <button type="submit">create</button>
-          {isCreating && <div>isCreating...</div>}
+          <Button
+            variant="primary"
+            type="submit"
+          >
+            Create
+          </Button>
         </div>
-
-        <DevTool control={control} />
-      </form>
+      </Form>
     </Drawer>
   )
 }
