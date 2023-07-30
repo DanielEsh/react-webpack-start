@@ -95,9 +95,10 @@ const CollectionsCreate = () => {
           <div className="mt-8 flex flex-col gap-2.5">
             <div>
               <Controller
-                render={({ field }) => (
+                render={({ field, fieldState }) => (
                   <Input
                     label="slug"
+                    invalid={fieldState.invalid}
                     {...field}
                   />
                 )}

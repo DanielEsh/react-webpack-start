@@ -5,6 +5,7 @@ export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label: string
   className?: string
+  invalid?: boolean
   onChange?: (value: any) => void
 }
 
