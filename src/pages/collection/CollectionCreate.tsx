@@ -4,12 +4,9 @@ import { useCreateCollectionMutation } from 'entities/collection/api'
 import { useUpdateCollectionsList } from 'entities/collection'
 import { Input } from 'shared/ui-kit/input'
 import { TextArea } from 'shared/ui-kit/textarea'
-import { DevTool } from '@hookform/devtools'
 import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { Form } from 'shared/ui-kit/form/form'
-import { FormField } from 'shared/ui-kit/form/form-field'
 import { Button } from 'shared/ui-kit/Button'
 
 const createCollectionFormSchema = z.object({
@@ -80,15 +77,15 @@ const CollectionsCreate = () => {
         methods={formMethods}
         onSubmit={createNewCollection}
       >
-        <FormField name="slug">
+        <Form.Field name="slug">
           <Input label="slug" />
-        </FormField>
-        <FormField name="name">
+        </Form.Field>
+        <Form.Field name="name">
           <Input label="name" />
-        </FormField>
-        <FormField name="description">
+        </Form.Field>
+        <Form.Field name="description">
           <TextArea label="description" />
-        </FormField>
+        </Form.Field>
 
         <div>
           <Button

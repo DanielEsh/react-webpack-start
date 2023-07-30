@@ -1,8 +1,9 @@
 import { forwardRef } from 'react'
 import { UiDefaultProps } from 'shared/ui-kit/types'
 import { FormProvider } from 'react-hook-form'
+import { FormField } from './form-field'
 
-interface FormProps extends UiDefaultProps {
+export interface FormProps extends UiDefaultProps {
   methods: any
   onSubmit: (event: any) => void
   onReset?: () => void
@@ -10,7 +11,7 @@ interface FormProps extends UiDefaultProps {
 
 const COMPONENT_NAME = 'Form'
 
-export const Form = forwardRef<HTMLFormElement, FormProps>(
+export const _Form = forwardRef<HTMLFormElement, FormProps>(
   (props, forwardedRef) => {
     const { children, className, methods, onSubmit, onReset } = props
 
@@ -28,5 +29,9 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
     )
   },
 )
+
+export const Form = Object.assign(_Form, {
+  Field: FormField,
+})
 
 Form.displayName = COMPONENT_NAME
