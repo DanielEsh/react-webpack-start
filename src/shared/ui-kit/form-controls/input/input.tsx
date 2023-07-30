@@ -1,12 +1,10 @@
 import { ChangeEvent, forwardRef, InputHTMLAttributes, useState } from 'react'
 import { classNames } from 'shared/utils'
 
-export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string
   className?: string
   invalid?: boolean
-  onChange?: (value: any) => void
 }
 
 const COMPONENT_NAME = 'Input'
