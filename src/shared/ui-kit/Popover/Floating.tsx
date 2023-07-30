@@ -1,8 +1,8 @@
 import { useContext, forwardRef, useImperativeHandle, useRef } from 'react'
 import { Portal } from 'shared/ui-kit/Portal'
 import { PopoverContext } from './Context'
-import { PopoverArrow } from './Arrow'
-import { TypeWithChidlren } from 'shared/ui-kit/types'
+// import { PopoverArrow } from './Arrow'
+import { UiDefaultProps } from 'shared/ui-kit/types'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useComposedRefs } from 'shared/lib/hooks/useComposedRefs'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside'
@@ -24,7 +24,7 @@ const fade = {
 
 export const PopoverFloating = forwardRef<
   HTMLDivElement | null,
-  TypeWithChidlren
+  UiDefaultProps
 >(({ children }, forwardedRef) => {
   const innerRef = useRef<any>(null)
 
@@ -38,7 +38,6 @@ export const PopoverFloating = forwardRef<
     isOpened,
     togglePopover,
     clearCloseTimeout,
-
     portalNode,
   } = useContext(PopoverContext)
 
@@ -68,7 +67,7 @@ export const PopoverFloating = forwardRef<
           >
             {children}
 
-            <PopoverArrow />
+            {/*<PopoverArrow />*/}
           </motion.div>
         </Portal>
       ) : null}

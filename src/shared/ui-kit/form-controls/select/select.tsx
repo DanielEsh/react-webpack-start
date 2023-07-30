@@ -11,7 +11,10 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
   (props, forwardedRef) => {
     return (
       <div>
-        <Popover placement="bottom">
+        <Popover
+          placement="bottom"
+          floatingClosable={false}
+        >
           <Popover.Trigger>
             <Input
               label="Select"
@@ -19,8 +22,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
             />
           </Popover.Trigger>
           <Popover.Floating>
-            <ul className="flex w-full flex-col bg-amber-500">
-              <li>item 1</li>
+            <ul className="flex w-full min-w-[238px] flex-col rounded-md bg-blue-500 p-2">
+              <li className="bg-amber-500">item 1</li>
               <li>item 2</li>
               <li>item 3</li>
             </ul>

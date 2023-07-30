@@ -19,6 +19,7 @@ export interface PopoverProps {
   visible?: boolean
   triggerType?: Trigger
   portalNode?: HTMLElement | null
+  floatingClosable?: boolean
   children: ReactNode
 }
 
@@ -28,6 +29,7 @@ const PopoverRoot = (props: PopoverProps) => {
     offset = DEFAULT_OFFSET,
     delay = DEFAULT_DELAY,
     visible = false,
+    floatingClosable = true,
     portalNode,
     triggerType = DEFAULT_TRIGGER_TYPE,
     children,
@@ -75,6 +77,8 @@ const PopoverRoot = (props: PopoverProps) => {
   }
 
   const changePopover = (value: boolean) => {
+    if (!floatingClosable && !value) return
+
     if (!value) return delayClose()
     return delayOpen()
   }
