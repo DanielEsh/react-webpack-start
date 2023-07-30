@@ -9,6 +9,7 @@ import { classNames } from 'shared/utils'
 export interface TextareaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string
+  invalid?: boolean
   className?: string
 }
 
@@ -20,6 +21,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       label,
       className,
       value: externalValue,
+      invalid,
+      placeholder,
       onChange,
       ...restProps
     } = props
@@ -50,12 +53,13 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       'absolute left-3 top-1 bg-white transition-all duration-150 ease-linear',
       {
         ['left-0 top-0 -translate-y-1/2 scale-75 px-2']:
-          isFocused || internalValue || props.placeholder,
+          isFocused || internalValue || placeholder,
+        ['text-red-500']: invalid,
       },
     )
 
     return (
-      <label>
+      <label onBlur={() => handleFocusManagement(false)}>
         <div className="relative h-full w-full">
           <textarea
             className={classes}
