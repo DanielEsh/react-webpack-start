@@ -19,6 +19,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       type = 'text',
       value: externalValue,
       onChange,
+      invalid,
       ...restProps
     } = props
 
@@ -40,8 +41,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }
 
     const classes = classNames(
-      'relative border-input bg-background focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 invalid:border-red-500',
+      'relative border-input bg-background focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
       className,
+      {
+        ['border-red-500']: invalid,
+      },
     )
 
     const labelClasses = classNames(
@@ -49,6 +53,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       {
         ['left-0 top-0 -translate-y-1/2 scale-75 px-2']:
           isFocused || internalValue || props.placeholder,
+        ['text-red-500']: invalid,
       },
     )
 

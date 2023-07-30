@@ -26,9 +26,12 @@ export const FormField = (props: FormFieldProps) => {
       name={name}
       render={({ field, fieldState }) => (
         <div className={className}>
-          {childrenWithFormFieldProps(field)}
+          {childrenWithFormFieldProps({
+            invalid: fieldState.invalid,
+            ...field,
+          })}
 
-          <div className="error">{fieldState.error?.message}</div>
+          <div className="text-red-500">{fieldState.error?.message}</div>
         </div>
       )}
     />
