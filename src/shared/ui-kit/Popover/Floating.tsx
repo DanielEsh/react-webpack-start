@@ -62,8 +62,8 @@ export const PopoverFloating = forwardRef<
             style={popoverStyles}
             variants={fade}
             {...fade}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            // onMouseEnter={handleMouseEnter}
+            // onMouseLeave={handleMouseLeave}
           >
             {children}
 

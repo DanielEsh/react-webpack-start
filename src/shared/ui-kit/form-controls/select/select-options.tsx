@@ -12,7 +12,7 @@ export const SelectOptions = forwardRef<HTMLDivElement, SelectOptionsProps>(
     const { className, children } = props
 
     const classes = classNames(
-      'flex w-full min-w-[238px] flex-col rounded-md bg-blue-500 p-2',
+      'relative flex min-w-[96px] flex-col overflow-hidden rounded-md border bg-popover shadow-md p-2',
       className,
     )
 

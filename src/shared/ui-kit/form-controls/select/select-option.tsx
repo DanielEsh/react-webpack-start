@@ -22,17 +22,29 @@ export const SelectOption = forwardRef<HTMLLIElement, SelectItemProps>(
 
     const isSelected = selectedValue === value
 
-    const classes = classNames('', className, {
-      ['bg-blue-200']: isSelected,
-    })
+    const classes = classNames(
+      'relative flex w-full select-none rounded-sm text-sm outline-none',
+      className,
+    )
+
+    const buttonClasses = classNames(
+      'flex rounded-md py-1.5 pl-2 pr-8 hover:bg-blue-500',
+      {
+        ['bg-blue-500']: isSelected,
+      },
+    )
 
     return (
       <li
         ref={forwardedRef}
         className={classes}
-        onClick={handleClick}
       >
-        {children}
+        <button
+          className={buttonClasses}
+          onClick={handleClick}
+        >
+          {children}
+        </button>
       </li>
     )
   },

@@ -77,9 +77,9 @@ const PopoverRoot = (props: PopoverProps) => {
   }
 
   const changePopover = (value: boolean) => {
-    if (!floatingClosable && !value) return
-
-    if (!value) return delayClose()
+    if (!value) {
+      return delayClose()
+    }
     return delayOpen()
   }
 
