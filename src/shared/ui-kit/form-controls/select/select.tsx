@@ -11,6 +11,7 @@ import { SelectType } from 'shared/ui-kit/form-controls/select/types'
 
 interface SelectProps extends PropsWithChildren {
   defaultValue?: SelectType
+  placeholder?: string
   onChange?: (value: SelectType) => void
 }
 
@@ -18,7 +19,7 @@ const COMPONENT_NAME = 'Select'
 
 export const Select = forwardRef<HTMLDivElement, SelectProps>(
   (props, forwardedRef) => {
-    const { defaultValue = '', onChange } = props
+    const { defaultValue = '', onChange, placeholder = 'Select value' } = props
 
     const [selectedValue, setSelectedValue] = useState<SelectType>(defaultValue)
 
@@ -39,7 +40,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
           floatingClosable={false}
         >
           <Popover.Trigger>
-            <SelectValue>Select value</SelectValue>
+            <SelectValue>{placeholder}</SelectValue>
           </Popover.Trigger>
           <SelectOptions>
             <SelectOption value="value1">value1</SelectOption>
