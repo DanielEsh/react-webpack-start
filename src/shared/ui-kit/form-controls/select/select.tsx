@@ -2,6 +2,7 @@ import { forwardRef, PropsWithChildren } from 'react'
 import { Input } from 'shared/ui-kit/form-controls'
 import { Popover } from 'shared/ui-kit/Popover'
 import { SelectOptions } from 'shared/ui-kit/form-controls/select/select-options'
+import { SelectOption } from 'shared/ui-kit/form-controls/select/select-option'
 
 type SelectProps = PropsWithChildren
 
@@ -22,7 +23,9 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
             />
           </Popover.Trigger>
           <SelectOptions>
-            <li>item 1</li>
+            <SelectOption value="value1">value1</SelectOption>
+            <SelectOption value="value2">value2</SelectOption>
+            <SelectOption value="value3">value3</SelectOption>
           </SelectOptions>
         </Popover>
       </div>
