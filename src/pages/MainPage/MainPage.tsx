@@ -29,7 +29,8 @@ export const MainPage = () => {
 
       <FormExample />
       <Select
-        defaultValue="value1"
+        placeholder="placeholder"
+        readOnly
         onChange={(value) => console.log('CHANGE', value)}
       />
 
