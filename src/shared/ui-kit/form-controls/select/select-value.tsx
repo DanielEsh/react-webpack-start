@@ -1,6 +1,7 @@
-import { forwardRef } from 'react'
+import { forwardRef, useContext } from 'react'
 import { Button } from 'shared/ui-kit/Button'
 import { UiDefaultProps } from 'shared/ui-kit/types'
+import { SelectContext } from 'shared/ui-kit/form-controls/select/select-context'
 
 type SelectValueProps = UiDefaultProps
 
@@ -9,6 +10,10 @@ const COMPONENT_NAME = 'SelectValue'
 export const SelectValue = forwardRef<HTMLButtonElement, SelectValueProps>(
   (props, forwardedRef) => {
     const { className, children } = props
+
+    const { selectedValue } = useContext(SelectContext)
+
+    const value = selectedValue ? selectedValue : children
 
     const icon = () => {
       return (
@@ -35,7 +40,7 @@ export const SelectValue = forwardRef<HTMLButtonElement, SelectValueProps>(
         className={className}
         addonRight={icon()}
       >
-        {children}
+        {value}
       </Button>
     )
   },

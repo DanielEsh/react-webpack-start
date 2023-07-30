@@ -1,6 +1,7 @@
-import { forwardRef } from 'react'
+import { forwardRef, useContext } from 'react'
 import { UiDefaultProps } from 'shared/ui-kit/types'
 import { classNames } from 'shared/utils'
+import { SelectContext } from 'shared/ui-kit/form-controls/select/select-context'
 
 interface SelectItemProps extends UiDefaultProps {
   value: string | number
@@ -12,11 +13,17 @@ export const SelectOption = forwardRef<HTMLLIElement, SelectItemProps>(
   (props, forwardedRef) => {
     const { className, children, value } = props
 
+    const { selectedValue, changeSelectedValue } = useContext(SelectContext)
+
     const handleClick = () => {
-      console.log('onClick', value)
+      changeSelectedValue(value)
     }
 
-    const classes = classNames('bg-blue-200', className)
+    const isSelected = selectedValue === value
+
+    const classes = classNames('', className, {
+      ['bg-blue-200']: isSelected,
+    })
 
     return (
       <li
