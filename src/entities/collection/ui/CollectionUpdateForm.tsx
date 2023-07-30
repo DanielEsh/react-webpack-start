@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Collection, UpdateCollectionForm } from '../types'
-import { Input } from 'shared/ui-kit/input'
-import { TextArea } from 'shared/ui-kit/textarea'
+import { Input } from 'shared/ui-kit/form-controls/input'
+import { TextArea } from 'shared/ui-kit/form-controls/textarea'
 import { Button } from 'shared/ui-kit/Button'
 
 interface Props {

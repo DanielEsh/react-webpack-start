@@ -3,7 +3,7 @@ import { Form } from 'shared/ui-kit/form/form'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { z } from 'zod'
 import { FormField } from 'shared/ui-kit/form/form-field'
-import { Input } from 'shared/ui-kit/input'
+import { Input } from 'shared/ui-kit/form-controls'
 
 const formSchema = z.object({
   field: z.string().nonempty({
