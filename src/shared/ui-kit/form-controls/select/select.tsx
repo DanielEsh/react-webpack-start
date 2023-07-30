@@ -1,7 +1,7 @@
 import { forwardRef, PropsWithChildren } from 'react'
-import { Menu } from 'shared/ui-kit/Menu'
 import { Input } from 'shared/ui-kit/form-controls'
 import { Popover } from 'shared/ui-kit/Popover'
+import { SelectOptions } from 'shared/ui-kit/form-controls/select/select-options'
 
 type SelectProps = PropsWithChildren
 
@@ -21,13 +21,9 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
               readOnly
             />
           </Popover.Trigger>
-          <Popover.Floating>
-            <ul className="flex w-full min-w-[238px] flex-col rounded-md bg-blue-500 p-2">
-              <li className="bg-amber-500">item 1</li>
-              <li>item 2</li>
-              <li>item 3</li>
-            </ul>
-          </Popover.Floating>
+          <SelectOptions>
+            <li>item 1</li>
+          </SelectOptions>
         </Popover>
       </div>
     )

@@ -1,6 +1,11 @@
-import { forwardRef, PropsWithChildren } from 'react'
+import { forwardRef } from 'react'
+import { UiDefaultProps } from 'shared/ui-kit/types'
 
-type TemplateProps = PropsWithChildren
+// interface TemplateProps extends UiDefaultProps {
+//   props: string
+// }
+
+type TemplateProps = UiDefaultProps
 
 const COMPONENT_NAME = 'Template'
 
