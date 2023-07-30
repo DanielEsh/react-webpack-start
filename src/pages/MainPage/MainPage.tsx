@@ -28,7 +28,7 @@ export const MainPage = () => {
       <ToastButtons />
 
       <FormExample />
-      <Select />
+      <Select defaultValue="value1" />
 
       {/* <div>
         <Popover

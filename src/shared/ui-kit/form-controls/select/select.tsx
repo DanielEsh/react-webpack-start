@@ -9,13 +9,17 @@ import {
 } from 'shared/ui-kit/form-controls/select/select-context'
 import { SelectType } from 'shared/ui-kit/form-controls/select/types'
 
-type SelectProps = PropsWithChildren
+interface SelectProps extends PropsWithChildren {
+  defaultValue?: SelectType
+}
 
 const COMPONENT_NAME = 'Select'
 
 export const Select = forwardRef<HTMLDivElement, SelectProps>(
   (props, forwardedRef) => {
-    const [selectedValue, setSelectedValue] = useState<SelectType>('')
+    const { defaultValue = '' } = props
+
+    const [selectedValue, setSelectedValue] = useState<SelectType>(defaultValue)
 
     const handleChange = (value: SelectType) => {
       setSelectedValue(value)
