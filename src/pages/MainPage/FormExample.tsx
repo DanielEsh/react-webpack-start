@@ -2,8 +2,7 @@ import { Button } from 'shared/ui-kit/Button'
 import { Form } from 'shared/ui-kit/form/form'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { z } from 'zod'
-import { Controller } from 'react-hook-form'
-import { Input } from 'shared/ui-kit/input'
+import { FormField } from 'shared/ui-kit/form/form-field'
 
 const formSchema = z.object({
   field: z.string().nonempty({
@@ -12,8 +11,12 @@ const formSchema = z.object({
 })
 
 type FormSchemaType = z.infer<typeof formSchema>
+
+const formDefaultValues: FormSchemaType = {
+  field: 'field',
+}
 export const FormExample = () => {
-  const formMethods = useForm(formSchema)
+  const formMethods = useForm(formSchema, formDefaultValues)
 
   const handleFormSubmit = (form: any) => {
     console.log('submit', form)
@@ -24,21 +27,7 @@ export const FormExample = () => {
       methods={formMethods}
       onSubmit={handleFormSubmit}
     >
-      <div>
-        <Controller
-          render={({ field, fieldState }) => (
-            <Input
-              label="field"
-              invalid={fieldState.invalid}
-              {...field}
-            />
-          )}
-          control={formMethods.control}
-          name="field"
-        />
-
-        <div className="error">ERRORS</div>
-      </div>
+      <FormField />
       <Button type="submit">submit</Button>
     </Form>
   )
