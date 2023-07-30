@@ -59,12 +59,10 @@ const CollectionsCreate = () => {
   }
 
   async function createNewCollection(form: createCollectionFormType) {
-    console.log('SUBMIT', form)
-
-    // return await createCollection(form, {
-    //   onSuccess: (data) => handleSuccessCreate(data),
-    //   onError: handleErrorCreate,
-    // })
+    return createCollection(form, {
+      onSuccess: (data) => handleSuccessCreate(data),
+      onError: handleErrorCreate,
+    })
   }
 
   return (
