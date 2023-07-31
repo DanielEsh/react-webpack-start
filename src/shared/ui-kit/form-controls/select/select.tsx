@@ -12,7 +12,7 @@ import { SelectType } from 'shared/ui-kit/form-controls/select/types'
 
 export interface SelectProps extends PropsWithChildren {
   defaultValue?: SelectType
-  placeholder?: string
+  label?: string
   readOnly?: boolean
   onChange?: (value: SelectType) => void
 }
@@ -20,7 +20,7 @@ export interface SelectProps extends PropsWithChildren {
 const COMPONENT_NAME = 'Select'
 
 export const _Select = (props: SelectProps) => {
-  const { defaultValue = '', onChange, readOnly, children } = props
+  const { defaultValue = '', onChange, readOnly, children, label } = props
 
   const [selectedValue, setSelectedValue] = useState<SelectType>(defaultValue)
 
@@ -34,6 +34,7 @@ export const _Select = (props: SelectProps) => {
   const contextValue: SelectContextValues = {
     selectedValue,
     changeSelectedValue: handleChange,
+    label,
   }
 
   return (

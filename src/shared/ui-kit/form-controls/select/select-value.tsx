@@ -3,6 +3,7 @@ import { Button } from 'shared/ui-kit/Button'
 import { UiDefaultProps } from 'shared/ui-kit/types'
 import { SelectContext } from 'shared/ui-kit/form-controls/select/select-context'
 import { Popover } from 'shared/ui-kit/Popover'
+import { classNames } from 'shared/utils'
 
 type SelectValueProps = UiDefaultProps
 
@@ -12,7 +13,7 @@ export const SelectValue = forwardRef<HTMLButtonElement, SelectValueProps>(
   (props, forwardedRef) => {
     const { className, children } = props
 
-    const { selectedValue } = useContext(SelectContext)
+    const { selectedValue, label } = useContext(SelectContext)
 
     const value = selectedValue ? selectedValue : children
 
@@ -35,17 +36,28 @@ export const SelectValue = forwardRef<HTMLButtonElement, SelectValueProps>(
       )
     }
 
+    const labelClasses = classNames(
+      'absolute left-3 top-1/2 -translate-y-1/2 bg-white transition-all duration-150 ease-linear',
+      {
+        ['left-0 top-0 -translate-y-1/2 scale-75 px-2']: true,
+        ['text-red-500']: false,
+      },
+    )
+
     return (
       <Popover.Trigger>
-        <Button
-          ref={forwardedRef}
-          className={className}
-          addonRight={icon()}
-        >
-          {value}
-        </Button>
-      </Popover.Trigger>
+        <div className="relative">
+          <Button
+            ref={forwardedRef}
+            className={className}
+            addonRight={icon()}
+          >
+            {value}
+          </Button>
 
+          <span className={labelClasses}>{label}</span>
+        </div>
+      </Popover.Trigger>
     )
   },
 )

@@ -2,7 +2,7 @@ import { Select } from 'shared/ui-kit/form-controls'
 
 export const ExampleSelect = () => {
   return (
-    <Select>
+    <Select label="label">
       <Select.Value>Pick one</Select.Value>
       <Select.Options>
         <Select.Option value="option1">Option 1</Select.Option>
