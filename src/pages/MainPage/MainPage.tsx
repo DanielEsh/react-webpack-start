@@ -30,7 +30,6 @@ export const MainPage = () => {
       <FormExample />
       <Select
         placeholder="placeholder"
-        readOnly
         onChange={(value) => console.log('CHANGE', value)}
       />
 

@@ -25,14 +25,14 @@ export const SelectOption = forwardRef<HTMLLIElement, SelectItemProps>(
     const isSelected = selectedValue === value
 
     const classes = classNames(
-      'relative flex w-full select-none rounded-sm text-sm outline-none',
+      'relative flex flex-col w-full select-none rounded-sm text-sm outline-none',
       className,
     )
 
     const buttonClasses = classNames(
-      'flex rounded-md py-1.5 pl-2 pr-8 hover:bg-blue-500 disabled:bg-blue-200',
+      'flex rounded-md py-1.5 pl-2 pr-8 hover:bg-muted disabled:opacity-50 disabled:bg-transparent',
       {
-        ['bg-blue-500']: isSelected,
+        ['bg-muted']: isSelected,
       },
     )
 
