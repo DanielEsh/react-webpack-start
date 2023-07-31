@@ -10,7 +10,7 @@ import {
 } from 'shared/ui-kit/form-controls/select/select-context'
 import { SelectType } from 'shared/ui-kit/form-controls/select/types'
 
-interface SelectProps extends PropsWithChildren {
+export interface SelectProps extends PropsWithChildren {
   defaultValue?: SelectType
   placeholder?: string
   readOnly?: boolean
@@ -19,53 +19,40 @@ interface SelectProps extends PropsWithChildren {
 
 const COMPONENT_NAME = 'Select'
 
-export const Select = forwardRef<HTMLDivElement, SelectProps>(
-  (props, forwardedRef) => {
-    const {
-      defaultValue = '',
-      onChange,
-      placeholder = 'Select value',
-      readOnly,
-    } = props
+export const _Select = (props: SelectProps) => {
+  const { defaultValue = '', onChange, readOnly, children } = props
 
-    const [selectedValue, setSelectedValue] = useState<SelectType>(defaultValue)
+  const [selectedValue, setSelectedValue] = useState<SelectType>(defaultValue)
 
-    const handleChange = (value: SelectType) => {
-      if (readOnly) return
+  const handleChange = (value: SelectType) => {
+    if (readOnly) return
 
-      setSelectedValue(value)
-      onChange && onChange(value)
-    }
+    setSelectedValue(value)
+    onChange && onChange(value)
+  }
 
-    const contextValue: SelectContextValues = {
-      selectedValue,
-      changeSelectedValue: handleChange,
-    }
+  const contextValue: SelectContextValues = {
+    selectedValue,
+    changeSelectedValue: handleChange,
+  }
 
-    return (
-      <SelectContext.Provider value={contextValue}>
-        <Popover
-          placement="bottom"
-          floatingClosable={false}
-        >
-          <Popover.Trigger>
-            <SelectValue>{placeholder}</SelectValue>
-          </Popover.Trigger>
-          <SelectOptions>
-            <SelectLabel>Label</SelectLabel>
-            <SelectOption value="value1">value1</SelectOption>
-            <SelectOption
-              value="value2"
-              disabled
-            >
-              value2
-            </SelectOption>
-            <SelectOption value="value3">value3</SelectOption>
-          </SelectOptions>
-        </Popover>
-      </SelectContext.Provider>
-    )
-  },
-)
+  return (
+    <SelectContext.Provider value={contextValue}>
+      <Popover
+        placement="bottom"
+        floatingClosable={false}
+      >
+        {children}
+      </Popover>
+    </SelectContext.Provider>
+  )
+}
 
-Select.displayName = COMPONENT_NAME
+export const Select = Object.assign(_Select, {
+  Value: SelectValue,
+  Options: SelectOptions,
+  Option: SelectOption,
+  Label: SelectLabel,
+})
+
+_Select.displayName = COMPONENT_NAME

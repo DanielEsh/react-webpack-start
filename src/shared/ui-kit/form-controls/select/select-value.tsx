@@ -2,6 +2,7 @@ import { forwardRef, useContext } from 'react'
 import { Button } from 'shared/ui-kit/Button'
 import { UiDefaultProps } from 'shared/ui-kit/types'
 import { SelectContext } from 'shared/ui-kit/form-controls/select/select-context'
+import { Popover } from 'shared/ui-kit/Popover'
 
 type SelectValueProps = UiDefaultProps
 
@@ -35,13 +36,16 @@ export const SelectValue = forwardRef<HTMLButtonElement, SelectValueProps>(
     }
 
     return (
-      <Button
-        ref={forwardedRef}
-        className={className}
-        addonRight={icon()}
-      >
-        {value}
-      </Button>
+      <Popover.Trigger>
+        <Button
+          ref={forwardedRef}
+          className={className}
+          addonRight={icon()}
+        >
+          {value}
+        </Button>
+      </Popover.Trigger>
+
     )
   },
 )
