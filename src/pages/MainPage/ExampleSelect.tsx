@@ -1,15 +1,45 @@
 import { Select } from 'shared/ui-kit/form-controls'
 
+type ExampleOption = {
+  value: number
+  label: string
+}
 export const ExampleSelect = () => {
+  const options: ExampleOption[] = [
+    {
+      value: 1,
+      label: 'option1',
+    },
+    {
+      value: 2,
+      label: 'option2',
+    },
+    {
+      value: 3,
+      label: 'option3',
+    },
+    {
+      value: 4,
+      label: 'option4',
+    },
+    {
+      value: 5,
+      label: 'option5',
+    },
+  ]
+
   return (
     <Select label="label">
       <Select.Value>Pick one</Select.Value>
       <Select.Options>
-        <Select.Option value="option1">Option 1</Select.Option>
-        <Select.Option value="option2">Option 2</Select.Option>
-        <Select.Option value="option3">Option 3</Select.Option>
-        <Select.Option value="option4">Option 4</Select.Option>
-        <Select.Option value="option5">Option 5</Select.Option>
+        {options.map(({ value, label }) => (
+          <Select.Option
+            key={value}
+            value={label}
+          >
+            {label}
+          </Select.Option>
+        ))}
       </Select.Options>
     </Select>
   )
