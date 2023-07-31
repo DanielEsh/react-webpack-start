@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-white border border-slate-300 text-gray-700 disabled:bg-slate-100',
+          'bg-white border border-input text-gray-700 disabled:bg-slate-100 rounded-md shadow-sm ',
         ghost: 'bg-transparent border-none',
         primary: 'bg-neutral-800 border border-neutral-800 text-white',
       },

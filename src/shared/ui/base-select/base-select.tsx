@@ -5,7 +5,8 @@ export type BaseSelectOption = {
   label: string
 }
 
-export interface BaseSelectProps extends Pick<SelectProps, 'defaultValue' | 'label'> {
+export interface BaseSelectProps
+  extends Pick<SelectProps, 'defaultValue' | 'label'> {
   options: BaseSelectOption[]
 }
 
@@ -17,7 +18,7 @@ export const BaseSelect = (props: BaseSelectProps) => {
       label={label}
       defaultValue={defaultValue}
     >
-      <Select.Value>Pick one</Select.Value>
+      <Select.Value className="h-8 w-[70px]">Pick one</Select.Value>
       <Select.Options>
         {options.map(({ value, label }) => (
           <Select.Option
