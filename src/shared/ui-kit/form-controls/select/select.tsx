@@ -3,6 +3,7 @@ import { Popover } from 'shared/ui-kit/Popover'
 import { SelectOptions } from 'shared/ui-kit/form-controls/select/select-options'
 import { SelectOption } from 'shared/ui-kit/form-controls/select/select-option'
 import { SelectValue } from 'shared/ui-kit/form-controls/select/select-value'
+import { SelectLabel } from 'shared/ui-kit/form-controls/select/select-label'
 import {
   SelectContext,
   type SelectContextValues,
@@ -51,6 +52,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
             <SelectValue>{placeholder}</SelectValue>
           </Popover.Trigger>
           <SelectOptions>
+            <SelectLabel>Label</SelectLabel>
             <SelectOption value="value1">value1</SelectOption>
             <SelectOption
               value="value2"
