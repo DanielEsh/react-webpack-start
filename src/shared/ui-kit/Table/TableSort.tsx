@@ -6,21 +6,13 @@ interface Props {
   direction: SortDirection | false
 }
 
-const Asc = () => (
-  <span>
-    <IconArrowUp />
-  </span>
-)
+const Asc = () => <IconArrowUp />
 
-const Desc = () => (
-  <span>
-    <IconArrowDown />
-  </span>
-)
+const Desc = () => <IconArrowDown />
 
 export const TableSort = ({ direction }: Props) => {
   return (
-    <div>
+    <div className="flex items-center">
       {{
         asc: <Asc />,
         desc: <Desc />,
