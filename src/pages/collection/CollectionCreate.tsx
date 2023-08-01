@@ -71,6 +71,11 @@ const CollectionsCreate = () => {
       opened={true}
       onClose={handleClose}
     >
+      <div>
+        <h2>Create Collection</h2>
+        <p>Create collection description</p>
+      </div>
+
       <Form
         className="mt-12 flex flex-col gap-2"
         methods={formMethods}
