@@ -22,10 +22,15 @@ const fade = {
   },
 }
 
+interface PopoverFloatingProps extends UiDefaultProps {
+  hideWhenLeave?: boolean
+}
+
 export const PopoverFloating = forwardRef<
   HTMLDivElement | null,
-  UiDefaultProps
->(({ children }, forwardedRef) => {
+  PopoverFloatingProps
+>((props, forwardedRef) => {
+  const { className, children, hideWhenLeave = true } = props
   const innerRef = useRef<any>(null)
 
   useImperativeHandle(forwardedRef, () => innerRef.current)
@@ -46,11 +51,11 @@ export const PopoverFloating = forwardRef<
   const composedRef = useComposedRefs(innerRef, floatingRef, outsideRef)
 
   const handleMouseEnter = () => {
-    clearCloseTimeout()
+    if (hideWhenLeave) clearCloseTimeout()
   }
 
   const handleMouseLeave = () => {
-    togglePopover(false)
+    if (hideWhenLeave) togglePopover(false)
   }
 
   return (
@@ -62,8 +67,9 @@ export const PopoverFloating = forwardRef<
             style={popoverStyles}
             variants={fade}
             {...fade}
-            // onMouseEnter={handleMouseEnter}
-            // onMouseLeave={handleMouseLeave}
+            className={className}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             {children}
 
