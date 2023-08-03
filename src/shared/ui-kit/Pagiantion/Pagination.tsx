@@ -21,7 +21,7 @@ export const Pagiantion = (props: Props) => {
   const renderItemComponent = renderPaginationElements(onChange)
 
   return (
-    <ul className="mt-6 flex gap-3">
+    <ul className="flex gap-3">
       {paginationModel.map((itemModel: PaginationModel) =>
         renderItemComponent(itemModel),
       )}

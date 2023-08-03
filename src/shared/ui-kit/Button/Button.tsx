@@ -1,6 +1,5 @@
 import { forwardRef, ButtonHTMLAttributes, ReactNode } from 'react'
 import { VariantProps, cva } from 'class-variance-authority'
-import { Ripple } from 'shared/ui-kit/Ripple'
 import { classNames } from 'shared/utils'
 
 const buttonVariants = cva(
@@ -16,7 +15,7 @@ const buttonVariants = cva(
       size: {
         default: 'h-10 py-2 px-4',
         xs: 'w-4 h-4 rounded-md',
-        sm: 'h-9 px-2 rounded-md',
+        sm: 'h-9 px-3 rounded-md',
         lg: 'h-11 px-8 rounded-md',
       },
     },
@@ -50,19 +49,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const classes = classNames(buttonVariants({ variant, size, className }))
 
     return (
-      <Ripple.Container
-        as="button"
+      <button
         ref={forwardedRef}
         className={classes}
         {...restProps}
       >
         {addonLeft && <span>{addonLeft}</span>}
-
         <span>{children}</span>
-
         {addonRight && <span>{addonRight}</span>}
-        <Ripple />
-      </Ripple.Container>
+      </button>
     )
   },
 )

@@ -27,15 +27,6 @@ export const PaginationElement = (props: PaginationElementProps) => {
   const getVariant = () => {
     let variants = {}
 
-    if (
-      type !== PaginationElementsType.PAGE &&
-      PaginationElementsType.ELLIPSIS
-    ) {
-      variants = {
-        variant: 'ghost',
-      }
-    }
-
     if (isActive) {
       variants = {
         variant: 'primary',
@@ -50,6 +41,7 @@ export const PaginationElement = (props: PaginationElementProps) => {
       <Button
         disabled={isDisabled}
         onClick={onClick}
+        size="sm"
         {...getVariant()}
       >
         {mergeContentToType[type]}
