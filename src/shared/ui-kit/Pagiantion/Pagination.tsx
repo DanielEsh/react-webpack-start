@@ -16,8 +16,6 @@ export const Pagiantion = (props: Props) => {
     currentPage: currentPage,
   })
 
-  console.log('MODEL', paginationModel)
-
   const renderItemComponent = renderPaginationElements(onChange)
 
   return (

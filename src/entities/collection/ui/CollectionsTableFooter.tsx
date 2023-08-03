@@ -1,5 +1,6 @@
 import { Pagiantion } from 'shared/ui-kit/Pagiantion/Pagination'
 import { BaseSelect, BaseSelectOption } from 'shared/ui/base-select'
+import { DataTablePageCounter } from 'shared/ui/data-table/data-table-page-counter'
 
 interface Props {
   totalItemsCount: number
@@ -48,9 +49,10 @@ export const CollectionsTableFooter = (props: Props) => {
             options={rowsPerPageOptions}
           />
         </div>
-        <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page 1 of 10
-        </div>
+        <DataTablePageCounter
+          totalPages={totalPages}
+          currentPage={currentPage}
+        />
 
         <Pagiantion
           totalPages={totalPages}
