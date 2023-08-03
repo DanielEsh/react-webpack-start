@@ -13,16 +13,16 @@ interface Props {
 
 const rowsPerPageOptions: BaseSelectOption[] = [
   {
-    value: 1,
-    label: '20',
+    value: 5,
+    label: '5',
   },
   {
-    value: 2,
-    label: '40',
+    value: 10,
+    label: '10',
   },
   {
-    value: 3,
-    label: '60',
+    value: 25,
+    label: '25',
   },
 ]
 
@@ -45,8 +45,9 @@ export const CollectionsTableFooter = (props: Props) => {
         <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">Rows per page</p>
           <BaseSelect
-            defaultValue="20"
+            defaultValue={rowPerPage}
             options={rowsPerPageOptions}
+            onChange={onRowPerPageChange}
           />
         </div>
         <DataTablePageCounter

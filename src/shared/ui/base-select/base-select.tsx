@@ -6,17 +6,18 @@ export type BaseSelectOption = {
 }
 
 export interface BaseSelectProps
-  extends Pick<SelectProps, 'defaultValue' | 'label'> {
+  extends Pick<SelectProps, 'defaultValue' | 'label' | 'onChange'> {
   options: BaseSelectOption[]
 }
 
 export const BaseSelect = (props: BaseSelectProps) => {
-  const { options, defaultValue, label } = props
+  const { options, defaultValue, label, onChange } = props
 
   return (
     <Select
       label={label}
       defaultValue={defaultValue}
+      onChange={onChange}
     >
       <Select.Value className="h-8 w-[70px]">Pick one</Select.Value>
       <Select.Options>

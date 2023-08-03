@@ -24,9 +24,9 @@ const CollectionsPage = () => {
 
   const { isLoading, isError, data } = useGetCollections(values)
 
-  const handleRowPerPageChange = (event: any) => {
-    setRowsPerPage(event.target.value)
-    setSearchParams({ limit: event.target.value })
+  const handleRowPerPageChange = (rowsPerPage: any) => {
+    setRowsPerPage(rowsPerPage)
+    setSearchParams({ limit: rowsPerPage })
   }
 
   const handlePageClick = (page: number) => {
