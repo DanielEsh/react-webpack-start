@@ -1,6 +1,6 @@
 import { useContext, ChangeEvent } from 'react'
 import { Column } from '@tanstack/react-table'
-import { TableContext } from 'shared/ui/Table/TableContext'
+import { TableContext } from 'shared/ui/DTable/TableContext'
 
 type BaseData = unknown | object
 

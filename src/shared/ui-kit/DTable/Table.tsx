@@ -6,13 +6,13 @@ import {
   SortingState,
 } from '@tanstack/react-table'
 
-import { TableHead } from 'shared/ui-kit/Table/TableHead'
-import { TableBody } from 'shared/ui-kit/Table/TableBody'
+import { TableHead } from 'shared/ui-kit/DTable/TableHead'
+import { TableBody } from 'shared/ui-kit/DTable/TableBody'
 import {
   TableContext,
   TableContextType,
-} from 'shared/ui-kit/Table/TableContext'
-import { BaseTableData, TableSort } from 'shared/ui-kit/Table/types'
+} from 'shared/ui-kit/DTable/TableContext'
+import { BaseTableData, TableSort } from 'shared/ui-kit/DTable/types'
 
 interface TableProps<TData> {
   localStorageKey: string

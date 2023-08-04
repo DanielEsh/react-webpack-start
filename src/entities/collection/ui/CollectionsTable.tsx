@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 
-import { Table } from 'shared/ui-kit/Table'
+import { Table } from 'shared/ui-kit/table'
 
 import { CollectionsTableActions } from './CollectionsTableActions'
 import { useDeleteCollectionMutation } from 'entities/collection/api'
@@ -91,20 +91,11 @@ export const CollectionsTable = (props: Props) => {
     },
   ]
 
-  const handleSort = (sort: any) => {
-    console.log('sort', sort)
-    onSortChange(sort)
-  }
-
   return (
     <div className="min-h-[284px]">
-      <Table<Collection>
-        localStorageKey="CollectionData"
-        data={items}
-        columns={columns}
-        sort={sort}
-        onSortChange={handleSort}
-      />
+      <Table>
+
+      </Table>
 
       <Dialog
         opened={opened}

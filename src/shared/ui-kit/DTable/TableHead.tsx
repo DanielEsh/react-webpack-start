@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { TableCellHead } from 'shared/ui-kit/Table/TableCellHead'
-import { TableContext } from 'shared/ui-kit/Table/TableContext'
+import { TableCellHead } from 'shared/ui-kit/DTable/TableCellHead'
+import { TableContext } from 'shared/ui-kit/DTable/TableContext'
 
 export const TableHead = () => {
   const context = useContext(TableContext)
