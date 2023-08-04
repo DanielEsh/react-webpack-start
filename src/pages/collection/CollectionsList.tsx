@@ -9,6 +9,7 @@ import {
 } from 'entities/collection'
 
 import { Values } from 'entities/collection/types'
+import { CollectionDataTable } from "entities/collection/ui/list-table/collection-data-table";
 
 type RowsPerPage = 5 | 10 | 25
 
@@ -87,13 +88,7 @@ const CollectionsPage = () => {
         {data && (
           <>
             <CollectionsTableHeader />
-            <CollectionsTable
-              currentPage={values.page}
-              sort={getTableSort()}
-              items={data.data}
-              rowPerPage={rowsPerPage}
-              onSortChange={handleSortChange}
-            />
+            <CollectionDataTable data={data.data} />
 
             <CollectionsTableFooter
               totalItemsCount={data.meta.pagination.totalItemsCount}
