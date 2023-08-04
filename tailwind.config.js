@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        border: 'var(--border)',
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',

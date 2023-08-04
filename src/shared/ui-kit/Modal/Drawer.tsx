@@ -9,7 +9,7 @@ export const Drawer = (props: DrawerProps) => {
 
   return (
     <Modal
-      className="absolute top-0 right-0 h-full w-[880px] bg-white p-4"
+      className="absolute top-0 right-0 h-full w-[880px] bg-white"
       opened={opened}
       onClose={onClose}
       {...restProps}

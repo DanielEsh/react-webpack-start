@@ -4,6 +4,8 @@
 
   --muted: 240 4.8% 95.9%;
   --muted-foreground: 240 3.8% 46.1%;
+
+  --border: #d4d2d2;
 }
 
 .dark {

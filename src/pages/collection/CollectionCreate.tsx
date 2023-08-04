@@ -72,32 +72,50 @@ const CollectionsCreate = () => {
       opened={true}
       onClose={handleClose}
     >
-      <div className="relative">
+      <div className="relative px-4 pt-4">
         <h2 className="font-weight-medium text-xl">Create Collection</h2>
         <CloseButton onClick={handleClose} />
       </div>
+      <div
+        role="none"
+        className="my-6 h-[1px] w-full shrink-0 bg-border"
+      />
 
       <Form
-        className="mt-12 flex flex-col gap-2"
+        className="flex flex-col"
         methods={formMethods}
         onSubmit={createNewCollection}
       >
-        <Form.Field name="slug">
-          <Input label="slug" />
-        </Form.Field>
-        <Form.Field name="name">
-          <Input label="name" />
-        </Form.Field>
-        <Form.Field name="description">
-          <TextArea label="description" />
-        </Form.Field>
+        <div className="flex flex-col gap-2 px-4">
+          <Form.Field name="slug">
+            <Input label="slug" />
+          </Form.Field>
+          <Form.Field name="name">
+            <Input label="name" />
+          </Form.Field>
+          <Form.Field name="description">
+            <TextArea label="description" />
+          </Form.Field>
+        </div>
 
-        <div>
+        <div
+          role="none"
+          className="my-6 h-[1px] w-full shrink-0 bg-border"
+        />
+        <div className="flex gap-2 px-4">
           <Button
+            size="lg"
             variant="primary"
             type="submit"
           >
             Create
+          </Button>
+          <Button
+            size="lg"
+            variant="ghost"
+            onClick={handleClose}
+          >
+            Close
           </Button>
         </div>
       </Form>
