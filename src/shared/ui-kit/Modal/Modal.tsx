@@ -2,7 +2,6 @@ import { Portal } from 'shared/ui-kit/Portal/Portal'
 import { classNames } from 'shared/utils'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside'
 import type { UiDefaultProps } from '../types'
-import { CloseButton } from './CloseButton'
 import { ModalOverlay } from './ModalOverlay'
 
 export interface ModalProps extends UiDefaultProps {
