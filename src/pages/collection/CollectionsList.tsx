@@ -9,7 +9,7 @@ import {
 } from 'entities/collection'
 
 import { Values } from 'entities/collection/types'
-import { CollectionDataTable } from "entities/collection/ui/list-table/collection-data-table";
+import { CollectionDataTable } from 'entities/collection/ui/list-table/collection-data-table'
 
 type RowsPerPage = 5 | 10 | 25
 
