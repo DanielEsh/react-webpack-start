@@ -8,7 +8,8 @@ interface Props {
 export const CloseButton = ({ onClick }: Props) => {
   return (
     <Button
-      className="absolute right-4"
+      className="absolute top-0 right-4"
+      size="sm"
       variant="ghost"
       onClick={onClick}
     >

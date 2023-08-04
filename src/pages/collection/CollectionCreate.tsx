@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { Form } from 'shared/ui-kit/form/form'
 import { Button } from 'shared/ui-kit/Button'
+import { CloseButton } from 'shared/ui-kit/Modal/CloseButton'
 
 const createCollectionFormSchema = z.object({
   slug: z.string().nonempty({
@@ -71,9 +72,9 @@ const CollectionsCreate = () => {
       opened={true}
       onClose={handleClose}
     >
-      <div>
-        <h2>Create Collection</h2>
-        <p>Create collection description</p>
+      <div className="relative">
+        <h2 className="font-weight-medium text-xl">Create Collection</h2>
+        <CloseButton onClick={handleClose} />
       </div>
 
       <Form

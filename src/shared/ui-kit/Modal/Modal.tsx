@@ -45,7 +45,6 @@ export const Modal = (props: ModalProps) => {
           ref={outsideRef}
           className={classes}
         >
-          <CloseButton onClick={handleClose} />
           {children}
         </div>
       </ModalOverlay>
