@@ -1,14 +1,18 @@
 import { Pagiantion } from 'shared/ui-kit/Pagiantion/Pagination'
 import { BaseSelect, BaseSelectOption } from 'shared/ui/base-select'
 import { DataTablePageCounter } from 'shared/ui/data-table/data-table-page-counter'
-
+import {
+  $collectionTableStore,
+  setCollectionTableValues,
+  type RowsPerPagesValues,
+} from 'entities/collection/model'
+import { useStore } from 'effector-react'
 interface Props {
   totalItemsCount: number
   rowPerPage: number
   currentPage: number
   totalPages: number
   onPageClick: (page: number) => void
-  onRowPerPageChange: (event: any) => void
 }
 
 const rowsPerPageOptions: BaseSelectOption[] = [
@@ -27,14 +31,15 @@ const rowsPerPageOptions: BaseSelectOption[] = [
 ]
 
 export const CollectionsTableFooter = (props: Props) => {
-  const {
-    totalItemsCount,
-    rowPerPage,
-    currentPage,
-    totalPages,
-    onPageClick,
-    onRowPerPageChange,
-  } = props
+  const { totalItemsCount, currentPage, totalPages, onPageClick } = props
+
+  const { limit } = useStore($collectionTableStore)
+
+  const handleRowPerPageChange = (limit: number | string) => {
+    setCollectionTableValues({
+      limit: Number(limit) as RowsPerPagesValues,
+    })
+  }
 
   return (
     <div className="mt-6 flex items-center justify-between px-2">
@@ -45,9 +50,9 @@ export const CollectionsTableFooter = (props: Props) => {
         <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">Rows per page</p>
           <BaseSelect
-            defaultValue={rowPerPage}
+            defaultValue={limit}
             options={rowsPerPageOptions}
-            onChange={onRowPerPageChange}
+            onChange={(value) => handleRowPerPageChange(value)}
           />
         </div>
         <DataTablePageCounter

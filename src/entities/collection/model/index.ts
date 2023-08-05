@@ -1,7 +1,7 @@
-import { createEvent, createStore, sample } from 'effector'
+import { createEvent, createStore, sample, merge } from 'effector'
 
 type DeleteIdState = number | null
-type RowsPerPagesValues = 5 | 10 | 25
+export type RowsPerPagesValues = 5 | 10 | 25
 
 export interface CollectionTableState {
   page?: number
@@ -43,9 +43,8 @@ export const $collectionTableStore = createStore<CollectionTableState>(
   defaultCollectionTableValues,
 )
 
-sample({
-  clock: setCollectionTableValues,
-  target: $collectionTableStore,
+$collectionTableStore.on(setCollectionTableValues, (state, updatedValues) => {
+  return { ...state, ...updatedValues }
 })
 
 $collectionTableStore.watch((state) => {
