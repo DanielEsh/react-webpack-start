@@ -29,6 +29,8 @@ export const CollectionDataTableColumnHeader = <TData, TValue>(
 
     return (
       <Button
+        className="-ml-3"
+        size="sm"
         variant="ghost"
         onClick={toggleSort}
       >
