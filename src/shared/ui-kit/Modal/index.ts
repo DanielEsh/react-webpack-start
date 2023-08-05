@@ -1,3 +1,2 @@
-import { Modal } from './Modal'
+export { Modal, ModalProps } from './Modal'
 
-export { Modal }

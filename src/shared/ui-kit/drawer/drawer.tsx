@@ -1,10 +1,10 @@
-import { Modal, type ModalProps } from './Modal'
+import { Modal, type ModalProps } from 'shared/ui-kit/Modal'
 
 export type DrawerProps = ModalProps
 
-const COMPONENT_NAME = 'Drawer'
+const COMPONENT_NAME = 'UiKitDrawer'
 
-export const Drawer = (props: DrawerProps) => {
+export const UiKitDrawer = (props: DrawerProps) => {
   const { opened, onClose, children, ...restProps } = props
 
   return (
@@ -19,4 +19,4 @@ export const Drawer = (props: DrawerProps) => {
   )
 }
 
-Drawer.displayName = COMPONENT_NAME
+UiKitDrawer.displayName = COMPONENT_NAME

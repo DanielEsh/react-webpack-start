@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Drawer } from 'shared/ui-kit/Modal/Drawer'
+import { UiKitDrawer } from 'shared/ui-kit/drawer'
 import { useCreateCollectionMutation } from 'entities/collection/api'
 import { useUpdateCollectionsList } from 'entities/collection'
 import { Input, TextArea } from 'shared/ui-kit/form-controls'
@@ -69,7 +69,7 @@ const CollectionsCreate = () => {
   }
 
   return (
-    <Drawer
+    <UiKitDrawer
       opened={true}
       onClose={handleClose}
     >
@@ -112,7 +112,7 @@ const CollectionsCreate = () => {
           </div>
         </div>
       </Form>
-    </Drawer>
+    </UiKitDrawer>
   )
 }
 
