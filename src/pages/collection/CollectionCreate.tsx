@@ -5,9 +5,8 @@ import { useUpdateCollectionsList } from 'entities/collection'
 import { z } from 'zod'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { Form } from 'shared/ui-kit/form/form'
-import { Button } from 'shared/ui-kit/Button'
 import { CollectionCreateFormFields } from 'entities/collection/ui/create/collection-create-form-fields'
-import { CollectionCreateFormActions } from "entities/collection/ui/create/collection-create-form-actions";
+import { CollectionCreateFormActions } from 'entities/collection/ui/create/collection-create-form-actions'
 
 const createCollectionFormSchema = z.object({
   slug: z.string().nonempty({
