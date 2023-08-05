@@ -28,7 +28,7 @@ const rowsPerPageOptions: BaseSelectOption[] = [
   },
 ]
 
-export const CollectionDataTableFooter = ({ totalPages, onChange }: Props) => {
+export const CollectionsDataTableFooter = ({ totalPages, onChange }: Props) => {
   const { currentPage, limit } = useStore($collectionTableStore)
 
   const handleLimitChange = (limit: number | string) => {
@@ -59,16 +59,20 @@ export const CollectionDataTableFooter = ({ totalPages, onChange }: Props) => {
             onChange={handleLimitChange}
           />
         </div>
-        <DataTablePageCounter
-          totalPages={totalPages}
-          currentPage={currentPage ?? 1}
-        />
+        {totalPages > 1 && (
+          <>
+            <DataTablePageCounter
+              totalPages={totalPages}
+              currentPage={currentPage ?? 1}
+            />
 
-        <Pagiantion
-          totalPages={totalPages}
-          currentPage={currentPage ?? 1}
-          onChange={handleCurrentPageChange}
-        />
+            <Pagiantion
+              totalPages={totalPages}
+              currentPage={currentPage ?? 1}
+              onChange={handleCurrentPageChange}
+            />
+          </>
+        )}
       </div>
     </div>
   )

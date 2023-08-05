@@ -1,3 +1,3 @@
 export { CollectionsDataTable } from './collections-data-table'
-export { CollectionsDataTableHeader } from './collection-data-table-header'
-export { CollectionDataTableFooter } from './collection-data-table-footer'
+export { CollectionsDataTableHeader } from './collections-data-table-header'
+export { CollectionsDataTableFooter } from './collections-data-table-footer'

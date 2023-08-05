@@ -1,18 +1,17 @@
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import { useStore } from 'effector-react'
 import {
-  ColumnDef,
   SortingState,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
 import { Table } from 'shared/ui-kit/table'
 import { Dialog } from 'shared/ui-kit/Modal/Dialog'
+import { columns } from 'entities/collection/ui/data-table/collections-data-table-columns'
 import { Collection } from 'entities/collection/types'
-import { CollectionsDataTableRowActions } from 'entities/collection/ui/data-table/collection-data-table-row-actions'
-import { CollectionDataTableColumnHeader } from 'entities/collection/ui/data-table/collection-data-table-column-header'
-import { useStore } from 'effector-react'
 import {
   $deleteIdStore,
   $confirmDialogVisible,
@@ -21,8 +20,6 @@ import {
   type CollectionTableState,
   setCollectionTableValues,
 } from 'entities/collection/model'
-import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
-import { columns } from 'entities/collection/ui/data-table/collections-data-table-columns'
 
 interface Props {
   data: Collection[]
@@ -30,9 +27,13 @@ interface Props {
 }
 
 export const CollectionsDataTable = ({ data, onChange }: Props) => {
-  function transformTableSortingToStoreValues(
+  const deletedId = useStore($deleteIdStore)
+  const opened = useStore($confirmDialogVisible)
+  const [sorting, setSorting] = useState<SortingState>([])
+
+  const transformTableSortingToStoreValues = (
     sorting: SortingState,
-  ): Pick<CollectionTableState, 'sortBy' | 'orderBy'> {
+  ): Pick<CollectionTableState, 'sortBy' | 'orderBy'> => {
     const initialValue = {
       sortBy: 'id',
       orderBy: 'asc',
@@ -45,10 +46,6 @@ export const CollectionsDataTable = ({ data, onChange }: Props) => {
       }
     }, initialValue)
   }
-
-  const deletedId = useStore($deleteIdStore)
-  const opened = useStore($confirmDialogVisible)
-  const [sorting, setSorting] = useState<SortingState>([])
 
   useIsomorphicLayoutEffect(() => {
     setCollectionTableValues(transformTableSortingToStoreValues(sorting))

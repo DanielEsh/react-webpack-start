@@ -1,5 +1,5 @@
 export {
   CollectionsDataTable,
   CollectionsDataTableHeader,
-  CollectionDataTableFooter,
+  CollectionsDataTableFooter,
 } from './data-table'

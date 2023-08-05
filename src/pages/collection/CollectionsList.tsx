@@ -4,7 +4,7 @@ import { Outlet, useSearchParams } from 'react-router-dom'
 import {
   CollectionsDataTable,
   CollectionsDataTableHeader,
-  CollectionDataTableFooter,
+  CollectionsDataTableFooter,
 } from 'entities/collection/ui'
 import {
   $collectionTableStore,
@@ -57,7 +57,7 @@ const CollectionsPage = () => {
               data={data.data}
               onChange={handleChange}
             />
-            <CollectionDataTableFooter
+            <CollectionsDataTableFooter
               totalPages={data.meta.pagination.totalPages}
               onChange={handleChange}
             />

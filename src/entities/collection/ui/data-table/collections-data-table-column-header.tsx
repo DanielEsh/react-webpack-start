@@ -9,7 +9,7 @@ interface Props<TData, TValue> {
   title: string
 }
 
-export const CollectionDataTableColumnHeader = <TData, TValue>(
+export const CollectionsDataTableColumnHeader = <TData, TValue>(
   props: Props<TData, TValue>,
 ) => {
   const { column, title } = props

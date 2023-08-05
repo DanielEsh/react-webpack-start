@@ -1,16 +1,16 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { Collection } from "entities/collection/types";
-import { CollectionDataTableColumnHeader } from "entities/collection/ui/data-table/collection-data-table-column-header";
-import { Table } from "shared/ui-kit/table";
-import { ReactNode } from "react";
-import { CollectionsDataTableRowActions } from "entities/collection/ui/data-table/collection-data-table-row-actions";
+import { ReactNode } from 'react'
+import { ColumnDef } from '@tanstack/react-table'
+import { Collection } from 'entities/collection/types'
+import { Table } from 'shared/ui-kit/table'
+import { CollectionsDataTableColumnHeader } from './collections-data-table-column-header'
+import { CollectionsDataTableRowActions } from './collections-data-table-row-actions'
 
 export const columns: ColumnDef<Collection>[] = [
   {
     id: 'id',
     accessorKey: 'id',
     header: ({ column }) => (
-      <CollectionDataTableColumnHeader
+      <CollectionsDataTableColumnHeader
         column={column}
         title="id"
       />
@@ -21,7 +21,7 @@ export const columns: ColumnDef<Collection>[] = [
     id: 'slug',
     accessorFn: ({ slug }) => slug,
     header: ({ column }) => (
-      <CollectionDataTableColumnHeader
+      <CollectionsDataTableColumnHeader
         column={column}
         title="slug"
       />
@@ -32,7 +32,7 @@ export const columns: ColumnDef<Collection>[] = [
     id: 'name',
     accessorFn: ({ name }) => name,
     header: ({ column }) => (
-      <CollectionDataTableColumnHeader
+      <CollectionsDataTableColumnHeader
         column={column}
         title="name"
       />
@@ -43,7 +43,7 @@ export const columns: ColumnDef<Collection>[] = [
     id: 'goodsCount',
     accessorFn: ({ goodsCount }) => goodsCount,
     header: ({ column }) => (
-      <CollectionDataTableColumnHeader
+      <CollectionsDataTableColumnHeader
         column={column}
         title="goods count"
       />
@@ -53,7 +53,7 @@ export const columns: ColumnDef<Collection>[] = [
   {
     id: 'actions',
     header: ({ column }) => (
-      <CollectionDataTableColumnHeader
+      <CollectionsDataTableColumnHeader
         column={column}
         title="actions"
       />
