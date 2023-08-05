@@ -39,12 +39,7 @@ export const _Select = (props: SelectProps) => {
 
   return (
     <SelectContext.Provider value={contextValue}>
-      <Popover
-        placement="bottom"
-        floatingClosable={false}
-      >
-        {children}
-      </Popover>
+      <Popover placement="bottom">{children}</Popover>
     </SelectContext.Provider>
   )
 }
