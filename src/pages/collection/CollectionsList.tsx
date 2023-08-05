@@ -26,7 +26,7 @@ const CollectionsPage = () => {
   })
 
   useEffect(() => {
-    if (searchParams) {
+    if (searchParams.get('currentPage')) {
       setCollectionTableValues({
         currentPage: Number(searchParams.get('currentPage')),
         limit: Number(searchParams.get('limit')) as any,
