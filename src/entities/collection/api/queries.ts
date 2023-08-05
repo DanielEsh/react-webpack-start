@@ -24,7 +24,6 @@ export const useGetCollections = (values: Values) => {
     onSuccess: (data) => {
       setCollectionTableValues({
         currentPage: data.meta.pagination.currentPage,
-        totalPages: data.meta.pagination.totalPages,
       })
     },
   })

@@ -8,6 +8,11 @@ import {
 } from 'entities/collection/model'
 import { useStore } from 'effector-react'
 
+interface Props {
+  totalPages: number
+  onChange: () => void
+}
+
 const rowsPerPageOptions: BaseSelectOption[] = [
   {
     value: 5,
@@ -23,19 +28,21 @@ const rowsPerPageOptions: BaseSelectOption[] = [
   },
 ]
 
-export const CollectionDataTableFooter = () => {
-  const { currentPage, limit, totalPages } = useStore($collectionTableStore)
+export const CollectionDataTableFooter = ({ totalPages, onChange }: Props) => {
+  const { currentPage, limit } = useStore($collectionTableStore)
 
   const handleLimitChange = (limit: number | string) => {
     setCollectionTableValues({
       limit: Number(limit) as RowsPerPagesValues,
     })
+    onChange()
   }
 
   const handleCurrentPageChange = (currentPage: number) => {
     setCollectionTableValues({
       currentPage: currentPage,
     })
+    onChange()
   }
 
   return (
@@ -53,12 +60,12 @@ export const CollectionDataTableFooter = () => {
           />
         </div>
         <DataTablePageCounter
-          totalPages={totalPages ?? 0}
+          totalPages={totalPages}
           currentPage={currentPage ?? 1}
         />
 
         <Pagiantion
-          totalPages={totalPages ?? 0}
+          totalPages={totalPages}
           currentPage={currentPage ?? 1}
           onChange={handleCurrentPageChange}
         />

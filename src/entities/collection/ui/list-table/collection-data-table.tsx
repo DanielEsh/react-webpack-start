@@ -24,9 +24,10 @@ import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutE
 
 interface Props {
   data: Collection[]
+  onChange: () => void
 }
 
-export const CollectionDataTable = ({ data }: Props) => {
+export const CollectionDataTable = ({ data, onChange }: Props) => {
   const columns: ColumnDef<Collection>[] = [
     {
       id: 'id',
@@ -107,6 +108,7 @@ export const CollectionDataTable = ({ data }: Props) => {
 
   useIsomorphicLayoutEffect(() => {
     setCollectionTableValues(transformTableSortingToStoreValues(sorting))
+    onChange()
   }, [sorting])
 
   const table = useReactTable({

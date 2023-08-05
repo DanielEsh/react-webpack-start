@@ -1,17 +1,22 @@
 import { useGetCollections } from 'entities/collection/api'
 
-import { Outlet } from 'react-router-dom'
+import { Outlet, useSearchParams } from 'react-router-dom'
 import {
   CollectionDataTable,
   CollectionsDataTableHeader,
   CollectionDataTableFooter,
 } from 'entities/collection/ui'
-import { $collectionTableStore } from 'entities/collection/model'
-
+import {
+  $collectionTableStore,
+  setCollectionTableValues,
+} from 'entities/collection/model'
 import { useStore } from 'effector-react'
+import qs from 'qs'
+import { useEffect } from 'react'
 
 const CollectionsPage = () => {
   const values = useStore($collectionTableStore)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const { isLoading, isError, data } = useGetCollections({
     page: values.currentPage ?? 1,
@@ -19,6 +24,22 @@ const CollectionsPage = () => {
     sort_by: [values.sortBy ?? 'id'],
     order_by: [values.orderBy ?? 'asc'],
   })
+
+  useEffect(() => {
+    if (searchParams) {
+      setCollectionTableValues({
+        currentPage: Number(searchParams.get('currentPage')),
+        limit: Number(searchParams.get('limit')) as any,
+        sortBy: String(searchParams.get('sortBy')),
+        orderBy: String(searchParams.get('orderBy')),
+      })
+    }
+  }, [])
+
+  const handleChange = () => {
+    const string = qs.stringify($collectionTableStore.getState())
+    setSearchParams(string)
+  }
 
   return (
     <div>
@@ -32,8 +53,14 @@ const CollectionsPage = () => {
         {data && (
           <>
             <CollectionsDataTableHeader />
-            <CollectionDataTable data={data.data} />
-            <CollectionDataTableFooter />
+            <CollectionDataTable
+              data={data.data}
+              onChange={handleChange}
+            />
+            <CollectionDataTableFooter
+              totalPages={data.meta.pagination.totalPages}
+              onChange={handleChange}
+            />
           </>
         )}
       </div>

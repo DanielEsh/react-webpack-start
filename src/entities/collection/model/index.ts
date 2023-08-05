@@ -1,11 +1,10 @@
-import { createEvent, createStore, sample, merge } from 'effector'
+import { createEvent, createStore, sample } from 'effector'
 
 type DeleteIdState = number | null
 export type RowsPerPagesValues = 5 | 10 | 25
 
 export interface CollectionTableState {
   currentPage?: number
-  totalPages?: number
   limit?: RowsPerPagesValues
   sortBy?: string
   orderBy?: string
