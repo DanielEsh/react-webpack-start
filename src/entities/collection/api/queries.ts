@@ -7,6 +7,7 @@ import {
   deleteCollection,
 } from './requests'
 import { UpdateCollectionForm } from 'entities/collection/types'
+import { setCollectionTableValues } from "entities/collection/model";
 
 interface Values {
   page: number
@@ -20,6 +21,12 @@ export const useGetCollections = (values: Values) => {
     queryKey: ['collections', values],
     queryFn: () => getCollections(values),
     keepPreviousData: true,
+    onSuccess: (data) => {
+      setCollectionTableValues({
+        currentPage: data.meta.pagination.currentPage,
+        totalPages: data.meta.pagination.totalPages,
+      })
+    },
   })
 }
 

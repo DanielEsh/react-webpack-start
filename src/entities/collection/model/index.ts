@@ -5,6 +5,7 @@ export type RowsPerPagesValues = 5 | 10 | 25
 
 export interface CollectionTableState {
   currentPage?: number
+  totalPages?: number
   limit?: RowsPerPagesValues
   sortBy?: string
   orderBy?: string
