@@ -4,14 +4,19 @@ import { Button } from 'shared/ui-kit/Button'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
 import { Collection } from 'entities/collection/types'
+import { setDeleteId, toggleConfirmDialog } from 'entities/collection/model'
 
 interface Props {
   row: Row<Collection>
-  onDelete: (deletedId: number) => void
 }
 
-export const CollectionsDataTableRowActions = ({ row, onDelete }: Props) => {
+export const CollectionsDataTableRowActions = ({ row }: Props) => {
   const { id } = row.original
+
+  const handleDeleteClick = () => {
+    setDeleteId(id)
+    toggleConfirmDialog(true)
+  }
 
   return (
     <div className="flex justify-end gap-1">
@@ -27,7 +32,7 @@ export const CollectionsDataTableRowActions = ({ row, onDelete }: Props) => {
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => onDelete(id)}
+        onClick={handleDeleteClick}
       >
         <IconTrash />
       </Button>

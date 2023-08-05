@@ -7,11 +7,17 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 import { Table } from 'shared/ui-kit/table'
 import { Dialog } from 'shared/ui-kit/Modal/Dialog'
 import { Collection } from 'entities/collection/types'
 import { CollectionsDataTableRowActions } from 'entities/collection/ui/list-table/collection-data-table-row-actions'
+import { useStore } from 'effector-react'
+import {
+  $deleteIdStore,
+  $confirmDialogVisible,
+  toggleConfirmDialog,
+  setDeleteId,
+} from 'entities/collection/model'
 
 interface Props {
   data: Collection[]
@@ -66,19 +72,14 @@ export const CollectionDataTable = ({ data }: Props) => {
           <span>actions</span>
         </Table.ColumnHeader>
       ),
-      cell: ({ row }) => (
-        <CollectionsDataTableRowActions
-          row={row}
-          onDelete={showConfirmDeleteDialog}
-        />
-      ),
+      cell: ({ row }) => <CollectionsDataTableRowActions row={row} />,
       enableSorting: false,
     },
   ]
 
-  const [opened, { open, close }] = useDisclosure(false)
+  const deletedId = useStore($deleteIdStore)
+  const opened = useStore($confirmDialogVisible)
   const [sorting, setSorting] = useState<SortingState>([])
-  const [deleteId, setDeleteId] = useState<number | null>(null)
 
   const table = useReactTable({
     data,
@@ -92,12 +93,13 @@ export const CollectionDataTable = ({ data }: Props) => {
   })
 
   const handleConfirmDelete = () => {
-    console.log('handleConfirmDelete', deleteId)
+    console.log('handleConfirmDelete', deletedId)
+    setDeleteId(null)
   }
 
-  function showConfirmDeleteDialog(id: number) {
-    setDeleteId(id)
-    open()
+  const handleCloseDialog = () => {
+    setDeleteId(null)
+    toggleConfirmDialog(false)
   }
 
   return (
@@ -142,7 +144,7 @@ export const CollectionDataTable = ({ data }: Props) => {
 
       <Dialog
         opened={opened}
-        onClose={close}
+        onClose={handleCloseDialog}
         onConfirm={handleConfirmDelete}
       />
     </div>
