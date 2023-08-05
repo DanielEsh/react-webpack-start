@@ -30,7 +30,6 @@ export const CollectionsDataTable = ({ data, onChange }: Props) => {
   const deletedId = useStore($deleteIdStore)
   const opened = useStore($confirmDialogVisible)
   const [sorting, setSorting] = useState<SortingState>([])
-
   const transformTableSortingToStoreValues = (
     sorting: SortingState,
   ): Pick<CollectionTableState, 'sortBy' | 'orderBy'> => {

@@ -72,51 +72,55 @@ const CollectionsCreate = () => {
       opened={true}
       onClose={handleClose}
     >
-      <div className="relative px-4 pt-4">
-        <h2 className="font-weight-medium text-xl">Create Collection</h2>
-        <CloseButton onClick={handleClose} />
-      </div>
-      <div
-        role="none"
-        className="my-6 h-[1px] w-full shrink-0 bg-border"
-      />
-
       <Form
-        className="flex flex-col"
+        className="flex h-full flex-col"
         methods={formMethods}
         onSubmit={createNewCollection}
       >
-        <div className="flex flex-col gap-4 px-4">
-          <Form.Field name="slug">
-            <Input label="slug" />
-          </Form.Field>
-          <Form.Field name="name">
-            <Input label="name" />
-          </Form.Field>
-          <Form.Field name="description">
-            <TextArea label="description" />
-          </Form.Field>
+        <div className="relative px-4 pt-4">
+          <h2 className="font-weight-medium text-xl">Create Collection</h2>
+          <CloseButton onClick={handleClose} />
         </div>
-
         <div
           role="none"
           className="my-6 h-[1px] w-full shrink-0 bg-border"
         />
-        <div className="flex gap-2 px-4">
-          <Button
-            size="lg"
-            variant="primary"
-            type="submit"
-          >
-            Create
-          </Button>
-          <Button
-            size="lg"
-            variant="ghost"
-            onClick={handleClose}
-          >
-            Close
-          </Button>
+
+        <div className="flex flex-col">
+          <div className="px-4">
+            <Form.Field name="slug">
+              <Input label="slug" />
+            </Form.Field>
+            <Form.Field name="name">
+              <Input label="name" />
+            </Form.Field>
+            <Form.Field name="description">
+              <TextArea label="description" />
+            </Form.Field>
+          </div>
+        </div>
+
+        <div className="mt-auto">
+          <div
+            role="none"
+            className="mb-6 h-[1px] w-full shrink-0 bg-border"
+          />
+          <div className="flex gap-2 px-4 pb-6">
+            <Button
+              size="lg"
+              variant="primary"
+              type="submit"
+            >
+              Create
+            </Button>
+            <Button
+              size="lg"
+              variant="ghost"
+              onClick={handleClose}
+            >
+              Close
+            </Button>
+          </div>
         </div>
       </Form>
     </Drawer>
