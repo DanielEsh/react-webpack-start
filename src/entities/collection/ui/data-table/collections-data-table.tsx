@@ -10,82 +10,26 @@ import {
 import { Table } from 'shared/ui-kit/table'
 import { Dialog } from 'shared/ui-kit/Modal/Dialog'
 import { Collection } from 'entities/collection/types'
-import { CollectionsDataTableRowActions } from 'entities/collection/ui/list-table/collection-data-table-row-actions'
-import { CollectionDataTableColumnHeader } from 'entities/collection/ui/list-table/collection-data-table-column-header'
+import { CollectionsDataTableRowActions } from 'entities/collection/ui/data-table/collection-data-table-row-actions'
+import { CollectionDataTableColumnHeader } from 'entities/collection/ui/data-table/collection-data-table-column-header'
 import { useStore } from 'effector-react'
 import {
   $deleteIdStore,
   $confirmDialogVisible,
   toggleConfirmDialog,
   setDeleteId,
-  type CollectionTableState, setCollectionTableValues
-} from "entities/collection/model";
+  type CollectionTableState,
+  setCollectionTableValues,
+} from 'entities/collection/model'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
+import { columns } from 'entities/collection/ui/data-table/collections-data-table-columns'
 
 interface Props {
   data: Collection[]
   onChange: () => void
 }
 
-export const CollectionDataTable = ({ data, onChange }: Props) => {
-  const columns: ColumnDef<Collection>[] = [
-    {
-      id: 'id',
-      accessorKey: 'id',
-      header: ({ column }) => (
-        <CollectionDataTableColumnHeader
-          column={column}
-          title="id"
-        />
-      ),
-      cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
-    },
-    {
-      id: 'slug',
-      accessorFn: ({ slug }) => slug,
-      header: ({ column }) => (
-        <CollectionDataTableColumnHeader
-          column={column}
-          title="slug"
-        />
-      ),
-      cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
-    },
-    {
-      id: 'name',
-      accessorFn: ({ name }) => name,
-      header: ({ column }) => (
-        <CollectionDataTableColumnHeader
-          column={column}
-          title="name"
-        />
-      ),
-      cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
-    },
-    {
-      id: 'goodsCount',
-      accessorFn: ({ goodsCount }) => goodsCount,
-      header: ({ column }) => (
-        <CollectionDataTableColumnHeader
-          column={column}
-          title="goods count"
-        />
-      ),
-      cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
-    },
-    {
-      id: 'actions',
-      header: ({ column }) => (
-        <CollectionDataTableColumnHeader
-          column={column}
-          title="actions"
-        />
-      ),
-      cell: ({ row }) => <CollectionsDataTableRowActions row={row} />,
-      enableSorting: false,
-    },
-  ]
-
+export const CollectionsDataTable = ({ data, onChange }: Props) => {
   function transformTableSortingToStoreValues(
     sorting: SortingState,
   ): Pick<CollectionTableState, 'sortBy' | 'orderBy'> {

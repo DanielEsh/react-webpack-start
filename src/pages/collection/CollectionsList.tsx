@@ -2,7 +2,7 @@ import { useGetCollections } from 'entities/collection/api'
 
 import { Outlet, useSearchParams } from 'react-router-dom'
 import {
-  CollectionDataTable,
+  CollectionsDataTable,
   CollectionsDataTableHeader,
   CollectionDataTableFooter,
 } from 'entities/collection/ui'
@@ -53,7 +53,7 @@ const CollectionsPage = () => {
         {data && (
           <>
             <CollectionsDataTableHeader />
-            <CollectionDataTable
+            <CollectionsDataTable
               data={data.data}
               onChange={handleChange}
             />

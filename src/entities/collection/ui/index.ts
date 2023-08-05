@@ -1,5 +1,5 @@
 export {
-  CollectionDataTable,
+  CollectionsDataTable,
   CollectionsDataTableHeader,
   CollectionDataTableFooter,
-} from './list-table'
+} from './data-table'
