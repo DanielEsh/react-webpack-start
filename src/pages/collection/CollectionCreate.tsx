@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom'
-import { UiKitDrawer } from 'shared/ui-kit/drawer'
+import { Drawer } from 'shared/ui-kit/drawer'
 import { useCreateCollectionMutation } from 'entities/collection/api'
 import { useUpdateCollectionsList } from 'entities/collection'
-import { Input, TextArea } from 'shared/ui-kit/form-controls'
 import { z } from 'zod'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { Form } from 'shared/ui-kit/form/form'
 import { Button } from 'shared/ui-kit/Button'
-import { CloseButton } from 'shared/ui-kit/Modal/CloseButton'
-import { CollectionCreateFormFelds } from "entities/collection/ui/create/collection-create-form-fields";
+import { CollectionCreateFormFelds } from 'entities/collection/ui/create/collection-create-form-fields'
 
 const createCollectionFormSchema = z.object({
   slug: z.string().nonempty({
@@ -69,7 +67,7 @@ const CollectionsCreate = () => {
   }
 
   return (
-    <UiKitDrawer
+    <Drawer
       opened={true}
       onClose={handleClose}
     >
@@ -78,22 +76,13 @@ const CollectionsCreate = () => {
         methods={formMethods}
         onSubmit={createNewCollection}
       >
-        <div className="relative px-4 pt-4">
+        <Drawer.Header>
           <h2 className="font-weight-medium text-xl">Create Collection</h2>
-          <CloseButton onClick={handleClose} />
-        </div>
-        <div
-          role="none"
-          className="my-6 h-[1px] w-full shrink-0 bg-border"
-        />
+        </Drawer.Header>
 
         <CollectionCreateFormFelds />
 
-        <div className="mt-auto">
-          <div
-            role="none"
-            className="mb-6 h-[1px] w-full shrink-0 bg-border"
-          />
+        <Drawer.Footer>
           <div className="flex gap-2 px-4 pb-6">
             <Button
               size="lg"
@@ -110,9 +99,9 @@ const CollectionsCreate = () => {
               Close
             </Button>
           </div>
-        </div>
+        </Drawer.Footer>
       </Form>
-    </UiKitDrawer>
+    </Drawer>
   )
 }
 

@@ -1,10 +1,13 @@
 import { Modal, type ModalProps } from 'shared/ui-kit/Modal'
 
+import { DrawerHeader } from './drawer-header'
+import { DrawerFooter } from './drawer-footer'
+
 export type DrawerProps = ModalProps
 
-const COMPONENT_NAME = 'UiKitDrawer'
+const COMPONENT_NAME = 'Drawer'
 
-export const UiKitDrawer = (props: DrawerProps) => {
+export const Drawer = (props: DrawerProps) => {
   const { opened, onClose, children, ...restProps } = props
 
   return (
@@ -19,4 +22,7 @@ export const UiKitDrawer = (props: DrawerProps) => {
   )
 }
 
-UiKitDrawer.displayName = COMPONENT_NAME
+Drawer.displayName = COMPONENT_NAME
+
+Drawer.Header = DrawerHeader
+Drawer.Footer = DrawerFooter

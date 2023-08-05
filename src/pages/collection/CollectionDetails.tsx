@@ -3,7 +3,7 @@ import {
   useGetCollectionDetails,
   useUpdateCollectionMutation,
 } from 'entities/collection/api'
-import { UiKitDrawer } from 'shared/ui-kit/drawer'
+import { Drawer } from 'shared/ui-kit/drawer'
 import { CollectionUpdateForm } from 'entities/collection'
 import { UpdateCollectionForm } from 'entities/collection/types'
 
@@ -34,7 +34,7 @@ const CollectionPage = () => {
   }
 
   return (
-    <UiKitDrawer
+    <Drawer
       opened={true}
       onClose={handleClose}
     >
@@ -50,7 +50,7 @@ const CollectionPage = () => {
           onSubmit={handleUpdate}
         />
       )}
-    </UiKitDrawer>
+    </Drawer>
   )
 }
 

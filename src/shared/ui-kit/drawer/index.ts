@@ -1,1 +1,1 @@
-export { UiKitDrawer, type DrawerProps } from './drawer'
+export { Drawer, type DrawerProps } from './drawer'
