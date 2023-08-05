@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import {
   ColumnDef,
   SortingState,
@@ -18,7 +18,9 @@ import {
   $confirmDialogVisible,
   toggleConfirmDialog,
   setDeleteId,
-} from 'entities/collection/model'
+  type CollectionTableState, setCollectionTableValues
+} from "entities/collection/model";
+import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
 
 interface Props {
   data: Collection[]
@@ -83,9 +85,29 @@ export const CollectionDataTable = ({ data }: Props) => {
     },
   ]
 
+  function transformTableSortingToStoreValues(
+    sorting: SortingState,
+  ): Pick<CollectionTableState, 'sortBy' | 'orderBy'> {
+    const initialValue = {
+      sortBy: 'id',
+      orderBy: 'asc',
+    }
+
+    return sorting.reduce((acc, item) => {
+      return {
+        sortBy: item.id,
+        orderBy: item.desc ? 'desc' : 'asc',
+      }
+    }, initialValue)
+  }
+
   const deletedId = useStore($deleteIdStore)
   const opened = useStore($confirmDialogVisible)
   const [sorting, setSorting] = useState<SortingState>([])
+
+  useIsomorphicLayoutEffect(() => {
+    setCollectionTableValues(transformTableSortingToStoreValues(sorting))
+  }, [sorting])
 
   const table = useReactTable({
     data,
