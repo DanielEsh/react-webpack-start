@@ -6,7 +6,8 @@ import { z } from 'zod'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { Form } from 'shared/ui-kit/form/form'
 import { Button } from 'shared/ui-kit/Button'
-import { CollectionCreateFormFelds } from 'entities/collection/ui/create/collection-create-form-fields'
+import { CollectionCreateFormFields } from 'entities/collection/ui/create/collection-create-form-fields'
+import { CollectionCreateFormActions } from "entities/collection/ui/create/collection-create-form-actions";
 
 const createCollectionFormSchema = z.object({
   slug: z.string().nonempty({
@@ -22,7 +23,7 @@ type CreateCollectionFormType = z.infer<typeof createCollectionFormSchema>
 
 const CollectionsCreate = () => {
   const navigate = useNavigate()
-  const { isLoading: isCreating, mutate: createCollection } =
+  const { isLoading: isCreating, mutate: createCollectionMutation } =
     useCreateCollectionMutation()
 
   const { updateCollectionsList } = useUpdateCollectionsList()
@@ -60,7 +61,7 @@ const CollectionsCreate = () => {
   }
 
   async function createNewCollection(form: CreateCollectionFormType) {
-    return createCollection(form, {
+    return createCollectionMutation(form, {
       onSuccess: (data) => handleSuccessCreate(data),
       onError: handleErrorCreate,
     })
@@ -80,25 +81,10 @@ const CollectionsCreate = () => {
           <h2 className="font-weight-medium text-xl">Create Collection</h2>
         </Drawer.Header>
 
-        <CollectionCreateFormFelds />
+        <CollectionCreateFormFields />
 
         <Drawer.Footer>
-          <div className="flex gap-2 px-4 pb-6">
-            <Button
-              size="lg"
-              variant="primary"
-              type="submit"
-            >
-              Create
-            </Button>
-            <Button
-              size="lg"
-              variant="ghost"
-              onClick={handleClose}
-            >
-              Close
-            </Button>
-          </div>
+          <CollectionCreateFormActions onCancel={handleClose} />
         </Drawer.Footer>
       </Form>
     </Drawer>

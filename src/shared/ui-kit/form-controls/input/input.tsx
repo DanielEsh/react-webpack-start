@@ -58,7 +58,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <label onBlur={() => handleFocusManagement(false)}>
-        <div className="relative h-full w-full">
+        <div className="relative h-14 w-full">
           <input
             value={internalValue}
             type={type}
