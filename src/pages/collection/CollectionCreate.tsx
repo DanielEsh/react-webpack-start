@@ -8,6 +8,7 @@ import { useForm } from 'shared/ui-kit/form/use-form'
 import { Form } from 'shared/ui-kit/form/form'
 import { Button } from 'shared/ui-kit/Button'
 import { CloseButton } from 'shared/ui-kit/Modal/CloseButton'
+import { CollectionCreateFormFelds } from "entities/collection/ui/create/collection-create-form-fields";
 
 const createCollectionFormSchema = z.object({
   slug: z.string().nonempty({
@@ -86,19 +87,7 @@ const CollectionsCreate = () => {
           className="my-6 h-[1px] w-full shrink-0 bg-border"
         />
 
-        <div className="flex flex-col">
-          <div className="px-4">
-            <Form.Field name="slug">
-              <Input label="slug" />
-            </Form.Field>
-            <Form.Field name="name">
-              <Input label="name" />
-            </Form.Field>
-            <Form.Field name="description">
-              <TextArea label="description" />
-            </Form.Field>
-          </div>
-        </div>
+        <CollectionCreateFormFelds />
 
         <div className="mt-auto">
           <div
