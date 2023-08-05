@@ -4,7 +4,7 @@ type DeleteIdState = number | null
 export type RowsPerPagesValues = 5 | 10 | 25
 
 export interface CollectionTableState {
-  page?: number
+  currentPage?: number
   limit?: RowsPerPagesValues
   sortBy?: string
   orderBy?: string
@@ -31,7 +31,7 @@ $deleteIdStore.watch((deleteId) => {
 })
 
 const defaultCollectionTableValues: CollectionTableState = {
-  page: 1,
+  currentPage: 1,
   limit: 5,
   sortBy: 'id',
   orderBy: 'asc',

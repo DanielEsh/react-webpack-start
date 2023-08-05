@@ -10,9 +10,7 @@ import { useStore } from 'effector-react'
 interface Props {
   totalItemsCount: number
   rowPerPage: number
-  currentPage: number
   totalPages: number
-  onPageClick: (page: number) => void
 }
 
 const rowsPerPageOptions: BaseSelectOption[] = [
@@ -31,13 +29,19 @@ const rowsPerPageOptions: BaseSelectOption[] = [
 ]
 
 export const CollectionsTableFooter = (props: Props) => {
-  const { totalItemsCount, currentPage, totalPages, onPageClick } = props
+  const { totalItemsCount, totalPages } = props
 
-  const { limit } = useStore($collectionTableStore)
+  const { currentPage, limit } = useStore($collectionTableStore)
 
-  const handleRowPerPageChange = (limit: number | string) => {
+  const handleLimitChange = (limit: number | string) => {
     setCollectionTableValues({
       limit: Number(limit) as RowsPerPagesValues,
+    })
+  }
+
+  const handleCurrentPageChange = (currentPage: number) => {
+    setCollectionTableValues({
+      currentPage: currentPage,
     })
   }
 
@@ -52,18 +56,18 @@ export const CollectionsTableFooter = (props: Props) => {
           <BaseSelect
             defaultValue={limit}
             options={rowsPerPageOptions}
-            onChange={(value) => handleRowPerPageChange(value)}
+            onChange={handleLimitChange}
           />
         </div>
         <DataTablePageCounter
           totalPages={totalPages}
-          currentPage={currentPage}
+          currentPage={currentPage ?? 1}
         />
 
         <Pagiantion
           totalPages={totalPages}
-          currentPage={currentPage}
-          onChange={onPageClick}
+          currentPage={currentPage ?? 1}
+          onChange={handleCurrentPageChange}
         />
       </div>
     </div>
