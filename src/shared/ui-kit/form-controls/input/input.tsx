@@ -15,18 +15,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       label,
       className,
       type = 'text',
-      value: externalValue,
+      value,
       onChange,
       invalid,
       placeholder,
       ...restProps
     } = props
 
-    const [internalValue, setInternalValue] = useState(externalValue)
     const [isFocused, setFocused] = useState(false)
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      setInternalValue(event.target.value)
       onChange && onChange(event)
     }
 
@@ -51,7 +49,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       'absolute left-3 top-1/2 -translate-y-1/2 bg-white transition-all duration-150 ease-linear',
       {
         ['left-0 top-0 -translate-y-1/2 scale-75 px-2']:
-          isFocused || internalValue || placeholder,
+          isFocused || value || placeholder,
         ['text-red-500']: invalid,
       },
     )
@@ -60,7 +58,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <label onBlur={() => handleFocusManagement(false)}>
         <div className="relative h-14 w-full">
           <input
-            value={internalValue}
+            value={value}
             type={type}
             className={classes}
             ref={forwardedRef}

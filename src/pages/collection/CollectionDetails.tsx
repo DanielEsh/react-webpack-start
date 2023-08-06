@@ -8,8 +8,9 @@ import { CollectionUpdateForm } from 'entities/collection'
 import { UpdateCollectionForm } from 'entities/collection/types'
 import { Form } from 'shared/ui-kit/form'
 import { Button } from 'shared/ui-kit/Button'
-import { z } from "zod";
-import { useForm } from "shared/ui-kit/form/use-form";
+import { z } from 'zod'
+import { useForm } from 'shared/ui-kit/form/use-form'
+import { useEffect, useMemo } from 'react'
 
 const updateCollectionFormSchema = z.object({
   slug: z.string().nonempty({
@@ -29,9 +30,23 @@ const CollectionPage = () => {
   const { isLoading, isError, data } = useGetCollectionDetails(Number(id))
   const { mutate: updateCollection } = useUpdateCollectionMutation()
 
+  const defaultValues = useMemo<UpdateCollectionFormType>(() => {
+    return {
+      slug: data?.slug ?? '',
+      name: data?.name ?? '',
+    }
+  }, [data])
+
   const formMethods = useForm<UpdateCollectionFormType>(
     updateCollectionFormSchema,
+    defaultValues,
   )
+
+  const { reset } = formMethods
+
+  useEffect(() => {
+    reset(data)
+  }, [data])
 
   const handleClose = () => {
     navigate('/collections')
