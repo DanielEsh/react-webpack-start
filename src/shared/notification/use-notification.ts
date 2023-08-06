@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { NotificationContext } from 'shared/notification/NotificationContext'
+import { NotificationContext } from 'shared/notification/notification-context'
 
 export function useNotification() {
   const {

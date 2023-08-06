@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext } from 'react'
-import { useNotificationsState } from './NotificationsState'
+import { useNotificationsState } from './notifications-state'
 import { CreatedNotification, Notification } from './types'
 
 export interface NotificationContextType {

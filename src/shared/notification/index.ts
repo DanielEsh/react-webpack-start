@@ -1,8 +1,8 @@
-export { NotificationRoot } from './NotificationRoot'
+export { NotificationRoot } from './notification-root'
 export {
   NotificationContext,
   NotificationProvider,
-} from './NotificationContext'
+} from './notification-context'
 export type { Notification } from './types'
 
-export { useNotification } from './useNotification'
+export { useNotification } from './use-notification'
