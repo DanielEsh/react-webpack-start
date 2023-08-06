@@ -2,7 +2,7 @@ import { Portal } from 'shared/ui-kit/Portal/Portal'
 import { classNames } from 'shared/utils'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside'
 import type { UiDefaultProps } from '../types'
-import { ModalOverlay } from './ModalOverlay'
+import { ModalOverlay } from './modal-overlay'
 import { ModalContext } from './modal-context'
 import { ModalHeader } from './modal-header'
 

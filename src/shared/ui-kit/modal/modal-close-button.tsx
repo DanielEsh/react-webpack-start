@@ -5,7 +5,7 @@ interface Props {
   onClick: () => void
 }
 
-export const CloseButton = ({ onClick }: Props) => {
+export const ModalCloseButton = ({ onClick }: Props) => {
   return (
     <Button
       className="absolute top-2 right-4"

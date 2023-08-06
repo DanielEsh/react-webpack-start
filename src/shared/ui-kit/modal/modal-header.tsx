@@ -1,14 +1,14 @@
 import { useContext } from 'react'
 import { ModalContext } from './modal-context'
 import { UiDefaultProps } from 'shared/ui-kit/types'
-import { CloseButton } from 'shared/ui-kit/modal/CloseButton'
+import { ModalCloseButton } from 'shared/ui-kit/modal/modal-close-button'
 
 export const ModalHeader = ({ className, children }: UiDefaultProps) => {
   const { onClose } = useContext(ModalContext)
 
   return (
     <header className={className}>
-      <CloseButton onClick={onClose} />
+      <ModalCloseButton onClick={onClose} />
       {children}
     </header>
   )
