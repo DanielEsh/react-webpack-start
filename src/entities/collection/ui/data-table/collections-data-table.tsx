@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useStore } from 'effector-react'
 import {
   SortingState,
@@ -20,6 +20,9 @@ import {
   type CollectionTableState,
   setCollectionTableValues,
 } from 'entities/collection/model'
+import { useDeleteCollectionMutation } from 'entities/collection/api'
+import { NotificationContext } from 'shared/notification'
+import { useUpdateCollectionsList } from "entities/collection";
 
 interface Props {
   data: Collection[]
@@ -29,6 +32,11 @@ interface Props {
 export const CollectionsDataTable = ({ data, onChange }: Props) => {
   const deletedId = useStore($deleteIdStore)
   const opened = useStore($confirmDialogVisible)
+
+  const { updateCollectionsList } = useUpdateCollectionsList()
+  const { mutate: deleteCollectionMutation } = useDeleteCollectionMutation()
+  const { showNotification } = useContext(NotificationContext)
+
   const [sorting, setSorting] = useState<SortingState>([])
   const transformTableSortingToStoreValues = (
     sorting: SortingState,
@@ -62,9 +70,20 @@ export const CollectionsDataTable = ({ data, onChange }: Props) => {
     getSortedRowModel: getSortedRowModel(),
   })
 
-  const handleConfirmDelete = () => {
-    console.log('handleConfirmDelete', deletedId)
+  const handleSuccessDelete = () => {
+    showNotification({
+      id: String(deletedId),
+      title: 'Успешное удаление',
+      message: `success delete`,
+    })
     setDeleteId(null)
+    updateCollectionsList()
+  }
+
+  const handleConfirmDelete = async () => {
+    await deleteCollectionMutation(Number(deletedId), {
+      onSuccess: () => handleSuccessDelete(),
+    })
   }
 
   const handleCloseDialog = () => {

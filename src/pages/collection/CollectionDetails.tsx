@@ -1,17 +1,18 @@
+import { useContext, useEffect, useMemo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { z } from 'zod'
+import { Drawer } from 'shared/ui-kit/drawer'
+import { Form } from 'shared/ui-kit/form'
+import { useForm } from 'shared/ui-kit/form/use-form'
 import {
   useGetCollectionDetails,
   useUpdateCollectionMutation,
 } from 'entities/collection/api'
-import { Drawer } from 'shared/ui-kit/drawer'
 import { UpdateCollectionForm } from 'entities/collection/types'
-import { Form } from 'shared/ui-kit/form'
 import { useUpdateCollectionsList } from 'entities/collection'
-import { z } from 'zod'
-import { useForm } from 'shared/ui-kit/form/use-form'
-import { useEffect, useMemo } from 'react'
 import { CollectionUpdateFormFields } from 'entities/collection/ui/update/collection-update-form-fields'
 import { CollectionFormActions } from 'entities/collection/ui/collection-form-actions'
+import { NotificationContext } from 'shared/notification'
 
 const updateCollectionFormSchema = z.object({
   slug: z.string().nonempty({
@@ -32,6 +33,7 @@ const CollectionPage = () => {
   const { mutate: updateCollection } = useUpdateCollectionMutation()
 
   const { updateCollectionsList } = useUpdateCollectionsList()
+  const { showNotification } = useContext(NotificationContext)
 
   const defaultValues = useMemo<UpdateCollectionFormType>(() => {
     return {
@@ -56,8 +58,13 @@ const CollectionPage = () => {
     navigate('/collections')
   }
 
-  const handleSuccessUpdate = () => {
+  const handleSuccessUpdate = (data: any) => {
     console.log('SUCCESS UPDATE')
+    showNotification({
+      id: data.id,
+      title: 'Успешное обновление',
+      message: `объект ${data.name} успешно создан`,
+    })
     updateCollectionsList()
     handleClose()
   }

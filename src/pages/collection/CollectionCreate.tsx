@@ -7,6 +7,8 @@ import { useForm } from 'shared/ui-kit/form/use-form'
 import { Form } from 'shared/ui-kit/form/form'
 import { CollectionCreateFormFields } from 'entities/collection/ui/create/collection-create-form-fields'
 import { CollectionFormActions } from 'entities/collection/ui/collection-form-actions'
+import { useContext } from "react";
+import { NotificationContext } from "shared/notification";
 
 const createCollectionFormSchema = z.object({
   slug: z.string().nonempty({
@@ -26,6 +28,7 @@ const CollectionsCreate = () => {
     useCreateCollectionMutation()
 
   const { updateCollectionsList } = useUpdateCollectionsList()
+  const { showNotification } = useContext(NotificationContext)
 
   const defaultValues: CreateCollectionFormType = {
     slug: '',
@@ -55,6 +58,11 @@ const CollectionsCreate = () => {
 
   const handleSuccessCreate = (data: any) => {
     console.log('SUCCESS CREATE', data)
+    showNotification({
+      id: data.id,
+      title: 'Успешное создание',
+      message: `объект ${data.name} успешно создан`,
+    })
     updateCollectionsList()
     handleClose()
   }
