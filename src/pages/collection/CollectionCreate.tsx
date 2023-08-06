@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { Form } from 'shared/ui-kit/form/form'
 import { CollectionCreateFormFields } from 'entities/collection/ui/create/collection-create-form-fields'
-import { CollectionCreateFormActions } from 'entities/collection/ui/create/collection-create-form-actions'
+import { CollectionFormActions } from 'entities/collection/ui/collection-form-actions'
 
 const createCollectionFormSchema = z.object({
   slug: z.string().nonempty({
@@ -83,7 +83,10 @@ const CollectionsCreate = () => {
         <CollectionCreateFormFields />
 
         <Drawer.Footer>
-          <CollectionCreateFormActions onCancel={handleClose} />
+          <CollectionFormActions
+            primaryButtonLabel="Create"
+            onCancel={handleClose}
+          />
         </Drawer.Footer>
       </Form>
     </Drawer>

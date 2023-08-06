@@ -1,9 +1,13 @@
 import { Button } from 'shared/ui-kit/Button'
 
 interface Props {
+  primaryButtonLabel: string
   onCancel: () => void
 }
-export const CollectionCreateFormActions = ({ onCancel }: Props) => {
+export const CollectionFormActions = ({
+  primaryButtonLabel,
+  onCancel,
+}: Props) => {
   return (
     <div className="flex gap-2 px-4 pb-6">
       <Button
@@ -11,7 +15,7 @@ export const CollectionCreateFormActions = ({ onCancel }: Props) => {
         variant="primary"
         type="submit"
       >
-        Create
+        {primaryButtonLabel}
       </Button>
       <Button
         size="lg"

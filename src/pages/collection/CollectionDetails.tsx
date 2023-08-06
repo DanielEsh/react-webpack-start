@@ -4,13 +4,14 @@ import {
   useUpdateCollectionMutation,
 } from 'entities/collection/api'
 import { Drawer } from 'shared/ui-kit/drawer'
-import { CollectionUpdateForm } from 'entities/collection'
 import { UpdateCollectionForm } from 'entities/collection/types'
 import { Form } from 'shared/ui-kit/form'
 import { Button } from 'shared/ui-kit/Button'
 import { z } from 'zod'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { useEffect, useMemo } from 'react'
+import { CollectionUpdateFormFields } from 'entities/collection/ui/update/collection-update-form-fields'
+import { CollectionFormActions } from 'entities/collection/ui/collection-form-actions'
 
 const updateCollectionFormSchema = z.object({
   slug: z.string().nonempty({
@@ -34,6 +35,7 @@ const CollectionPage = () => {
     return {
       slug: data?.slug ?? '',
       name: data?.name ?? '',
+      description: data?.description ?? '',
     }
   }, [data])
 
@@ -73,49 +75,35 @@ const CollectionPage = () => {
       opened={true}
       onClose={handleClose}
     >
-      <Drawer.Header>
-        <h2>категория: {data?.name}</h2>
-        <div>
-          <p>Создание</p>
-          <p>обновление</p>
-        </div>
-      </Drawer.Header>
-
       <Form
+        className="flex h-full flex-col"
         methods={formMethods}
         onSubmit={handleUpdate}
       >
+        <Drawer.Header>
+          <h2>категория: {data?.name}</h2>
+          <div>
+            <p>Создание</p>
+            <p>обновление</p>
+          </div>
+        </Drawer.Header>
+
         <div className="px-4">
           {isError && <div>Error</div>}
           {isLoading && <div>Loading...</div>}
 
           {!isLoading && data && (
-            <CollectionUpdateForm
-              collection={data}
-              onSubmit={handleUpdate}
-            />
+            <CollectionUpdateFormFields collection={data} />
           )}
         </div>
-      </Form>
 
-      <Drawer.Footer>
-        <div className="flex gap-2 px-4 pb-6">
-          <Button
-            size="lg"
-            variant="primary"
-            type="submit"
-          >
-            Update
-          </Button>
-          <Button
-            size="lg"
-            variant="ghost"
-            onClick={handleClose}
-          >
-            Close
-          </Button>
-        </div>
-      </Drawer.Footer>
+        <Drawer.Footer>
+          <CollectionFormActions
+            primaryButtonLabel="Update"
+            onCancel={handleClose}
+          />
+        </Drawer.Footer>
+      </Form>
     </Drawer>
   )
 }
