@@ -24,10 +24,12 @@ export const NotificationElement = (props: Props) => {
   }
 
   const handleDelayedHide = () => {
-    hideTimeout.current = window.setTimeout(
-      handleHide,
-      notification.duration * 1000,
-    )
+    if (notification.autoClose) {
+      hideTimeout.current = window.setTimeout(
+        handleHide,
+        notification.duration * 1000,
+      )
+    }
   }
 
   useEffect(() => {

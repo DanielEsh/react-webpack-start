@@ -1,9 +1,8 @@
-import { useContext } from 'react'
 import { Button } from 'shared/ui-kit/Button'
-import { NotificationContext } from 'shared/notification'
+import { useNotification } from 'shared/notification'
 
 export const ToastButtons = () => {
-  const { showNotification: show } = useContext(NotificationContext)
+  const { showNotification: show } = useNotification()
 
   const openNotification = () => {
     show({

@@ -15,10 +15,10 @@ export const NotificationRoot = () => {
   return (
     <Portal container={TOAST_ROOT_ELEMENT}>
       <ol className="fixed top-[16px] right-[16px] flex min-w-[220px] flex-col gap-4">
-        {notifications.map((n) => (
+        {notifications.map((notification) => (
           <NotificationElement
-            key={n.id}
-            notification={n}
+            key={notification.id}
+            notification={notification}
             onHide={hideNotification}
           />
         ))}

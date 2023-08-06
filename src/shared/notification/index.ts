@@ -3,4 +3,6 @@ export {
   NotificationContext,
   NotificationProvider,
 } from './NotificationContext'
-export type { NotificationType } from './types'
+export type { Notification } from './types'
+
+export { useNotification } from './useNotification'

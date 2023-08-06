@@ -97,12 +97,7 @@ export const useNotificationsState = () => {
   const hideNotification = (id: string) =>
     update((notifications) =>
       notifications.filter((notification) => {
-        if (notification.id === id) {
-          typeof notification.onClose === 'function' && notification.onClose()
-          return false
-        }
-
-        return true
+        return notification.id !== id
       }),
     )
 
