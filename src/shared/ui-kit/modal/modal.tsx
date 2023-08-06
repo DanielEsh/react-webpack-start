@@ -3,23 +3,19 @@ import { classNames } from 'shared/utils'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside'
 import type { UiDefaultProps } from '../types'
 import { ModalOverlay } from './ModalOverlay'
+import { ModalContext } from './modal-context'
+import { ModalHeader } from './modal-header'
 
 export interface ModalProps extends UiDefaultProps {
   opened: boolean
-  clickOutSideCanClose?: boolean
+  persistent?: boolean
   onClose?: () => void
 }
 
 const COMPONENT_NAME = 'Modal'
 
 export const Modal = (props: ModalProps) => {
-  const {
-    opened,
-    className,
-    clickOutSideCanClose = true,
-    children,
-    onClose,
-  } = props
+  const { opened, className, persistent = false, children, onClose } = props
 
   const classes = classNames('', className)
 
@@ -30,25 +26,33 @@ export const Modal = (props: ModalProps) => {
   }
 
   const handleClickOutside = () => {
-    if (!clickOutSideCanClose) return
+    if (persistent) return
 
     handleClose()
   }
 
   const outsideRef = useClickOutside(handleClickOutside)
 
+  const modalContextValues = {
+    onClose: handleClose,
+  }
+
   return opened ? (
-    <Portal>
-      <ModalOverlay>
-        <div
-          ref={outsideRef}
-          className={classes}
-        >
-          {children}
-        </div>
-      </ModalOverlay>
-    </Portal>
+    <ModalContext.Provider value={modalContextValues}>
+      <Portal>
+        <ModalOverlay>
+          <div
+            ref={outsideRef}
+            className={classes}
+          >
+            {children}
+          </div>
+        </ModalOverlay>
+      </Portal>
+    </ModalContext.Provider>
   ) : null
 }
 
 Modal.displayName = COMPONENT_NAME
+
+Modal.Header = ModalHeader

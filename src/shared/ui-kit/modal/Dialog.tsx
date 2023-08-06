@@ -1,4 +1,4 @@
-import { Modal, type ModalProps } from './Modal'
+import { Modal, type ModalProps } from './modal'
 import { Button } from '../Button'
 
 export interface DialogProps
@@ -27,7 +27,7 @@ export const Dialog = (props: DialogProps) => {
     <Modal
       className="absolute top-1/2 left-1/2 h-[248px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-4"
       opened={opened}
-      clickOutSideCanClose={false}
+      persistent
       onClose={onClose}
       {...restProps}
     >

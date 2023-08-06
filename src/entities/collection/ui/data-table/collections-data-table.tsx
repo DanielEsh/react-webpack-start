@@ -9,7 +9,7 @@ import {
 } from '@tanstack/react-table'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
 import { Table } from 'shared/ui-kit/table'
-import { Dialog } from 'shared/ui-kit/Modal/Dialog'
+import { Dialog } from 'shared/ui-kit/modal/Dialog'
 import { columns } from 'entities/collection/ui/data-table/collections-data-table-columns'
 import { Collection } from 'entities/collection/types'
 import {

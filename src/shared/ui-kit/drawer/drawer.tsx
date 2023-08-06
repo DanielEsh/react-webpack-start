@@ -1,4 +1,4 @@
-import { Modal, type ModalProps } from 'shared/ui-kit/Modal'
+import { Modal, type ModalProps } from 'shared/ui-kit/modal'
 
 import { DrawerHeader } from './drawer-header'
 import { DrawerFooter } from './drawer-footer'
