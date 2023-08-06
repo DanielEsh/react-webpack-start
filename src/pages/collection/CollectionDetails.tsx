@@ -6,7 +6,7 @@ import {
 import { Drawer } from 'shared/ui-kit/drawer'
 import { UpdateCollectionForm } from 'entities/collection/types'
 import { Form } from 'shared/ui-kit/form'
-import { Button } from 'shared/ui-kit/Button'
+import { useUpdateCollectionsList } from 'entities/collection'
 import { z } from 'zod'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { useEffect, useMemo } from 'react'
@@ -30,6 +30,8 @@ const CollectionPage = () => {
   const { id } = useParams()
   const { isLoading, isError, data } = useGetCollectionDetails(Number(id))
   const { mutate: updateCollection } = useUpdateCollectionMutation()
+
+  const { updateCollectionsList } = useUpdateCollectionsList()
 
   const defaultValues = useMemo<UpdateCollectionFormType>(() => {
     return {
@@ -56,6 +58,8 @@ const CollectionPage = () => {
 
   const handleSuccessUpdate = () => {
     console.log('SUCCESS UPDATE')
+    updateCollectionsList()
+    handleClose()
   }
 
   const handleUpdate = (form: UpdateCollectionForm) => {
