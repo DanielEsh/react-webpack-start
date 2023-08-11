@@ -28,7 +28,7 @@ const buttonVariants = cva(
 
 const COMPONENT_NAME = 'BaseButton'
 
-export interface ButtonProps
+export interface BaseButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   addonLeft?: ReactNode
@@ -39,7 +39,7 @@ export interface ButtonProps
 
 type ButtonElement = HTMLButtonElement | HTMLAnchorElement
 
-export const BaseButton = forwardRef<ButtonElement, ButtonProps>(
+export const BaseButton = forwardRef<ButtonElement, BaseButtonProps>(
   (props, forwardedRef) => {
     const {
       className,

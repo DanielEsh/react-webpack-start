@@ -1,3 +1,3 @@
-import { Button } from 'shared/ui-kit/Button/Button'
+import { Button } from 'shared/ui-kit/Button/button'
 
 export { Button }
