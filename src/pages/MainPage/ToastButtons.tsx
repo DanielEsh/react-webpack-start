@@ -1,4 +1,4 @@
-import { Button } from 'shared/ui-kit/Button'
+import { Button } from 'shared/ui-kit/button'
 import { useNotification } from 'shared/notification'
 
 export const ToastButtons = () => {

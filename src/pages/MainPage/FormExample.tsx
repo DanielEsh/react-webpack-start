@@ -1,4 +1,4 @@
-import { Button } from 'shared/ui-kit/Button'
+import { Button } from 'shared/ui-kit/button'
 import { Form } from 'shared/ui-kit/form/form'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { z } from 'zod'

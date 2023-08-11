@@ -1,5 +1,5 @@
 import { Modal, type ModalProps } from './modal'
-import { Button } from '../Button'
+import { Button } from '../button'
 
 export interface DialogProps
   extends Omit<ModalProps, 'clickOutSideCanClose' | 'children'> {

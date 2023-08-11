@@ -1,4 +1,4 @@
-import { Button } from 'shared/ui/Button'
+import { Button } from 'shared/ui/button'
 import { Menu } from 'shared/ui/Menu'
 import { TableVisibilityChanger } from './TableVisibilityChanger'
 import IconSettings from 'shared/assets/icons/settings.svg'

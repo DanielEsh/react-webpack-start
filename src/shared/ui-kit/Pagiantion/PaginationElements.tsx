@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { PaginationElementProps, PaginationElementsType } from './types'
-import { Button } from 'shared/ui-kit/Button'
+import { Button } from 'shared/ui-kit/button'
 import IconChevronLeft from 'shared/assets/icons/chevron-left.svg'
 import IconChevronRight from 'shared/assets/icons/chevron-right.svg'
 import IconDoubleChevronLeft from 'shared/assets/icons/chevron-left-double.svg'

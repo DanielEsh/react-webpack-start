@@ -1,5 +1,5 @@
 import { forwardRef, useContext } from 'react'
-import { Button } from 'shared/ui-kit/Button'
+import { Button } from 'shared/ui-kit/button'
 import { UiDefaultProps } from 'shared/ui-kit/types'
 import { SelectContext } from 'shared/ui-kit/form-controls/select/select-context'
 import { Popover } from 'shared/ui-kit/Popover'

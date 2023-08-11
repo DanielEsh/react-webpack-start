@@ -1,4 +1,4 @@
-import { Button } from '../Button'
+import { Button } from '../button'
 import IconClose from 'shared/assets/icons/close.svg'
 
 interface Props {

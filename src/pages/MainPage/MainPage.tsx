@@ -1,7 +1,7 @@
 import Counter from 'components/Counter'
 import { ChangeLangButton } from 'components/ChangeLangButton'
 import { Ripple } from 'shared/ui-kit/Ripple'
-import { Button } from 'shared/ui-kit/Button'
+import { Button } from 'shared/ui-kit/button'
 import { Modal } from 'shared/ui-kit/modal'
 import { Menu } from 'shared/ui-kit/Menu'
 import StarIcon from 'shared/assets/icons/star.svg'

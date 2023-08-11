@@ -1,6 +1,6 @@
 import { Column } from '@tanstack/react-table'
 import { Table } from 'shared/ui-kit/table'
-import { Button } from 'shared/ui-kit/Button'
+import { Button } from 'shared/ui-kit/button'
 import IconArrowUp from 'shared/assets/icons/arrow-up.svg'
 import IconArrowDown from 'shared/assets/icons/arrow-down.svg'
 

@@ -3,7 +3,7 @@ import { UiDefaultProps } from 'shared/ui-kit/types'
 import { classNames } from 'shared/utils'
 import { SelectContext } from 'shared/ui-kit/form-controls/select/select-context'
 import { SelectType } from 'shared/ui-kit/form-controls/select/types'
-import { Button } from 'shared/ui-kit/Button'
+import { Button } from 'shared/ui-kit/button'
 
 interface SelectItemProps extends UiDefaultProps {
   value: SelectType
