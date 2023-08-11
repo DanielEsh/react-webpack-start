@@ -20,14 +20,12 @@ export const CollectionsDataTableRowActions = ({ row }: Props) => {
 
   return (
     <div className="flex justify-end gap-1">
-      <div className="">
-        <Link
-          size="sm"
-          to={`/collections/${id}`}
-        >
-          <IconEdit />
-        </Link>
-      </div>
+      <Link
+        size="sm"
+        to={`/collections/${id}`}
+      >
+        <IconEdit />
+      </Link>
 
       <Button
         variant="ghost"
