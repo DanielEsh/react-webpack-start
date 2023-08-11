@@ -1,4 +1,4 @@
-import { forwardRef, ButtonHTMLAttributes, ReactNode } from 'react'
+import { forwardRef, ButtonHTMLAttributes, ReactNode, ElementType } from 'react'
 import { VariantProps, cva } from 'class-variance-authority'
 import { classNames } from 'shared/utils'
 
@@ -26,16 +26,20 @@ const buttonVariants = cva(
   },
 )
 
+const COMPONENT_NAME = 'BaseButton'
+
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   addonLeft?: ReactNode
   addonRight?: ReactNode
   children: ReactNode
-  as?: keyof JSX.IntrinsicElements
+  as?: ElementType
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+type ButtonElement = HTMLButtonElement | HTMLAnchorElement
+
+export const BaseButton = forwardRef<ButtonElement, ButtonProps>(
   (props, forwardedRef) => {
     const {
       className,
@@ -63,4 +67,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     )
   },
 )
-Button.displayName = 'Button'
+BaseButton.displayName = COMPONENT_NAME
