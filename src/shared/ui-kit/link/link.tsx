@@ -13,6 +13,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
         ref={forwardedRef}
         as={RouterLink}
         children={children}
+        variant="ghost"
         {...restProps}
       />
     )

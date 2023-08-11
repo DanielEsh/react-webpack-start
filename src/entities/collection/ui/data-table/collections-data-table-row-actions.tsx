@@ -1,5 +1,5 @@
 import { Row } from '@tanstack/react-table'
-import { Link } from 'react-router-dom'
+import { Link } from 'shared/ui-kit/link'
 import { Button } from 'shared/ui-kit/button'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
@@ -22,7 +22,7 @@ export const CollectionsDataTableRowActions = ({ row }: Props) => {
     <div className="flex justify-end gap-1">
       <div className="">
         <Link
-          className="inline-flex h-9 w-9 items-center justify-center"
+          size="sm"
           to={`/collections/${id}`}
         >
           <IconEdit />

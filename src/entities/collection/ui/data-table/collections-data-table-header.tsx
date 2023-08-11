@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'shared/ui-kit/link'
 import IconPlus from 'shared/assets/icons/plus.svg'
 
 export const CollectionsDataTableHeader = () => {
@@ -9,9 +9,9 @@ export const CollectionsDataTableHeader = () => {
       <div className="flex gap-3">
         <Link
           to="create"
-          className="flex gap-2"
+          addonLeft={<IconPlus />}
         >
-          <IconPlus /> <span>Create Button</span>
+          <span>Create</span>
         </Link>
       </div>
     </div>
