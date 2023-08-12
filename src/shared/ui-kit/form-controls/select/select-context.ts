@@ -6,7 +6,7 @@ const COMPONENT_NAME = 'SelectContext'
 export interface SelectContextValues {
   selectedValue?: SelectType
   changeSelectedValue: (value: SelectType) => void
-  label?: string;
+  label?: string
 }
 
 export const SelectContext = createContext<SelectContextValues>({

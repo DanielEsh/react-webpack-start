@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from 'react'
+import { PropsWithChildren } from 'react'
 import { Popover } from 'shared/ui-kit/Popover'
 import { SelectOptions } from 'shared/ui-kit/form-controls/select/select-options'
 import { SelectOption } from 'shared/ui-kit/form-controls/select/select-option'
@@ -41,7 +41,7 @@ export const _Select = <Value extends SelectType>(
       onChange,
     })
 
-  const handleChange = (value: Value) => {
+  const handleChange = (value: SelectType) => {
     if (readOnly) return
 
     if (!isControlled) {
@@ -53,7 +53,7 @@ export const _Select = <Value extends SelectType>(
   }
 
   const contextValue: SelectContextValues = {
-    selectedValue: internalValue,
+    selectedValue: internalValue as SelectType,
     changeSelectedValue: handleChange,
     label,
   }
