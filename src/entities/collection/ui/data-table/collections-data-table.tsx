@@ -9,7 +9,7 @@ import {
 } from '@tanstack/react-table'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
 import { Table } from 'shared/ui-kit/table'
-import { Dialog } from 'shared/ui-kit/modal/Dialog'
+import { Dialog } from 'shared/ui-kit/dialog'
 import { columns } from 'entities/collection/ui/data-table/collections-data-table-columns'
 import { Collection } from 'entities/collection/types'
 import {
@@ -22,7 +22,7 @@ import {
 } from 'entities/collection/model'
 import { useDeleteCollectionMutation } from 'entities/collection/api'
 import { NotificationContext } from 'shared/notification'
-import { useUpdateCollectionsList } from "entities/collection";
+import { useUpdateCollectionsList } from 'entities/collection'
 
 interface Props {
   data: Collection[]
