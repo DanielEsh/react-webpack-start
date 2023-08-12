@@ -26,16 +26,8 @@ export function usePopover(options: Options) {
 
   const ARROW_HEIGHT = 4
 
-  const {
-    reference,
-    floating,
-    strategy,
-    x,
-    y,
-    placement: floatingUIPlacement,
-    middlewareData: { arrow: { x: arrowX, y: arrowY, centerOffset } = {} },
-  } = useFloating({
-    strategy: 'fixed',
+  const floating = useFloating({
+    strategy: 'absolute',
     placement,
     middleware: [
       floatingUiOffset({
@@ -47,12 +39,9 @@ export function usePopover(options: Options) {
     ].filter(isDefined),
   })
 
-  console.log('floatingUIPlacement', floatingUIPlacement)
-
   const popoverStyles = {
-    position: strategy,
-    top: y ?? 0,
-    left: x ?? 0,
+    position: floating.strategy,
+    ...floating.floatingStyles,
   }
 
   const currentPlacement = options?.placement
@@ -67,8 +56,14 @@ export function usePopover(options: Options) {
   }[currentPlacement]
 
   const arrowStyles = {
-    left: arrowX != null ? `${arrowX}px` : '',
-    top: arrowY != null ? `${arrowY}px` : '',
+    left:
+      floating.middlewareData.arrow?.x != null
+        ? `${floating.middlewareData.arrow?.y}px`
+        : '',
+    top:
+      floating.middlewareData.arrow?.y != null
+        ? `${floating.middlewareData.arrow?.y}px`
+        : '',
     right: '',
     bottom: '',
     [staticSide]: '-4px',
@@ -77,8 +72,8 @@ export function usePopover(options: Options) {
   return {
     isOpened,
     changeOpened: (val: boolean) => setOpened(val),
-    referenceRef: reference,
-    floatingRef: floating,
+    referenceRef: floating.refs.setReference,
+    floatingRef: floating.refs.setFloating,
     popoverStyles: popoverStyles,
     arrowStyles: arrowStyles,
   }
