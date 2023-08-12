@@ -1,7 +1,5 @@
-import { ReactNode } from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 import { Collection } from 'entities/collection/types'
-import { Table } from 'shared/ui-kit/table'
 import { CollectionsDataTableColumnHeader } from './collections-data-table-column-header'
 import { CollectionsDataTableRowActions } from './collections-data-table-row-actions'
 
@@ -15,7 +13,7 @@ export const columns: ColumnDef<Collection>[] = [
         title="id"
       />
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'slug',
@@ -26,7 +24,7 @@ export const columns: ColumnDef<Collection>[] = [
         title="slug"
       />
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'name',
@@ -37,7 +35,7 @@ export const columns: ColumnDef<Collection>[] = [
         title="name"
       />
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'goodsCount',
@@ -48,7 +46,7 @@ export const columns: ColumnDef<Collection>[] = [
         title="goods count"
       />
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'actions',

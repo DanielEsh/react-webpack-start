@@ -1,5 +1,4 @@
 import { Column } from '@tanstack/react-table'
-import { Table } from 'shared/ui-kit/table'
 import { Button } from 'shared/ui-kit/button'
 import IconArrowUp from 'shared/assets/icons/arrow-up.svg'
 import IconArrowDown from 'shared/assets/icons/arrow-down.svg'
@@ -49,5 +48,5 @@ export const CollectionsDataTableColumnHeader = <TData, TValue>(
     )
   }
 
-  return <Table.ColumnHeader>{renderContent()}</Table.ColumnHeader>
+  return renderContent()
 }
