@@ -25,13 +25,13 @@ export const Dialog = (props: DialogProps) => {
 
   return (
     <Modal
-      className="absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 "
+      className="absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2"
       opened={opened}
       persistent
       onClose={onClose}
       {...restProps}
     >
-      <div className="relative flex min-h-[222px] max-w-lg flex-col rounded-md bg-white">
+      <div className="relative flex min-h-[222px] max-w-lg flex-col overflow-hidden rounded-md bg-white">
         <div className="p-6 pb-4">
           <div className="flex items-start">
             <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100">
