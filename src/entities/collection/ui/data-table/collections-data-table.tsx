@@ -114,15 +114,17 @@ export const CollectionsDataTable = ({ data, onChange }: Props) => {
         </Table.Head>
         <Table.Body>
           {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <Table.Row key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <Table.Cell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Table.Cell>
-                ))}
-              </Table.Row>
-            ))
+            table
+              .getRowModel()
+              .rows.map((row) => (
+                <Table.Row key={row.id}>
+                  {row
+                    .getVisibleCells()
+                    .map((cell) =>
+                      flexRender(cell.column.columnDef.cell, cell.getContext()),
+                    )}
+                </Table.Row>
+              ))
           ) : (
             <Table.Row>
               <Table.Cell className="h-24 text-center">No results.</Table.Cell>

@@ -2,6 +2,8 @@ import { ColumnDef } from '@tanstack/react-table'
 import { Collection } from 'entities/collection/types'
 import { CollectionsDataTableColumnHeader } from './collections-data-table-column-header'
 import { CollectionsDataTableRowActions } from './collections-data-table-row-actions'
+import { ReactNode } from 'react'
+import { Table } from 'shared/ui-kit/table'
 
 export const columns: ColumnDef<Collection>[] = [
   {
@@ -13,7 +15,11 @@ export const columns: ColumnDef<Collection>[] = [
         title="id"
       />
     ),
-    cell: (info) => info.getValue(),
+    cell: (info) => (
+      <Table.Cell className="w-[98px]">
+        {info.getValue() as ReactNode}
+      </Table.Cell>
+    ),
   },
   {
     id: 'slug',
@@ -24,7 +30,9 @@ export const columns: ColumnDef<Collection>[] = [
         title="slug"
       />
     ),
-    cell: (info) => info.getValue(),
+    cell: (info) => (
+      <Table.Cell className="w-auto">{info.getValue() as ReactNode}</Table.Cell>
+    ),
   },
   {
     id: 'name',
@@ -35,7 +43,9 @@ export const columns: ColumnDef<Collection>[] = [
         title="name"
       />
     ),
-    cell: (info) => info.getValue(),
+    cell: (info) => (
+      <Table.Cell className="w-auto">{info.getValue() as ReactNode}</Table.Cell>
+    ),
   },
   {
     id: 'goodsCount',
@@ -46,7 +56,11 @@ export const columns: ColumnDef<Collection>[] = [
         title="goods count"
       />
     ),
-    cell: (info) => info.getValue(),
+    cell: (info) => (
+      <Table.Cell className="w-[128px]">
+        {info.getValue() as ReactNode}
+      </Table.Cell>
+    ),
   },
   {
     id: 'actions',
@@ -56,7 +70,12 @@ export const columns: ColumnDef<Collection>[] = [
         title="actions"
       />
     ),
-    cell: ({ row }) => <CollectionsDataTableRowActions row={row} />,
+    size: 98,
+    cell: ({ row }) => (
+      <Table.Cell className="w-[98px]">
+        <CollectionsDataTableRowActions row={row} />
+      </Table.Cell>
+    ),
     enableSorting: false,
   },
 ]
