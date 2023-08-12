@@ -1,4 +1,5 @@
 import { Select } from 'shared/ui-kit/form-controls'
+import { ExampleControlledSelect } from 'pages/MainPage/ExampleControlledSelect'
 
 type ExampleOption = {
   value: number
@@ -28,19 +29,31 @@ export const ExampleSelect = () => {
     },
   ]
 
+  const handleChange = (value: string | number) => {
+    console.log('EXAMPLE CHANGE', value)
+  }
+
   return (
-    <Select label="label">
-      <Select.Value>Pick one</Select.Value>
-      <Select.Options>
-        {options.map(({ value, label }) => (
-          <Select.Option
-            key={value}
-            value={label}
-          >
-            {label}
-          </Select.Option>
-        ))}
-      </Select.Options>
-    </Select>
+    <div className="inline-flex flex-col gap-4">
+      <Select
+        label="label"
+        defaultValue="option1"
+        onChange={handleChange}
+      >
+        <Select.Value>Pick one</Select.Value>
+        <Select.Options>
+          {options.map(({ value, label }) => (
+            <Select.Option
+              key={value}
+              value={label}
+            >
+              {label}
+            </Select.Option>
+          ))}
+        </Select.Options>
+      </Select>
+
+      <ExampleControlledSelect />
+    </div>
   )
 }

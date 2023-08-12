@@ -9,9 +9,11 @@ import {
   type SelectContextValues,
 } from 'shared/ui-kit/form-controls/select/select-context'
 import { SelectType } from 'shared/ui-kit/form-controls/select/types'
+import { useUncontrolled } from 'shared/lib/hooks/use-uncontrolled'
 
-export interface SelectProps extends PropsWithChildren {
+export interface SelectProps<Value> extends PropsWithChildren {
   defaultValue?: SelectType
+  value?: Value
   label?: string
   readOnly?: boolean
   onChange?: (value: SelectType) => void
@@ -19,20 +21,39 @@ export interface SelectProps extends PropsWithChildren {
 
 const COMPONENT_NAME = 'Select'
 
-export const _Select = (props: SelectProps) => {
-  const { defaultValue = '', onChange, readOnly, children, label } = props
+export const _Select = <Value extends SelectType>(
+  props: SelectProps<Value>,
+) => {
+  const {
+    defaultValue = '',
+    value: externalValue,
+    onChange,
+    readOnly,
+    children,
+    label,
+  } = props
 
-  const [selectedValue, setSelectedValue] = useState<SelectType>(defaultValue)
+  const [internalValue, handleInternalValueChange, isControlled] =
+    useUncontrolled({
+      value: externalValue,
+      defaultValue,
+      finalValue: null,
+      onChange,
+    })
 
-  const handleChange = (value: SelectType) => {
+  const handleChange = (value: Value) => {
     if (readOnly) return
 
-    setSelectedValue(value)
+    if (!isControlled) {
+      handleInternalValueChange(value)
+      return
+    }
+
     onChange && onChange(value)
   }
 
   const contextValue: SelectContextValues = {
-    selectedValue,
+    selectedValue: internalValue,
     changeSelectedValue: handleChange,
     label,
   }
