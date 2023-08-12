@@ -6,7 +6,10 @@ export type BaseSelectOption = {
 }
 
 export interface BaseSelectProps
-  extends Pick<SelectProps, 'defaultValue' | 'label' | 'onChange'> {
+  extends Pick<
+    SelectProps<string | number>,
+    'defaultValue' | 'label' | 'onChange'
+  > {
   options: BaseSelectOption[]
 }
 

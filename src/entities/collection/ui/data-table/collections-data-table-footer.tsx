@@ -54,7 +54,7 @@ export const CollectionsDataTableFooter = ({ totalPages, onChange }: Props) => {
         <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">Rows per page</p>
           <BaseSelect
-            defaultValue={limit}
+            defaultValue={String(limit)}
             options={rowsPerPageOptions}
             onChange={handleLimitChange}
           />
