@@ -10,69 +10,66 @@ export const columns: ColumnDef<Collection>[] = [
     id: 'id',
     accessorKey: 'id',
     header: ({ column }) => (
-      <CollectionsDataTableColumnHeader
-        column={column}
-        title="id"
-      />
+      <Table.ColumnHeader className="w-[98px]">
+        <CollectionsDataTableColumnHeader
+          column={column}
+          title="id"
+        />
+      </Table.ColumnHeader>
     ),
-    cell: (info) => (
-      <Table.Cell className="w-[98px]">
-        {info.getValue() as ReactNode}
-      </Table.Cell>
-    ),
+    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
   },
   {
     id: 'slug',
     accessorFn: ({ slug }) => slug,
     header: ({ column }) => (
-      <CollectionsDataTableColumnHeader
-        column={column}
-        title="slug"
-      />
+      <Table.ColumnHeader className="min-w-[320px]">
+        <CollectionsDataTableColumnHeader
+          column={column}
+          title="slug"
+        />
+      </Table.ColumnHeader>
     ),
-    cell: (info) => (
-      <Table.Cell className="w-auto">{info.getValue() as ReactNode}</Table.Cell>
-    ),
+    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
   },
   {
     id: 'name',
     accessorFn: ({ name }) => name,
     header: ({ column }) => (
-      <CollectionsDataTableColumnHeader
-        column={column}
-        title="name"
-      />
+      <Table.ColumnHeader className="min-w-[320px]">
+        <CollectionsDataTableColumnHeader
+          column={column}
+          title="name"
+        />
+      </Table.ColumnHeader>
     ),
-    cell: (info) => (
-      <Table.Cell className="w-auto">{info.getValue() as ReactNode}</Table.Cell>
-    ),
+    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
   },
   {
     id: 'goodsCount',
     accessorFn: ({ goodsCount }) => goodsCount,
     header: ({ column }) => (
-      <CollectionsDataTableColumnHeader
-        column={column}
-        title="goods count"
-      />
+      <Table.ColumnHeader className="w-[128px]">
+        <CollectionsDataTableColumnHeader
+          column={column}
+          title="goods count"
+        />
+      </Table.ColumnHeader>
     ),
-    cell: (info) => (
-      <Table.Cell className="w-[128px]">
-        {info.getValue() as ReactNode}
-      </Table.Cell>
-    ),
+    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
   },
   {
     id: 'actions',
     header: ({ column }) => (
-      <CollectionsDataTableColumnHeader
-        column={column}
-        title="actions"
-      />
+      <Table.ColumnHeader className="w-[98px]">
+        <CollectionsDataTableColumnHeader
+          column={column}
+          title="actions"
+        />
+      </Table.ColumnHeader>
     ),
-    size: 98,
     cell: ({ row }) => (
-      <Table.Cell className="w-[98px]">
+      <Table.Cell>
         <CollectionsDataTableRowActions row={row} />
       </Table.Cell>
     ),

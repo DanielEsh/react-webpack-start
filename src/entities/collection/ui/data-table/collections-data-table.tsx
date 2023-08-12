@@ -97,18 +97,14 @@ export const CollectionsDataTable = ({ data, onChange }: Props) => {
         <Table.Head>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Row key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <Table.ColumnHeader key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </Table.ColumnHeader>
-                )
-              })}
+              {headerGroup.headers.map((header) =>
+                header.isPlaceholder
+                  ? null
+                  : flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    ),
+              )}
             </Table.Row>
           ))}
         </Table.Head>
