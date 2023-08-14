@@ -1,3 +1,5 @@
+import { SideBarMenu } from './sidebar-menu'
+
 export const Sidebar = () => {
   return (
     <div className="relative h-screen min-w-[280px]">
@@ -6,8 +8,8 @@ export const Sidebar = () => {
           LOGO
         </div>
 
-        <div className="flex h-[400px] w-full items-center justify-center rounded bg-neutral-800 text-white">
-          MENU
+        <div className="flex h-[400px] w-full rounded bg-neutral-800 p-4 text-white">
+          <SideBarMenu />
         </div>
 
         <div className="mt-auto flex flex-col gap-2">
