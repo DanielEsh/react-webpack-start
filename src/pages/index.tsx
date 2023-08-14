@@ -6,6 +6,7 @@ import { AboutPageAsync } from 'pages/AboutPage/AboutPage.async'
 import { GlobalNotFoundPage } from 'pages/GlobalNotFound'
 
 import CollectionsRouting from 'pages/collection'
+import categoriesRoutes from 'pages/categories'
 
 export const Router = () => {
   return (
@@ -25,6 +26,7 @@ export const Router = () => {
           />
 
           {...CollectionsRouting}
+          {...categoriesRoutes}
         </Route>
 
         <Route
