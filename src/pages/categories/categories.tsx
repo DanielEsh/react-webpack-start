@@ -1,3 +1,5 @@
+import { Outlet } from 'react-router-dom'
+import { CategoriesDataTableHeader } from 'entities/categories/ui/data-table/data-table-header'
 import { CategoriesDataTable } from 'entities/categories/ui/data-table/categories-data-table'
 
 const CategoriesPage = () => {
@@ -8,7 +10,10 @@ const CategoriesPage = () => {
           <code>Breadcrumbs</code>
         </pre>
 
+        <CategoriesDataTableHeader />
         <CategoriesDataTable data={[]} />
+
+        <Outlet />
       </div>
     </div>
   )
