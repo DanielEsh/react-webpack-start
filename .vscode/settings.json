@@ -3,5 +3,8 @@
   "i18n-ally.keystyle": "nested",
   "editor.codeActionsOnSave": {
     "source.fixAll": true
-  }
+  },
+  "editor.minimap.enabled": false,
+  "editor.scrollBeyondLastLine": false,
+  "explorer.compactFolders": false
 }
