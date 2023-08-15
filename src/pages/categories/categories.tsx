@@ -1,3 +1,5 @@
+import { CategoriesDataTable } from 'entities/categories/ui/data-table/categories-data-table'
+
 const CategoriesPage = () => {
   return (
     <div>
@@ -6,7 +8,7 @@ const CategoriesPage = () => {
           <code>Breadcrumbs</code>
         </pre>
 
-        <div>Categories data</div>
+        <CategoriesDataTable data={[]} />
       </div>
     </div>
   )
