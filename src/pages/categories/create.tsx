@@ -7,7 +7,7 @@ import { Button } from 'shared/ui-kit/button'
 import { Input, TextArea } from 'shared/ui-kit/form-controls'
 import {
   useCreateCategoryMutation,
-  useUpdateCollections,
+  useUpdateCategories,
 } from 'entities/categories/api/queries'
 import { useNotification } from 'shared/notification'
 
@@ -27,7 +27,7 @@ const CategoryCreatePage = () => {
   const navigate = useNavigate()
 
   const { mutate: createCategoryMutation } = useCreateCategoryMutation()
-  const { updateCategories } = useUpdateCollections()
+  const { updateCategories } = useUpdateCategories()
   const { showNotification } = useNotification()
 
   const defaultValues: CreateCategoryForm = {

@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createCategory } from './requests'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { createCategory, getCategories } from './requests'
 
 export const useCreateCategoryMutation = () => {
   return useMutation({
@@ -7,7 +7,18 @@ export const useCreateCategoryMutation = () => {
   })
 }
 
-export const useUpdateCollections = () => {
+export const useGetCategories = () => {
+  return useQuery({
+    queryKey: ['categories'],
+    queryFn: () => getCategories(),
+    keepPreviousData: true,
+    onSuccess: (data) => {
+      console.log('success', data)
+    },
+  })
+}
+
+export const useUpdateCategories = () => {
   const queryClient = useQueryClient()
 
   const updateCategories = () => {
