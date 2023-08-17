@@ -1,6 +1,22 @@
 import { useNavigate } from 'react-router-dom'
-
+import { z } from 'zod'
 import { Drawer } from 'shared/ui-kit/drawer'
+import { Form } from 'shared/ui-kit/form'
+import { useForm } from 'shared/ui-kit/form/use-form'
+import { Button } from 'shared/ui-kit/button'
+import { Input, TextArea } from 'shared/ui-kit/form-controls'
+
+const updateCategoryFormSchema = z.object({
+  slug: z.string().nonempty({
+    message: 'Must be required',
+  }),
+  name: z.string().nonempty({
+    message: 'Must be required',
+  }),
+  description: z.string().optional(),
+})
+
+type UpdateCategoryForm = z.infer<typeof updateCategoryFormSchema>
 
 const CategoryDetailsPage = () => {
   const navigate = useNavigate()
@@ -9,12 +25,55 @@ const CategoryDetailsPage = () => {
     navigate('/categories')
   }
 
+  const defaultValues: UpdateCategoryForm = {
+    slug: '',
+    name: '',
+  }
+
+  const formMethods = useForm<UpdateCategoryForm>(
+    updateCategoryFormSchema,
+    defaultValues,
+  )
+
+  const updateCategory = () => {
+    console.log('update')
+  }
+
   return (
     <Drawer
       opened
       onClose={close}
     >
-      updated
+      <Form
+        className="flex h-full flex-col"
+        methods={formMethods}
+        onSubmit={updateCategory}
+      >
+        <Drawer.Header>
+          <h2>Update category</h2>
+        </Drawer.Header>
+        <div className="flex flex-col gap-4 px-4">
+          <Form.Field name="slug">
+            <Input label="slug" />
+          </Form.Field>
+          <Form.Field name="name">
+            <Input label="name" />
+          </Form.Field>
+          <Form.Field name="description">
+            <TextArea label="description" />
+          </Form.Field>
+        </div>
+        <Drawer.Footer>
+          <div className="flex gap-2 px-4 pb-6">
+            <Button
+              type="submit"
+              variant="primary"
+            >
+              Update
+            </Button>
+          </div>
+        </Drawer.Footer>
+      </Form>
     </Drawer>
   )
 }

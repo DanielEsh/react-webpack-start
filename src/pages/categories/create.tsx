@@ -25,7 +25,6 @@ type CreateCategoryForm = z.infer<typeof createCategoryFormSchema>
 
 const CategoryCreatePage = () => {
   const navigate = useNavigate()
-
   const { mutate: createCategoryMutation } = useCreateCategoryMutation()
   const { updateCategories } = useUpdateCategories()
   const { showNotification } = useNotification()
