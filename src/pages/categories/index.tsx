@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 
 export const CategoriesPage = lazy(() => import('./categories'))
 export const CategoryCreatePage = lazy(() => import('./create'))
+export const CategoryDetailsPage = lazy(() => import('./category-details-page'))
 
 export default [
   <Route
@@ -12,6 +13,10 @@ export default [
     <Route
       path="create"
       element={<CategoryCreatePage />}
+    />
+    <Route
+      path=":slug"
+      element={<CategoryDetailsPage />}
     />
   </Route>,
 ]

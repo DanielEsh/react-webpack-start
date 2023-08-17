@@ -10,17 +10,17 @@ interface Props {
 }
 
 export const CategoriesDataTableRowActions = ({ row }: Props) => {
-  const { id } = row.original
+  const { id, slug } = row.original
 
   const handleDeleteClick = () => {
-    console.log('delete', id)
+    console.log('delete', slug)
   }
 
   return (
     <div className="flex justify-end gap-1">
       <Link
         size="sm"
-        to={`/categories/${id}`}
+        to={`/categories/${slug}`}
       >
         <IconEdit />
       </Link>
