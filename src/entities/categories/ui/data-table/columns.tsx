@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { Category } from 'entities/categories/types'
-import { CollectionsDataTableColumnHeader } from 'entities/collection/ui/data-table/collections-data-table-column-header'
-import { CollectionsDataTableRowActions } from 'entities/collection/ui/data-table/collections-data-table-row-actions'
+import { DataTableColumnHead } from 'widgets/data-table'
+import { CategoriesDataTableRowActions } from './categories-data-row-actions'
 import { ReactNode } from 'react'
 import { Table } from 'shared/ui-kit/table'
 
@@ -11,7 +11,7 @@ export const columns: ColumnDef<Category>[] = [
     accessorKey: 'id',
     header: ({ column }) => (
       <Table.ColumnHeader className="w-[98px]">
-        <CollectionsDataTableColumnHeader
+        <DataTableColumnHead
           column={column}
           title="id"
         />
@@ -24,7 +24,7 @@ export const columns: ColumnDef<Category>[] = [
     accessorFn: ({ slug }) => slug,
     header: ({ column }) => (
       <Table.ColumnHeader className="min-w-[320px]">
-        <CollectionsDataTableColumnHeader
+        <DataTableColumnHead
           column={column}
           title="slug"
         />
@@ -37,7 +37,7 @@ export const columns: ColumnDef<Category>[] = [
     accessorFn: ({ name }) => name,
     header: ({ column }) => (
       <Table.ColumnHeader className="min-w-[320px]">
-        <CollectionsDataTableColumnHeader
+        <DataTableColumnHead
           column={column}
           title="name"
         />
@@ -49,7 +49,7 @@ export const columns: ColumnDef<Category>[] = [
     id: 'actions',
     header: ({ column }) => (
       <Table.ColumnHeader className="w-[98px]">
-        <CollectionsDataTableColumnHeader
+        <DataTableColumnHead
           column={column}
           title="actions"
         />
@@ -57,7 +57,7 @@ export const columns: ColumnDef<Category>[] = [
     ),
     cell: ({ row }) => (
       <Table.Cell>
-        <CollectionsDataTableRowActions row={row} />
+        <CategoriesDataTableRowActions row={row} />
       </Table.Cell>
     ),
     enableSorting: false,

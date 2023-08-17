@@ -3,18 +3,18 @@ import {
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
-  type Column,
+  type ColumnDef,
 } from '@tanstack/react-table'
 
 import { Table } from 'shared/ui-kit/table'
 
 interface Props<DATA> {
   data: DATA[]
-  columns: Column<DATA>[]
+  columns: ColumnDef<DATA>[]
   onChange?(): void
 }
 
-export const CategoriesDataTable = <TData extends unknown | object>(
+export const DataTable = <TData extends unknown | object>(
   props: Props<TData>,
 ) => {
   const { data, columns } = props
