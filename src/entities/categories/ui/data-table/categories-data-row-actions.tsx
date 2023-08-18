@@ -14,8 +14,8 @@ export const CategoriesDataTableRowActions = ({ row }: Props) => {
   const { original } = row
 
   const handleDeleteClick = () => {
-    openDeleteConfirmDialog<string, Category>({
-      key: original.slug,
+    openDeleteConfirmDialog<number, Category>({
+      key: original.id,
       data: original,
     })
   }

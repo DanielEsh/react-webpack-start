@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { createCategory, getCategories, getCategoryBySlug } from './requests'
+import {
+  createCategory,
+  deleteCategory,
+  getCategories,
+  getCategoryBySlug,
+} from './requests'
 
 export const useCreateCategoryMutation = () => {
   return useMutation({
@@ -36,4 +41,10 @@ export const useUpdateCategories = () => {
   return {
     updateCategories,
   }
+}
+
+export const useDeleteCategoryMutation = () => {
+  return useMutation({
+    mutationFn: deleteCategory,
+  })
 }
