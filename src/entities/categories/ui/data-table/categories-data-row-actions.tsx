@@ -4,23 +4,27 @@ import { Button } from 'shared/ui-kit/button'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
 import { Category } from 'entities/categories/types'
+import { openDeleteConfirmDialog } from 'widgets/data-table/model/delete'
 
 interface Props {
   row: Row<Category>
 }
 
 export const CategoriesDataTableRowActions = ({ row }: Props) => {
-  const { id, slug } = row.original
+  const { original } = row
 
   const handleDeleteClick = () => {
-    console.log('delete', slug)
+    openDeleteConfirmDialog<string, Category>({
+      key: original.slug,
+      data: original,
+    })
   }
 
   return (
     <div className="flex justify-end gap-1">
       <Link
         size="sm"
-        to={`/categories/${slug}`}
+        to={`/categories/${original.slug}`}
       >
         <IconEdit />
       </Link>

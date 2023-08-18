@@ -5,8 +5,14 @@ import {
   useReactTable,
   type ColumnDef,
 } from '@tanstack/react-table'
-
+import { useStore } from 'effector-react'
+import { Dialog } from 'shared/ui-kit/dialog'
 import { Table } from 'shared/ui-kit/table'
+import {
+  $deletedStore,
+  $deleteConfirmDialogVisible,
+  closeDeleteConfirmDialog,
+} from './model/delete'
 
 interface Props<DATA> {
   data: DATA[]
@@ -19,12 +25,25 @@ export const DataTable = <TData extends unknown | object>(
 ) => {
   const { data, columns } = props
 
+  const deletedState = useStore($deletedStore)
+  const opened = useStore($deleteConfirmDialogVisible)
+
   const table = useReactTable<TData>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
   })
+
+  const handleDelete = (confirmDelete: boolean) => {
+    closeDeleteConfirmDialog()
+    if (!confirmDelete) {
+      console.log('cancel')
+      return
+    }
+
+    console.log('confirm', deletedState)
+  }
 
   return (
     <div className="min-h-[309px]">
@@ -63,6 +82,12 @@ export const DataTable = <TData extends unknown | object>(
           )}
         </Table.Body>
       </Table>
+
+      <Dialog
+        opened={opened}
+        onClose={() => handleDelete(false)}
+        onConfirm={() => handleDelete(true)}
+      />
     </div>
   )
 }

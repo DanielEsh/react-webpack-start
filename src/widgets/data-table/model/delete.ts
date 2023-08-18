@@ -13,7 +13,7 @@ export const setDeletedItem =
 
 export const $deletedStore = createStore<DeleteStateStore>(null)
 
-export const toggleDeleteConfirmDialog = createEvent<boolean>()
+const toggleDeleteConfirmDialog = createEvent<boolean>()
 export const $deleteConfirmDialogVisible = createStore<boolean>(false)
 
 export const openDeleteConfirmDialog = <KEY extends number | string, DATA>(
@@ -21,6 +21,10 @@ export const openDeleteConfirmDialog = <KEY extends number | string, DATA>(
 ) => {
   setDeletedItem(data)
   toggleDeleteConfirmDialog(true)
+}
+
+export const closeDeleteConfirmDialog = () => {
+  toggleDeleteConfirmDialog(false)
 }
 
 sample({
