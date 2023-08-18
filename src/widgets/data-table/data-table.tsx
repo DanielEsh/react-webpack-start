@@ -67,7 +67,9 @@ export const DataTable = <TData extends unknown | object>(
               ))
           ) : (
             <Table.Row>
-              <Table.Cell className="h-24 text-center">No results.</Table.Cell>
+              <Table.Cell className="h-[308px] text-center">
+                No results.
+              </Table.Cell>
             </Table.Row>
           )}
         </Table.Body>
