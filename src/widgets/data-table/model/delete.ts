@@ -1,6 +1,7 @@
 import { createEvent, createStore, sample } from 'effector'
 
 interface DeleteState<KEY extends number | string, DATA> {
+  /** ключ для удаления */
   key: KEY
   data: DATA
 }
