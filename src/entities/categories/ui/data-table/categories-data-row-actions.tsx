@@ -4,7 +4,8 @@ import { Button } from 'shared/ui-kit/button'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
 import { Category } from 'entities/categories/types'
-import { openDeleteConfirmDialog } from 'widgets/data-table/model/delete'
+import { useDeleteConfirmation } from 'widgets/data-table/use-delete-confirmation'
+// import { openDeleteConfirmDialog } from 'widgets/data-table/model/delete'
 
 interface Props {
   row: Row<Category>
@@ -12,6 +13,7 @@ interface Props {
 
 export const CategoriesDataTableRowActions = ({ row }: Props) => {
   const { original } = row
+  const { openDeleteConfirmDialog } = useDeleteConfirmation()
 
   const handleDeleteClick = () => {
     openDeleteConfirmDialog<number, Category>({
