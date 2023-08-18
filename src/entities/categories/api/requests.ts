@@ -10,3 +10,7 @@ export const createCategory = async (form: CreateCategoryDto) => {
 export const getCategories = async () => {
   return (await $api.get<ListRequest<Category>>('categories')).data
 }
+
+export const getCategoryBySlug = async (slug: string) => {
+  return (await $api.get<Category>(`/categories/${slug}`)).data
+}
