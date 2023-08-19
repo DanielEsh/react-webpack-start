@@ -9,7 +9,7 @@ import { CategoryForm } from 'entities/categories/ui/form/types'
 import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
 
 const CategoryCreatePage = () => {
-  const { mutate: createCategoryMutation } = useCreateCategoryMutation()
+  const { mutateAsync: createCategoryMutation } = useCreateCategoryMutation()
   const { updateCategories } = useUpdateCategories()
   const { showNotification } = useNotification()
 
@@ -18,8 +18,8 @@ const CategoryCreatePage = () => {
     name: '',
   }
 
-  const createNewCategory = (form: CategoryForm) => {
-    return createCategoryMutation(form, {
+  const createNewCategory = async (form: CategoryForm) => {
+    return await createCategoryMutation(form, {
       onSuccess: (data) => handleSuccessCreate(data),
       onError: handleErrorCreate,
     })
@@ -40,7 +40,6 @@ const CategoryCreatePage = () => {
 
   return (
     <FormDrawerLayout
-      success={true}
       formSchema={categoryFormSchema}
       defaultValues={defaultValues}
       backLinkPath="/categories"

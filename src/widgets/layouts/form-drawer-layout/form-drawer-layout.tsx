@@ -15,14 +15,14 @@ export interface Props extends TypeWithChildren {
   formSchema: any
   defaultValues: any
   backLinkPath: string
-  onSubmit(form: any): void
+  onSubmit: (form: any) => void
 }
 
 export const FormDrawerLayout = (props: Props) => {
   const {
     loading,
     error,
-    success,
+    success = true,
     data,
     formSchema,
     defaultValues,
@@ -40,9 +40,9 @@ export const FormDrawerLayout = (props: Props) => {
 
   const { reset } = formMethods
 
-  const handleSubmit = (form: any) => {
-    onSubmit(form)
-    // close()
+  const handleSubmit = async (form: any) => {
+    await onSubmit(form)
+    close()
   }
 
   useEffect(() => {
