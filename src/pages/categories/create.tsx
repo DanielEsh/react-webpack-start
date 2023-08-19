@@ -1,8 +1,3 @@
-import { useNavigate } from 'react-router-dom'
-import { Drawer } from 'shared/ui-kit/drawer'
-import { useForm } from 'shared/ui-kit/form/use-form'
-import { Form } from 'shared/ui-kit/form/form'
-import { Button } from 'shared/ui-kit/button'
 import {
   useCreateCategoryMutation,
   useUpdateCategories,
@@ -11,9 +6,9 @@ import { useNotification } from 'shared/notification'
 import { CategoryFormFields } from 'entities/categories/ui/form/category-form-fields'
 import { categoryFormSchema } from 'entities/categories/ui/form/category-form-schema'
 import { CategoryForm } from 'entities/categories/ui/form/types'
+import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
 
 const CategoryCreatePage = () => {
-  const navigate = useNavigate()
   const { mutate: createCategoryMutation } = useCreateCategoryMutation()
   const { updateCategories } = useUpdateCategories()
   const { showNotification } = useNotification()
@@ -21,12 +16,6 @@ const CategoryCreatePage = () => {
   const defaultValues: CategoryForm = {
     slug: '',
     name: '',
-  }
-
-  const formMethods = useForm<CategoryForm>(categoryFormSchema, defaultValues)
-
-  const close = () => {
-    navigate('/categories')
   }
 
   const createNewCategory = (form: CategoryForm) => {
@@ -43,7 +32,6 @@ const CategoryCreatePage = () => {
       message: `Категория ${data.name} успешно создана`,
     })
     updateCategories()
-    close()
   }
 
   function handleErrorCreate() {
@@ -51,33 +39,15 @@ const CategoryCreatePage = () => {
   }
 
   return (
-    <Drawer
-      opened
-      onClose={close}
+    <FormDrawerLayout
+      success={true}
+      formSchema={categoryFormSchema}
+      defaultValues={defaultValues}
+      backLinkPath="/categories"
+      onSubmit={createNewCategory}
     >
-      <Form
-        className="flex h-full flex-col"
-        methods={formMethods}
-        onSubmit={createNewCategory}
-      >
-        <Drawer.Header>
-          <h2>Create category</h2>
-        </Drawer.Header>
-
-        <CategoryFormFields />
-
-        <Drawer.Footer>
-          <div className="flex gap-2 px-4 pb-6">
-            <Button
-              type="submit"
-              variant="primary"
-            >
-              Create
-            </Button>
-          </div>
-        </Drawer.Footer>
-      </Form>
-    </Drawer>
+      <CategoryFormFields />
+    </FormDrawerLayout>
   )
 }
 
