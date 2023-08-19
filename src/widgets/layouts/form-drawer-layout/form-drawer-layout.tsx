@@ -15,6 +15,7 @@ export interface Props extends TypeWithChildren {
   formSchema: any
   defaultValues: any
   backLinkPath: string
+  submitButtonLabel: string
   onSubmit: (form: any) => void
 }
 
@@ -28,6 +29,7 @@ export const FormDrawerLayout = (props: Props) => {
     defaultValues,
     backLinkPath,
     children,
+    submitButtonLabel,
     onSubmit,
   } = props
   const navigate = useNavigate()
@@ -76,7 +78,7 @@ export const FormDrawerLayout = (props: Props) => {
                   type="submit"
                   variant="primary"
                 >
-                  Update
+                  {submitButtonLabel}
                 </Button>
 
                 <Button

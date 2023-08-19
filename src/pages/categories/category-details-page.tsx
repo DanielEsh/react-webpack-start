@@ -29,6 +29,7 @@ const CategoryDetailsPage = () => {
       formSchema={categoryFormSchema}
       defaultValues={defaultValues}
       backLinkPath="/categories"
+      submitButtonLabel="Update"
       onSubmit={updateCategory}
     >
       <CategoryFormFields />

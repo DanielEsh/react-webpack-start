@@ -43,6 +43,7 @@ const CategoryCreatePage = () => {
       formSchema={categoryFormSchema}
       defaultValues={defaultValues}
       backLinkPath="/categories"
+      submitButtonLabel="Create"
       onSubmit={createNewCategory}
     >
       <CategoryFormFields />
