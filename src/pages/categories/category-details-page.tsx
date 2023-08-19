@@ -7,18 +7,9 @@ import { Button } from 'shared/ui-kit/button'
 import { Input, TextArea } from 'shared/ui-kit/form-controls'
 import { useGetCategoryDetails } from 'entities/categories/api/queries'
 import { useEffect } from 'react'
-
-const updateCategoryFormSchema = z.object({
-  slug: z.string().nonempty({
-    message: 'Must be required',
-  }),
-  name: z.string().nonempty({
-    message: 'Must be required',
-  }),
-  description: z.string().optional(),
-})
-
-type UpdateCategoryForm = z.infer<typeof updateCategoryFormSchema>
+import { CategoryFormFields } from 'entities/categories/ui/form/category-form-fields'
+import { categoryFormSchema } from 'entities/categories/ui/form/category-form-schema'
+import { CategoryForm } from 'entities/categories/ui/form/types'
 
 const CategoryDetailsPage = () => {
   const navigate = useNavigate()
@@ -29,15 +20,12 @@ const CategoryDetailsPage = () => {
     navigate('/categories')
   }
 
-  const defaultValues: UpdateCategoryForm = {
+  const defaultValues: CategoryForm = {
     slug: data?.slug ?? '',
     name: data?.name ?? '',
   }
 
-  const formMethods = useForm<UpdateCategoryForm>(
-    updateCategoryFormSchema,
-    defaultValues,
-  )
+  const formMethods = useForm<CategoryForm>(categoryFormSchema, defaultValues)
 
   const { reset } = formMethods
 
@@ -63,17 +51,9 @@ const CategoryDetailsPage = () => {
           <Drawer.Header>
             <h2>Update category</h2>
           </Drawer.Header>
-          <div className="flex flex-col gap-4 px-4">
-            <Form.Field name="slug">
-              <Input label="slug" />
-            </Form.Field>
-            <Form.Field name="name">
-              <Input label="name" />
-            </Form.Field>
-            <Form.Field name="description">
-              <TextArea label="description" />
-            </Form.Field>
-          </div>
+
+          <CategoryFormFields />
+
           <Drawer.Footer>
             <div className="flex gap-2 px-4 pb-6">
               <Button

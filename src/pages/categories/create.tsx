@@ -1,27 +1,16 @@
 import { useNavigate } from 'react-router-dom'
-import { z } from 'zod'
 import { Drawer } from 'shared/ui-kit/drawer'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { Form } from 'shared/ui-kit/form/form'
 import { Button } from 'shared/ui-kit/button'
-import { Input, TextArea } from 'shared/ui-kit/form-controls'
 import {
   useCreateCategoryMutation,
   useUpdateCategories,
 } from 'entities/categories/api/queries'
 import { useNotification } from 'shared/notification'
-
-const createCategoryFormSchema = z.object({
-  slug: z.string().nonempty({
-    message: 'Must be required',
-  }),
-  name: z.string().nonempty({
-    message: 'Must be required',
-  }),
-  description: z.string().optional(),
-})
-
-type CreateCategoryForm = z.infer<typeof createCategoryFormSchema>
+import { CategoryFormFields } from 'entities/categories/ui/form/category-form-fields'
+import { categoryFormSchema } from 'entities/categories/ui/form/category-form-schema'
+import { CategoryForm } from 'entities/categories/ui/form/types'
 
 const CategoryCreatePage = () => {
   const navigate = useNavigate()
@@ -29,21 +18,18 @@ const CategoryCreatePage = () => {
   const { updateCategories } = useUpdateCategories()
   const { showNotification } = useNotification()
 
-  const defaultValues: CreateCategoryForm = {
+  const defaultValues: CategoryForm = {
     slug: '',
     name: '',
   }
 
-  const formMethods = useForm<CreateCategoryForm>(
-    createCategoryFormSchema,
-    defaultValues,
-  )
+  const formMethods = useForm<CategoryForm>(categoryFormSchema, defaultValues)
 
   const close = () => {
     navigate('/categories')
   }
 
-  const createNewCategory = (form: CreateCategoryForm) => {
+  const createNewCategory = (form: CategoryForm) => {
     return createCategoryMutation(form, {
       onSuccess: (data) => handleSuccessCreate(data),
       onError: handleErrorCreate,
@@ -77,20 +63,17 @@ const CategoryCreatePage = () => {
         <Drawer.Header>
           <h2>Create category</h2>
         </Drawer.Header>
-        <div className="flex flex-col gap-4 px-4">
-          <Form.Field name="slug">
-            <Input label="slug" />
-          </Form.Field>
-          <Form.Field name="name">
-            <Input label="name" />
-          </Form.Field>
-          <Form.Field name="description">
-            <TextArea label="description" />
-          </Form.Field>
-        </div>
+
+        <CategoryFormFields />
+
         <Drawer.Footer>
           <div className="flex gap-2 px-4 pb-6">
-            <Button type="submit">Create</Button>
+            <Button
+              type="submit"
+              variant="primary"
+            >
+              Create
+            </Button>
           </div>
         </Drawer.Footer>
       </Form>
