@@ -1,5 +1,5 @@
 import { $api } from 'shared/api/api'
-import { Category, CreateCategoryDto } from '../types'
+import { Category, CreateCategoryDto, UpdateCategoryDto } from '../types'
 import { ListRequest } from 'entities/collection/types'
 
 export const createCategory = async (form: CreateCategoryDto) => {
@@ -13,6 +13,13 @@ export const getCategories = async () => {
 
 export const getCategoryBySlug = async (slug: string) => {
   return (await $api.get<Category>(`/categories/${slug}`)).data
+}
+
+export const updateCategoryBySlug = async (
+  form: UpdateCategoryDto,
+  slug: string,
+) => {
+  return (await $api.patch<Category>(`/categories/${slug}`, form)).data
 }
 
 export const deleteCategory = async (id: number) => {

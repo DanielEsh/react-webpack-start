@@ -6,7 +6,7 @@ import { useDeleteConfirmation } from 'widgets/data-table/use-delete-confirmatio
 import { DeleteState } from 'widgets/data-table/model/delete'
 import {
   useDeleteCategoryMutation,
-  useUpdateCategories,
+  useInvalidateCategories,
 } from 'entities/categories/api/queries'
 import { useNotification } from 'shared/notification'
 
@@ -22,7 +22,7 @@ export const CategoriesDataTable = ({ data }: Props) => {
     confirmDelete,
   } = useDeleteConfirmation()
   const { mutate: deleteCategoryMutation } = useDeleteCategoryMutation()
-  const { updateCategories } = useUpdateCategories()
+  const { invalidateCategories } = useInvalidateCategories()
   const { showNotification } = useNotification()
 
   const handleSuccessCategoryDelete = (data: Category) => {
@@ -32,7 +32,7 @@ export const CategoriesDataTable = ({ data }: Props) => {
       title: 'Успешное удаление',
       message: `message`,
     })
-    updateCategories()
+    invalidateCategories()
   }
 
   const handleConfirmDelete = (data: DeleteState<number, Category>) => {

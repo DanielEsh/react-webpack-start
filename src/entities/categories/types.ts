@@ -14,3 +14,4 @@ export interface Category {
 }
 
 export type CreateCategoryDto = Omit<Category, 'id'>
+export type UpdateCategoryDto = Omit<Category, 'id'>

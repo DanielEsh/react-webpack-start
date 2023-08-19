@@ -4,7 +4,9 @@ import {
   deleteCategory,
   getCategories,
   getCategoryBySlug,
+  updateCategoryBySlug,
 } from './requests'
+import { CategoryForm } from '../ui/form/types'
 
 export const useCreateCategoryMutation = () => {
   return useMutation({
@@ -31,20 +33,29 @@ export const useGetCategoryDetails = (slug: string) => {
   })
 }
 
-export const useUpdateCategories = () => {
-  const queryClient = useQueryClient()
-
-  const updateCategories = () => {
-    queryClient.invalidateQueries({ queryKey: ['categories'] })
-  }
-
-  return {
-    updateCategories,
-  }
+export const useUpdateCategoryMutation = () => {
+  return useMutation({
+    mutationFn: ({ form, slug }: { form: CategoryForm; slug: string }) => {
+      console.log('FORM', form)
+      return updateCategoryBySlug(form, slug)
+    },
+  })
 }
 
 export const useDeleteCategoryMutation = () => {
   return useMutation({
     mutationFn: deleteCategory,
   })
+}
+
+export const useInvalidateCategories = () => {
+  const queryClient = useQueryClient()
+
+  const invalidateCategories = () => {
+    queryClient.invalidateQueries({ queryKey: ['categories'] })
+  }
+
+  return {
+    invalidateCategories,
+  }
 }

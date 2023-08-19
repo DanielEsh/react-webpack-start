@@ -1,6 +1,6 @@
 import {
   useCreateCategoryMutation,
-  useUpdateCategories,
+  useInvalidateCategories,
 } from 'entities/categories/api/queries'
 import { useNotification } from 'shared/notification'
 import { CategoryFormFields } from 'entities/categories/ui/form/category-form-fields'
@@ -10,7 +10,7 @@ import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer
 
 const CategoryCreatePage = () => {
   const { mutateAsync: createCategoryMutation } = useCreateCategoryMutation()
-  const { updateCategories } = useUpdateCategories()
+  const { invalidateCategories } = useInvalidateCategories()
   const { showNotification } = useNotification()
 
   const defaultValues: CategoryForm = {
@@ -31,7 +31,7 @@ const CategoryCreatePage = () => {
       title: 'Успешное создание категории',
       message: `Категория ${data.name} успешно создана`,
     })
-    updateCategories()
+    invalidateCategories()
   }
 
   function handleErrorCreate() {
