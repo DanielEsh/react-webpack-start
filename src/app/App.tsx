@@ -3,13 +3,12 @@ import { StrictMode, Suspense } from 'react'
 // import { AppRouter } from 'app/providers/router'
 import { Router } from 'pages'
 // import { ErrorBoundary } from 'app/providers/ErrorBoundary'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from 'shared/lib/react-query'
 import { NotificationRoot, NotificationProvider } from 'shared/notification'
 
 import './tailwind.css'
 import './global.css'
-
-const queryClient = new QueryClient()
 
 export const App = () => {
   return (
