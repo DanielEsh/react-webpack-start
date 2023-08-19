@@ -4,22 +4,24 @@ import { Form } from 'shared/ui-kit/form'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { Button } from 'shared/ui-kit/button'
 import { useEffect } from 'react'
-import { CategoryForm } from 'entities/categories/ui/form/types'
 import { TypeWithChildren } from 'shared/ui-kit/types'
-
-export interface Props extends TypeWithChildren {
+import { type ZodType } from 'zod'
+import { type FieldValues, type DefaultValues } from 'react-hook-form'
+export interface Props<FormValues> extends TypeWithChildren {
   loading?: boolean
   error?: boolean
   success?: boolean
-  data?: any
-  formSchema: any
-  defaultValues: any
+  data?: FormValues
+  formSchema: ZodType<FormValues>
+  defaultValues: DefaultValues<FormValues>
   backLinkPath: string
   submitButtonLabel: string
-  onSubmit: (form: any) => Promise<void>
+  onSubmit: (form: FormValues) => Promise<void>
 }
 
-export const FormDrawerLayout = (props: Props) => {
+export const FormDrawerLayout = <FormValues extends FieldValues>(
+  props: Props<FormValues>,
+) => {
   const {
     loading,
     error,
@@ -38,7 +40,7 @@ export const FormDrawerLayout = (props: Props) => {
     navigate(backLinkPath)
   }
 
-  const formMethods = useForm<CategoryForm>(formSchema, defaultValues)
+  const formMethods = useForm<FormValues>(formSchema, defaultValues)
 
   const { reset } = formMethods
 

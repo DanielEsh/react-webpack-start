@@ -16,8 +16,8 @@ const CategoryDetailsPage = () => {
     name: data?.name ?? '',
   }
 
-  const updateCategory = async () => {
-    console.log('update')
+  const updateCategory = async (form: CategoryForm) => {
+    console.log('update', form)
   }
 
   return (
