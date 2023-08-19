@@ -16,7 +16,7 @@ export interface Props extends TypeWithChildren {
   defaultValues: any
   backLinkPath: string
   submitButtonLabel: string
-  onSubmit: (form: any) => void
+  onSubmit: (form: any) => Promise<void>
 }
 
 export const FormDrawerLayout = (props: Props) => {

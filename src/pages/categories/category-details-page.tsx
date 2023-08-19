@@ -16,7 +16,7 @@ const CategoryDetailsPage = () => {
     name: data?.name ?? '',
   }
 
-  const updateCategory = () => {
+  const updateCategory = async () => {
     console.log('update')
   }
 
