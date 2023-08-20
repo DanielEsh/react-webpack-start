@@ -9,13 +9,15 @@ import {
   useInvalidateCategories,
 } from 'entities/categories/api/queries'
 import { useNotification } from 'shared/notification'
+import { DataTableFooterToolbar } from 'widgets/data-table/data-table-footer-toolbar'
 
 interface Props {
   data: Category[]
+  totalPages: number
   onChange?(): void
 }
 
-export const CategoriesDataTable = ({ data }: Props) => {
+export const CategoriesDataTable = ({ data, totalPages }: Props) => {
   const {
     deleteConfirmDialogVisible,
     closeDeleteConfirmDialog,
@@ -48,6 +50,8 @@ export const CategoriesDataTable = ({ data }: Props) => {
         data={data}
         columns={columns}
       />
+
+      <DataTableFooterToolbar totalPages={totalPages} />
 
       <Dialog
         opened={deleteConfirmDialogVisible}

@@ -17,7 +17,12 @@ const CategoriesPage = () => {
 
         {isLoading && <div>Error...</div>}
         {isLoading && <div>Loading...</div>}
-        {data && <CategoriesDataTable data={data?.data} />}
+        {data && (
+          <CategoriesDataTable
+            data={data?.data}
+            totalPages={data.meta.pagination.totalPages}
+          />
+        )}
 
         <Outlet />
       </div>
