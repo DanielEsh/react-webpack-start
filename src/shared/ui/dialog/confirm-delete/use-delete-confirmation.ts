@@ -5,7 +5,7 @@ import {
   setDeletedItem,
   toggleDeleteConfirmDialog,
   type DeleteState,
-} from './model/delete'
+} from './model'
 
 export function useDeleteConfirmation() {
   const deletedStore = useStore($deletedStore)

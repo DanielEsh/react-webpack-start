@@ -1,8 +1,9 @@
-import { Dialog } from 'shared/ui-kit/dialog'
 import { Category } from 'entities/categories/types'
 import { columns } from './columns'
-import { useDeleteConfirmation } from 'widgets/data-table/use-delete-confirmation'
-import { DeleteState } from 'widgets/data-table/model/delete'
+import {
+  ConfirmDeleteDialog,
+  type DeleteState,
+} from 'shared/ui/dialog/confirm-delete'
 import {
   useDeleteCategoryMutation,
   useInvalidateCategories,
@@ -18,11 +19,6 @@ interface Props {
 }
 
 export const CategoriesDataTable = ({ data, totalPages, onChange }: Props) => {
-  const {
-    deleteConfirmDialogVisible,
-    closeDeleteConfirmDialog,
-    confirmDelete,
-  } = useDeleteConfirmation()
   const { mutate: deleteCategoryMutation } = useDeleteCategoryMutation()
   const { invalidateCategories } = useInvalidateCategories()
   const { showNotification } = useNotification()
@@ -53,11 +49,7 @@ export const CategoriesDataTable = ({ data, totalPages, onChange }: Props) => {
         onChange={onChange}
       />
 
-      <Dialog
-        opened={deleteConfirmDialogVisible}
-        onClose={closeDeleteConfirmDialog}
-        onConfirm={() => confirmDelete(handleConfirmDelete)}
-      />
+      <ConfirmDeleteDialog onConfirmDelete={handleConfirmDelete} />
     </>
   )
 }
