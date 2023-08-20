@@ -9,14 +9,15 @@ import {
 } from 'entities/categories/api/queries'
 import { useNotification } from 'shared/notification'
 import { PaginatedDataView } from 'widgets/data-view/paginated-data-view'
+import { DataTableState } from 'widgets/data-table/model'
 
 interface Props {
   data: Category[]
   totalPages: number
-  onChange?(): void
+  onChange?(state: DataTableState): void
 }
 
-export const CategoriesDataTable = ({ data, totalPages }: Props) => {
+export const CategoriesDataTable = ({ data, totalPages, onChange }: Props) => {
   const {
     deleteConfirmDialogVisible,
     closeDeleteConfirmDialog,
@@ -49,6 +50,7 @@ export const CategoriesDataTable = ({ data, totalPages }: Props) => {
         data={data}
         columns={columns}
         meta={{ totalPages }}
+        onChange={onChange}
       />
 
       <Dialog

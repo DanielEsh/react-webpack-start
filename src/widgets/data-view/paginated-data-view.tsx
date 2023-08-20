@@ -1,6 +1,6 @@
 import { DataTable } from 'widgets/data-table'
 import { DataTableFooterToolbar } from 'widgets/data-table/data-table-footer-toolbar'
-import { $dataTableStore } from 'widgets/data-table/model'
+import { $dataTableStore, DataTableState } from 'widgets/data-table/model'
 
 interface Meta {
   totalPages: number
@@ -10,13 +10,14 @@ interface Props<DATA> {
   data: DATA[]
   columns: any
   meta: Meta
+  onChange?(state: DataTableState): void
 }
 
 export const PaginatedDataView = (props: Props<any>) => {
-  const { data, columns, meta } = props
+  const { data, columns, meta, onChange } = props
 
   const handleChange = () => {
-    console.log('Values', $dataTableStore.getState())
+    onChange && onChange($dataTableStore.getState())
   }
 
   return (

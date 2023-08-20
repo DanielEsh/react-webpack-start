@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 import { CategoriesDataTableHeader } from 'entities/categories/ui/data-table/data-table-header'
 import { CategoriesDataTable } from 'entities/categories/ui/data-table/categories-data-table'
 import { useGetCategories } from 'entities/categories/api/queries'
-import { $dataTableStore } from 'widgets/data-table/model'
+import { $dataTableStore, DataTableState } from 'widgets/data-table/model'
 import { useStore } from 'effector-react'
 
 const CategoriesPage = () => {
@@ -13,6 +13,10 @@ const CategoriesPage = () => {
     sort_by: [values.sortBy ?? 'id'],
     order_by: [values.orderBy ?? 'asc'],
   })
+
+  const handleChange = (state: DataTableState) => {
+    console.log('values', state)
+  }
 
   return (
     <div>
@@ -29,6 +33,7 @@ const CategoriesPage = () => {
           <CategoriesDataTable
             data={data?.data}
             totalPages={data.meta.pagination.totalPages}
+            onChange={handleChange}
           />
         )}
 
