@@ -14,6 +14,7 @@ import {
 } from './model'
 import { useState } from 'react'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
+import { useStore } from 'effector-react'
 
 interface Props<DATA> {
   data: DATA[]
@@ -25,6 +26,7 @@ export const DataTable = <TData extends unknown | object>(
   props: Props<TData>,
 ) => {
   const { data, columns, onChange } = props
+  const { sortBy, orderBy } = useStore($dataTableStore)
   const [sorting, setSorting] = useState<SortingState>([])
 
   const transformTableSortingToStoreValues = (
@@ -47,6 +49,17 @@ export const DataTable = <TData extends unknown | object>(
     setDataTableValues(transformTableSortingToStoreValues(sorting))
     onChange && onChange($dataTableStore.getState())
   }, [sorting])
+
+  useIsomorphicLayoutEffect(() => {
+    if (sortBy && orderBy) {
+      setSorting([
+        {
+          id: sortBy,
+          desc: orderBy === 'desc' ? true : false,
+        },
+      ])
+    }
+  }, [])
 
   const table = useReactTable({
     data,
