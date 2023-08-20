@@ -1,3 +1,4 @@
+import { type ColumnDef } from '@tanstack/react-table'
 import { DataTable } from 'widgets/data-table'
 import { DataTableFooterToolbar } from 'widgets/data-table/data-table-footer-toolbar'
 import { $dataTableStore, DataTableState } from 'widgets/data-table/model'
@@ -8,12 +9,14 @@ interface Meta {
 
 interface Props<DATA> {
   data: DATA[]
-  columns: any
+  columns: ColumnDef<DATA>[]
   meta: Meta
   onChange?(state: DataTableState): void
 }
 
-export const PaginatedDataView = (props: Props<any>) => {
+export const PaginatedDataView = <DATA extends unknown | object>(
+  props: Props<DATA>,
+) => {
   const { data, columns, meta, onChange } = props
 
   const handleChange = () => {
@@ -22,7 +25,7 @@ export const PaginatedDataView = (props: Props<any>) => {
 
   return (
     <>
-      <DataTable
+      <DataTable<DATA>
         data={data}
         columns={columns}
         onChange={handleChange}

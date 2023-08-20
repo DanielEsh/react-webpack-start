@@ -5,8 +5,8 @@ export type RowsPerPagesValues = 10 | 20 | 40
 export interface DataTableState {
   currentPage?: number
   limit?: RowsPerPagesValues
-  sortBy?: string
-  orderBy?: string
+  sortBy?: string | null
+  orderBy?: string | null
 }
 
 const defaultCollectionTableValues: DataTableState = {
@@ -24,6 +24,6 @@ $dataTableStore.on(setDataTableValues, (state, updatedValues) => {
   return { ...state, ...updatedValues }
 })
 
-$dataTableStore.watch((state) => {
-  console.log('STATE', state)
-})
+// $dataTableStore.watch((state) => {
+//   console.log('STATE', state)
+// })

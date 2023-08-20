@@ -26,7 +26,7 @@ export const DataTable = <TData extends unknown | object>(
   props: Props<TData>,
 ) => {
   const { data, columns, onChange } = props
-  const { sortBy, orderBy } = useStore($dataTableStore)
+  const dataTableStore = useStore($dataTableStore)
   const [sorting, setSorting] = useState<SortingState>([])
 
   const transformTableSortingToStoreValues = (
@@ -43,16 +43,26 @@ export const DataTable = <TData extends unknown | object>(
   }
 
   useIsomorphicLayoutEffect(() => {
+    if (!sorting.length) {
+      setDataTableValues({
+        currentPage: dataTableStore.currentPage,
+        limit: dataTableStore.limit,
+        sortBy: null,
+        orderBy: null,
+      })
+      onChange && onChange($dataTableStore.getState())
+    }
+
     setDataTableValues(transformTableSortingToStoreValues(sorting))
     onChange && onChange($dataTableStore.getState())
   }, [sorting])
 
   useIsomorphicLayoutEffect(() => {
-    if (sortBy && orderBy) {
+    if (dataTableStore.sortBy && dataTableStore.orderBy) {
       setSorting([
         {
-          id: sortBy,
-          desc: orderBy === 'desc' ? true : false,
+          id: dataTableStore.sortBy,
+          desc: dataTableStore.orderBy === 'desc' ? true : false,
         },
       ])
     }
