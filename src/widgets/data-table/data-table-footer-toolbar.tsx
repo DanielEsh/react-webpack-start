@@ -10,6 +10,7 @@ import {
 
 interface Props {
   totalPages: number
+  onChange(): void
 }
 
 const rowsPerPageOptions: BaseSelectOption[] = [
@@ -27,19 +28,21 @@ const rowsPerPageOptions: BaseSelectOption[] = [
   },
 ]
 
-export const DataTableFooterToolbar = ({ totalPages }: Props) => {
+export const DataTableFooterToolbar = ({ totalPages, onChange }: Props) => {
   const { currentPage, limit } = useStore($dataTableStore)
 
   const handleLimitChange = (limit: number | string) => {
     setDataTableValues({
       limit: Number(limit) as RowsPerPagesValues,
     })
+    onChange()
   }
 
   const handleCurrentPageChange = (currentPage: number) => {
     setDataTableValues({
       currentPage: currentPage,
     })
+    onChange()
   }
 
   return (

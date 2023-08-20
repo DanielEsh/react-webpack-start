@@ -26,6 +26,6 @@ $dataTableStore.on(setDataTableValues, (state, updatedValues) => {
   return { ...state, ...updatedValues }
 })
 
-$dataTableStore.watch((state) => {
-  console.log('STATE', state)
-})
+// $dataTableStore.watch((state) => {
+//   console.log('STATE', state)
+// })

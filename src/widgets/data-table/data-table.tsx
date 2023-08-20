@@ -4,23 +4,57 @@ import {
   getSortedRowModel,
   useReactTable,
   type ColumnDef,
+  SortingState,
 } from '@tanstack/react-table'
 import { Table } from 'shared/ui-kit/table'
+import {
+  $dataTableStore,
+  setDataTableValues,
+  type DataTableState,
+} from './model'
+import { useState } from 'react'
+import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
 
 interface Props<DATA> {
   data: DATA[]
   columns: ColumnDef<DATA>[]
-  onChange?(): void
+  onChange?(values: DataTableState): void
 }
 
 export const DataTable = <TData extends unknown | object>(
   props: Props<TData>,
 ) => {
-  const { data, columns } = props
+  const { data, columns, onChange } = props
+  const [sorting, setSorting] = useState<SortingState>([])
 
-  const table = useReactTable<TData>({
+  const transformTableSortingToStoreValues = (
+    sorting: SortingState,
+  ): Pick<DataTableState, 'sortBy' | 'orderBy'> => {
+    const initialValue = {
+      sortBy: 'id',
+      orderBy: 'asc',
+    }
+
+    return sorting.reduce((acc, item) => {
+      return {
+        sortBy: item.id,
+        orderBy: item.desc ? 'desc' : 'asc',
+      }
+    }, initialValue)
+  }
+
+  useIsomorphicLayoutEffect(() => {
+    setDataTableValues(transformTableSortingToStoreValues(sorting))
+    onChange && onChange($dataTableStore.getState())
+  }, [sorting])
+
+  const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
   })
