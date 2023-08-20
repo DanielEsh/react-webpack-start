@@ -12,8 +12,6 @@ export interface DataTableState {
 const defaultCollectionTableValues: DataTableState = {
   currentPage: 1,
   limit: 10,
-  sortBy: 'id',
-  orderBy: 'asc',
 }
 
 export const setDataTableValues = createEvent<DataTableState>()

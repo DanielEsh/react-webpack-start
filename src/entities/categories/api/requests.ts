@@ -11,8 +11,8 @@ export const createCategory = async (form: CreateCategoryDto) => {
 interface Params {
   page: number
   limit: number
-  sort_by: string[]
-  order_by: string[]
+  sort_by?: string[]
+  order_by?: string[]
 }
 
 export const getCategories = async (params: Params) => {

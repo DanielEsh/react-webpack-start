@@ -31,8 +31,8 @@ const CategoriesPage = () => {
   const { isLoading, isError, data } = useGetCategories({
     page: values.currentPage ?? 1,
     limit: values.limit ?? 5,
-    sort_by: [values.sortBy ?? 'id'],
-    order_by: [values.orderBy ?? 'asc'],
+    sort_by: values.sortBy ? [values.sortBy] : [],
+    order_by: values.orderBy ? [values.orderBy] : [],
   })
 
   const handleChange = (state: DataTableState) => {

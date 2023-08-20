@@ -17,8 +17,8 @@ export const useCreateCategoryMutation = () => {
 interface Values {
   page: number
   limit: number
-  sort_by: string[]
-  order_by: string[]
+  sort_by?: string[]
+  order_by?: string[]
 }
 
 export const useGetCategories = (values: Values) => {
