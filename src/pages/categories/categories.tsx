@@ -4,9 +4,13 @@ import { CategoriesDataTable } from 'entities/categories/ui/data-table/categorie
 import { useGetCategories } from 'entities/categories/api/queries'
 import { $dataTableStore, DataTableState } from 'widgets/data-table/model'
 import { useStore } from 'effector-react'
+import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
 
 const CategoriesPage = () => {
   const values = useStore($dataTableStore)
+
+  const { sync } = useSyncWithQueryParams()
+
   const { isLoading, isError, data } = useGetCategories({
     page: values.currentPage ?? 1,
     limit: values.limit ?? 5,
@@ -16,6 +20,7 @@ const CategoriesPage = () => {
 
   const handleChange = (state: DataTableState) => {
     console.log('values', state)
+    sync(state)
   }
 
   return (
