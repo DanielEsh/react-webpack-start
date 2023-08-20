@@ -32,10 +32,7 @@ export const DataTable = <TData extends unknown | object>(
   const transformTableSortingToStoreValues = (
     sorting: SortingState,
   ): Pick<DataTableState, 'sortBy' | 'orderBy'> => {
-    const initialValue = {
-      sortBy: 'id',
-      orderBy: 'asc',
-    }
+    const initialValue = {}
 
     return sorting.reduce((acc, item) => {
       return {
