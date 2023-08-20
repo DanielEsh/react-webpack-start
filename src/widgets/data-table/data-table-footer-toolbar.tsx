@@ -60,12 +60,12 @@ export const DataTableFooterToolbar = ({ totalPages, onChange }: Props) => {
           <>
             <DataTablePageCounter
               totalPages={totalPages}
-              currentPage={currentPage ?? 1}
+              currentPage={Number(currentPage) ?? 1}
             />
 
             <Pagiantion
               totalPages={totalPages}
-              currentPage={currentPage ?? 1}
+              currentPage={Number(currentPage) ?? 1}
               onChange={handleCurrentPageChange}
             />
           </>

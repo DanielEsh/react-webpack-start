@@ -2,14 +2,31 @@ import { Outlet } from 'react-router-dom'
 import { CategoriesDataTableHeader } from 'entities/categories/ui/data-table/data-table-header'
 import { CategoriesDataTable } from 'entities/categories/ui/data-table/categories-data-table'
 import { useGetCategories } from 'entities/categories/api/queries'
-import { $dataTableStore, DataTableState } from 'widgets/data-table/model'
+import {
+  $dataTableStore,
+  type DataTableState,
+  type RowsPerPagesValues,
+  setDataTableValues,
+} from 'widgets/data-table/model'
 import { useStore } from 'effector-react'
 import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
+import { useEffect } from 'react'
 
 const CategoriesPage = () => {
   const values = useStore($dataTableStore)
 
-  const { sync } = useSyncWithQueryParams()
+  const { setQueryParams, getQueryParams } = useSyncWithQueryParams()
+
+  useEffect(() => {
+    const queryParams = getQueryParams()
+    if (Object.keys(queryParams).length) {
+      setDataTableValues({
+        currentPage: Number(queryParams.currentPage),
+        limit: +queryParams.limit as unknown as RowsPerPagesValues,
+        ...queryParams,
+      })
+    }
+  }, [])
 
   const { isLoading, isError, data } = useGetCategories({
     page: values.currentPage ?? 1,
@@ -20,7 +37,7 @@ const CategoriesPage = () => {
 
   const handleChange = (state: DataTableState) => {
     console.log('values', state)
-    sync(state)
+    setQueryParams(state)
   }
 
   return (
