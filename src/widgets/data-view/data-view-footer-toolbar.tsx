@@ -6,7 +6,7 @@ import {
   $dataTableStore,
   setDataTableValues,
   type RowsPerPagesValues,
-} from './model'
+} from '../data-table/model'
 
 interface Props {
   totalPages: number
@@ -28,7 +28,7 @@ const rowsPerPageOptions: BaseSelectOption[] = [
   },
 ]
 
-export const DataTableFooterToolbar = ({ totalPages, onChange }: Props) => {
+export const DataViewFooterToolbar = ({ totalPages, onChange }: Props) => {
   const { currentPage, limit } = useStore($dataTableStore)
 
   const handleLimitChange = (limit: number | string) => {

@@ -1,6 +1,6 @@
 import { type ColumnDef } from '@tanstack/react-table'
 import { DataTable } from 'widgets/data-table'
-import { DataTableFooterToolbar } from 'widgets/data-table/data-table-footer-toolbar'
+import { DataViewFooterToolbar } from './data-view-footer-toolbar'
 import { $dataTableStore, DataTableState } from 'widgets/data-table/model'
 
 interface Meta {
@@ -31,7 +31,7 @@ export const PaginatedDataView = <DATA extends unknown | object>(
         onChange={handleChange}
       />
 
-      <DataTableFooterToolbar
+      <DataViewFooterToolbar
         totalPages={meta.totalPages}
         onChange={handleChange}
       />
