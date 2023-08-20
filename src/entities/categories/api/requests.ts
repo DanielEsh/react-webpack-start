@@ -1,14 +1,23 @@
 import { $api } from 'shared/api/api'
 import { Category, CreateCategoryDto, UpdateCategoryDto } from '../types'
 import { ListRequest } from 'entities/collection/types'
+import qs from 'qs'
 
 export const createCategory = async (form: CreateCategoryDto) => {
   return (await $api.post(`/categories`, form)).data
   // console.log('CREATE', JSON.stringify(form, null, 2))
 }
 
-export const getCategories = async () => {
-  return (await $api.get<ListRequest<Category>>('categories')).data
+interface Params {
+  page: number
+  limit: number
+  sort_by: string[]
+  order_by: string[]
+}
+
+export const getCategories = async (params: Params) => {
+  const query = `categories?${qs.stringify(params)}`
+  return (await $api.get<ListRequest<Category>>(query)).data
 }
 
 export const getCategoryBySlug = async (slug: string) => {

@@ -14,10 +14,17 @@ export const useCreateCategoryMutation = () => {
   })
 }
 
-export const useGetCategories = () => {
+interface Values {
+  page: number
+  limit: number
+  sort_by: string[]
+  order_by: string[]
+}
+
+export const useGetCategories = (values: Values) => {
   return useQuery({
-    queryKey: ['categories'],
-    queryFn: () => getCategories(),
+    queryKey: ['categories', values],
+    queryFn: () => getCategories(values),
     keepPreviousData: true,
     onSuccess: (data) => {
       console.log('success', data)
