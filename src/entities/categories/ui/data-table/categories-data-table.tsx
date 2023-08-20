@@ -1,4 +1,3 @@
-import { DataTable } from 'widgets/data-table'
 import { Dialog } from 'shared/ui-kit/dialog'
 import { Category } from 'entities/categories/types'
 import { columns } from './columns'
@@ -9,7 +8,7 @@ import {
   useInvalidateCategories,
 } from 'entities/categories/api/queries'
 import { useNotification } from 'shared/notification'
-import { DataTableFooterToolbar } from 'widgets/data-table/data-table-footer-toolbar'
+import { PaginatedDataView } from 'widgets/data-view/paginated-data-view'
 
 interface Props {
   data: Category[]
@@ -46,12 +45,11 @@ export const CategoriesDataTable = ({ data, totalPages }: Props) => {
 
   return (
     <>
-      <DataTable<Category>
+      <PaginatedDataView
         data={data}
         columns={columns}
+        meta={{ totalPages }}
       />
-
-      <DataTableFooterToolbar totalPages={totalPages} />
 
       <Dialog
         opened={deleteConfirmDialogVisible}
