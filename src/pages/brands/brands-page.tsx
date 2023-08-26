@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import { useGetBrands } from 'entities/brands/api/queries/useGetBrands'
 import { BrandsDataTable } from 'entities/brands/ui/data-table/brands-data-table'
 import { BrandsDataTableHeader } from 'entities/brands/ui/data-table/brands-data-table-header'
@@ -38,6 +39,8 @@ const BrandsPage = () => {
           onChange={handleChange}
         />
       )}
+
+      <Outlet />
     </div>
   )
 }

@@ -8,7 +8,7 @@ export const BrandsDataTableHeader = () => {
 
       <div className="flex gap-3">
         <Link
-          to="brands"
+          to="/brands/create"
           addonLeft={<IconPlus />}
         >
           <span>Create</span>
