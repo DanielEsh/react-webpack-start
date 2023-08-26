@@ -80,7 +80,7 @@ export const DataTable = <TData extends unknown | object>(
   })
 
   return (
-    <div className="min-h-[309px]">
+    <div className="min-h-[572px]">
       <Table>
         <Table.Head>
           {table.getHeaderGroups().map((headerGroup) => (

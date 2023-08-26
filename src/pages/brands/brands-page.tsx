@@ -2,13 +2,31 @@ import { Outlet } from 'react-router-dom'
 import { useGetBrands } from 'entities/brands/api/queries/use-get-brands'
 import { BrandsDataTable } from 'entities/brands/ui/data-table/brands-data-table'
 import { BrandsDataTableHeader } from 'entities/brands/ui/data-table/brands-data-table-header'
-import { DataTableState } from 'widgets/data-table/model'
+import {
+  $dataTableStore,
+  DataTableState,
+  RowsPerPagesValues,
+  setDataTableValues,
+} from 'widgets/data-table/model'
+import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
+import { useEffect } from 'react'
+import { useStore } from 'effector-react'
 
 const BrandsPage = () => {
-  const values = {
-    currentPage: 1,
-    limit: 10,
-  }
+  const values = useStore($dataTableStore)
+
+  const { setQueryParams, getQueryParams } = useSyncWithQueryParams()
+
+  useEffect(() => {
+    const queryParams = getQueryParams()
+    if (Object.keys(queryParams).length) {
+      setDataTableValues({
+        currentPage: Number(queryParams.currentPage),
+        limit: +queryParams.limit as unknown as RowsPerPagesValues,
+        ...queryParams,
+      })
+    }
+  }, [])
 
   const { isLoading, isError, data } = useGetBrands({
     page: values.currentPage ?? 1,
@@ -19,7 +37,7 @@ const BrandsPage = () => {
 
   const handleChange = (state: DataTableState) => {
     console.log('values', state)
-    // setQueryParams(state)
+    setQueryParams(state)
   }
 
   return (
