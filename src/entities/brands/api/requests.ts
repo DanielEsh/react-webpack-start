@@ -3,7 +3,7 @@ import { $api } from 'shared/api/api'
 import { PageableResponse } from 'shared/api/types'
 import { BrandDto, CreateBrandDto, UpdateBrandDto } from './types'
 
-export const createCategory = async (dto: CreateBrandDto) => {
+export const createBrand = async (dto: CreateBrandDto) => {
   return (await $api.post(`/brands`, dto)).data
 }
 
