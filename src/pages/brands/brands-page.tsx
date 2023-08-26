@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { useGetBrands } from 'entities/brands/api/queries/useGetBrands'
+import { useGetBrands } from 'entities/brands/api/queries/use-get-brands'
 import { BrandsDataTable } from 'entities/brands/ui/data-table/brands-data-table'
 import { BrandsDataTableHeader } from 'entities/brands/ui/data-table/brands-data-table-header'
 import { DataTableState } from 'widgets/data-table/model'
