@@ -33,10 +33,12 @@ export const useGetCategories = (values: Values) => {
 }
 
 export const useGetCategoryDetails = (slug: string) => {
+  console.log('useGetCategoryDetails')
   return useQuery({
-    queryKey: ['collections', slug],
+    queryKey: ['categories', slug],
     queryFn: () => getCategoryBySlug(slug),
     retry: 1,
+    onSuccess: (data) => console.log('DATA', data),
   })
 }
 

@@ -12,9 +12,9 @@ import { useNotification } from 'shared/notification'
 
 const CategoryDetailsPage = () => {
   const { slug } = useParams()
-  const { isSuccess, isLoading, isError, data } = useGetCategoryDetails(
-    slug || '',
-  )
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const { isSuccess, isLoading, isError, data } = useGetCategoryDetails(slug)
   const { mutateAsync: updateCategoryMutation } = useUpdateCategoryMutation()
   const { invalidateCategories } = useInvalidateCategories()
   const { showNotification } = useNotification()

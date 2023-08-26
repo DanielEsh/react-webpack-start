@@ -53,7 +53,7 @@ const CategoriesPage = () => {
         {isLoading && <div>Loading...</div>}
         {data && (
           <CategoriesDataTable
-            data={data?.data}
+            data={data?.content}
             totalPages={data.meta.pagination.totalPages}
             onChange={handleChange}
           />

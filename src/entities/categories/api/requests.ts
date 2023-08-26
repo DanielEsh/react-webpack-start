@@ -1,7 +1,12 @@
 import { $api } from 'shared/api/api'
-import { Category, CreateCategoryDto, UpdateCategoryDto } from '../types'
-import { ListRequest } from 'entities/collection/types'
+import {
+  Category,
+  CategoryDto,
+  CreateCategoryDto,
+  UpdateCategoryDto,
+} from '../types'
 import qs from 'qs'
+import { PageableResponse } from 'shared/api/types'
 
 export const createCategory = async (form: CreateCategoryDto) => {
   return (await $api.post(`/categories`, form)).data
@@ -17,11 +22,12 @@ interface Params {
 
 export const getCategories = async (params: Params) => {
   const query = `categories?${qs.stringify(params)}`
-  return (await $api.get<ListRequest<Category>>(query)).data
+  return (await $api.get<PageableResponse<Category>>(query)).data
 }
 
 export const getCategoryBySlug = async (slug: string) => {
-  return (await $api.get<Category>(`/categories/${slug}`)).data
+  console.log('getCategoryBySlug')
+  return (await $api.get<CategoryDto>(`/categories/${slug}`)).data
 }
 
 export const updateCategoryBySlug = async (
