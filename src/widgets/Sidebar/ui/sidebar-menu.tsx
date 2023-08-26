@@ -8,6 +8,10 @@ export const SideBarMenu = () => {
       </li>
 
       <li>
+        <Link to="brands">brands</Link>
+      </li>
+
+      <li>
         <Link to="collections">collections</Link>
       </li>
     </ul>
