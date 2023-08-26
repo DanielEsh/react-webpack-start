@@ -10,7 +10,7 @@ interface Values {
 
 export const useGetBrands = (values: Values) => {
   return useQuery({
-    queryKey: ['categories', values],
+    queryKey: ['brands', values],
     queryFn: () => getBrands(values),
     keepPreviousData: true,
   })
