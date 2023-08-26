@@ -1,4 +1,6 @@
 import { useGetBrands } from 'entities/brands/api/queries/useGetBrands'
+import { BrandsDataTable } from 'entities/brands/ui/data-table/brands-data-table'
+import { DataTableState } from 'widgets/data-table/model'
 
 const BrandsPage = () => {
   const values = {
@@ -13,12 +15,25 @@ const BrandsPage = () => {
     order_by: [],
   })
 
+  const handleChange = (state: DataTableState) => {
+    console.log('values', state)
+    // setQueryParams(state)
+  }
+
   return (
     <div>
       <pre>
         <code>Breadcrumbs</code>
       </pre>
-      <span>Brands</span>
+      {isError && <div>Error...</div>}
+      {isLoading && <div>Loading...</div>}
+      {data && (
+        <BrandsDataTable
+          data={data?.content}
+          totalPages={data.meta.pagination.totalPages}
+          onChange={handleChange}
+        />
+      )}
     </div>
   )
 }
