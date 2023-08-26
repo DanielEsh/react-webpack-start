@@ -25,24 +25,22 @@ export const DataTableColumnHead = <TData, TValue>(
     return <span>{title}</span>
   }
 
+  const renderIcon = () =>
+    column.getIsSorted() === 'desc' ? (
+      <IconArrowDown />
+    ) : column.getIsSorted() === 'asc' ? (
+      <IconArrowUp />
+    ) : null
+
   return (
     <Button
       className="-ml-3"
       size="sm"
       variant="ghost"
+      addonRight={renderIcon()}
       onClick={toggleSort}
     >
-      <div className="flex gap-3">
-        <span>{title}</span>
-
-        <div className="flex items-center">
-          {column.getIsSorted() === 'desc' ? (
-            <IconArrowDown />
-          ) : column.getIsSorted() === 'asc' ? (
-            <IconArrowUp />
-          ) : null}
-        </div>
-      </div>
+      {title}
     </Button>
   )
 }
