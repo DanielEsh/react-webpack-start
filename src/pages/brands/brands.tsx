@@ -1,5 +1,6 @@
 import { useGetBrands } from 'entities/brands/api/queries/useGetBrands'
 import { BrandsDataTable } from 'entities/brands/ui/data-table/brands-data-table'
+import { BrandsDataTableHeader } from 'entities/brands/ui/data-table/brands-data-table-header'
 import { DataTableState } from 'widgets/data-table/model'
 
 const BrandsPage = () => {
@@ -25,6 +26,9 @@ const BrandsPage = () => {
       <pre>
         <code>Breadcrumbs</code>
       </pre>
+
+      <BrandsDataTableHeader />
+
       {isError && <div>Error...</div>}
       {isLoading && <div>Loading...</div>}
       {data && (
