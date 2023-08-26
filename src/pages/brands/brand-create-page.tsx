@@ -23,7 +23,7 @@ const BrandCreatePage = () => {
 
   const handleSuccessCreate = (data: BrandDto) => {
     showNotification({
-      id: String(data.id),
+      id: data.id,
       title: 'Успешное создание бренда',
       message: `Бренд ${data.name} успешно создан`,
     })

@@ -9,7 +9,7 @@ export type NotificationVariants =
   | null
 
 export interface Notification {
-  id: string
+  id: string | number
   title: string
   message: ReactNode
   type?: NotificationVariants
