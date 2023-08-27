@@ -8,6 +8,7 @@ import { GlobalNotFoundPage } from 'pages/GlobalNotFound'
 import CollectionsRouting from 'pages/collection'
 import categoriesRoutes from 'pages/categories'
 import brandsRoutes from 'pages/brands'
+import attributesRoutes from 'pages/attributes'
 
 export const Router = () => {
   return (
@@ -29,6 +30,7 @@ export const Router = () => {
           {...CollectionsRouting}
           {...categoriesRoutes}
           {...brandsRoutes}
+          {...attributesRoutes}
         </Route>
 
         <Route
