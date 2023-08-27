@@ -1,7 +1,7 @@
 import { Link } from 'shared/ui-kit/link'
 import IconPlus from 'shared/assets/icons/plus.svg'
 
-export const BrandsDataTableHeader = () => {
+export const AttributesDataTableHeader = () => {
   return (
     <div className="mt-4 mb-2 flex items-center justify-between">
       <h1 className="text-2xl">Attributes</h1>
