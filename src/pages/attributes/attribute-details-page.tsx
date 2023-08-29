@@ -9,10 +9,9 @@ import { AttributeForm } from 'entities/attributes/ui/form/types'
 import { attributeFormSchema } from 'entities/attributes/ui/form/attribute-form-schema'
 import { AttributeFormFields } from 'entities/attributes/ui/form/attribute-form-fields'
 import { AttributeType } from 'entities/attributes/types'
+
 const AttributeDetailsPage = () => {
-  const { id } = useParams()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+  const { id } = useParams() as unknown as { id: number }
   const { isSuccess, isLoading, isError, data } = useGetAttributeById(id)
   const { mutateAsync: updateAttributeMutation } = useUpdateAttributeMutatuin()
   const invalidateAttributes = useInvalidateAttributes()
@@ -20,7 +19,7 @@ const AttributeDetailsPage = () => {
 
   const defaultValues: AttributeForm = {
     name: data?.name ?? '',
-    type: data?.type ?? AttributeType.String,
+    type: data?.type ?? '',
   }
 
   const handleSuccessUpdate = (data: AttributeDto) => {
@@ -36,8 +35,6 @@ const AttributeDetailsPage = () => {
     await updateAttributeMutation(
       {
         form,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         id: id,
       },
       {
