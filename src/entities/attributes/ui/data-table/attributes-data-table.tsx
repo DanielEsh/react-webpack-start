@@ -1,17 +1,15 @@
 import { attributesDataTableColumns } from './attributes-data-table-columns'
-// import {
-//   ConfirmDeleteDialog,
-//   type DeleteState,
-// } from 'shared/ui/dialog/confirm-delete'
 import { PaginatedDataView } from 'widgets/data-view/paginated-data-view'
 import { DataTableState } from 'widgets/data-table/model'
 import { Attribute } from 'entities/attributes/types'
-// import { BrandDto } from 'entities/brands/api/types'
-// import {
-//   useDeleteBrandMutation,
-//   useInvalidateBrands,
-// } from 'entities/brands/api/queries'
-// import { useNotification } from 'shared/notification'
+import { useInvalidateAttributes } from 'entities/attributes/api/queries/use-invalidate-attributes'
+import { useNotification } from 'shared/notification'
+import { useDeleteAttributeMutation } from 'entities/attributes/api/queries/use-delete-attribute-mutation'
+import { AttributeDto } from 'entities/attributes/api/types'
+import {
+  ConfirmDeleteDialog,
+  DeleteState,
+} from 'shared/ui/dialog/confirm-delete'
 
 interface Props {
   data: Attribute[]
@@ -20,24 +18,24 @@ interface Props {
 }
 
 export const AttributesDataTable = ({ data, totalPages, onChange }: Props) => {
-  //   const { mutate: deleteCategoryMutation } = useDeleteBrandMutation()
-  //   const { invalidateBrands } = useInvalidateBrands()
-  //   const { showNotification } = useNotification()
+  const { mutate: deleteAttributeMutation } = useDeleteAttributeMutation()
+  const invalidateAttributes = useInvalidateAttributes()
+  const { showNotification } = useNotification()
 
-  //   const handleSuccessBrandDelete = (data: BrandDto) => {
-  //     showNotification({
-  //       id: data.id,
-  //       title: 'Успешное удаление',
-  //       message: `message`,
-  //     })
-  //     invalidateBrands()
-  //   }
+  const handleSuccessBrandDelete = (data: AttributeDto) => {
+    showNotification({
+      id: data.id,
+      title: 'Успешное удаление',
+      message: `message`,
+    })
+    invalidateAttributes()
+  }
 
-  //   const handleConfirmDelete = (data: DeleteState<number, BrandDto>) => {
-  //     deleteCategoryMutation(data.key, {
-  //       onSuccess: handleSuccessBrandDelete,
-  //     })
-  //   }
+  const handleConfirmDelete = (data: DeleteState<number, AttributeDto>) => {
+    deleteAttributeMutation(data.key, {
+      onSuccess: handleSuccessBrandDelete,
+    })
+  }
 
   return (
     <>
@@ -48,7 +46,7 @@ export const AttributesDataTable = ({ data, totalPages, onChange }: Props) => {
         onChange={onChange}
       />
 
-      {/* <ConfirmDeleteDialog onConfirmDelete={handleConfirmDelete} /> */}
+      <ConfirmDeleteDialog onConfirmDelete={handleConfirmDelete} />
     </>
   )
 }
