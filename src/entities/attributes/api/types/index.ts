@@ -1,3 +1,3 @@
-export { AttributeDto } from './attribute-dto'
-export { AttributeCreateDto } from './attribute-create-dto'
-export { AttributeUpdateDto } from './attribute-update-dto'
+export { type AttributeDto } from './attribute-dto'
+export { type AttributeCreateDto } from './attribute-create-dto'
+export { type AttributeUpdateDto } from './attribute-update-dto'

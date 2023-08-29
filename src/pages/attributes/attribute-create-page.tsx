@@ -1,12 +1,14 @@
 import { useNotification } from 'shared/notification'
 import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
-import { useCreateAttributeMutation } from 'entities/attributes/api/queries/use-create-attribute-mutation'
-import { useInvalidateAttributes } from 'entities/attributes/api/queries/use-invalidate-attributes'
-import { AttributeDto } from 'entities/attributes/api/types'
-import { AttributeForm } from 'entities/attributes/ui/form/types'
-import { attributeFormSchema } from 'entities/attributes/ui/form/attribute-form-schema'
-import { AttributeFormFields } from 'entities/attributes/ui/form/attribute-form-fields'
-import { AttributeType } from 'entities/attributes/types'
+import {
+  useCreateAttributeMutation,
+  useInvalidateAttributes,
+  type AttributeDto,
+  type AttributeForm,
+  AttributeType,
+  attributeFormSchema,
+  AttributeFormFields,
+} from 'entities/attributes'
 
 const AttributeCreatePage = () => {
   const { mutateAsync: createAttributeMutation } = useCreateAttributeMutation()
