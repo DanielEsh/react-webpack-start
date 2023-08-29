@@ -1,6 +1,6 @@
 import { AttributeDto } from './attribute-dto'
 
-export type AttributeCreateDto = Pick<
+export type AttributeCreateDto = Omit<
   AttributeDto,
-  'id' | 'created_at' | 'updated_at'
+  'id' | 'created_at' | 'updated_at' | 'value'
 >

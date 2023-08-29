@@ -19,7 +19,7 @@ const AttributeDetailsPage = () => {
 
   const defaultValues: AttributeForm = {
     name: data?.name ?? '',
-    type: data?.type ?? '',
+    type: data?.type ?? AttributeType.String,
   }
 
   const handleSuccessUpdate = (data: AttributeDto) => {
