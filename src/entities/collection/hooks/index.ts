@@ -1,1 +1,0 @@
-export { useUpdateCollectionsList } from './useUpdateCollectionsList'

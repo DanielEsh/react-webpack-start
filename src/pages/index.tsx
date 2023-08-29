@@ -5,7 +5,6 @@ import { MainPage } from 'pages/MainPage/MainPage'
 import { AboutPageAsync } from 'pages/AboutPage/AboutPage.async'
 import { GlobalNotFoundPage } from 'pages/GlobalNotFound'
 
-import CollectionsRouting from 'pages/collection'
 import categoriesRoutes from 'pages/categories'
 import brandsRoutes from 'pages/brands'
 import attributesRoutes from 'pages/attributes'
@@ -27,7 +26,6 @@ export const Router = () => {
             element={<AboutPageAsync />}
           />
 
-          {...CollectionsRouting}
           {...categoriesRoutes}
           {...brandsRoutes}
           {...attributesRoutes}
