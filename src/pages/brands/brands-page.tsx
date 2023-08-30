@@ -2,12 +2,12 @@ import { Outlet } from 'react-router-dom'
 import { useGetBrands } from 'entities/brands/api/queries/use-get-brands'
 import { BrandsDataTable } from 'entities/brands/ui/data-table/brands-data-table'
 import { BrandsDataTableHeader } from 'entities/brands/ui/data-table/brands-data-table-header'
-import { DataTableState } from 'widgets/data-table/model'
 import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
 import { useEffect, useState } from 'react'
+import type { DataViewState } from 'widgets/data-view'
 
 const BrandsPage = () => {
-  const [tableValues, setTableValues] = useState<any>({
+  const [tableValues, setTableValues] = useState<DataViewState>({
     page: 1,
     limit: 10,
     sortBy: null,
@@ -34,7 +34,7 @@ const BrandsPage = () => {
     order_by: [],
   })
 
-  const handleChange = (state: DataTableState) => {
+  const handleChange = (state: DataViewState) => {
     setTableValues(state)
     setQueryParams(state)
   }

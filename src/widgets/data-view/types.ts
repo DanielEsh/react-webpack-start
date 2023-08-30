@@ -12,6 +12,6 @@ export type DataViewActionsType =
 export interface DataViewState {
   page: number
   limit: number
-  sortBy: string | null
-  orderBy: string | null
+  sortBy?: string | null
+  orderBy?: string | null
 }

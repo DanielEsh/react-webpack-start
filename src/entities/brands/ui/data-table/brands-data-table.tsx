@@ -3,20 +3,19 @@ import {
   ConfirmDeleteDialog,
   type DeleteState,
 } from 'shared/ui/dialog/confirm-delete'
-import { PaginatedDataView } from 'widgets/data-view/paginated-data-view'
-import { DataTableState } from 'widgets/data-table/model'
 import { BrandDto } from 'entities/brands/api/types'
 import {
   useDeleteBrandMutation,
   useInvalidateBrands,
 } from 'entities/brands/api/queries'
 import { useNotification } from 'shared/notification'
+import { type DataViewState, PaginatedDataView } from 'widgets/data-view'
 
 interface Props {
   data: BrandDto[]
-  defaultDataTableValues: any
+  defaultDataTableValues: DataViewState
   totalPages: number
-  onChange?(state: DataTableState): void
+  onChange?(state: DataViewState): void
 }
 
 export const BrandsDataTable = ({
