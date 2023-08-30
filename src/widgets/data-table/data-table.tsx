@@ -7,26 +7,21 @@ import {
   SortingState,
 } from '@tanstack/react-table'
 import { Table } from 'shared/ui-kit/table'
-import {
-  $dataTableStore,
-  setDataTableValues,
-  type DataTableState,
-} from './model'
-import { useState } from 'react'
+import { type DataTableState } from './model'
+import { useContext, useState } from 'react'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
-import { useStore } from 'effector-react'
+import { DataViewContext } from 'widgets/data-view/data-view.context'
 
 interface Props<DATA> {
   data: DATA[]
   columns: ColumnDef<DATA>[]
-  onChange?(values: DataTableState): void
 }
 
 export const DataTable = <TData extends unknown | object>(
   props: Props<TData>,
 ) => {
-  const { data, columns, onChange } = props
-  const dataTableStore = useStore($dataTableStore)
+  const { data, columns } = props
+  const context = useContext(DataViewContext)
   const [sorting, setSorting] = useState<SortingState>([])
 
   const transformTableSortingToStoreValues = (
@@ -44,25 +39,27 @@ export const DataTable = <TData extends unknown | object>(
 
   useIsomorphicLayoutEffect(() => {
     if (!sorting.length) {
-      setDataTableValues({
-        currentPage: dataTableStore.currentPage,
-        limit: dataTableStore.limit,
-        sortBy: null,
-        orderBy: null,
+      context?.dispatch({
+        type: 'SORT_CHANGE',
+        payload: {
+          sortBy: null,
+          orderBy: null,
+        },
       })
-      onChange && onChange($dataTableStore.getState())
     }
 
-    setDataTableValues(transformTableSortingToStoreValues(sorting))
-    onChange && onChange($dataTableStore.getState())
+    context?.dispatch({
+      type: 'SORT_CHANGE',
+      payload: transformTableSortingToStoreValues(sorting),
+    })
   }, [sorting])
 
   useIsomorphicLayoutEffect(() => {
-    if (dataTableStore.sortBy && dataTableStore.orderBy) {
+    if (context?.state.sortBy && context?.state.orderBy) {
       setSorting([
         {
-          id: dataTableStore.sortBy,
-          desc: dataTableStore.orderBy === 'desc' ? true : false,
+          id: context?.state.sortBy,
+          desc: context?.state.orderBy === 'desc' ? true : false,
         },
       ])
     }

@@ -1,16 +1,11 @@
 import { Pagiantion } from 'shared/ui-kit/Pagiantion/Pagination'
 import { BaseSelect, BaseSelectOption } from 'shared/ui/base-select'
 import { DataTablePageCounter } from 'shared/ui/data-table/data-table-page-counter'
-import { useStore } from 'effector-react'
-import {
-  $dataTableStore,
-  setDataTableValues,
-  type RowsPerPagesValues,
-} from '../data-table/model'
+import { DataViewContext } from './data-view.context'
+import { useContext } from 'react'
 
 interface Props {
   totalPages: number
-  onChange(): void
 }
 
 const rowsPerPageOptions: BaseSelectOption[] = [
@@ -28,21 +23,21 @@ const rowsPerPageOptions: BaseSelectOption[] = [
   },
 ]
 
-export const DataViewFooterToolbar = ({ totalPages, onChange }: Props) => {
-  const { currentPage, limit } = useStore($dataTableStore)
+export const DataViewFooterToolbar = ({ totalPages }: Props) => {
+  const context = useContext(DataViewContext)
 
   const handleLimitChange = (limit: number | string) => {
-    setDataTableValues({
-      limit: Number(limit) as RowsPerPagesValues,
+    context?.dispatch({
+      type: 'PAGE_LIMIT_CHANGE',
+      payload: Number(limit),
     })
-    onChange()
   }
 
   const handleCurrentPageChange = (currentPage: number) => {
-    setDataTableValues({
-      currentPage: currentPage,
+    context?.dispatch({
+      type: 'PAGE_CHANGE',
+      payload: currentPage,
     })
-    onChange()
   }
 
   return (
@@ -51,7 +46,7 @@ export const DataViewFooterToolbar = ({ totalPages, onChange }: Props) => {
         <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">Rows per page</p>
           <BaseSelect
-            defaultValue={String(limit)}
+            defaultValue={String(context?.state.limit)}
             options={rowsPerPageOptions}
             onChange={handleLimitChange}
           />
@@ -60,12 +55,12 @@ export const DataViewFooterToolbar = ({ totalPages, onChange }: Props) => {
           <>
             <DataTablePageCounter
               totalPages={totalPages}
-              currentPage={Number(currentPage) ?? 1}
+              currentPage={Number(context?.state.page) ?? 1}
             />
 
             <Pagiantion
               totalPages={totalPages}
-              currentPage={Number(currentPage) ?? 1}
+              currentPage={Number(context?.state.page) ?? 1}
               onChange={handleCurrentPageChange}
             />
           </>

@@ -14,11 +14,17 @@ import { useNotification } from 'shared/notification'
 
 interface Props {
   data: BrandDto[]
+  defaultDataTableValues: any
   totalPages: number
   onChange?(state: DataTableState): void
 }
 
-export const BrandsDataTable = ({ data, totalPages, onChange }: Props) => {
+export const BrandsDataTable = ({
+  data,
+  totalPages,
+  defaultDataTableValues,
+  onChange,
+}: Props) => {
   const { mutate: deleteCategoryMutation } = useDeleteBrandMutation()
   const { invalidateBrands } = useInvalidateBrands()
   const { showNotification } = useNotification()
@@ -44,6 +50,7 @@ export const BrandsDataTable = ({ data, totalPages, onChange }: Props) => {
         data={data}
         columns={brandsDataTableColumns}
         meta={{ totalPages }}
+        defaultValues={defaultDataTableValues}
         onChange={onChange}
       />
 
