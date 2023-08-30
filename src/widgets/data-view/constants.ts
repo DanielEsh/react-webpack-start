@@ -27,8 +27,12 @@ export const dataViewReducer: Reducer<DataViewState, DataViewActionsType> = (
     }
 
     case DataViewActions.SORT_CHANGE: {
+      const { sortBy, orderBy } = payload
+
       return {
         ...state,
+        sortBy,
+        orderBy,
       }
     }
 

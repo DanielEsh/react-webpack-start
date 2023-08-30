@@ -20,7 +20,7 @@ const BrandsPage = () => {
     const queryParams = getQueryParams()
     if (Object.keys(queryParams).length) {
       setTableValues({
-        page: Number(queryParams.currentPage),
+        page: +queryParams.currentPage,
         limit: +queryParams.limit,
         ...queryParams,
       })
@@ -30,8 +30,8 @@ const BrandsPage = () => {
   const { isLoading, isError, data } = useGetBrands({
     page: tableValues.page ?? 1,
     limit: tableValues.limit ?? 10,
-    sort_by: [],
-    order_by: [],
+    sort_by: tableValues.sortBy ? [tableValues.sortBy] : [],
+    order_by: tableValues.orderBy ? [tableValues.orderBy] : [],
   })
 
   const handleChange = (state: DataViewState) => {

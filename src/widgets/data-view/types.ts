@@ -4,10 +4,15 @@ export enum DataViewActions {
   SORT_CHANGE = 'SORT_CHANGE',
 }
 
+export type SortPayload = {
+  sortBy: string | null
+  orderBy: string | null
+}
+
 export type DataViewActionsType =
   | { type: DataViewActions.PAGE_CHANGE; payload: number }
   | { type: DataViewActions.PAGE_LIMIT_CHANGE; payload: number }
-  | { type: DataViewActions.SORT_CHANGE; payload: any }
+  | { type: DataViewActions.SORT_CHANGE; payload: SortPayload }
 
 export interface DataViewState {
   page: number

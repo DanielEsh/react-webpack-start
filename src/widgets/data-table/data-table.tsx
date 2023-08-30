@@ -7,11 +7,10 @@ import {
   SortingState,
 } from '@tanstack/react-table'
 import { Table } from 'shared/ui-kit/table'
-import { type DataTableState } from './model'
 import { useContext, useState } from 'react'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
 import { DataViewContext } from 'widgets/data-view/data-view.context'
-import { DataViewActions } from 'widgets/data-view/types'
+import { DataViewActions, type SortPayload } from 'widgets/data-view/types'
 
 interface Props<DATA> {
   data: DATA[]
@@ -25,9 +24,7 @@ export const DataTable = <TData extends unknown | object>(
   const context = useContext(DataViewContext)
   const [sorting, setSorting] = useState<SortingState>([])
 
-  const transformTableSortingToStoreValues = (
-    sorting: SortingState,
-  ): Pick<DataTableState, 'sortBy' | 'orderBy'> => {
+  const transformTableSortingToStoreValues = (sorting: SortingState) => {
     const initialValue = {}
 
     return sorting.reduce((acc, item) => {
@@ -51,7 +48,7 @@ export const DataTable = <TData extends unknown | object>(
 
     context?.dispatch({
       type: DataViewActions.SORT_CHANGE,
-      payload: transformTableSortingToStoreValues(sorting),
+      payload: transformTableSortingToStoreValues(sorting) as SortPayload,
     })
   }, [sorting])
 
