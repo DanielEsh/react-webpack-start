@@ -3,6 +3,8 @@ import { DataTable } from 'widgets/data-table'
 import { DataViewFooterToolbar } from './data-view-footer-toolbar'
 import { useEffect, useReducer } from 'react'
 import { DataViewContext } from './data-view.context'
+import { dataViewReducer } from './constants'
+import { DataViewState } from './types'
 
 interface Meta {
   totalPages: number
@@ -12,7 +14,7 @@ interface Props<DATA> {
   data: DATA[]
   columns: ColumnDef<DATA>[]
   meta: Meta
-  defaultValues?: any
+  defaultValues?: DataViewState
   onChange?(state: any): void
 }
 
@@ -32,34 +34,7 @@ export const PaginatedDataView = <DATA extends unknown | object>(
     onChange,
   } = props
 
-  const reducer = (state, { type, payload }) => {
-    switch (type) {
-      case 'PAGE_CHANGE': {
-        return {
-          ...state,
-          page: payload,
-        }
-      }
-
-      case 'PAGE_LIMIT_CHANGE': {
-        return {
-          ...state,
-          limit: payload,
-        }
-      }
-
-      case 'SORT_CHANGE': {
-        return {
-          ...state,
-        }
-      }
-
-      default:
-        throw new Error(`Unhandled action type ${type}`)
-    }
-  }
-
-  const [state, dispatch] = useReducer(reducer, defaultValues)
+  const [state, dispatch] = useReducer(dataViewReducer, defaultValues)
 
   useEffect(() => {
     onChange && onChange(state)

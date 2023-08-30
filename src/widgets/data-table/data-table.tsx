@@ -11,6 +11,7 @@ import { type DataTableState } from './model'
 import { useContext, useState } from 'react'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
 import { DataViewContext } from 'widgets/data-view/data-view.context'
+import { DataViewActions } from 'widgets/data-view/types'
 
 interface Props<DATA> {
   data: DATA[]
@@ -40,7 +41,7 @@ export const DataTable = <TData extends unknown | object>(
   useIsomorphicLayoutEffect(() => {
     if (!sorting.length) {
       context?.dispatch({
-        type: 'SORT_CHANGE',
+        type: DataViewActions.SORT_CHANGE,
         payload: {
           sortBy: null,
           orderBy: null,
@@ -49,7 +50,7 @@ export const DataTable = <TData extends unknown | object>(
     }
 
     context?.dispatch({
-      type: 'SORT_CHANGE',
+      type: DataViewActions.SORT_CHANGE,
       payload: transformTableSortingToStoreValues(sorting),
     })
   }, [sorting])

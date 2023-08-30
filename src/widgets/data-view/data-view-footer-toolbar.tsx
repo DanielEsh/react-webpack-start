@@ -3,6 +3,7 @@ import { BaseSelect, BaseSelectOption } from 'shared/ui/base-select'
 import { DataTablePageCounter } from 'shared/ui/data-table/data-table-page-counter'
 import { DataViewContext } from './data-view.context'
 import { useContext } from 'react'
+import { DataViewActions } from './types'
 
 interface Props {
   totalPages: number
@@ -28,14 +29,14 @@ export const DataViewFooterToolbar = ({ totalPages }: Props) => {
 
   const handleLimitChange = (limit: number | string) => {
     context?.dispatch({
-      type: 'PAGE_LIMIT_CHANGE',
+      type: DataViewActions.PAGE_CHANGE,
       payload: Number(limit),
     })
   }
 
   const handleCurrentPageChange = (currentPage: number) => {
     context?.dispatch({
-      type: 'PAGE_CHANGE',
+      type: DataViewActions.PAGE_CHANGE,
       payload: currentPage,
     })
   }
