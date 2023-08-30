@@ -29,7 +29,7 @@ export const DataViewFooterToolbar = ({ totalPages }: Props) => {
 
   const handleLimitChange = (limit: number | string) => {
     context?.dispatch({
-      type: DataViewActions.PAGE_CHANGE,
+      type: DataViewActions.PAGE_LIMIT_CHANGE,
       payload: Number(limit),
     })
   }
