@@ -10,12 +10,13 @@ import {
 } from 'entities/categories/api/queries'
 import { useNotification } from 'shared/notification'
 import { PaginatedDataView } from 'widgets/data-view/paginated-data-view'
-import { DataTableState } from 'widgets/data-table/model'
+import { DataViewState } from 'widgets/data-view'
 
 interface Props {
   data: Category[]
+  defaultDataTableValues: DataViewState
   totalPages: number
-  onChange?(state: DataTableState): void
+  onChange?(state: DataViewState): void
 }
 
 export const CategoriesDataTable = ({ data, totalPages, onChange }: Props) => {
@@ -34,7 +35,6 @@ export const CategoriesDataTable = ({ data, totalPages, onChange }: Props) => {
   }
 
   const handleConfirmDelete = (data: DeleteState<number, Category>) => {
-    console.log('DELETE', data)
     deleteCategoryMutation(data.key, {
       onSuccess: handleSuccessCategoryDelete,
     })

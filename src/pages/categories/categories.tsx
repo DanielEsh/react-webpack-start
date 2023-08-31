@@ -2,41 +2,40 @@ import { Outlet } from 'react-router-dom'
 import { CategoriesDataTableHeader } from 'entities/categories/ui/data-table/data-table-header'
 import { CategoriesDataTable } from 'entities/categories/ui/data-table/categories-data-table'
 import { useGetCategories } from 'entities/categories/api/queries'
-import {
-  $dataTableStore,
-  type DataTableState,
-  type RowsPerPagesValues,
-  setDataTableValues,
-} from 'widgets/data-table/model'
-import { useStore } from 'effector-react'
 import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { DataViewState } from 'widgets/data-view'
 
 const CategoriesPage = () => {
-  const values = useStore($dataTableStore)
+  const [tableValues, setTableValues] = useState<DataViewState>({
+    page: 1,
+    limit: 10,
+    sortBy: null,
+    orderBy: null,
+  })
 
   const { setQueryParams, getQueryParams } = useSyncWithQueryParams()
 
   useEffect(() => {
     const queryParams = getQueryParams()
     if (Object.keys(queryParams).length) {
-      setDataTableValues({
-        currentPage: Number(queryParams.currentPage),
-        limit: +queryParams.limit as unknown as RowsPerPagesValues,
+      setTableValues({
+        page: +queryParams.currentPage,
+        limit: +queryParams.limit,
         ...queryParams,
       })
     }
   }, [])
 
   const { isLoading, isError, data } = useGetCategories({
-    page: values.currentPage ?? 1,
-    limit: values.limit ?? 5,
-    sort_by: values.sortBy ? [values.sortBy] : [],
-    order_by: values.orderBy ? [values.orderBy] : [],
+    page: tableValues.page ?? 1,
+    limit: tableValues.limit ?? 10,
+    sort_by: tableValues.sortBy ? [tableValues.sortBy] : [],
+    order_by: tableValues.orderBy ? [tableValues.orderBy] : [],
   })
 
-  const handleChange = (state: DataTableState) => {
-    console.log('values', state)
+  const handleChange = (state: DataViewState) => {
+    setTableValues(state)
     setQueryParams(state)
   }
 
@@ -54,6 +53,7 @@ const CategoriesPage = () => {
         {data && (
           <CategoriesDataTable
             data={data?.content}
+            defaultDataTableValues={tableValues}
             totalPages={data.meta.pagination.totalPages}
             onChange={handleChange}
           />
