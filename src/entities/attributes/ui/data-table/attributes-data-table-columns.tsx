@@ -3,9 +3,9 @@ import { DataTableColumnHead } from 'widgets/data-table'
 import { AttributesDataTableRowActions } from './attributes-data-table-row-actions'
 import { ReactNode } from 'react'
 import { Table } from 'shared/ui-kit/table'
-import { Attribute } from 'entities/attributes/types'
+import { AttributeDto } from 'entities/attributes/api'
 
-export const attributesDataTableColumns: ColumnDef<Attribute>[] = [
+export const attributesDataTableColumns: ColumnDef<AttributeDto>[] = [
   {
     id: 'id',
     accessorKey: 'id',

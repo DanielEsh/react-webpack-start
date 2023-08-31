@@ -4,10 +4,10 @@ import { Button } from 'shared/ui-kit/button'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
 import { useDeleteConfirmation } from 'shared/ui/dialog/confirm-delete'
-import { Attribute } from 'entities/attributes/types'
+import { AttributeDto } from 'entities/attributes/api'
 
 interface Props {
-  row: Row<Attribute>
+  row: Row<AttributeDto>
 }
 
 export const AttributesDataTableRowActions = ({ row }: Props) => {
@@ -15,7 +15,7 @@ export const AttributesDataTableRowActions = ({ row }: Props) => {
   const { openDeleteConfirmDialog } = useDeleteConfirmation()
 
   const handleDeleteClick = () => {
-    openDeleteConfirmDialog<number, Attribute>({
+    openDeleteConfirmDialog<number, AttributeDto>({
       key: original.id,
       data: original,
     })

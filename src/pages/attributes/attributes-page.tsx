@@ -1,43 +1,44 @@
 import { AttributesDataTable } from 'entities/attributes/ui/data-table/attributes-data-table'
 import { AttributesDataTableHeader } from 'entities/attributes/ui/data-table/attributes-data-table-header'
-import {
-  $dataTableStore,
-  DataTableState,
-  // RowsPerPagesValues,
-  // setDataTableValues,
-} from 'widgets/data-table/model'
-import { useStore } from 'effector-react'
 // import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
 // import { useEffect } from 'react'
 import { useGetAttributes } from 'entities/attributes/api/queries/use-get-attributes'
 import { Outlet } from 'react-router-dom'
+import { DataViewState } from 'widgets/data-view'
+import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
+import { useEffect, useState } from 'react'
 
 const AttiributesPage = () => {
-  const values = useStore($dataTableStore)
-
-  // const { setQueryParams, getQueryParams } = useSyncWithQueryParams()
-
-  // useEffect(() => {
-  //   const queryParams = getQueryParams()
-  //   if (Object.keys(queryParams).length) {
-  //     setDataTableValues({
-  //       currentPage: Number(queryParams.currentPage),
-  //       limit: +queryParams.limit as unknown as RowsPerPagesValues,
-  //       ...queryParams,
-  //     })
-  //   }
-  // }, [])
-
-  const { isLoading, isError, data } = useGetAttributes({
-    page: values.currentPage ?? 1,
-    limit: values.limit ?? 10,
-    sort_by: [],
-    order_by: [],
+  const [tableValues, setTableValues] = useState<DataViewState>({
+    page: 1,
+    limit: 10,
+    sortBy: null,
+    orderBy: null,
   })
 
-  const handleChange = (state: DataTableState) => {
-    console.log('values', state)
-    // setQueryParams(state)
+  const { setQueryParams, getQueryParams } = useSyncWithQueryParams()
+
+  useEffect(() => {
+    const queryParams = getQueryParams()
+    if (Object.keys(queryParams).length) {
+      setTableValues({
+        page: +queryParams.currentPage,
+        limit: +queryParams.limit,
+        ...queryParams,
+      })
+    }
+  }, [])
+
+  const { isLoading, isError, data } = useGetAttributes({
+    page: tableValues.page ?? 1,
+    limit: tableValues.limit ?? 10,
+    sort_by: tableValues.sortBy ? [tableValues.sortBy] : [],
+    order_by: tableValues.orderBy ? [tableValues.orderBy] : [],
+  })
+
+  const handleChange = (state: DataViewState) => {
+    setTableValues(state)
+    setQueryParams(state)
   }
 
   return (
@@ -53,6 +54,7 @@ const AttiributesPage = () => {
       {data && (
         <AttributesDataTable
           data={data?.content}
+          defaultDataTableValues={tableValues}
           totalPages={data.meta.pagination.totalPages}
           onChange={handleChange}
         />

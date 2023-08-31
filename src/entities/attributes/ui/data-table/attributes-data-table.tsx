@@ -1,7 +1,5 @@
 import { attributesDataTableColumns } from './attributes-data-table-columns'
 import { PaginatedDataView } from 'widgets/data-view/paginated-data-view'
-import { DataTableState } from 'widgets/data-table/model'
-import { Attribute } from 'entities/attributes/types'
 import { useInvalidateAttributes } from 'entities/attributes/api/queries/use-invalidate-attributes'
 import { useNotification } from 'shared/notification'
 import { useDeleteAttributeMutation } from 'entities/attributes/api/queries/use-delete-attribute-mutation'
@@ -10,11 +8,13 @@ import {
   ConfirmDeleteDialog,
   DeleteState,
 } from 'shared/ui/dialog/confirm-delete'
+import { DataViewState } from 'widgets/data-view'
 
 interface Props {
-  data: Attribute[]
+  data: AttributeDto[]
+  defaultDataTableValues: DataViewState
   totalPages: number
-  onChange?(state: DataTableState): void
+  onChange?(state: DataViewState): void
 }
 
 export const AttributesDataTable = ({ data, totalPages, onChange }: Props) => {
