@@ -14,6 +14,10 @@ export const SideBarMenu = () => {
       <li>
         <Link to="attributes">attributes</Link>
       </li>
+
+      <li>
+        <Link to="products">goods</Link>
+      </li>
     </ul>
   )
 }
