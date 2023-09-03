@@ -1,6 +1,7 @@
 import { useGetProducts } from 'entities/products/api'
 import { ProductsDataTable } from 'entities/products/ui/data-table/products-data-table'
 import { ProductsDataTableHeader } from 'entities/products/ui/data-table/products-data-table-header'
+import { Outlet } from 'react-router-dom'
 
 const ProductsPage = () => {
   const { isLoading, isError, data } = useGetProducts({
@@ -18,6 +19,8 @@ const ProductsPage = () => {
           <ProductsDataTable data={data.content} />
         </>
       )}
+
+      <Outlet />
     </div>
   )
 }
