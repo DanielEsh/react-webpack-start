@@ -1,4 +1,6 @@
 import { useGetProducts } from 'entities/products/api'
+import { ProductsDataTable } from 'entities/products/ui/data-table/products-data-table'
+import { ProductsDataTableHeader } from 'entities/products/ui/data-table/products-data-table-header'
 
 const ProductsPage = () => {
   const { isLoading, isError, data } = useGetProducts({
@@ -10,7 +12,12 @@ const ProductsPage = () => {
     <div>
       {isLoading && <div>Loading</div>}
       {isError && <div>Error</div>}
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+      {data && (
+        <>
+          <ProductsDataTableHeader />
+          <ProductsDataTable data={data.content} />
+        </>
+      )}
     </div>
   )
 }
