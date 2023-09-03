@@ -14,12 +14,15 @@ export const SelectOptions = forwardRef<HTMLDivElement, SelectOptionsProps>(
     const { className, children, withinPortal = true } = props
 
     const classes = classNames(
-      'relative z-100 flex flex-col overflow-hidden rounded-md border bg-white shadow-md p-2',
+      'relative flex flex-col justify-start w-[color:var(--popover-anchor-width)] overflow-hidden rounded-md border bg-white shadow-md p-2',
       className,
     )
 
     return (
-      <Popover.Floating withinPortal={withinPortal}>
+      <Popover.Floating
+        withinPortal={withinPortal}
+        hideWhenLeave={false}
+      >
         <ul className={classes}>{children}</ul>
       </Popover.Floating>
     )

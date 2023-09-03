@@ -44,6 +44,7 @@ export const BaseButton = forwardRef<ButtonElement, BaseButtonProps>(
     const {
       className,
       as: Component = 'button',
+      type = 'button',
       variant,
       size,
       children,
@@ -58,6 +59,7 @@ export const BaseButton = forwardRef<ButtonElement, BaseButtonProps>(
       <Component
         ref={forwardedRef}
         className={classes}
+        type={type}
         {...restProps}
       >
         {addonLeft && <span>{addonLeft}</span>}

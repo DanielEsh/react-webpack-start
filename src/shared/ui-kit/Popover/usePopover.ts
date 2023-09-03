@@ -4,6 +4,7 @@ import {
   offset as floatingUiOffset,
   flip,
   arrow as floatingUiArrow,
+  size,
 } from '@floating-ui/react-dom'
 import type { Placement, Offset } from './types'
 
@@ -36,6 +37,17 @@ export function usePopover(options: Options) {
       }),
       floatingUiArrow({ element: arrow, padding: arrowPadding }),
       flip(),
+      size({
+        apply: ({ elements, rects }) => {
+          const { width: anchorWidth, height: anchorHeight } = rects.reference
+          const contentStyle = elements.floating.style
+          contentStyle.setProperty('--popover-anchor-width', `${anchorWidth}px`)
+          contentStyle.setProperty(
+            '--popover-anchor-height',
+            `${anchorHeight}px`,
+          )
+        },
+      }),
     ].filter(isDefined),
   })
 

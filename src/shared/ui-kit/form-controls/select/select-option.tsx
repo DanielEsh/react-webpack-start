@@ -30,7 +30,7 @@ export const SelectOption = forwardRef<HTMLLIElement, SelectItemProps>(
     )
 
     const buttonClasses = classNames(
-      'flex rounded-md py-1.5 pl-2 pr-8 hover:bg-muted disabled:opacity-50 disabled:bg-transparent',
+      'flex justify-start rounded-md py-1.5 pl-2 pr-8 hover:bg-muted disabled:opacity-50 disabled:bg-transparent',
       {
         ['bg-muted']: isSelected,
       },
