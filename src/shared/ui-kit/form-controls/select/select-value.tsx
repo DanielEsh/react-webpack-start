@@ -51,6 +51,7 @@ export const SelectValue = forwardRef<HTMLButtonElement, SelectValueProps>(
             ref={forwardedRef}
             className={className}
             addonRight={icon()}
+            type="button"
           >
             {value}
           </Button>
