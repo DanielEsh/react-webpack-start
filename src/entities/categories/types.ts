@@ -1,4 +1,5 @@
 export interface CategoryDto {
+  id: number
   slug: string
   name: string
   description: string
