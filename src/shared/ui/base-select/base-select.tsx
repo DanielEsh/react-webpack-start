@@ -22,16 +22,20 @@ export const BaseSelect = (props: BaseSelectProps) => {
       defaultValue={defaultValue}
       onChange={onChange}
     >
-      <Select.Value className="h-8 w-[70px]">Pick one</Select.Value>
+      <Select.Value className="h-8">Pick one</Select.Value>
       <Select.Options>
-        {options.map(({ value, label }) => (
-          <Select.Option
-            key={value}
-            value={label}
-          >
-            {label}
-          </Select.Option>
-        ))}
+        {options.length ? (
+          options.map(({ value, label }) => (
+            <Select.Option
+              key={value}
+              value={label}
+            >
+              {label}
+            </Select.Option>
+          ))
+        ) : (
+          <div>нет вариантов для выбора</div>
+        )}
       </Select.Options>
     </Select>
   )

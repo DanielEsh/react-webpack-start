@@ -34,7 +34,7 @@ export const PopoverTrigger = forwardRef<
   return (
     <div
       ref={composedRef}
-      className={classNames('inline-flex', className)}
+      className={className}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
