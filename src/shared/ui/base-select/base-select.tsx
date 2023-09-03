@@ -23,7 +23,7 @@ export const BaseSelect = (props: BaseSelectProps) => {
       onChange={onChange}
     >
       <Select.Value className="h-8">Pick one</Select.Value>
-      <Select.Options>
+      <Select.Options withinPortal={false}>
         {options.length ? (
           options.map(({ value, label }) => (
             <Select.Option

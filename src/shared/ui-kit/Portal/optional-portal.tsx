@@ -9,9 +9,11 @@ export const OptionalPortal = ({
   children,
   ...others
 }: OptionalPortalProps) => {
-  if (!withinPortal) <>{children}</>
+  if (withinPortal) {
+    return <Portal {...others}>{children}</Portal>
+  }
 
-  return <Portal {...others}>{children}</Portal>
+  return <>{children}</>
 }
 
 OptionalPortal.displayName = 'OptionalPortal'
