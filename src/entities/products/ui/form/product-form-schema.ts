@@ -7,7 +7,8 @@ export const productFormSchema = z.object({
   name: z.string().nonempty({
     message: 'Must be required',
   }),
-  price: z.number().nonpositive(),
+  price: z.any(),
+  brand: z.any(),
   description: z.string().optional(),
 })
 

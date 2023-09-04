@@ -14,8 +14,8 @@ const AttributeCreatePage = () => {
   const { showNotification } = useNotification()
   const invalidateAttributes = useInvalidateProducts()
   const defaultValues: ProductForm = {
-    article: '',
-    name: '',
+    article: 'article',
+    name: 'name',
     price: 1,
   }
 
@@ -29,10 +29,11 @@ const AttributeCreatePage = () => {
   }
 
   const createNewProduct = async (form: ProductForm) => {
-    return await createAttributeMutation(form, {
-      onSuccess: (data) => handleSuccessCreate(data),
-      onError: handleErrorCreate,
-    })
+    console.log('FORM', form)
+    // return await createAttributeMutation(form, {
+    //   onSuccess: (data) => handleSuccessCreate(data),
+    //   onError: handleErrorCreate,
+    // })
   }
 
   function handleErrorCreate() {
