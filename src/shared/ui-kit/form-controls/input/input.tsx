@@ -7,14 +7,15 @@ import {
 } from 'react'
 import { classNames } from 'shared/utils'
 
-export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
+interface InputBaseProps {
   label: string
   className?: string
   prefix?: ReactNode
   suffix?: ReactNode
   invalid?: boolean
 }
+
+export type InputProps = InputBaseProps & InputHTMLAttributes<HTMLInputElement>
 
 const COMPONENT_NAME = 'Input'
 
