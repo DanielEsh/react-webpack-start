@@ -7,6 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react'
+import { Select } from 'shared/ui-kit/form-controls/select'
 
 export type Props = SelectHTMLAttributes<HTMLSelectElement>
 
@@ -38,21 +39,40 @@ export const SelectBrand = forwardRef<HTMLSelectElement, Props>(
     }
 
     return (
-      <select
-        ref={forwardedRef}
-        onChange={handleChange}
-        {...restProps}
-      >
-        <option value="">Select value</option>
-        {data?.content.map((item) => (
-          <option
-            key={item.id}
-            value={item.id}
-          >
-            {item.name}
-          </option>
-        ))}
-      </select>
+      <>
+        <Select
+          label={'label'}
+          onChange={handleChange}
+        >
+          <Select.Value>Pick one</Select.Value>
+          <Select.Options withinPortal={false}>
+            {options.map(({ value, label }) => (
+              <Select.Option
+                key={value}
+                value={label}
+              >
+                {label}
+              </Select.Option>
+            ))}
+          </Select.Options>
+        </Select>
+
+        <select
+          ref={forwardedRef}
+          onChange={handleChange}
+          {...restProps}
+        >
+          <option value="">Select value</option>
+          {data?.content.map((item) => (
+            <option
+              key={item.id}
+              value={item.id}
+            >
+              {item.name}
+            </option>
+          ))}
+        </select>
+      </>
     )
   },
 )

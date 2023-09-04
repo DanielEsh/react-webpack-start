@@ -13,21 +13,22 @@ import {
 } from './constants'
 
 export interface PopoverProps {
+  value: boolean
   placement: Placement
   offset?: Offset
   delay?: Delay
-  visible?: boolean
   triggerType?: Trigger
   portalNode?: HTMLElement | null
   children: ReactNode
+  onChange(visible: boolean): void
 }
 
 const PopoverRoot = (props: PopoverProps) => {
   const {
+    value = false,
     placement,
     offset = DEFAULT_OFFSET,
     delay = DEFAULT_DELAY,
-    visible = false,
     portalNode,
     triggerType = DEFAULT_TRIGGER_TYPE,
     children,
@@ -47,7 +48,7 @@ const PopoverRoot = (props: PopoverProps) => {
   } = usePopover({
     placement,
     offset,
-    visible,
+    visible: value,
     arrow: arrowRef,
     arrowPadding: 0,
   })
@@ -58,9 +59,16 @@ const PopoverRoot = (props: PopoverProps) => {
     ReturnType<typeof setTimeout>
   >
 
+  const changeVisible = (visible: boolean) => {
+    changeOpened(visible)
+    if (props.onChange) {
+      props.onChange(visible)
+    }
+  }
+
   const delayClose = () => {
     timeoutDelayRef.current = setTimeout(() => {
-      changeOpened(false)
+      changeVisible(false)
     }, delay.leave)
   }
 
@@ -70,7 +78,7 @@ const PopoverRoot = (props: PopoverProps) => {
 
   const delayOpen = () => {
     setTimeout(() => {
-      changeOpened(true)
+      changeVisible(true)
     }, delay.enter)
   }
 
