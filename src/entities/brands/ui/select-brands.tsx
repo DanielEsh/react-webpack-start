@@ -14,7 +14,6 @@ export type Props = SelectHTMLAttributes<HTMLSelectElement>
 export const SelectBrand = forwardRef<HTMLSelectElement, Props>(
   ({ onChange, ...restProps }, forwardedRef) => {
     const [options, setOptions] = useState<any>([])
-    const [selected, setSelected] = useState('')
     const { isLoading, data } = useGetBrands({
       page: 1,
       limit: 10,
