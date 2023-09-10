@@ -1,7 +1,6 @@
 import { forwardRef, type ElementRef, ComponentPropsWithoutRef } from 'react'
 import * as RadixSelectPrimitive from '@radix-ui/react-select'
 import { classNames } from 'shared/utils/classNames'
-import { Portal } from 'shared/ui-kit/Portal'
 
 export const SelectContent = forwardRef<
   ElementRef<typeof RadixSelectPrimitive.Content>,

@@ -4,7 +4,7 @@ export const SelectDemo = () => {
   return (
     <Select>
       <Select.Trigger>
-        <Select.Value placeholder="Select a verified email to display"></Select.Value>
+        <Select.Value placeholder="Label"></Select.Value>
       </Select.Trigger>
       <Select.Content>
         <Select.Item value="m@example.com">m@example.com</Select.Item>
