@@ -8,22 +8,32 @@ import { SelectContent } from './select-content'
 import { SelectGroup } from './select-group'
 import { SelectItem } from './select-item'
 import { SelectLabel } from './select-label'
+import type { SelectType } from './types'
+interface Props extends TypeWithChildren {
+  defaultValue?: SelectType
+  onChange?(value: SelectType): void
+}
 
-type Props = TypeWithChildren
+export const _Select = (props: Props) => {
+  const { children, defaultValue = '', onChange } = props
 
-export const _Select = ({ children }: Props) => {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<SelectType>(defaultValue)
 
   const contextValue: SelectContextValues = {
     value,
     changeValue: () => setValue,
   }
 
+  const handleChange = (value: SelectType) => {
+    setValue(value)
+    onChange && onChange(value)
+  }
+
   return (
     <SelectContext.Provider value={contextValue}>
       <RadixSelectPrimitive.Root
-        value={value}
-        onValueChange={setValue}
+        value={String(value)}
+        onValueChange={handleChange}
       >
         {children}
       </RadixSelectPrimitive.Root>

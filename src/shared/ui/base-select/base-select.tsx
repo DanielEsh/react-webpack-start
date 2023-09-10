@@ -1,16 +1,16 @@
-import { Select, SelectProps } from 'shared/ui-kit/form-controls'
+import { Select } from 'shared/ui-kit/form-controls'
 
 export type BaseSelectOption = {
   value: number
   label: string
 }
 
-export interface BaseSelectProps
-  extends Pick<
-    SelectProps<string | number>,
-    'defaultValue' | 'label' | 'onChange'
-  > {
+type SelectType = string | number
+export interface BaseSelectProps {
   options: BaseSelectOption[]
+  label: string
+  defaultValue?: SelectType
+  onChange?(value: SelectType): void
 }
 
 export const BaseSelect = (props: BaseSelectProps) => {
@@ -18,25 +18,26 @@ export const BaseSelect = (props: BaseSelectProps) => {
 
   return (
     <Select
-      label={label}
       defaultValue={defaultValue}
       onChange={onChange}
     >
-      <Select.Value className="h-8">Pick one</Select.Value>
-      <Select.Options withinPortal={false}>
+      <Select.Trigger>
+        <Select.Value placeholder={label}></Select.Value>
+      </Select.Trigger>
+      <Select.Content>
         {options.length ? (
           options.map(({ value, label }) => (
-            <Select.Option
+            <Select.Item
               key={value}
               value={label}
             >
               {label}
-            </Select.Option>
+            </Select.Item>
           ))
         ) : (
           <div>нет вариантов для выбора</div>
         )}
-      </Select.Options>
+      </Select.Content>
     </Select>
   )
 }

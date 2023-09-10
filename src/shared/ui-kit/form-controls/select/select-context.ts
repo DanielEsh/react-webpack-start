@@ -1,8 +1,7 @@
 import { createContext } from 'react'
+import type { SelectType } from './types'
 
 const COMPONENT_NAME = 'SelectContext'
-
-type SelectType = string | number
 
 export interface SelectContextValues {
   value?: SelectType
