@@ -12,7 +12,7 @@ import { SelectContext } from './select-context'
 export const SelectValue = forwardRef<
   ElementRef<typeof RadixSelectPrimitive.Content>,
   ComponentPropsWithoutRef<typeof RadixSelectPrimitive.Content>
->(({ className, children, placeholder = '', ...props }, ref) => {
+>(({ placeholder = '' }, ref) => {
   const { value } = useContext(SelectContext)
 
   return (
