@@ -4,7 +4,7 @@ import { Input, TextArea } from 'shared/ui-kit/form-controls'
 
 export const ProductFormFields = () => {
   return (
-    <div className="flex flex-col gap-4 px-4">
+    <div className="flex flex-col gap-4 px-6">
       <Form.Field name="article">
         <Input label="article" />
       </Form.Field>

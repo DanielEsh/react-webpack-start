@@ -2,13 +2,15 @@ import Counter from 'components/Counter'
 import { ChangeLangButton } from 'components/ChangeLangButton'
 import { Ripple } from 'shared/ui-kit/Ripple'
 import { Button } from 'shared/ui-kit/button'
-import { Modal } from 'shared/ui-kit/modal'
 import { Menu } from 'shared/ui-kit/Menu'
 import StarIcon from 'shared/assets/icons/star.svg'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 import { ToastButtons } from './ToastButtons'
 import { FormExample } from 'pages/MainPage/FormExample'
 import { ExampleSelect } from 'pages/MainPage/ExampleSelect'
+import { ModalDemo } from 'components/ModalDemo'
+import { DrawerDemo } from 'components/DrawerDemo'
+import { SelectDemo } from 'components/SelectExample'
 
 export const MainPage = () => {
   const [opened, { open, close }] = useDisclosure(false)
@@ -76,13 +78,11 @@ export const MainPage = () => {
             <Menu.Item>item2</Menu.Item>
           </Menu.Dropdown>
         </Menu>
+      </div>
 
-        <Modal
-          opened={opened}
-          onClose={close}
-        >
-          Base Modal
-        </Modal>
+      <div>
+        <ModalDemo />
+        <DrawerDemo />
       </div>
     </div>
   )

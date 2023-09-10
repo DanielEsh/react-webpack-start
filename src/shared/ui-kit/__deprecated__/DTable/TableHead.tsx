@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { TableCellHead } from 'shared/ui-kit/DTable/TableCellHead'
-import { TableContext } from 'shared/ui-kit/DTable/TableContext'
+import { TableCellHead } from 'shared/ui-kit/__deprecated__/DTable/TableCellHead'
+import { TableContext } from 'shared/ui-kit/__deprecated__/DTable/TableContext'
 
 export const TableHead = () => {
   const context = useContext(TableContext)
@@ -12,7 +12,7 @@ export const TableHead = () => {
         headerGroups.map((headerGroup) => (
           <tr
             key={headerGroup.id}
-            className="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+            className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
           >
             {headerGroup.headers.map((header) => (
               <TableCellHead
