@@ -3,6 +3,7 @@ import { Button } from 'shared/ui-kit/button'
 import { Drawer } from 'shared/ui-kit/drawer'
 import { DrawerContent } from 'shared/ui-kit/drawer/drawer'
 import { SelectDemo } from './SelectExample'
+import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 
 export const DrawerDemo = () => {
   const [opened, { open, close }] = useDisclosure(false)
@@ -16,7 +17,9 @@ export const DrawerDemo = () => {
       >
         <DrawerContent>
           <div>
-            <span>Drawer example </span>
+            <DrawerHeader>
+              <span>Drawer example </span>
+            </DrawerHeader>
             <SelectDemo />
           </div>
         </DrawerContent>
