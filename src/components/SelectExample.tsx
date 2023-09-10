@@ -1,4 +1,4 @@
-import { Select } from 'shared/ui-kit/form-controls/r-select/r-select'
+import { Select } from 'shared/ui-kit/form-controls'
 
 export const SelectDemo = () => {
   return (

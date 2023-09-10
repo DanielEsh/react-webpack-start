@@ -1,75 +1,41 @@
-import { PropsWithChildren } from 'react'
-import { Popover } from 'shared/ui-kit/Popover'
-import { SelectOptions } from 'shared/ui-kit/form-controls/select/select-options'
-import { SelectOption } from 'shared/ui-kit/form-controls/select/select-option'
-import { SelectValue } from 'shared/ui-kit/form-controls/select/select-value'
-import { SelectLabel } from 'shared/ui-kit/form-controls/select/select-label'
-import {
-  SelectContext,
-  type SelectContextValues,
-} from 'shared/ui-kit/form-controls/select/select-context'
-import { SelectType } from 'shared/ui-kit/form-controls/select/types'
-import { useUncontrolled } from 'shared/lib/hooks/use-uncontrolled'
+import { useState } from 'react'
+import * as RadixSelectPrimitive from '@radix-ui/react-select'
+import { TypeWithChildren } from 'shared/ui-kit/types'
+import { SelectContext, type SelectContextValues } from './select-context'
+import { SelectTrigger } from './select-trigger'
+import { SelectValue } from './select-value'
+import { SelectContent } from './select-content'
+import { SelectGroup } from './select-group'
+import { SelectItem } from './select-item'
+import { SelectLabel } from './select-label'
 
-export interface SelectProps<Value> extends PropsWithChildren {
-  defaultValue?: SelectType
-  value?: Value
-  label?: string
-  readOnly?: boolean
-  onChange?: (value: SelectType) => void
-}
+type Props = TypeWithChildren
 
-const COMPONENT_NAME = 'Select'
-
-export const _Select = <Value extends SelectType>(
-  props: SelectProps<Value>,
-) => {
-  const {
-    defaultValue = '',
-    value: externalValue,
-    onChange,
-    readOnly,
-    children,
-    label,
-  } = props
-
-  const [internalValue, handleInternalValueChange, isControlled] =
-    useUncontrolled({
-      value: externalValue,
-      defaultValue,
-      finalValue: null,
-      onChange,
-    })
-
-  const handleChange = (value: SelectType) => {
-    if (readOnly) return
-
-    if (!isControlled) {
-      handleInternalValueChange(value)
-      return
-    }
-
-    onChange && onChange(value)
-  }
+export const _Select = ({ children }: Props) => {
+  const [value, setValue] = useState('')
 
   const contextValue: SelectContextValues = {
-    selectedValue: internalValue as SelectType,
-    changeSelectedValue: handleChange,
-    label,
+    value,
+    changeValue: () => setValue,
   }
 
   return (
     <SelectContext.Provider value={contextValue}>
-      <Popover placement="bottom">{children}</Popover>
+      <RadixSelectPrimitive.Root
+        value={value}
+        onValueChange={setValue}
+      >
+        {children}
+      </RadixSelectPrimitive.Root>
     </SelectContext.Provider>
   )
 }
 
 export const Select = Object.assign(_Select, {
+  Trigger: SelectTrigger,
   Value: SelectValue,
-  Options: SelectOptions,
-  Option: SelectOption,
+  Content: SelectContent,
+  Group: SelectGroup,
+  Item: SelectItem,
   Label: SelectLabel,
 })
-
-_Select.displayName = COMPONENT_NAME

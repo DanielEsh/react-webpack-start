@@ -1,17 +1,16 @@
 import { createContext } from 'react'
+import { SelectType } from 'shared/ui-kit/form-controls/select/types'
 
 const COMPONENT_NAME = 'SelectContext'
 
-type SelectType = string | number
-
 export interface SelectContextValues {
-  value?: SelectType
-  changeValue: (value: SelectType) => void
+  selectedValue?: SelectType
+  changeSelectedValue: (value: SelectType) => void
   label?: string
 }
 
 export const SelectContext = createContext<SelectContextValues>({
-  changeValue: () => {
+  changeSelectedValue: () => {
     throw new Error('not implemented')
   },
 })

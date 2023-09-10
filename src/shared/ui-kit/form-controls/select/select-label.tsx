@@ -1,15 +1,15 @@
-import { UiDefaultProps } from 'shared/ui-kit/types'
-import { classNames } from 'shared/utils'
+import { forwardRef, type ElementRef, ComponentPropsWithoutRef } from 'react'
+import * as RadixSelectPrimitive from '@radix-ui/react-select'
+import { classNames } from 'shared/utils/classNames'
 
-type SelectLabelProps = UiDefaultProps
-
-export const SelectLabel = (props: SelectLabelProps) => {
-  const { className, children } = props
-
-  const classes = classNames(
-    'py-1.5 pl-2 pr-2 text-sm font-semibold',
-    className,
-  )
-
-  return <span className={classes}>{children}</span>
-}
+export const SelectLabel = forwardRef<
+  ElementRef<typeof RadixSelectPrimitive.Label>,
+  ComponentPropsWithoutRef<typeof RadixSelectPrimitive.Label>
+>(({ className, ...props }, ref) => (
+  <RadixSelectPrimitive.Label
+    ref={ref}
+    className={classNames('py-1.5 pl-8 pr-2 text-sm font-semibold', className)}
+    {...props}
+  />
+))
+SelectLabel.displayName = RadixSelectPrimitive.Label.displayName
