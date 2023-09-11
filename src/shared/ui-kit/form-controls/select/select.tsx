@@ -20,7 +20,7 @@ export const _Select = (props: Props) => {
   const [value, setValue] = useState<SelectType>(defaultValue)
 
   const contextValue: SelectContextValues = {
-    value,
+    value: String(value || defaultValue),
     changeValue: () => setValue,
   }
 
@@ -32,7 +32,7 @@ export const _Select = (props: Props) => {
   return (
     <SelectContext.Provider value={contextValue}>
       <RadixSelectPrimitive.Root
-        value={String(value)}
+        value={String(value || defaultValue)}
         onValueChange={handleChange}
       >
         {children}

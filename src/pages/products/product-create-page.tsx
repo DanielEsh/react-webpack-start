@@ -18,6 +18,7 @@ const AttributeCreatePage = () => {
     name: 'name',
     price: 1,
     brand: 5,
+    category: 10,
   }
 
   const handleSuccessCreate = (data: ProductDto) => {

@@ -9,6 +9,7 @@ export const productFormSchema = z.object({
   }),
   price: z.any(),
   brand: z.any(),
+  category: z.any(),
   description: z.string().optional(),
 })
 

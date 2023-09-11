@@ -12,8 +12,10 @@ import { SelectContext } from './select-context'
 export const SelectValue = forwardRef<
   ElementRef<typeof RadixSelectPrimitive.Content>,
   ComponentPropsWithoutRef<typeof RadixSelectPrimitive.Content>
->(({ placeholder = '' }, ref) => {
+>(({ placeholder = '', ...props }, ref) => {
   const { value } = useContext(SelectContext)
+
+  console.log('VALUE', value)
 
   return (
     <RadixSelectPrimitive.Value
@@ -24,6 +26,7 @@ export const SelectValue = forwardRef<
         label={placeholder}
         value={value}
         suffix={<ChevronDownIcon className="h-4 w-4" />}
+        {...props}
       />
     </RadixSelectPrimitive.Value>
   )
