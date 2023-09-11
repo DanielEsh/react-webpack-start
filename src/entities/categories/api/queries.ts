@@ -7,6 +7,8 @@ import {
   updateCategoryBySlug,
 } from './requests'
 import { CategoryForm } from '../ui/form/types'
+import { PageableResponse } from 'shared/api/types'
+import { Category } from '../types'
 
 export const useCreateCategoryMutation = () => {
   return useMutation({
@@ -21,13 +23,16 @@ interface Values {
   order_by?: string[]
 }
 
-export const useGetCategories = (values: Values) => {
+export const useGetCategories = (
+  values: Values,
+  onSuccess?: (data: PageableResponse<Category>) => void,
+) => {
   return useQuery({
     queryKey: ['categories', values],
     queryFn: () => getCategories(values),
     keepPreviousData: true,
     onSuccess: (data) => {
-      console.log('success', data)
+      onSuccess && onSuccess(data)
     },
   })
 }

@@ -1,4 +1,5 @@
 import { BrandsSelect } from 'entities/brands/ui/brands-select'
+import { CategoriesSelect } from 'entities/categories/ui/categories-select'
 import { Form } from 'shared/ui-kit/form'
 import { Input, TextArea } from 'shared/ui-kit/form-controls'
 
@@ -16,12 +17,9 @@ export const ProductFormFields = () => {
       </Form.Field>
       <Form.Field name="brand">
         <BrandsSelect />
-        {/* <select>
-          <option value="">select</option>
-          <option value="1">option 1</option>
-          <option value="2">option 2</option>
-          <option value="3">option 3</option>
-        </select> */}
+      </Form.Field>
+      <Form.Field name="category">
+        <CategoriesSelect />
       </Form.Field>
       <Form.Field name="description">
         <TextArea label="description" />

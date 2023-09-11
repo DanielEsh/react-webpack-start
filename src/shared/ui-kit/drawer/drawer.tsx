@@ -37,7 +37,7 @@ const DrawerOverlay = forwardRef<
 DrawerOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 const drawerVariants = cva(
-  'fixed z-50 gap-4 bg-white shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500',
+  'fixed overflow-auto z-50 gap-4 bg-white shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500',
   {
     variants: {
       side: {
