@@ -31,6 +31,10 @@ export const FormField = (props: FormFieldProps) => {
       name={name}
       render={({ field, fieldState }) => (
         <div className={className}>
+          <pre>
+            <code>{JSON.stringify(field, null, 2)}</code>
+          </pre>
+
           {childrenWithFormFieldProps({
             invalid: fieldState.invalid,
             ...field,
