@@ -58,7 +58,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     return (
       <label onBlur={() => handleFocusManagement(false)}>
-        <div className="relative h-full w-full">
+        <div className="relative w-full">
           <textarea
             className={classes}
             ref={forwardedRef}

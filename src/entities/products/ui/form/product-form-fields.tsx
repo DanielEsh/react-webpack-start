@@ -15,10 +15,10 @@ export const ProductFormFields = () => {
       <Form.Field name="price">
         <Input label="price" />
       </Form.Field>
-      <Form.Field name="brand">
+      <Form.Field name="brandId">
         <BrandsSelect />
       </Form.Field>
-      <Form.Field name="category">
+      <Form.Field name="categoryId">
         <CategoriesSelect />
       </Form.Field>
       <Form.Field name="description">

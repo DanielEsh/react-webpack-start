@@ -16,7 +16,10 @@ export interface ProductDto {
 
 export type CreateProductDto = Pick<
   ProductDto,
-  'article' | 'name' | 'price' | 'brand' | 'category' | 'descriptions'
->
+  'article' | 'name' | 'price' | 'descriptions'
+> & {
+  brandId: number
+  categoryId: number
+}
 
 export type UpdateProductDto = CreateProductDto

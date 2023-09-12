@@ -15,8 +15,6 @@ export const SelectValue = forwardRef<
 >(({ placeholder = '', ...props }, ref) => {
   const { value } = useContext(SelectContext)
 
-  console.log('VALUE', value)
-
   return (
     <RadixSelectPrimitive.Value
       ref={ref}

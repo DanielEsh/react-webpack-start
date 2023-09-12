@@ -9,16 +9,16 @@ import {
 } from 'entities/products'
 import { ProductForm } from 'entities/products/ui/form/product-form-schema'
 
-const AttributeCreatePage = () => {
-  const { mutateAsync: createAttributeMutation } = useCreateProductMutation()
+const ProductCreatePage = () => {
+  const { mutateAsync: createProductMutation } = useCreateProductMutation()
   const { showNotification } = useNotification()
   const invalidateAttributes = useInvalidateProducts()
   const defaultValues: ProductForm = {
-    article: 'article',
-    name: 'name',
+    article: '',
+    name: '',
     price: 1,
-    brand: 5,
-    category: 10,
+    brandId: 5,
+    categoryId: 10,
   }
 
   const handleSuccessCreate = (data: ProductDto) => {
@@ -31,11 +31,10 @@ const AttributeCreatePage = () => {
   }
 
   const createNewProduct = async (form: ProductForm) => {
-    console.log('FORM', form)
-    // return await createAttributeMutation(form, {
-    //   onSuccess: (data) => handleSuccessCreate(data),
-    //   onError: handleErrorCreate,
-    // })
+    return await createProductMutation(form, {
+      onSuccess: (data) => handleSuccessCreate(data),
+      onError: handleErrorCreate,
+    })
   }
 
   function handleErrorCreate() {
@@ -55,4 +54,4 @@ const AttributeCreatePage = () => {
   )
 }
 
-export default AttributeCreatePage
+export default ProductCreatePage
