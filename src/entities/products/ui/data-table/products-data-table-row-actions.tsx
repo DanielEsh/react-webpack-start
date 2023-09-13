@@ -21,7 +21,7 @@ export const ProductsDataTableRowActions = ({ row }: Props) => {
 
   return (
     <DataTableRowButtons
-      link={`products/${original.id}`}
+      link={`/products/${original.id}`}
       onDeleteClick={handleDeleteClick}
     />
   )

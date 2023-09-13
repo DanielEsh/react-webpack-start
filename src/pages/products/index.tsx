@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import { Route } from 'react-router-dom'
 
 export const ProductsPage = lazy(() => import('./products-page'))
+export const ProductDetailsPage = lazy(() => import('./product-details-page'))
 export const ProductCreatePage = lazy(() => import('./product-create-page'))
 
 export default [
@@ -12,6 +13,10 @@ export default [
     <Route
       path="create"
       element={<ProductCreatePage />}
+    />
+    <Route
+      path=":id"
+      element={<ProductDetailsPage />}
     />
   </Route>,
 ]
