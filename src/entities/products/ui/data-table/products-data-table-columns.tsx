@@ -3,6 +3,7 @@ import { DataTableColumnHead } from 'widgets/data-table'
 import { ReactNode } from 'react'
 import { Table } from 'shared/ui-kit/table'
 import { ProductDto } from 'entities/products/api'
+import { ProductsDataTableRowActions } from './products-data-table-row-actions'
 
 export const getProductsColumns: ColumnDef<ProductDto>[] = [
   {
@@ -95,7 +96,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
     ),
     cell: ({ row }) => (
       <Table.Cell>
-        <div>actions for {row.id}</div>
+        <ProductsDataTableRowActions row={row} />
       </Table.Cell>
     ),
     enableSorting: false,

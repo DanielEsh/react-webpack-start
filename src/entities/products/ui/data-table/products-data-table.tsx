@@ -39,17 +39,18 @@ export const ProductsDataTable = ({ data }: Props) => {
         </Table.Head>
         <Table.Body>
           {table.getRowModel().rows?.length ? (
-            table
-              .getRowModel()
-              .rows.map((row) => (
-                <Table.Row key={row.id}>
-                  {row
-                    .getVisibleCells()
-                    .map((cell) =>
-                      flexRender(cell.column.columnDef.cell, cell.getContext()),
-                    )}
-                </Table.Row>
-              ))
+            table.getRowModel().rows.map((row) => (
+              <Table.Row
+                key={row.id}
+                className="h-[54px]"
+              >
+                {row
+                  .getVisibleCells()
+                  .map((cell) =>
+                    flexRender(cell.column.columnDef.cell, cell.getContext()),
+                  )}
+              </Table.Row>
+            ))
           ) : (
             <Table.Row>
               <Table.Cell className="h-[308px] text-center">

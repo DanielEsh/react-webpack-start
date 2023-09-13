@@ -13,7 +13,10 @@ export const ProductFormFields = () => {
         <Input label="name" />
       </Form.Field>
       <Form.Field name="price">
-        <Input label="price" />
+        <Input
+          label="price"
+          type="number"
+        />
       </Form.Field>
       <Form.Field name="brandId">
         <BrandsSelect />
