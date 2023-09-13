@@ -1,13 +1,13 @@
 import { forwardRef } from 'react'
 import { Input, type InputProps } from '../input/input'
 
-export interface NumberInputProps extends Omit<InputProps, 'onChange'> {
+export interface InputNumberProps extends Omit<InputProps, 'onChange'> {
   onChange?(value: number): void
 }
 
 const COMPONENT_NAME = 'InputNumber'
 
-export const InputNumber = forwardRef<HTMLInputElement, NumberInputProps>(
+export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(
   (props, forwardedRef) => {
     const { label, onChange, ...restProps } = props
 

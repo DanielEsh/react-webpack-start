@@ -1,8 +1,7 @@
 import { BrandsSelect } from 'entities/brands/ui/brands-select'
 import { CategoriesSelect } from 'entities/categories/ui/categories-select'
 import { Form } from 'shared/ui-kit/form'
-import { Input, TextArea } from 'shared/ui-kit/form-controls'
-import { InputNumber } from 'shared/ui-kit/form-controls/input-number/input-number'
+import { Input, InputNumber, TextArea } from 'shared/ui-kit/form-controls'
 
 export const ProductFormFields = () => {
   return (

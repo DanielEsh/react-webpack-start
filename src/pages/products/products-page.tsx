@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom'
 const ProductsPage = () => {
   const { isLoading, isError, data } = useGetProducts({
     page: 1,
-    limit: 10,
+    limit: 50,
   })
 
   return (
