@@ -18,8 +18,8 @@ export type CreateProductDto = Pick<
   ProductDto,
   'article' | 'name' | 'price' | 'descriptions'
 > & {
-  brandId: number
-  categoryId: number
+  brandId?: any
+  categoryId?: any
 }
 
 export type UpdateProductDto = CreateProductDto
