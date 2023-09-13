@@ -48,10 +48,6 @@ export default function ProductDetailsPage() {
     )
   }
 
-  function handleErrorCreate() {
-    console.log('error')
-  }
-
   return (
     <FormDrawerLayout
       loading={isLoading}
