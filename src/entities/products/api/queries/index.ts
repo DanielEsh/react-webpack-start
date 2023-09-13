@@ -1,5 +1,6 @@
 export * from './use-create-product-mutation'
 export * from './use-get-all-products'
 export * from './use-get-product-by-id'
+export * from './use-update-product-mutation'
 export * from './use-delete-product-mutation'
 export * from './use-invalidate-products'

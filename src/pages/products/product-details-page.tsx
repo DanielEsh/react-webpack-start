@@ -6,6 +6,7 @@ import {
   useGetProductsById,
   useInvalidateProducts,
 } from 'entities/products'
+import { useUpdateProductById } from 'entities/products/api/queries'
 import { useParams } from 'react-router-dom'
 import { useNotification } from 'shared/notification'
 import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
@@ -15,6 +16,7 @@ export default function ProductDetailsPage() {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const { isSuccess, isLoading, isError, data } = useGetProductsById(id)
+  const { mutateAsync: updateProductByIdMutation } = useUpdateProductById()
   const { showNotification } = useNotification()
   const invalidateAttributes = useInvalidateProducts()
   const defaultValues: ProductForm = {
@@ -25,7 +27,7 @@ export default function ProductDetailsPage() {
     categoryId: data?.category.id,
   }
 
-  const handleSuccessCreate = (data: ProductDto) => {
+  const handleSuccessUpdate = (data: ProductDto) => {
     showNotification({
       id: data.id,
       title: 'Успешное создание товара',
@@ -35,11 +37,15 @@ export default function ProductDetailsPage() {
   }
 
   const updateProduct = async (form: ProductForm) => {
-    console.log('form', form)
-    // return await createProductMutation(form, {
-    //   onSuccess: (data) => handleSuccessCreate(data),
-    //   onError: handleErrorCreate,
-    // })
+    await updateProductByIdMutation(
+      {
+        form,
+        id: id ? +id : 0,
+      },
+      {
+        onSuccess: handleSuccessUpdate,
+      },
+    )
   }
 
   function handleErrorCreate() {
