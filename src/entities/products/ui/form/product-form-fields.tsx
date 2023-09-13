@@ -2,6 +2,7 @@ import { BrandsSelect } from 'entities/brands/ui/brands-select'
 import { CategoriesSelect } from 'entities/categories/ui/categories-select'
 import { Form } from 'shared/ui-kit/form'
 import { Input, TextArea } from 'shared/ui-kit/form-controls'
+import { InputNumber } from 'shared/ui-kit/form-controls/input-number/input-number'
 
 export const ProductFormFields = () => {
   return (
@@ -13,11 +14,9 @@ export const ProductFormFields = () => {
         <Input label="name" />
       </Form.Field>
       <Form.Field name="price">
-        <Input
-          label="price"
-          type="number"
-        />
+        <InputNumber label="number field" />
       </Form.Field>
+
       <Form.Field name="brandId">
         <BrandsSelect />
       </Form.Field>
