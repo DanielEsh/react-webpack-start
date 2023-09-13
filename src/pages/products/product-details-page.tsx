@@ -1,11 +1,64 @@
-import { Drawer } from 'shared/ui-kit/drawer'
+import {
+  ProductDto,
+  ProductForm,
+  ProductFormFields,
+  productFormSchema,
+  useGetProductsById,
+  useInvalidateProducts,
+} from 'entities/products'
+import { useParams } from 'react-router-dom'
+import { useNotification } from 'shared/notification'
+import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
 
 export default function ProductDetailsPage() {
+  const { id } = useParams()
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const { isSuccess, isLoading, isError, data } = useGetProductsById(id)
+  const { showNotification } = useNotification()
+  const invalidateAttributes = useInvalidateProducts()
+  const defaultValues: ProductForm = {
+    article: data?.article ?? '',
+    name: data?.name ?? '',
+    price: data?.price ?? 1,
+    brandId: data?.brand.id,
+    categoryId: data?.category.id,
+  }
+
+  const handleSuccessCreate = (data: ProductDto) => {
+    showNotification({
+      id: data.id,
+      title: 'Успешное создание товара',
+      message: `Товар ${data.name} успешно создан`,
+    })
+    invalidateAttributes()
+  }
+
+  const updateProduct = async (form: ProductForm) => {
+    console.log('form', form)
+    // return await createProductMutation(form, {
+    //   onSuccess: (data) => handleSuccessCreate(data),
+    //   onError: handleErrorCreate,
+    // })
+  }
+
+  function handleErrorCreate() {
+    console.log('error')
+  }
+
   return (
-    <Drawer open>
-      <div>
-        <span>product details page</span>
-      </div>
-    </Drawer>
+    <FormDrawerLayout
+      loading={isLoading}
+      error={isError}
+      success={isSuccess}
+      data={data}
+      formSchema={productFormSchema}
+      defaultValues={defaultValues}
+      backLinkPath="/products"
+      submitButtonLabel="Update"
+      onSubmit={updateProduct}
+    >
+      <ProductFormFields />
+    </FormDrawerLayout>
   )
 }
