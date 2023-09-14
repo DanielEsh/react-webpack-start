@@ -1,7 +1,6 @@
 import {
   flexRender,
   getCoreRowModel,
-  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
 import { ProductDto } from 'entities/products/api'
@@ -22,7 +21,6 @@ export const ProductsDataTable = ({ data, onDelete }: Props) => {
     data,
     columns: getProductsColumns,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
   })
 
   return (

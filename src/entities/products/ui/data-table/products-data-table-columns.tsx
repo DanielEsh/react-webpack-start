@@ -10,7 +10,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
     id: 'id',
     accessorKey: 'id',
     header: ({ column }) => (
-      <Table.ColumnHeader className="w-[98px]">
+      <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
         <DataTableColumnHead
           column={column}
           title="id"
@@ -23,7 +23,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
     id: 'article',
     accessorFn: ({ article }) => article,
     header: ({ column }) => (
-      <Table.ColumnHeader className="min-w-[320px]">
+      <Table.ColumnHeader className="sticky top-0 min-w-[320px] bg-white">
         <DataTableColumnHead
           column={column}
           title="article"
@@ -36,7 +36,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
     id: 'name',
     accessorFn: ({ name }) => name,
     header: ({ column }) => (
-      <Table.ColumnHeader className="min-w-[320px]">
+      <Table.ColumnHeader className="sticky top-0 min-w-[320px] bg-white">
         <DataTableColumnHead
           column={column}
           title="name"
@@ -49,7 +49,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
     id: 'price',
     accessorFn: ({ price }) => price,
     header: ({ column }) => (
-      <Table.ColumnHeader className="">
+      <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
           title="price"
@@ -62,7 +62,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
     id: 'category',
     accessorFn: ({ category }) => category.name,
     header: ({ column }) => (
-      <Table.ColumnHeader className="">
+      <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
           title="category"
@@ -75,7 +75,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
     id: 'brand',
     accessorFn: ({ brand }) => brand.name,
     header: ({ column }) => (
-      <Table.ColumnHeader className="">
+      <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
           title="brand"
@@ -87,7 +87,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
   {
     id: 'actions',
     header: ({ column }) => (
-      <Table.ColumnHeader className="w-[98px]">
+      <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
         <DataTableColumnHead
           column={column}
           title="actions"

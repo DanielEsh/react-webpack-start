@@ -8,8 +8,10 @@ import { TableCell } from './table-cell'
 export const _Table = ({ children }: TypeWithChildren) => {
   return (
     <div className="rounded-md border">
-      <div className="w-full overflow-auto">
-        <table className="caption-bottom w-full text-sm">{children}</table>
+      <div className="w-full">
+        <table className="caption-bottom relative w-full text-sm">
+          {children}
+        </table>
       </div>
     </div>
   )
