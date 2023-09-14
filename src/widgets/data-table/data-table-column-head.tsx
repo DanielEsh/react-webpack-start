@@ -34,7 +34,7 @@ export const DataTableColumnHead = <TData, TValue>(
 
   return (
     <Button
-      className="-ml-3"
+      className="-ml-2"
       size="sm"
       variant="ghost"
       addonRight={renderIcon()}
