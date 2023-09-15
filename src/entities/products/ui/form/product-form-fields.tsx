@@ -5,26 +5,28 @@ import { Input, InputNumber, TextArea } from 'shared/ui-kit/form-controls'
 
 export const ProductFormFields = () => {
   return (
-    <div className="flex flex-col gap-4 px-6">
-      <Form.Field name="article">
-        <Input label="article" />
-      </Form.Field>
-      <Form.Field name="name">
-        <Input label="name" />
-      </Form.Field>
-      <Form.Field name="price">
-        <InputNumber label="number field" />
-      </Form.Field>
+    <>
+      <div className="flex flex-col gap-4 px-6">
+        <Form.Field name="article">
+          <Input label="article" />
+        </Form.Field>
+        <Form.Field name="name">
+          <Input label="name" />
+        </Form.Field>
+        <Form.Field name="price">
+          <InputNumber label="number field" />
+        </Form.Field>
 
-      <Form.Field name="brandId">
-        <BrandsSelect />
-      </Form.Field>
-      <Form.Field name="categoryId">
-        <CategoriesSelect />
-      </Form.Field>
-      <Form.Field name="description">
-        <TextArea label="description" />
-      </Form.Field>
-    </div>
+        <Form.Field name="brandId">
+          <BrandsSelect />
+        </Form.Field>
+        <Form.Field name="categoryId">
+          <CategoriesSelect />
+        </Form.Field>
+        <Form.Field name="description">
+          <TextArea label="description" />
+        </Form.Field>
+      </div>
+    </>
   )
 }

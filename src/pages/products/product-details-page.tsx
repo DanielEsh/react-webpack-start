@@ -7,12 +7,20 @@ import {
   useInvalidateProducts,
 } from 'entities/products'
 import { useUpdateProductById } from 'entities/products/api/queries'
-import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useNotification } from 'shared/notification'
-import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
+import { Button } from 'shared/ui-kit/button'
+import { Drawer } from 'shared/ui-kit/drawer'
+import { DrawerContent } from 'shared/ui-kit/drawer/drawer'
+import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
+import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
+import { Form } from 'shared/ui-kit/form'
+import { useForm } from 'shared/ui-kit/form/use-form'
 
 export default function ProductDetailsPage() {
   const { id } = useParams()
+  const navigate = useNavigate()
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const { isSuccess, isLoading, isError, data } = useGetProductsById(id)
@@ -46,21 +54,65 @@ export default function ProductDetailsPage() {
         onSuccess: handleSuccessUpdate,
       },
     )
+    close()
   }
 
+  const close = () => {
+    navigate('/products')
+  }
+
+  const formMethods = useForm(productFormSchema, defaultValues)
+
+  const { reset } = formMethods
+
+  useEffect(() => {
+    reset(data)
+  }, [data])
+
   return (
-    <FormDrawerLayout
-      loading={isLoading}
-      error={isError}
-      success={isSuccess}
-      data={data}
-      formSchema={productFormSchema}
-      defaultValues={defaultValues}
-      backLinkPath="/products"
-      submitButtonLabel="Update"
-      onSubmit={updateProduct}
+    <Drawer
+      open
+      onOpenChange={close}
     >
-      <ProductFormFields />
-    </FormDrawerLayout>
+      <DrawerContent>
+        <Form
+          className="flex h-full flex-col"
+          methods={formMethods}
+          onSubmit={updateProduct}
+        >
+          {isLoading && <div>Loading...</div>}
+          {isError && <div>Error</div>}
+
+          {isSuccess && (
+            <>
+              <DrawerHeader>
+                <h2>Update product</h2>
+              </DrawerHeader>
+
+              <ProductFormFields />
+
+              <DrawerFooter>
+                <div className="flex gap-2 px-4 pb-6">
+                  <Button
+                    type="submit"
+                    variant="primary"
+                  >
+                    Update
+                  </Button>
+
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={close}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </DrawerFooter>
+            </>
+          )}
+        </Form>
+      </DrawerContent>
+    </Drawer>
   )
 }
