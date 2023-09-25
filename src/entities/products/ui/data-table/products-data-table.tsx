@@ -25,7 +25,7 @@ export const ProductsDataTable = ({ data, onDelete }: Props) => {
 
   return (
     <>
-      <div className="min-h-[572px]">
+      <div className="h-[750px] overflow-y-auto">
         <Table>
           <Table.Head>
             {table.getHeaderGroups().map((headerGroup) => (
