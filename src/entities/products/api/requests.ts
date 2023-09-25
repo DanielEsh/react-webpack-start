@@ -16,6 +16,7 @@ interface Params {
 }
 
 export const getProducts = async (params: Params) => {
+  console.log('getProducts', params)
   const query = `products?${qs.stringify(params)}`
   return (await $api.get<PageableResponse<ProductDto>>(query)).data
 }

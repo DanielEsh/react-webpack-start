@@ -11,9 +11,17 @@ import { useNotification } from 'shared/notification'
 import { DeleteState } from 'shared/ui/dialog/confirm-delete'
 
 const ProductsPage = () => {
-  const { isLoading, isError, data } = useGetProducts({
+  const {
+    isLoading,
+    isError,
+    isFetching,
+    data,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useGetProducts({
     page: 1,
-    limit: 50,
+    limit: 2,
   })
 
   const { mutate: deleteProductMutation } = useDeleteProductMutation()
@@ -36,6 +44,17 @@ const ProductsPage = () => {
     })
   }
 
+  const handleNextFetch = () => {
+    console.log('FETCH NEXT')
+
+    if (!hasNextPage) {
+      console.log('EMPTY')
+      return
+    }
+
+    fetchNextPage()
+  }
+
   return (
     <div>
       {isLoading && <div>Loading</div>}
@@ -44,9 +63,16 @@ const ProductsPage = () => {
         <>
           <ProductsDataTableHeader />
           <ProductsDataTable
-            data={data.content}
+            data={data.pages[0].content}
             onDelete={handleDelete}
           />
+
+          <button onClick={handleNextFetch}>next</button>
+          <div>isFetchingNextPage: {JSON.stringify(isFetchingNextPage)}</div>
+          <div>hasNextPage: {JSON.stringify(hasNextPage)}</div>
+          <div>
+            Status: {isFetching && !isFetchingNextPage ? 'Fetching...' : null}
+          </div>
         </>
       )}
 

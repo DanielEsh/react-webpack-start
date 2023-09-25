@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { getProducts } from '../requests'
-
+import { PageableResponse } from 'shared/api/types'
 interface Values {
   page: number
   limit: number
@@ -8,10 +8,37 @@ interface Values {
   order_by?: string[]
 }
 
+// const flatResponse = <T>(pages: PageableResponse<T>) => {
+//   return pages.content.map(page =>)
+// }
+
 export const useGetProducts = (values: Values) => {
-  return useQuery({
+  const {
+    isLoading,
+    isError,
+    isFetching,
+    data,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
     queryKey: ['products', values],
     queryFn: () => getProducts(values),
     keepPreviousData: true,
+    getNextPageParam: (lastPage, pages) => {
+      return false
+    },
   })
+
+  console.log('DATA', data)
+
+  return {
+    isLoading,
+    isError,
+    isFetching,
+    data,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  }
 }
