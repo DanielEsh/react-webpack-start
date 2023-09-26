@@ -1,19 +1,15 @@
-import {
-  useInfiniteQuery,
-  useQuery,
-  type InfiniteData,
-} from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { getProducts } from '../requests'
 import { PageableResponse } from 'shared/api/types'
-interface Values {
-  page: number
-  limit: number
-  sort_by?: string[]
-  order_by?: string[]
-}
+// interface Values {
+//   page: number
+//   limit: number
+//   sort_by?: string[]
+//   order_by?: string[]
+// }
 
-const flatResponse = <T>(pages: any) => {
-  if (!pages) return
+const flatResponse = <T>(pages: PageableResponse<T>[] = []) => {
+  if (!pages.length) return []
 
   return pages.map((page: any) => page.content).flat()
 }

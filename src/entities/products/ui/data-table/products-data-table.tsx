@@ -39,8 +39,7 @@ export const ProductsDataTable = ({ data, onDelete, onEndReached }: Props) => {
 
   return (
     <>
-      entry: {JSON.stringify(entry?.isIntersecting)}
-      <div className="h-[750px] overflow-y-auto">
+      <div className="h-[720px] overflow-y-auto">
         <Table>
           <Table.Head>
             {table.getHeaderGroups().map((headerGroup) => (
