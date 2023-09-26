@@ -43,10 +43,7 @@ const ProductsPage = () => {
   }
 
   const handleNextFetch = () => {
-    console.log('FETCH NEXT')
-
     if (!hasNextPage) {
-      console.log('EMPTY')
       return
     }
 
@@ -65,12 +62,12 @@ const ProductsPage = () => {
             onDelete={handleDelete}
             onEndReached={handleNextFetch}
           />
-
-          <button onClick={handleNextFetch}>next</button>
-          <div>isFetchingNextPage: {JSON.stringify(isFetchingNextPage)}</div>
-          <div>hasNextPage: {JSON.stringify(hasNextPage)}</div>
-          <div>
-            Status: {isFetching && !isFetchingNextPage ? 'Fetching...' : null}
+          <div className="flex gap-5">
+            <div>hasNextPage: {JSON.stringify(hasNextPage)}</div>
+            <div>
+              Status: {isFetching && !isFetchingNextPage ? 'Fetching...' : null}
+            </div>
+            <div>Всего: {data.pages[0].meta.totalItemsCount}</div>
           </div>
         </>
       )}
