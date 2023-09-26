@@ -18,10 +18,9 @@ const flatResponse = <T>(pages: any) => {
   return pages.map((page: any) => page.content).flat()
 }
 
-export const useGetProducts = (values?: Values) => {
-  // let initPage = 1
-  console.log('useGetProducts', values)
+const LIMIT = 2
 
+export const useGetProducts = () => {
   const {
     isLoading,
     isError,
@@ -31,18 +30,15 @@ export const useGetProducts = (values?: Values) => {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['products', values],
-    queryFn: (page) =>
-      getProducts({
-        page: page?.pageParam?.page ?? values?.page,
-        limit: 2,
-      }),
+    queryKey: ['products'],
+    queryFn: (page) => {
+      return getProducts({
+        page: page?.pageParam ?? 1,
+        limit: LIMIT,
+      })
+    },
     keepPreviousData: true,
-    // onSuccess: (data) => {
-    //   initPage = data.pages[0].meta.pagination.links.next
-    //   console.log('INIT', initPage)
-    // },
-    getNextPageParam: (lastPage, pages) => {
+    getNextPageParam: (lastPage) => {
       return lastPage.meta.pagination.links.next
     },
   })

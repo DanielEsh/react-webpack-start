@@ -20,10 +20,7 @@ const ProductsPage = () => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = useGetProducts({
-    page: 1,
-    limit: 2,
-  })
+  } = useGetProducts()
 
   const { mutate: deleteProductMutation } = useDeleteProductMutation()
   const invalidateProducts = useInvalidateProducts()
@@ -53,12 +50,7 @@ const ProductsPage = () => {
       return
     }
 
-    fetchNextPage({
-      pageParam: {
-        page: data?.pages[data.pages.length - 1].meta.pagination.links.next,
-        limit: 2,
-      },
-    })
+    fetchNextPage()
   }
 
   return (

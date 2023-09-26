@@ -9,14 +9,13 @@ export const createProduct = async (productDto: ProductForm) => {
 }
 
 interface Params {
-  page?: number
+  page: number
   limit: number
   sort_by?: string[]
   order_by?: string[]
 }
 
-export const getProducts = async (params?: Params) => {
-  console.log('getProducts', params)
+export const getProducts = async (params: Params) => {
   const query = `products?${qs.stringify(params)}`
   return (await $api.get<PageableResponse<ProductDto>>(query)).data
 }
