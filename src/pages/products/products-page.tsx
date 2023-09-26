@@ -63,6 +63,7 @@ const ProductsPage = () => {
           <ProductsDataTable
             data={flattedData}
             onDelete={handleDelete}
+            onEndReached={handleNextFetch}
           />
 
           <button onClick={handleNextFetch}>next</button>

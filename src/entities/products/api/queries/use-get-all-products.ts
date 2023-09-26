@@ -18,7 +18,7 @@ const flatResponse = <T>(pages: any) => {
   return pages.map((page: any) => page.content).flat()
 }
 
-const LIMIT = 2
+const LIMIT = 20
 
 export const useGetProducts = () => {
   const {

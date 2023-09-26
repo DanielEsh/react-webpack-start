@@ -10,21 +10,36 @@ import {
   ConfirmDeleteDialog,
   DeleteState,
 } from 'shared/ui/dialog/confirm-delete'
+import { useIntersection } from 'shared/lib/hooks/use-intersection/use-intersection'
+import { useEffect } from 'react'
 
 interface Props {
   data: ProductDto[]
   onDelete(state: DeleteState<number, ProductDto>): void
+  onEndReached(): void
 }
 
-export const ProductsDataTable = ({ data, onDelete }: Props) => {
+export const ProductsDataTable = ({ data, onDelete, onEndReached }: Props) => {
   const table = useReactTable({
     data,
     columns: getProductsColumns,
     getCoreRowModel: getCoreRowModel(),
   })
 
+  const { ref: bottomElementRef, entry } = useIntersection({
+    root: null, // viewport
+    threshold: 0.7,
+  })
+
+  useEffect(() => {
+    if (entry && entry.intersectionRatio > 0) {
+      onEndReached()
+    }
+  }, [entry, onEndReached])
+
   return (
     <>
+      entry: {JSON.stringify(entry?.isIntersecting)}
       <div className="h-[750px] overflow-y-auto">
         <Table>
           <Table.Head>
@@ -64,8 +79,8 @@ export const ProductsDataTable = ({ data, onDelete }: Props) => {
             )}
           </Table.Body>
         </Table>
+        <div ref={bottomElementRef}></div>
       </div>
-
       <ConfirmDeleteDialog onConfirmDelete={onDelete} />
     </>
   )
