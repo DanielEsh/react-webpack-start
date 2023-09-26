@@ -16,6 +16,7 @@ const ProductsPage = () => {
     isError,
     isFetching,
     data,
+    flattedData,
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
@@ -52,7 +53,12 @@ const ProductsPage = () => {
       return
     }
 
-    fetchNextPage()
+    fetchNextPage({
+      pageParam: {
+        page: data?.pages[data.pages.length - 1].meta.pagination.links.next,
+        limit: 2,
+      },
+    })
   }
 
   return (
@@ -63,7 +69,7 @@ const ProductsPage = () => {
         <>
           <ProductsDataTableHeader />
           <ProductsDataTable
-            data={data.pages[0].content}
+            data={flattedData}
             onDelete={handleDelete}
           />
 
