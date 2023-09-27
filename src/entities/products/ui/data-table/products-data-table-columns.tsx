@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 import { Table } from 'shared/ui-kit/table'
 import { ProductDto } from 'entities/products/api'
 import { ProductsDataTableRowActions } from './products-data-table-row-actions'
+import { splitThousands } from 'shared/utils/split-thousands'
 
 export const getProductsColumns: ColumnDef<ProductDto>[] = [
   {
@@ -56,7 +57,9 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => (
+      <Table.Cell>{splitThousands(info.getValue() as number)}</Table.Cell>
+    ),
   },
   {
     id: 'category',
