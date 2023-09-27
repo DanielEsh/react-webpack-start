@@ -8,9 +8,9 @@ export const productFormSchema = z.object({
     message: 'Must be required',
   }),
   price: z.number().positive(),
-  brandId: z.any(),
-  categoryId: z.any(),
-  description: z.string().optional(),
+  brandId: z.number().nullable(),
+  categoryId: z.number().nullable(),
+  description: z.string().optional().nullable(),
 })
 
 export type ProductForm = z.infer<typeof productFormSchema>

@@ -31,8 +31,8 @@ export default function ProductDetailsPage() {
     article: data?.article ?? '',
     name: data?.name ?? '',
     price: data?.price ?? 1,
-    brandId: data?.brand.id,
-    categoryId: data?.category.id,
+    brandId: data?.brand.id ?? 0,
+    categoryId: data?.category.id ?? 0,
   }
 
   const handleSuccessUpdate = (data: ProductDto) => {
@@ -63,10 +63,17 @@ export default function ProductDetailsPage() {
 
   const formMethods = useForm(productFormSchema, defaultValues)
 
-  const { reset } = formMethods
+  const { setValue } = formMethods
 
   useEffect(() => {
-    reset(data)
+    if (data) {
+      setValue('article', data.article)
+      setValue('name', data.name)
+      setValue('price', data.price)
+      setValue('brandId', data.brand.id)
+      setValue('categoryId', data.category.id)
+      setValue('description', data.descriptions)
+    }
   }, [data])
 
   return (

@@ -16,9 +16,9 @@ const ProductCreatePage = () => {
   const defaultValues: ProductForm = {
     article: '',
     name: '',
-    price: 1,
-    brandId: 5,
-    categoryId: 10,
+    price: 0,
+    brandId: 0,
+    categoryId: 0,
   }
 
   const handleSuccessCreate = (data: ProductDto) => {
