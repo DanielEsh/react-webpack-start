@@ -63,10 +63,6 @@ const ProductsPage = () => {
             onEndReached={handleNextFetch}
           />
           <div className="flex gap-5">
-            <div>hasNextPage: {JSON.stringify(hasNextPage)}</div>
-            <div>
-              Status: {isFetching && !isFetchingNextPage ? 'Fetching...' : null}
-            </div>
             <div>Всего: {data.pages[0].meta.totalItemsCount}</div>
           </div>
         </>
