@@ -8,6 +8,7 @@ import categoriesRoutes from 'pages/categories'
 import brandsRoutes from 'pages/brands'
 import attributesRoutes from 'pages/attributes'
 import productsRoutes from 'pages/products'
+import { AppRouterPaths } from './types'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
 export const PageLoader = ({ children }: PropsWithChildren) => (
@@ -21,7 +22,7 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path={AppRouterPaths.home}
           element={
             <PageLoader>
               <RootLayout />
@@ -41,7 +42,7 @@ export const AppRouter = () => {
           {...attributesRoutes}
           {...productsRoutes}
           <Route
-            path="*"
+            path={AppRouterPaths.notFound}
             element={
               <PageLoader>
                 <NotFoundPage />
