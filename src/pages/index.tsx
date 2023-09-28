@@ -1,5 +1,6 @@
 import { PropsWithChildren, Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AppRouterPaths } from './types'
 
 import RootLayout from 'widgets/layouts/RootLayout'
 
@@ -8,7 +9,7 @@ import categoriesRoutes from 'pages/categories'
 import brandsRoutes from 'pages/brands'
 import attributesRoutes from 'pages/attributes'
 import productsRoutes from 'pages/products'
-import { AppRouterPaths } from './types'
+import { sandBoxPages } from './sandbox'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
 export const PageLoader = ({ children }: PropsWithChildren) => (
@@ -41,6 +42,7 @@ export const AppRouter = () => {
           {...brandsRoutes}
           {...attributesRoutes}
           {...productsRoutes}
+          {...sandBoxPages}
           <Route
             path={AppRouterPaths.notFound}
             element={
