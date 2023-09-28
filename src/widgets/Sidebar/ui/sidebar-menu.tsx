@@ -1,22 +1,23 @@
+import { AppRouterPaths } from 'pages/types'
 import { Link } from 'react-router-dom'
 
 export const SideBarMenu = () => {
   return (
     <ul className="flex flex-col">
       <li>
-        <Link to="categories">categories</Link>
+        <Link to={AppRouterPaths.categories}>categories</Link>
       </li>
 
       <li>
-        <Link to="brands">brands</Link>
+        <Link to={AppRouterPaths.brands}>brands</Link>
       </li>
 
       <li>
-        <Link to="attributes">attributes</Link>
+        <Link to={AppRouterPaths.attributes}>attributes</Link>
       </li>
 
       <li>
-        <Link to="products">goods</Link>
+        <Link to={AppRouterPaths.products}>products</Link>
       </li>
     </ul>
   )
