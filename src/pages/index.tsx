@@ -2,12 +2,13 @@ import { lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import RootLayout from 'widgets/layouts/RootLayout'
-import { GlobalNotFoundPage } from 'pages/GlobalNotFound'
+
 const HomePage = lazy(() => import('pages/home-page'))
 import categoriesRoutes from 'pages/categories'
 import brandsRoutes from 'pages/brands'
 import attributesRoutes from 'pages/attributes'
 import productsRoutes from 'pages/products'
+const NotFoundPage = lazy(() => import('pages/not-found'))
 
 export const AppRouter = () => {
   return (
@@ -25,12 +26,11 @@ export const AppRouter = () => {
           {...brandsRoutes}
           {...attributesRoutes}
           {...productsRoutes}
+          <Route
+            path="*"
+            element={<NotFoundPage />}
+          />
         </Route>
-
-        <Route
-          path="*"
-          element={<GlobalNotFoundPage />}
-        />
       </Routes>
     </BrowserRouter>
   )
