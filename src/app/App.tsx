@@ -1,7 +1,7 @@
 import { StrictMode, Suspense } from 'react'
 // import { BrowserRouter } from 'react-router-dom'
 // import { AppRouter } from 'app/providers/router'
-import { Router } from 'pages'
+import { AppRouter } from 'pages'
 // import { ErrorBoundary } from 'app/providers/ErrorBoundary'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from 'shared/lib/react-query'
@@ -16,7 +16,7 @@ export const App = () => {
       <NotificationProvider>
         <QueryClientProvider client={queryClient}>
           <Suspense fallback={<div>GLOBAL LOADER...</div>}>
-            <Router />
+            <AppRouter />
             <NotificationRoot />
           </Suspense>
         </QueryClientProvider>

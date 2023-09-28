@@ -1,16 +1,15 @@
+import { lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import RootLayout from 'widgets/layouts/RootLayout'
-import { MainPage } from 'pages/MainPage/MainPage'
-import { AboutPageAsync } from 'pages/AboutPage/AboutPage.async'
 import { GlobalNotFoundPage } from 'pages/GlobalNotFound'
-
+const HomePage = lazy(() => import('pages/home-page'))
 import categoriesRoutes from 'pages/categories'
 import brandsRoutes from 'pages/brands'
 import attributesRoutes from 'pages/attributes'
 import productsRoutes from 'pages/products'
 
-export const Router = () => {
+export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -20,13 +19,8 @@ export const Router = () => {
         >
           <Route
             index
-            element={<MainPage />}
+            element={<HomePage />}
           />
-          <Route
-            path="about"
-            element={<AboutPageAsync />}
-          />
-
           {...categoriesRoutes}
           {...brandsRoutes}
           {...attributesRoutes}
