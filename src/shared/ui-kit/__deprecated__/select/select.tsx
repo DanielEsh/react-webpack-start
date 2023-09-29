@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import { Popover } from 'shared/ui-kit/Popover'
+import { Popover } from 'shared/ui-kit/__deprecated__/Popover'
 import { SelectOptions } from 'shared/ui-kit/form-controls/select/select-options'
 import { SelectOption } from 'shared/ui-kit/form-controls/select/select-option'
 import { SelectValue } from 'shared/ui-kit/form-controls/select/select-value'

@@ -1,7 +1,7 @@
 import { forwardRef, useContext } from 'react'
 import { UiDefaultProps } from 'shared/ui-kit/types'
 import { SelectContext } from 'shared/ui-kit/form-controls/select/select-context'
-import { Popover } from 'shared/ui-kit/Popover'
+import { Popover } from 'shared/ui-kit/__deprecated__/Popover'
 import { Input } from '../input'
 
 type SelectValueProps = UiDefaultProps

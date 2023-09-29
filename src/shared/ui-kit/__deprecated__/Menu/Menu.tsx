@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 import { type MenuContextType, MenuContext } from './MenuContext'
-import { Popover } from 'shared/ui-kit/Popover'
+import { Popover } from 'shared/ui-kit/__deprecated__/Popover'
 import { MenuTrigger } from './MenuTrigger'
 import { MenuDropdown } from './MenuDropdown'
 import { MenuItem } from './MenuItem'

@@ -1,5 +1,5 @@
 import { forwardRef, PropsWithChildren } from 'react'
-import { Popover } from 'shared/ui-kit/Popover'
+import { Popover } from 'shared/ui-kit/__deprecated__/Popover'
 
 type MenuDropdownProps = PropsWithChildren
 

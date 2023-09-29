@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { Popover } from 'shared/ui-kit/Popover'
+import { Popover } from 'shared/ui-kit/__deprecated__/Popover'
 import { UiDefaultProps } from 'shared/ui-kit/types'
 
 type MenuTriggerProps = UiDefaultProps

@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { UiDefaultProps } from 'shared/ui-kit/types'
-import { Popover } from 'shared/ui-kit/Popover'
+import { Popover } from 'shared/ui-kit/__deprecated__/Popover'
 import { classNames } from 'shared/utils'
 
 interface SelectOptionsProps extends UiDefaultProps {
