@@ -7,7 +7,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { ModalOverlay } from './modal-overlay'
 import { ModalPortal } from './modal-portal'
 import { classNames } from 'shared/utils'
-import IconClose from 'shared/assets/icons/close.svg'
+// import IconClose from 'shared/assets/icons/close.svg'
 
 export const ModalContent = forwardRef<
   ElementRef<typeof DialogPrimitive.Content>,
