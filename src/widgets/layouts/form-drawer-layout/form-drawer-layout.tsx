@@ -7,7 +7,6 @@ import { useEffect } from 'react'
 import { TypeWithChildren } from 'shared/ui-kit/types'
 import { type ZodType } from 'zod'
 import { type FieldValues, type DefaultValues } from 'react-hook-form'
-import { DrawerContent } from 'shared/ui-kit/drawer/drawer'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
 export interface Props<FormValues> extends TypeWithChildren {
@@ -61,45 +60,43 @@ export const FormDrawerLayout = <FormValues extends FieldValues>(
       open
       onOpenChange={close}
     >
-      <DrawerContent>
-        <Form
-          className="flex h-full flex-col"
-          methods={formMethods}
-          onSubmit={handleSubmit}
-        >
-          {loading && <div>Loading...</div>}
-          {error && <div>Error</div>}
+      <Form
+        className="flex h-full flex-col"
+        methods={formMethods}
+        onSubmit={handleSubmit}
+      >
+        {loading && <div>Loading...</div>}
+        {error && <div>Error</div>}
 
-          {success && (
-            <>
-              <DrawerHeader>
-                <h2>Update category</h2>
-              </DrawerHeader>
+        {success && (
+          <>
+            <DrawerHeader>
+              <h2>Update category</h2>
+            </DrawerHeader>
 
-              {children}
+            {children}
 
-              <DrawerFooter>
-                <div className="flex gap-2 px-4 pb-6">
-                  <Button
-                    type="submit"
-                    variant="primary"
-                  >
-                    {submitButtonLabel}
-                  </Button>
+            <DrawerFooter>
+              <div className="flex gap-2 px-4 pb-6">
+                <Button
+                  type="submit"
+                  variant="primary"
+                >
+                  {submitButtonLabel}
+                </Button>
 
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    onClick={close}
-                  >
-                    Cancel
-                  </Button>
-                </div>
-              </DrawerFooter>
-            </>
-          )}
-        </Form>
-      </DrawerContent>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={close}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </DrawerFooter>
+          </>
+        )}
+      </Form>
     </Drawer>
   )
 }

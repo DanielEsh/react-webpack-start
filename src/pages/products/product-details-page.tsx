@@ -12,7 +12,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useNotification } from 'shared/notification'
 import { Button } from 'shared/ui-kit/button'
 import { Drawer } from 'shared/ui-kit/drawer'
-import { DrawerContent } from 'shared/ui-kit/drawer/drawer'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { Form } from 'shared/ui-kit/form'
@@ -81,45 +80,43 @@ export default function ProductDetailsPage() {
       open
       onOpenChange={close}
     >
-      <DrawerContent>
-        <Form
-          className="flex h-full flex-col"
-          methods={formMethods}
-          onSubmit={updateProduct}
-        >
-          {isLoading && <div>Loading...</div>}
-          {isError && <div>Error</div>}
+      <Form
+        className="flex h-full flex-col"
+        methods={formMethods}
+        onSubmit={updateProduct}
+      >
+        {isLoading && <div>Loading...</div>}
+        {isError && <div>Error</div>}
 
-          {isSuccess && (
-            <>
-              <DrawerHeader>
-                <h2>Update product</h2>
-              </DrawerHeader>
+        {isSuccess && (
+          <>
+            <DrawerHeader>
+              <h2>Update product</h2>
+            </DrawerHeader>
 
-              <ProductFormFields />
+            <ProductFormFields />
 
-              <DrawerFooter>
-                <div className="flex gap-2 px-4 pb-6">
-                  <Button
-                    type="submit"
-                    variant="primary"
-                  >
-                    Update
-                  </Button>
+            <DrawerFooter>
+              <div className="flex gap-2 px-4 pb-6">
+                <Button
+                  type="submit"
+                  variant="primary"
+                >
+                  Update
+                </Button>
 
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    onClick={close}
-                  >
-                    Cancel
-                  </Button>
-                </div>
-              </DrawerFooter>
-            </>
-          )}
-        </Form>
-      </DrawerContent>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={close}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </DrawerFooter>
+          </>
+        )}
+      </Form>
     </Drawer>
   )
 }
