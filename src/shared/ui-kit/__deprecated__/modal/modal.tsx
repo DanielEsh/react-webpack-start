@@ -1,4 +1,4 @@
-import { Portal } from 'shared/ui-kit/Portal/Portal'
+import { Portal } from 'shared/ui-kit/portal/Portal'
 import { classNames } from 'shared/utils'
 import { useClickOutside } from 'shared/lib/hooks/useClickOutside'
 import type { UiDefaultProps } from '../types'

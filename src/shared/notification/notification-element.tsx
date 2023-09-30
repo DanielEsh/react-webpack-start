@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Toast } from 'shared/ui-kit/Toast'
+import { Toast } from 'shared/ui-kit/toast'
 import { CreatedNotification } from './types'
 
 const COMPONENT_NAME = 'NotificationElement'

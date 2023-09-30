@@ -3,7 +3,7 @@ import {
   CreatedNotification,
   NotificationVariants,
 } from './types'
-import { useQueue } from '../ui-kit/Toast/useQueue'
+import { useQueue } from '../ui-kit/toast/useQueue'
 
 const LIMIT = 2
 

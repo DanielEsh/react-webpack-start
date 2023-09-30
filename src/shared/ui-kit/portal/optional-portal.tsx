@@ -1,4 +1,4 @@
-import { Portal, PortalProps } from './Portal'
+import { Portal, PortalProps } from './portal'
 
 export interface OptionalPortalProps extends PortalProps {
   withinPortal?: boolean

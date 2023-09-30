@@ -1,5 +1,5 @@
 import { useContext, forwardRef, useImperativeHandle, useRef } from 'react'
-import { OptionalPortal } from 'shared/ui-kit/Portal'
+import { OptionalPortal } from 'shared/ui-kit/portal'
 import { PopoverContext } from './Context'
 // import { PopoverArrow } from './Arrow'
 import { UiDefaultProps } from 'shared/ui-kit/types'

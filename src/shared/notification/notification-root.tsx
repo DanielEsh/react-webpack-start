@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { Portal } from 'shared/ui-kit/Portal'
+import { Portal } from 'shared/ui-kit/portal'
 
 import { NotificationContext } from './notification-context'
 import { NotificationElement } from './notification-element'
