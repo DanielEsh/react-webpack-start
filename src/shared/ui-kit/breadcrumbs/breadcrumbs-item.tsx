@@ -4,18 +4,20 @@ import {
   type BreadcrumbsContextType,
 } from './ breadcrumbs-context'
 import { classNames } from 'shared/utils'
+import { Link } from 'react-router-dom'
 
 interface BreadcrumbsItemPropsType {
   children: ReactNode
   isLast?: boolean
+  to?: string
 }
 
 export const BreadcrumbsItem = (props: BreadcrumbsItemPropsType) => {
-  const { children, isLast } = props
+  const { children, isLast, to } = props
 
   const { separator } = useContext<BreadcrumbsContextType>(BreadcrumbsContext)
 
-  const Component = isLast ? 'span' : 'a'
+  const Component = isLast ? 'span' : Link
 
   const classes = classNames('text-sm text-gray-500 hover:text-blue-600', {
     'text-black hover:text-black': isLast,
@@ -24,8 +26,8 @@ export const BreadcrumbsItem = (props: BreadcrumbsItemPropsType) => {
   return (
     <li className="inline-flex items-center">
       <Component
-        href="#"
         className={classes}
+        to={to ?? ''}
       >
         {children}
       </Component>
