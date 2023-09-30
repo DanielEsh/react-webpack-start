@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 import { classNames } from 'shared/utils'
-import { ToastCloseButton } from './ToastCloseButton'
+import { ToastCloseButton } from './toast-close-button'
 
 const COMPONENT_NAME = 'Toast'
 
