@@ -115,6 +115,16 @@ export const ProductsAttributesGroups = () => {
     getRowCanExpand: () => true,
   })
 
+  const handleAddAttributeGroup = () => {
+    const newRow: ProductAttributesGroup = {
+      name: 'new',
+      count: 0,
+      attributes: [],
+    }
+    const setFunc = (old: ProductAttributesGroup[]) => [...old, newRow]
+    setStateData(setFunc)
+  }
+
   const handleAddClick = (index: number) => {
     console.log('addClick', index)
   }
@@ -174,7 +184,12 @@ export const ProductsAttributesGroups = () => {
       </Table>
 
       <div className="mt-4">
-        <Button variant="ghost">Добавить группу атрибутов</Button>
+        <Button
+          variant="ghost"
+          onClick={handleAddAttributeGroup}
+        >
+          Добавить группу атрибутов
+        </Button>
       </div>
     </div>
   )
