@@ -7,6 +7,7 @@ import {
   useInvalidateProducts,
 } from 'entities/products'
 import { useUpdateProductById } from 'entities/products/api/queries'
+import { ProductsAttributesGroups } from 'entities/products/ui/product-attributes-groups'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useNotification } from 'shared/notification'
@@ -95,6 +96,7 @@ export default function ProductDetailsPage() {
             </DrawerHeader>
 
             <ProductFormFields />
+            <ProductsAttributesGroups />
 
             <DrawerFooter>
               <div className="flex gap-2 px-4 pb-6">
