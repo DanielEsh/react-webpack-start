@@ -95,7 +95,7 @@ export default function ProductDetailsPage() {
               <h2>Update product</h2>
             </DrawerHeader>
 
-            <ProductFormFields />
+            {/* <ProductFormFields /> */}
             <ProductsAttributesGroups />
 
             <DrawerFooter>

@@ -1,10 +1,13 @@
 import {
   ColumnDef,
+  ExpandedState,
+  Row,
   flexRender,
   getCoreRowModel,
+  getExpandedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { ReactNode } from 'react'
+import { Fragment, ReactNode, useState } from 'react'
 import { Button, Table } from 'shared/ui-kit'
 
 interface ProductAttributesGroup {
@@ -16,26 +19,35 @@ const getColumns: ColumnDef<ProductAttributesGroup>[] = [
   {
     id: 'name',
     accessorFn: ({ name }) => name,
-    header: () => (
-      <Table.ColumnHeader className="sticky top-0 min-w-[320px] bg-white">
-        Название
-      </Table.ColumnHeader>
-    ),
+    header: 'Название',
     cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
   },
   {
     id: 'count',
     accessorFn: ({ count }) => count,
-    header: () => (
-      <Table.ColumnHeader className="sticky top-0 min-w-[320px] bg-white">
-        Количество
-      </Table.ColumnHeader>
-    ),
+    header: 'Количество',
     cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+  },
+  {
+    id: 'expander',
+    header: () => null,
+    cell: ({ row }) => {
+      return row.getCanExpand() ? (
+        <Button
+          size="xs"
+          variant="ghost"
+          onClick={row.getToggleExpandedHandler()}
+        >
+          {row.getIsExpanded() ? 'hide' : 'show'}
+        </Button>
+      ) : (
+        '🔵'
+      )
+    },
   },
 ]
 
-const data: ProductAttributesGroup[] = [
+const data: any[] = [
   {
     name: 'Группа атрибутов 1',
     count: 23,
@@ -46,11 +58,33 @@ const data: ProductAttributesGroup[] = [
   },
 ]
 
+const renderSubComponent = ({ row }: { row: Row<any> }) => {
+  return (
+    <div>
+      <pre style={{ fontSize: '10px' }}>
+        <code>{JSON.stringify(row.original, null, 2)}</code>
+      </pre>
+
+      <Button variant="ghost">Связать с атрибутом</Button>
+    </div>
+  )
+}
+
 export const ProductsAttributesGroups = () => {
+  const [expanded, setExpanded] = useState<ExpandedState>({
+    0: true,
+  })
+
   const table = useReactTable({
     data: data,
     columns: getColumns,
+    state: {
+      expanded,
+    },
+    onExpandedChange: setExpanded,
     getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    getRowCanExpand: () => true,
   })
 
   return (
@@ -59,37 +93,48 @@ export const ProductsAttributesGroups = () => {
         <Table.Head>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Row key={headerGroup.id}>
-              {headerGroup.headers.map((header) =>
-                header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    ),
-              )}
+              {headerGroup.headers.map((header) => (
+                <Table.ColumnHeader key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                </Table.ColumnHeader>
+              ))}
             </Table.Row>
           ))}
         </Table.Head>
 
         <Table.Body>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <Table.Row
-                key={row.id}
-                className="h-[54px]"
-              >
-                {row
-                  .getVisibleCells()
-                  .map((cell) =>
-                    flexRender(cell.column.columnDef.cell, cell.getContext()),
-                  )}
-              </Table.Row>
-            ))
-          ) : (
-            <Table.Row>
-              <Table.Cell className="h-24 text-center">No results.</Table.Cell>
-            </Table.Row>
-          )}
+          {table.getRowModel().rows.map((row) => {
+            return (
+              <Fragment key={row.id}>
+                <tr>
+                  {/* first row is a normal row */}
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <td key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </td>
+                    )
+                  })}
+                </tr>
+                {row.getIsExpanded() && (
+                  <tr>
+                    {/* 2nd row is a custom 1 cell row */}
+                    <td colSpan={row.getVisibleCells().length}>
+                      {renderSubComponent({ row })}
+                    </td>
+                  </tr>
+                )}
+              </Fragment>
+            )
+          })}
         </Table.Body>
       </Table>
 
