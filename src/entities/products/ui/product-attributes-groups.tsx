@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table'
 import { Fragment, ReactNode, useState } from 'react'
 import { Button, Table } from 'shared/ui-kit'
+import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
 import IconChevronRight from 'shared/assets/icons/chevron-right.svg'
 import IconChevronDown from 'shared/assets/icons/chevron-down.svg'
@@ -41,6 +42,18 @@ const getColumns: ColumnDef<ProductAttributesGroup>[] = [
     header: () => null,
     cell: ({ row, table }) => (
       <div className="flex gap-1">
+        <Button
+          size="xs"
+          variant="ghost"
+          onClick={() => {
+            table.options.meta?.setEditedRows((old: []) => ({
+              ...old,
+              [row.id]: !old[row.id],
+            }))
+          }}
+        >
+          <IconEdit />
+        </Button>
         <Button
           size="xs"
           variant="ghost"
@@ -110,6 +123,7 @@ const SubComponent = ({ attributes, onAddClick }: Props) => {
 
 export const ProductsAttributesGroups = () => {
   const [stateData, setStateData] = useState(data)
+  const [editedRows, setEditedRows] = useState({})
 
   const [expanded, setExpanded] = useState<ExpandedState>({
     0: true,
@@ -123,6 +137,20 @@ export const ProductsAttributesGroups = () => {
     setStateData(setFilterFunc)
   }
 
+  const handleUpdateRow = (rowIndex, columnId, value) => {
+    setStateData((old) =>
+      old.map((row, index) => {
+        if (index === rowIndex) {
+          return {
+            ...old[rowIndex]!,
+            [columnId]: value,
+          }
+        }
+        return row
+      }),
+    )
+  }
+
   const table = useReactTable({
     data: stateData,
     columns: getColumns,
@@ -134,7 +162,10 @@ export const ProductsAttributesGroups = () => {
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: () => true,
     meta: {
+      editedRows,
+      setEditedRows,
       removeRow: handleRemoveRow,
+      updateData: handleUpdateRow,
     },
   })
 
@@ -181,6 +212,9 @@ export const ProductsAttributesGroups = () => {
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <td key={cell.id}>
+                        {table.options.meta?.editedRows[row.id]
+                          ? 'true'
+                          : 'false'}
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext(),
