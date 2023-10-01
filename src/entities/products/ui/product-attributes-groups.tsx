@@ -37,19 +37,25 @@ const getColumns: ColumnDef<ProductAttributesGroup>[] = [
   {
     id: 'expander',
     header: () => null,
-    cell: ({ row }) => {
-      return row.getCanExpand() ? (
+    cell: ({ row }) => (
+      <div className="flex gap-3">
         <Button
           size="xs"
           variant="ghost"
+          onClick={() => console.log('delete')}
+        >
+          Delete
+        </Button>
+        <Button
+          size="xs"
+          variant="ghost"
+          disabled={!row.getCanExpand()}
           onClick={row.getToggleExpandedHandler()}
         >
           {row.getIsExpanded() ? 'hide' : 'show'}
         </Button>
-      ) : (
-        '🔵'
-      )
-    },
+      </div>
+    ),
   },
 ]
 
