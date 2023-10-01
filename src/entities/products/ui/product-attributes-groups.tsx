@@ -37,12 +37,12 @@ const getColumns: ColumnDef<ProductAttributesGroup>[] = [
   {
     id: 'expander',
     header: () => null,
-    cell: ({ row }) => (
+    cell: ({ row, table }) => (
       <div className="flex gap-3">
         <Button
           size="xs"
           variant="ghost"
-          onClick={() => console.log('delete')}
+          onClick={() => table.options.meta?.removeRow(row.index)}
         >
           Delete
         </Button>
@@ -109,6 +109,14 @@ export const ProductsAttributesGroups = () => {
     0: true,
   })
 
+  const handleRemoveRow = (rowIndex: number) => {
+    const setFilterFunc = (old: ProductAttributesGroup[]) =>
+      old.filter(
+        (_row: ProductAttributesGroup, index: number) => index !== rowIndex,
+      )
+    setStateData(setFilterFunc)
+  }
+
   const table = useReactTable({
     data: stateData,
     columns: getColumns,
@@ -119,6 +127,9 @@ export const ProductsAttributesGroups = () => {
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: () => true,
+    meta: {
+      removeRow: handleRemoveRow,
+    },
   })
 
   const handleAddAttributeGroup = () => {
