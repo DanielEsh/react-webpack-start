@@ -9,7 +9,9 @@ import {
 } from '@tanstack/react-table'
 import { Fragment, ReactNode, useState } from 'react'
 import { Button, Table } from 'shared/ui-kit'
-
+import IconTrash from 'shared/assets/icons/trash.svg'
+import IconChevronRight from 'shared/assets/icons/chevron-right.svg'
+import IconChevronDown from 'shared/assets/icons/chevron-down.svg'
 interface ProductAttribute {
   name: string
   value: string
@@ -38,13 +40,13 @@ const getColumns: ColumnDef<ProductAttributesGroup>[] = [
     id: 'expander',
     header: () => null,
     cell: ({ row, table }) => (
-      <div className="flex gap-3">
+      <div className="flex gap-1">
         <Button
           size="xs"
           variant="ghost"
           onClick={() => table.options.meta?.removeRow(row.index)}
         >
-          Delete
+          <IconTrash />
         </Button>
         <Button
           size="xs"
@@ -52,7 +54,11 @@ const getColumns: ColumnDef<ProductAttributesGroup>[] = [
           disabled={!row.getCanExpand()}
           onClick={row.getToggleExpandedHandler()}
         >
-          {row.getIsExpanded() ? 'hide' : 'show'}
+          {row.getIsExpanded() ? (
+            <IconChevronDown className="h-4 w-4" />
+          ) : (
+            <IconChevronRight />
+          )}
         </Button>
       </div>
     ),
