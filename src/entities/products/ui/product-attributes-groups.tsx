@@ -87,15 +87,15 @@ export const ProductsAttributesGroups = () => {
             ))
           ) : (
             <Table.Row>
-              <Table.Cell className="h-[308px] text-center">
-                No results.
-              </Table.Cell>
+              <Table.Cell className="h-24 text-center">No results.</Table.Cell>
             </Table.Row>
           )}
         </Table.Body>
       </Table>
 
-      <Button variant="ghost">Добавить группу атрибутов</Button>
+      <div className="mt-4">
+        <Button variant="ghost">Добавить группу атрибутов</Button>
+      </div>
     </div>
   )
 }
