@@ -10,9 +10,15 @@ import {
 import { Fragment, ReactNode, useState } from 'react'
 import { Button, Table } from 'shared/ui-kit'
 
+interface ProductAttribute {
+  name: string
+  value: string
+}
+
 interface ProductAttributesGroup {
   name: string
   count: number
+  attributes: ProductAttribute[]
 }
 
 const getColumns: ColumnDef<ProductAttributesGroup>[] = [
@@ -47,36 +53,58 @@ const getColumns: ColumnDef<ProductAttributesGroup>[] = [
   },
 ]
 
-const data: any[] = [
+const data: ProductAttributesGroup[] = [
   {
     name: 'Группа атрибутов 1',
     count: 23,
+    attributes: [
+      {
+        name: 'attribute-name',
+        value: 'attribute-value',
+      },
+    ],
   },
   {
     name: 'Группа атрибутов 2',
     count: 1,
+    attributes: [],
   },
 ]
 
-const renderSubComponent = ({ row }: { row: Row<any> }) => {
+interface Props {
+  attributes: ProductAttribute[]
+  onAddClick(): void
+}
+
+const SubComponent = ({ attributes, onAddClick }: Props) => {
   return (
     <div>
-      <pre style={{ fontSize: '10px' }}>
-        <code>{JSON.stringify(row.original, null, 2)}</code>
-      </pre>
+      {attributes.map((attribute, index) => (
+        <div key={index}>
+          <div>name: {attribute.name}</div>
+          <div>value: {attribute.value}</div>
+        </div>
+      ))}
 
-      <Button variant="ghost">Связать с атрибутом</Button>
+      <Button
+        variant="ghost"
+        onClick={onAddClick}
+      >
+        Связать с атрибутом
+      </Button>
     </div>
   )
 }
 
 export const ProductsAttributesGroups = () => {
+  const [stateData, setStateData] = useState(data)
+
   const [expanded, setExpanded] = useState<ExpandedState>({
     0: true,
   })
 
   const table = useReactTable({
-    data: data,
+    data: stateData,
     columns: getColumns,
     state: {
       expanded,
@@ -86,6 +114,10 @@ export const ProductsAttributesGroups = () => {
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: () => true,
   })
+
+  const handleAddClick = (index: number) => {
+    console.log('addClick', index)
+  }
 
   return (
     <div className="mt-4 px-6">
@@ -128,7 +160,10 @@ export const ProductsAttributesGroups = () => {
                   <tr>
                     {/* 2nd row is a custom 1 cell row */}
                     <td colSpan={row.getVisibleCells().length}>
-                      {renderSubComponent({ row })}
+                      <SubComponent
+                        attributes={row.original.attributes}
+                        onAddClick={() => handleAddClick(row.index)}
+                      />
                     </td>
                   </tr>
                 )}
