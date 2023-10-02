@@ -10,7 +10,6 @@ import {
 import { Button, Table } from 'shared/ui-kit'
 import { AttributesList } from './attributes-list'
 import { getColumns } from './data-table-columns'
-import { ProductAttributesGroupsTableEditableCell } from './editable-cell'
 
 interface Props {
   data: ProductAttributesGroup[]
@@ -86,16 +85,14 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
         <Table.Head>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Row key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <Table.ColumnHeader key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
-                </Table.ColumnHeader>
-              ))}
+              {headerGroup.headers.map((header) =>
+                header.isPlaceholder
+                  ? null
+                  : flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    ),
+              )}
             </Table.Row>
           ))}
         </Table.Head>
@@ -104,7 +101,7 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
           {table.getRowModel().rows.map((row) => {
             return (
               <Fragment key={row.id}>
-                <tr>
+                <Table.Row>
                   {/* first row is a normal row */}
                   {row.getVisibleCells().map((cell) => {
                     return (
@@ -116,9 +113,9 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
                       </td>
                     )
                   })}
-                </tr>
+                </Table.Row>
                 {row.getIsExpanded() && (
-                  <tr>
+                  <Table.Row>
                     {/* 2nd row is a custom 1 cell row */}
                     <td colSpan={row.getVisibleCells().length}>
                       <AttributesList
@@ -126,7 +123,7 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
                         onAddClick={() => handleAddClick(row.index)}
                       />
                     </td>
-                  </tr>
+                  </Table.Row>
                 )}
               </Fragment>
             )

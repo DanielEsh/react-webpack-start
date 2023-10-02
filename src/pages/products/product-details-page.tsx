@@ -7,7 +7,6 @@ import {
   useInvalidateProducts,
 } from 'entities/products'
 import { useUpdateProductById } from 'entities/products/api/queries'
-import { ProductsAttributesGroups } from 'entities/products/ui/product-attributes-groups'
 import { ProductsAttributesGroupsMain } from 'features/products/product-attributes-groups/products-attributes-groups'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -97,7 +96,6 @@ export default function ProductDetailsPage() {
             </DrawerHeader>
 
             {/* <ProductFormFields /> */}
-            <ProductsAttributesGroups />
             <ProductsAttributesGroupsMain />
 
             <DrawerFooter>
