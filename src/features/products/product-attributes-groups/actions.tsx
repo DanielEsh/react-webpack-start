@@ -14,21 +14,11 @@ interface Props {
 export const ProductAttributesGroupsTableRowActions = ({ cellInfo }: Props) => {
   const { table, row } = cellInfo
 
-  const isEditable = !!table.options.meta?.editedRows[row.id]
+  const isEditable = table.options.meta?.editedRows[row.id]
+  const isExpanded = row.getIsExpanded()
 
-  const editableButtonIcon = () =>
-    isEditable ? (
-      <IconCheck className="h-4 w-4" />
-    ) : (
-      <IconEdit className="h-4 w-4" />
-    )
-
-  const expandButtonIcon = () =>
-    row.getIsExpanded() ? (
-      <IconChevronDown className="h-4 w-4" />
-    ) : (
-      <IconChevronRight className="h-4 w-4" />
-    )
+  const EditableButtonIcon = isEditable ? IconCheck : IconEdit
+  const ExpandedButtonIcon = isExpanded ? IconChevronDown : IconChevronRight
 
   return (
     <div className="flex gap-1">
@@ -42,7 +32,7 @@ export const ProductAttributesGroupsTableRowActions = ({ cellInfo }: Props) => {
           }))
         }}
       >
-        {editableButtonIcon()}
+        <EditableButtonIcon className="h-4 w-4" />
       </Button>
       <Button
         size="xs"
@@ -57,7 +47,7 @@ export const ProductAttributesGroupsTableRowActions = ({ cellInfo }: Props) => {
         disabled={!row.getCanExpand()}
         onClick={row.getToggleExpandedHandler()}
       >
-        {expandButtonIcon()}
+        <ExpandedButtonIcon className="h-4 w-4" />
       </Button>
     </div>
   )
