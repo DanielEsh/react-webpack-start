@@ -4,7 +4,6 @@ import { ProductAttributesGroup } from './types'
 const data: ProductAttributesGroup[] = [
   {
     name: 'Группа атрибутов 1',
-    count: 23,
     attributes: [
       {
         name: 'attribute-name',
@@ -14,7 +13,6 @@ const data: ProductAttributesGroup[] = [
   },
   {
     name: 'Группа атрибутов 2',
-    count: 1,
     attributes: [],
   },
 ]

@@ -5,6 +5,5 @@ export interface ProductAttribute {
 
 export interface ProductAttributesGroup {
   name: string
-  count: number
   attributes: ProductAttribute[]
 }

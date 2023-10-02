@@ -65,12 +65,15 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
 
   const handleAddAttributeGroup = () => {
     const newRow: ProductAttributesGroup = {
-      name: 'new',
-      count: 0,
+      name: '',
       attributes: [],
     }
     const setFunc = (old: ProductAttributesGroup[]) => [...old, newRow]
     setData(setFunc)
+
+    setEditedRows({
+      [data.length]: true,
+    })
   }
 
   const handleAddClick = (index: number) => {

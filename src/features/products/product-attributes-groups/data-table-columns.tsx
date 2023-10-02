@@ -13,7 +13,7 @@ export const getColumns: ColumnDef<ProductAttributesGroup, string>[] = [
   },
   {
     id: 'count',
-    accessorFn: ({ count }) => count.toString(),
+    accessorFn: ({ attributes }) => String(attributes.length),
     header: 'Количество',
     cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
   },
