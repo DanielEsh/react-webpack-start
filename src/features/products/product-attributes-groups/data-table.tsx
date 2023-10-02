@@ -10,6 +10,7 @@ import {
 import { Button, Table } from 'shared/ui-kit'
 import { AttributesList } from './attributes-list'
 import { getColumns } from './data-table-columns'
+import { ProductAttributesGroupsTableEditableCell } from './editable-cell'
 
 interface Props {
   data: ProductAttributesGroup[]
@@ -105,9 +106,6 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <td key={cell.id}>
-                        {table.options.meta?.editedRows[row.id]
-                          ? 'true'
-                          : 'false'}
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext(),
