@@ -1,4 +1,5 @@
-import { Button } from 'shared/ui-kit'
+import { Button, Input } from 'shared/ui-kit'
+import { BaseSelect } from 'shared/ui/base-select'
 import { ProductAttribute } from './types'
 
 interface Props {
@@ -6,16 +7,32 @@ interface Props {
   onAddClick(): void
 }
 
+const options = [
+  {
+    label: '1',
+    value: 1,
+  },
+  {
+    label: '2',
+    value: 2,
+  },
+]
+
 export const AttributesList = ({ attributes, onAddClick }: Props) => {
   return (
     <div className="p-4">
       {attributes.map((attribute, index) => (
         <div
-          className="flex w-full gap-[120px]"
+          className="mb-4 flex w-full justify-between gap-4"
           key={index}
         >
-          <div>name: {attribute.name}</div>
-          <div>value: {attribute.value}</div>
+          <BaseSelect
+            className="w-[50%]"
+            options={options}
+            label="атрибут"
+          />
+
+          <Input label="значение" />
         </div>
       ))}
 

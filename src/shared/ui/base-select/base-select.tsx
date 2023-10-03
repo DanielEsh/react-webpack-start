@@ -10,18 +10,19 @@ export interface BaseSelectProps {
   options: BaseSelectOption[]
   label: string
   defaultValue?: SelectType
+  className?: string
   onChange?(value: SelectType): void
 }
 
 export const BaseSelect = (props: BaseSelectProps) => {
-  const { options, defaultValue, label, onChange } = props
+  const { options, defaultValue, label, className, onChange } = props
 
   return (
     <Select
       defaultValue={defaultValue}
       onChange={onChange}
     >
-      <Select.Trigger>
+      <Select.Trigger className={className}>
         <Select.Value placeholder={label}></Select.Value>
       </Select.Trigger>
       <Select.Content>

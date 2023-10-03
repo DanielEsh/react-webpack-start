@@ -76,7 +76,6 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
   }
 
   const handleAddClick = (index: number) => {
-    console.log('addClick', data[index])
     const updatedAttributesGroup = [...data]
 
     updatedAttributesGroup[index].attributes.push({
@@ -144,6 +143,10 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
           Добавить группу атрибутов
         </Button>
       </div>
+
+      <pre className="bg-slate-950 mt-2 w-[340px] rounded-md p-4">
+        <code className="text-black">{JSON.stringify(data, null, 2)}</code>
+      </pre>
     </div>
   )
 }
