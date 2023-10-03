@@ -76,7 +76,15 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
   }
 
   const handleAddClick = (index: number) => {
-    console.log('addClick', index)
+    console.log('addClick', data[index])
+    const updatedAttributesGroup = [...data]
+
+    updatedAttributesGroup[index].attributes.push({
+      name: 'created-name',
+      value: 'created-value',
+    })
+
+    setData(updatedAttributesGroup)
   }
 
   return (
@@ -105,24 +113,24 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
                   {/* first row is a normal row */}
                   {row.getVisibleCells().map((cell) => {
                     return (
-                      <td key={cell.id}>
+                      <Table.Cell key={cell.id}>
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext(),
                         )}
-                      </td>
+                      </Table.Cell>
                     )
                   })}
                 </Table.Row>
                 {row.getIsExpanded() && (
                   <Table.Row>
                     {/* 2nd row is a custom 1 cell row */}
-                    <td colSpan={row.getVisibleCells().length}>
+                    <Table.Cell colSpan={row.getVisibleCells().length}>
                       <AttributesList
                         attributes={row.original.attributes}
                         onAddClick={() => handleAddClick(row.index)}
                       />
-                    </td>
+                    </Table.Cell>
                   </Table.Row>
                 )}
               </Fragment>
@@ -132,10 +140,7 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
       </Table>
 
       <div className="mt-4">
-        <Button
-          variant="ghost"
-          onClick={handleAddAttributeGroup}
-        >
+        <Button onClick={handleAddAttributeGroup}>
           Добавить группу атрибутов
         </Button>
       </div>

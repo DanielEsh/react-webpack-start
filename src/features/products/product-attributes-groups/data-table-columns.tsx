@@ -23,9 +23,6 @@ export const getColumns: ColumnDef<ProductAttributesGroup, string>[] = [
   },
   {
     id: 'actions',
-    header: () => (
-      <Table.ColumnHeader className="w-[15%]">Actions</Table.ColumnHeader>
-    ),
     cell: (cellInfo) => (
       <ProductAttributesGroupsTableRowActions cellInfo={cellInfo} />
     ),
