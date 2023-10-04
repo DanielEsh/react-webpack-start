@@ -21,10 +21,15 @@ const options = [
 
 export const AttributesList = ({ attributes, onAddClick, onChange }: Props) => {
   const handleChange = (attribute: ProductAttribute, index: number) => {
-    const updatedData = { ...attributes }
-    updatedData[index] = attribute
+    const updatedData = [...attributes]
+    updatedData[index] = {
+      name: attribute.name,
+      value: attribute.value,
+    }
     onChange(updatedData)
   }
+
+  console.log('ATTRIBUTES', attributes)
 
   return (
     <div className="p-4">

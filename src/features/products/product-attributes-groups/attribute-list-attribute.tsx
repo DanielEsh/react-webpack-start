@@ -14,17 +14,17 @@ export const AttributeListAttribute = ({
   selectOptions,
   onChange,
 }: Props) => {
-  const [values, setValue] = useState<ProductAttribute>(attribute)
+  const [attributeValues, setAttributeValues] =
+    useState<ProductAttribute>(attribute)
 
   const handleChange = (field: keyof ProductAttribute, value: any) => {
-    setValue({
-      ...values,
+    const updatedAttributeValues = {
+      ...attributeValues,
       [field]: value,
-    })
-    onChange({
-      ...values,
-      [field]: value,
-    })
+    }
+
+    setAttributeValues(updatedAttributeValues)
+    onChange(updatedAttributeValues)
   }
 
   return (
@@ -32,12 +32,12 @@ export const AttributeListAttribute = ({
       <BaseSelect
         className="w-[50%]"
         options={selectOptions}
-        defaultValue={values.name}
+        defaultValue={attributeValues.name}
         label="атрибут"
       />
 
       <Input
-        value={values.value}
+        value={attributeValues.value}
         label="значение"
         onChange={(e) => handleChange('value', e.target.value)}
       />

@@ -88,14 +88,13 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
 
   const handleAttributesChange = (
     attributes: ProductAttribute[],
-    index: number,
+    groupIndex: number,
   ) => {
-    console.log('attributes', attributes)
-    // const updatedAttributesGroup = [...data]
+    const updatedAttributesData = [...data]
+    updatedAttributesData[groupIndex].attributes = attributes
 
-    // updatedAttributesGroup[index].attributes = [{ ...attributes }]
-
-    // setData(updatedAttributesGroup)
+    console.log('update', updatedAttributesData)
+    setData(updatedAttributesData)
   }
 
   return (
@@ -138,7 +137,7 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
                     {/* 2nd row is a custom 1 cell row */}
                     <Table.Cell colSpan={row.getVisibleCells().length}>
                       <AttributesList
-                        attributes={row.original.attributes}
+                        attributes={data[row.index].attributes}
                         onAddClick={() => handleAddClick(row.index)}
                         onChange={(e) => handleAttributesChange(e, row.index)}
                       />
