@@ -31,6 +31,12 @@ export const AttributesList = ({ attributes, onAddClick, onChange }: Props) => {
 
   console.log('ATTRIBUTES', attributes)
 
+  const handleRemove = (index: number) => {
+    const updatedData = [...attributes]
+    updatedData.splice(index, 1)
+    onChange(updatedData)
+  }
+
   return (
     <div className="p-4">
       {attributes.map((attribute, index) => (
@@ -39,6 +45,7 @@ export const AttributesList = ({ attributes, onAddClick, onChange }: Props) => {
           attribute={attribute}
           selectOptions={options}
           onChange={(attribute) => handleChange(attribute, index)}
+          onRemove={() => handleRemove(index)}
         />
       ))}
 

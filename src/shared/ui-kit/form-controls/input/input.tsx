@@ -50,7 +50,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }
 
     const inputWrapperClasses =
-      'relative border-input bg-background flex items-center gap-3 h-14 w-full rounded-md border px-3 py-1 text-base shadow-sm transition-colors'
+      'relative flex items-center gap-3 h-14 w-full rounded-md border px-3 py-1 text-base shadow-sm transition-colors'
     const fileClasses =
       'file:border-0 file:bg-transparent file:text-sm file:font-medium'
     const focusClasses =
