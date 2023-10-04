@@ -1,5 +1,5 @@
 import { Fragment, useState } from 'react'
-import { ProductAttributesGroup } from './types'
+import { ProductAttribute, ProductAttributesGroup } from './types'
 import {
   ExpandedState,
   flexRender,
@@ -79,11 +79,23 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
     const updatedAttributesGroup = [...data]
 
     updatedAttributesGroup[index].attributes.push({
-      name: 'created-name',
-      value: 'created-value',
+      name: '',
+      value: '',
     })
 
     setData(updatedAttributesGroup)
+  }
+
+  const handleAttributesChange = (
+    attributes: ProductAttribute[],
+    index: number,
+  ) => {
+    console.log('attributes', attributes)
+    // const updatedAttributesGroup = [...data]
+
+    // updatedAttributesGroup[index].attributes = [{ ...attributes }]
+
+    // setData(updatedAttributesGroup)
   }
 
   return (
@@ -128,6 +140,7 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
                       <AttributesList
                         attributes={row.original.attributes}
                         onAddClick={() => handleAddClick(row.index)}
+                        onChange={(e) => handleAttributesChange(e, row.index)}
                       />
                     </Table.Cell>
                   </Table.Row>

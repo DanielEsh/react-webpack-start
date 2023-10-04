@@ -1,10 +1,11 @@
-import { Button, Input } from 'shared/ui-kit'
-import { BaseSelect } from 'shared/ui/base-select'
+import { Button } from 'shared/ui-kit'
 import { ProductAttribute } from './types'
+import { AttributeListAttribute } from './attribute-list-attribute'
 
 interface Props {
   attributes: ProductAttribute[]
   onAddClick(): void
+  onChange(attributes: ProductAttribute[]): void
 }
 
 const options = [
@@ -18,22 +19,22 @@ const options = [
   },
 ]
 
-export const AttributesList = ({ attributes, onAddClick }: Props) => {
+export const AttributesList = ({ attributes, onAddClick, onChange }: Props) => {
+  const handleChange = (attribute: ProductAttribute, index: number) => {
+    const updatedData = { ...attributes }
+    updatedData[index] = attribute
+    onChange(updatedData)
+  }
+
   return (
     <div className="p-4">
       {attributes.map((attribute, index) => (
-        <div
-          className="mb-4 flex w-full justify-between gap-4"
+        <AttributeListAttribute
           key={index}
-        >
-          <BaseSelect
-            className="w-[50%]"
-            options={options}
-            label="атрибут"
-          />
-
-          <Input label="значение" />
-        </div>
+          attribute={attribute}
+          selectOptions={options}
+          onChange={(attribute) => handleChange(attribute, index)}
+        />
       ))}
 
       <Button
