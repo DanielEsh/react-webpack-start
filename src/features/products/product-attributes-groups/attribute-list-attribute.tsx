@@ -34,6 +34,7 @@ export const AttributeListAttribute = ({
         options={selectOptions}
         defaultValue={attributeValues.name}
         label="атрибут"
+        onChange={(e) => handleChange('name', e)}
       />
 
       <Input
