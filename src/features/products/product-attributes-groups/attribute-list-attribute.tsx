@@ -36,11 +36,11 @@ export const AttributeListAttribute = ({
         <BaseSelect
           className="w-[50%]"
           options={selectOptions}
-          defaultValue={attributeValues.name}
+          defaultValue={'attribute3'}
           label="атрибут"
           onChange={(e) =>
             handleChange(
-              'name',
+              'attributeId',
               selectOptions.filter((attribute: any) => attribute.label === e)[0]
                 .value,
             )

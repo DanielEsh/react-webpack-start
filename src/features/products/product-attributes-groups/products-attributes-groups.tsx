@@ -6,7 +6,7 @@ const data: ProductAttributesGroup[] = [
     name: 'Группа атрибутов 1',
     attributes: [
       {
-        name: 'attribute-name',
+        attributeId: 4,
         value: 'attribute-value',
       },
     ],

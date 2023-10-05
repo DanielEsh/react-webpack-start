@@ -87,7 +87,7 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
     const updatedAttributesGroup = [...data]
 
     updatedAttributesGroup[index].attributes.push({
-      name: '',
+      attributeId: undefined,
       value: '',
     })
 

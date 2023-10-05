@@ -23,7 +23,7 @@ export const AttributesList = ({
     console.log('update', attribute)
 
     updatedData[index] = {
-      name: attribute.name,
+      attributeId: attribute.attributeId,
       value: attribute.value,
     }
     onChange(updatedData)
