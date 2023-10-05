@@ -5,11 +5,13 @@ import {
   flexRender,
   getCoreRowModel,
   getExpandedRowModel,
+  Row,
   useReactTable,
 } from '@tanstack/react-table'
 import { Button, Table } from 'shared/ui-kit'
 import { AttributesList } from './attributes-list'
 import { getColumns } from './data-table-columns'
+import { classNames } from 'shared/utils'
 
 interface Props {
   data: ProductAttributesGroup[]
@@ -97,6 +99,11 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
     setData(updatedAttributesData)
   }
 
+  const activeClasses = (row: Row<ProductAttributesGroup>) =>
+    classNames({
+      'bg-gray-50': row.getIsExpanded(),
+    })
+
   return (
     <div className="mt-4 px-6">
       <Table>
@@ -123,7 +130,10 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
                   {/* first row is a normal row */}
                   {row.getVisibleCells().map((cell) => {
                     return (
-                      <Table.Cell key={cell.id}>
+                      <Table.Cell
+                        key={cell.id}
+                        className={activeClasses(row)}
+                      >
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext(),
@@ -135,7 +145,10 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
                 {row.getIsExpanded() && (
                   <Table.Row>
                     {/* 2nd row is a custom 1 cell row */}
-                    <Table.Cell colSpan={row.getVisibleCells().length}>
+                    <Table.Cell
+                      colSpan={row.getVisibleCells().length}
+                      className={activeClasses(row)}
+                    >
                       <AttributesList
                         attributes={data[row.index].attributes}
                         onAddClick={() => handleAddClick(row.index)}
