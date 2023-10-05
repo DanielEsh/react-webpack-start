@@ -1,6 +1,6 @@
 import { Select } from 'shared/ui-kit/form-controls'
 
-export type BaseSelectOption = {
+export interface BaseSelectOption {
   value: number
   label: string
 }

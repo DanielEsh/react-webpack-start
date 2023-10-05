@@ -38,7 +38,13 @@ export const AttributeListAttribute = ({
           options={selectOptions}
           defaultValue={attributeValues.name}
           label="атрибут"
-          onChange={(e) => handleChange('name', e)}
+          onChange={(e) =>
+            handleChange(
+              'name',
+              selectOptions.filter((attribute: any) => attribute.label === e)[0]
+                .value,
+            )
+          }
         />
 
         <Input

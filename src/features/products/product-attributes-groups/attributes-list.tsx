@@ -1,27 +1,27 @@
 import { Button } from 'shared/ui-kit'
 import { ProductAttribute } from './types'
 import { AttributeListAttribute } from './attribute-list-attribute'
+import { AttributeDto } from 'entities/attributes'
+import type { BaseSelectOption } from 'shared/ui/base-select'
 
 interface Props {
   attributes: ProductAttribute[]
+  attributesOptions?: AttributeDto[]
   onAddClick(): void
   onChange(attributes: ProductAttribute[]): void
 }
 
-const options = [
-  {
-    label: '1',
-    value: 1,
-  },
-  {
-    label: '2',
-    value: 2,
-  },
-]
-
-export const AttributesList = ({ attributes, onAddClick, onChange }: Props) => {
+export const AttributesList = ({
+  attributes,
+  attributesOptions,
+  onAddClick,
+  onChange,
+}: Props) => {
   const handleChange = (attribute: ProductAttribute, index: number) => {
     const updatedData = [...attributes]
+
+    console.log('update', attribute)
+
     updatedData[index] = {
       name: attribute.name,
       value: attribute.value,
@@ -29,12 +29,21 @@ export const AttributesList = ({ attributes, onAddClick, onChange }: Props) => {
     onChange(updatedData)
   }
 
-  console.log('ATTRIBUTES', attributes)
-
   const handleRemove = (index: number) => {
     const updatedData = [...attributes]
     updatedData.splice(index, 1)
     onChange(updatedData)
+  }
+
+  const mappedAttributesOptions = () => {
+    if (!attributesOptions) return []
+
+    return attributesOptions.map((attribute) => {
+      return {
+        label: attribute.name,
+        value: attribute.id,
+      }
+    })
   }
 
   return (
@@ -43,7 +52,7 @@ export const AttributesList = ({ attributes, onAddClick, onChange }: Props) => {
         <AttributeListAttribute
           key={index}
           attribute={attribute}
-          selectOptions={options}
+          selectOptions={mappedAttributesOptions()}
           onChange={(attribute) => handleChange(attribute, index)}
           onRemove={() => handleRemove(index)}
         />

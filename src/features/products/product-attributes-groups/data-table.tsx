@@ -12,6 +12,7 @@ import { Button, Table } from 'shared/ui-kit'
 import { AttributesList } from './attributes-list'
 import { getColumns } from './data-table-columns'
 import { classNames } from 'shared/utils'
+import { useGetAttributes } from "entities/attributes";
 
 interface Props {
   data: ProductAttributesGroup[]
@@ -22,6 +23,11 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
   const [editedRows, setEditedRows] = useState({})
   const [expanded, setExpanded] = useState<ExpandedState>({
     0: true,
+  })
+
+  const { isLoading, isError, data: attributes } = useGetAttributes({
+    page: 1,
+    limit: 100,
   })
 
   const handleRemoveRow = (rowIndex: number) => {
@@ -151,6 +157,7 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
                     >
                       <AttributesList
                         attributes={data[row.index].attributes}
+                        attributesOptions={attributes?.content}
                         onAddClick={() => handleAddClick(row.index)}
                         onChange={(e) => handleAttributesChange(e, row.index)}
                       />
