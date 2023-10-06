@@ -33,6 +33,7 @@ export default function ProductDetailsPage() {
     price: data?.price ?? 1,
     brandId: data?.brand.id ?? 0,
     categoryId: data?.category.id ?? 0,
+    productAttributesGroups: [],
   }
 
   const handleSuccessUpdate = (data: ProductDto) => {
@@ -95,7 +96,7 @@ export default function ProductDetailsPage() {
               <h2>Update product</h2>
             </DrawerHeader>
 
-            {/* <ProductFormFields /> */}
+            <ProductFormFields />
             <ProductsAttributesGroupsMain />
 
             <DrawerFooter>

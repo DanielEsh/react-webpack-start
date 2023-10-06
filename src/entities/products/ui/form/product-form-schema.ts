@@ -1,5 +1,14 @@
 import { z } from 'zod'
 
+const attributesSchema = z.object({
+  name: z.string().nonempty(),
+})
+
+const productsAttributesGroupsSchema = z.object({
+  name: z.string().nonempty(),
+  attributes: z.array(attributesSchema),
+})
+
 export const productFormSchema = z.object({
   article: z.string().nonempty({
     message: 'Must be required',
@@ -11,6 +20,7 @@ export const productFormSchema = z.object({
   brandId: z.number(),
   categoryId: z.number(),
   description: z.string().optional().nullable(),
+  productAttributesGroups: z.array(productsAttributesGroupsSchema),
 })
 
 export type ProductForm = z.infer<typeof productFormSchema>

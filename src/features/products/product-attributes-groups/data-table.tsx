@@ -60,7 +60,7 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
     )
   }
 
-  const table = useReactTable({
+  const table = useReactTable<any>({
     data,
     columns: getColumns,
     state: {
