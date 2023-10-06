@@ -21,7 +21,7 @@ interface Props {
 
 export const ProductsDataTable = ({ data, onDelete, onEndReached }: Props) => {
   const table = useReactTable({
-    data: [],
+    data,
     columns: getProductsColumns,
     getCoreRowModel: getCoreRowModel(),
   })
