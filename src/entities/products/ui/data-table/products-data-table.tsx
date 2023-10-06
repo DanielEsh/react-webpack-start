@@ -21,7 +21,7 @@ interface Props {
 
 export const ProductsDataTable = ({ data, onDelete, onEndReached }: Props) => {
   const table = useReactTable({
-    data,
+    data: [],
     columns: getProductsColumns,
     getCoreRowModel: getCoreRowModel(),
   })
@@ -72,7 +72,10 @@ export const ProductsDataTable = ({ data, onDelete, onEndReached }: Props) => {
             ))
           ) : (
             <Table.Row>
-              <Table.Cell className="h-[308px] text-center">
+              <Table.Cell
+                className="h-full text-center"
+                colSpan={getProductsColumns.length}
+              >
                 No results.
               </Table.Cell>
             </Table.Row>
