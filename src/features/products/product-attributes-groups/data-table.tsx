@@ -12,7 +12,7 @@ import { Button, Table } from 'shared/ui-kit'
 import { AttributesList } from './attributes-list'
 import { getColumns } from './data-table-columns'
 import { classNames } from 'shared/utils'
-import { useGetAttributes } from "entities/attributes";
+import { useGetAttributes } from 'entities/attributes'
 
 interface Props {
   data: ProductAttributesGroup[]
@@ -25,7 +25,11 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
     0: true,
   })
 
-  const { isLoading, isError, data: attributes } = useGetAttributes({
+  const {
+    isLoading,
+    isError,
+    data: attributes,
+  } = useGetAttributes({
     page: 1,
     limit: 100,
   })
@@ -38,7 +42,11 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
     setData(setFilterFunc)
   }
 
-  const handleUpdateRow = (rowIndex, columnId, value) => {
+  const handleUpdateRow = (
+    rowIndex: number,
+    columnId: number,
+    value: number,
+  ) => {
     setData((old) =>
       old.map((row, index) => {
         if (index === rowIndex) {
