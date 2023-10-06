@@ -8,22 +8,35 @@ export const getColumns: ColumnDef<ProductAttributesGroup, string>[] = [
   {
     id: 'name',
     accessorFn: ({ name }) => name,
-    header: () => (
-      <Table.ColumnHeader className="w-[65%] bg-white">
+    header: ({ column }) => (
+      <Table.ColumnHeader
+        key={column.id}
+        className="w-[65%] bg-white"
+      >
         Название
       </Table.ColumnHeader>
     ),
-    cell: (cellInfo) => <EditableTableCell cellInfo={cellInfo} />,
+    cell: (cellInfo) => (
+      <EditableTableCell
+        key={cellInfo.cell.id}
+        cellInfo={cellInfo}
+      />
+    ),
   },
   {
     id: 'count',
     accessorFn: ({ attributes }) => String(attributes.length),
-    header: () => (
-      <Table.ColumnHeader className="w-[20%] bg-white">
+    header: ({ column }) => (
+      <Table.ColumnHeader
+        key={column.id}
+        className="w-[20%] bg-white"
+      >
         Количество
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
+    cell: (info) => (
+      <Table.Cell key={info.cell.id}>{info.getValue()}</Table.Cell>
+    ),
   },
   {
     id: 'actions',

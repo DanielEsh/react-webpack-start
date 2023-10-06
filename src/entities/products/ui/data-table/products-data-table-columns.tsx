@@ -1,12 +1,11 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTableColumnHead } from 'widgets/data-table'
-import { ReactNode } from 'react'
 import { Table } from 'shared/ui-kit/table'
 import { ProductDto } from 'entities/products/api'
 import { ProductsDataTableRowActions } from './products-data-table-row-actions'
 import { splitThousands } from 'shared/utils/split-thousands'
 
-export const getProductsColumns: ColumnDef<ProductDto>[] = [
+export const getProductsColumns: ColumnDef<ProductDto, string>[] = [
   {
     id: 'id',
     accessorKey: 'id',
@@ -18,7 +17,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'article',
@@ -31,7 +30,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'name',
@@ -44,11 +43,11 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'price',
-    accessorFn: ({ price }) => price,
+    accessorFn: ({ price }) => price.toString(),
     header: ({ column }) => (
       <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
@@ -57,9 +56,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => (
-      <Table.Cell>{splitThousands(info.getValue() as number)}</Table.Cell>
-    ),
+    cell: (info) => splitThousands(+info.getValue()),
   },
   {
     id: 'category',
@@ -72,7 +69,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'brand',
@@ -85,7 +82,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'actions',
@@ -97,11 +94,7 @@ export const getProductsColumns: ColumnDef<ProductDto>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: ({ row }) => (
-      <Table.Cell>
-        <ProductsDataTableRowActions row={row} />
-      </Table.Cell>
-    ),
+    cell: ({ row }) => <ProductsDataTableRowActions row={row} />,
     enableSorting: false,
   },
 ]

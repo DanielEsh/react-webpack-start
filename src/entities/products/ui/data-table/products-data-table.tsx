@@ -11,7 +11,7 @@ import {
   DeleteState,
 } from 'shared/ui/dialog/confirm-delete'
 import { useIntersection } from 'shared/lib/hooks/use-intersection/use-intersection'
-import { useEffect } from 'react'
+import { Fragment, useEffect } from 'react'
 
 interface Props {
   data: ProductDto[]
@@ -43,14 +43,16 @@ export const ProductsDataTable = ({ data, onDelete, onEndReached }: Props) => {
         <Table.Head>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Row key={headerGroup.id}>
-              {headerGroup.headers.map((header) =>
-                header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    ),
-              )}
+              {headerGroup.headers.map((header) => (
+                <Fragment key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                </Fragment>
+              ))}
             </Table.Row>
           ))}
         </Table.Head>
@@ -61,11 +63,11 @@ export const ProductsDataTable = ({ data, onDelete, onEndReached }: Props) => {
                 key={row.id}
                 className="h-[54px]"
               >
-                {row
-                  .getVisibleCells()
-                  .map((cell) =>
-                    flexRender(cell.column.columnDef.cell, cell.getContext()),
-                  )}
+                {row.getVisibleCells().map((cell) => (
+                  <Table.Cell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </Table.Cell>
+                ))}
               </Table.Row>
             ))
           ) : (
