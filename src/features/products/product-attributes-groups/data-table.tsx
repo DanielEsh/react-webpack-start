@@ -155,20 +155,6 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
                       )}
                     </Table.Cell>
                   ))}
-
-                  {/*{row.getVisibleCells().map((cell) => {*/}
-                  {/*  return (*/}
-                  {/*    <Table.Cell*/}
-                  {/*      key={cell.id}*/}
-                  {/*      className={activeClasses(row)}*/}
-                  {/*    >*/}
-                  {/*      {flexRender(*/}
-                  {/*        cell.column.columnDef.cell,*/}
-                  {/*        cell.getContext(),*/}
-                  {/*      )}*/}
-                  {/*    </Table.Cell>*/}
-                  {/*  )*/}
-                  {/*})}*/}
                 </Table.Row>
                 {row.getIsExpanded() && (
                   <Table.Row>

@@ -5,7 +5,22 @@ import { PageableResponse } from 'shared/api/types'
 import { ProductForm } from '../ui/form/product-form-schema'
 
 export const createProduct = async (productDto: ProductForm) => {
-  return (await $api.post(`/products`, productDto)).data
+  return (
+    await $api.post(`/products`, {
+      ...productDto,
+      attributesGroups: [
+        {
+          name: 'Группа атрибутов 1',
+          attributes: [
+            {
+              attributeId: 4,
+              value: 'attribute-value',
+            },
+          ],
+        },
+      ],
+    })
+  ).data
 }
 
 interface Params {

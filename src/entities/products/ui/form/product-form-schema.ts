@@ -1,7 +1,8 @@
 import { z } from 'zod'
 
 const attributesSchema = z.object({
-  name: z.string().nonempty(),
+  attributeId: z.number(),
+  value: z.string().nonempty(),
 })
 
 const productsAttributesGroupsSchema = z.object({
@@ -20,7 +21,7 @@ export const productFormSchema = z.object({
   brandId: z.number(),
   categoryId: z.number(),
   description: z.string().optional().nullable(),
-  productAttributesGroups: z.array(productsAttributesGroupsSchema),
+  // attributesGroups: z.array(productsAttributesGroupsSchema),
 })
 
 export type ProductForm = z.infer<typeof productFormSchema>

@@ -33,7 +33,17 @@ export default function ProductDetailsPage() {
     price: data?.price ?? 1,
     brandId: data?.brand.id ?? 0,
     categoryId: data?.category.id ?? 0,
-    productAttributesGroups: [],
+    // attributesGroups: [
+    //   {
+    //     name: 'Группа атрибутов 1',
+    //     attributes: [
+    //       {
+    //         attributeId: 4,
+    //         value: 'attribute-value',
+    //       },
+    //     ],
+    //   },
+    // ],
   }
 
   const handleSuccessUpdate = (data: ProductDto) => {
