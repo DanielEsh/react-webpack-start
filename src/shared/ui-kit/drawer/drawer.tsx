@@ -12,7 +12,7 @@ const drawerVariants = cva('fixed overflow-auto z-50 bg-white shadow-lg', {
       bottom: 'inset-x-0 bottom-0 border-t',
       left: 'inset-y-0 left-0 h-full w-[680px] border-r',
       right:
-        'left-1/2 top-0 right-0 bottom-0 h-full min-w-[680px] border-l sm:max-w-sm translate-x-[50%] translate-y-[0%]',
+        'left-[100%] top-0 right-0 bottom-0 h-full min-w-[680px] -translate-x-[100%] translate-y-[0%]',
     },
   },
   defaultVariants: {
