@@ -124,14 +124,16 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
         <Table.Head>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Row key={headerGroup.id}>
-              {headerGroup.headers.map((header) =>
-                header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    ),
-              )}
+              {headerGroup.headers.map((header) => (
+                <Fragment key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                </Fragment>
+              ))}
             </Table.Row>
           ))}
         </Table.Head>
@@ -142,19 +144,31 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
               <Fragment key={row.id}>
                 <Table.Row>
                   {/* first row is a normal row */}
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <Table.Cell
-                        key={cell.id}
-                        className={activeClasses(row)}
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </Table.Cell>
-                    )
-                  })}
+                  {row.getVisibleCells().map((cell) => (
+                    <Table.Cell
+                      key={cell.id}
+                      className={activeClasses(row)}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </Table.Cell>
+                  ))}
+
+                  {/*{row.getVisibleCells().map((cell) => {*/}
+                  {/*  return (*/}
+                  {/*    <Table.Cell*/}
+                  {/*      key={cell.id}*/}
+                  {/*      className={activeClasses(row)}*/}
+                  {/*    >*/}
+                  {/*      {flexRender(*/}
+                  {/*        cell.column.columnDef.cell,*/}
+                  {/*        cell.getContext(),*/}
+                  {/*      )}*/}
+                  {/*    </Table.Cell>*/}
+                  {/*  )*/}
+                  {/*})}*/}
                 </Table.Row>
                 {row.getIsExpanded() && (
                   <Table.Row>

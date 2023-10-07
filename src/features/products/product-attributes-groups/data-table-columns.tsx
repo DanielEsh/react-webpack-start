@@ -16,12 +16,7 @@ export const getColumns: ColumnDef<ProductAttributesGroup, string>[] = [
         Название
       </Table.ColumnHeader>
     ),
-    cell: (cellInfo) => (
-      <EditableTableCell
-        key={cellInfo.cell.id}
-        cellInfo={cellInfo}
-      />
-    ),
+    cell: (cellInfo) => <EditableTableCell cellInfo={cellInfo} />,
   },
   {
     id: 'count',
@@ -34,9 +29,7 @@ export const getColumns: ColumnDef<ProductAttributesGroup, string>[] = [
         Количество
       </Table.ColumnHeader>
     ),
-    cell: (info) => (
-      <Table.Cell key={info.cell.id}>{info.getValue()}</Table.Cell>
-    ),
+    cell: (info) => info.getValue(),
   },
   {
     id: 'actions',
