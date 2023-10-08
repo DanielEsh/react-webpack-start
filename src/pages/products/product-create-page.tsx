@@ -1,5 +1,4 @@
 import { useNotification } from 'shared/notification'
-import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
 import {
   productFormSchema,
   useCreateProductMutation,
@@ -59,14 +58,11 @@ const ProductCreatePage = () => {
   }
 
   const handleSubmit = async (form: any) => {
-    console.log('FORM', form)
-
-    // await createNewProduct(form)
-    // close()
+    await createNewProduct(form)
+    close()
   }
 
   const handleAttributeGroupsChange = (data: ProductAttributesGroup[]) => {
-    console.log('CHANGE', data)
     setValue('attributesGroups', data)
   }
 
