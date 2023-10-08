@@ -11,9 +11,12 @@ export const ProductsAttributesGroupsMain = ({
   onChange,
 }: Props) => {
   return (
-    <ProductAttributesGroupsTable
-      data={attributeGroups}
-      onChange={onChange}
-    />
+    <div className="mt-4 px-6">
+      <h2>Группы атрибутов:</h2>
+      <ProductAttributesGroupsTable
+        data={attributeGroups}
+        onChange={onChange}
+      />
+    </div>
   )
 }

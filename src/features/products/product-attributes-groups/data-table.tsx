@@ -125,7 +125,7 @@ export const ProductAttributesGroupsTable = ({
     })
 
   return (
-    <div className="mt-4 px-6">
+    <div className="mt-4">
       <Table>
         <Table.Head>
           {table.getHeaderGroups().map((headerGroup) => (
