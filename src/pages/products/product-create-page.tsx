@@ -90,12 +90,6 @@ const ProductCreatePage = () => {
               attributeGroups={defaultValues.attributesGroups}
               onChange={handleAttributeGroupsChange}
             />
-            CREATE FORM
-            <pre className="bg-slate-950 mt-2 w-[340px] rounded-md p-4">
-              <code className="text-black">
-                {JSON.stringify(formState, null, 2)}
-              </code>
-            </pre>
             <DrawerFooter>
               <div className="flex gap-2 px-4 pb-6">
                 <Button
