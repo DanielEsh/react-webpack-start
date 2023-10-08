@@ -16,9 +16,13 @@ import { useGetAttributes } from 'entities/attributes'
 
 interface Props {
   data: ProductAttributesGroup[]
+  onChange(attributeGroups: ProductAttributesGroup[]): void
 }
 
-export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
+export const ProductAttributesGroupsTable = ({
+  data: externalData,
+  onChange,
+}: Props) => {
   const [data, setData] = useState<ProductAttributesGroup[]>(externalData)
   const [editedRows, setEditedRows] = useState({})
   const [expanded, setExpanded] = useState<ExpandedState>({
@@ -84,7 +88,9 @@ export const ProductAttributesGroupsTable = ({ data: externalData }: Props) => {
       attributes: [],
     }
     const setFunc = (old: ProductAttributesGroup[]) => [...old, newRow]
+
     setData(setFunc)
+    onChange(data)
 
     setEditedRows({
       [data.length]: true,

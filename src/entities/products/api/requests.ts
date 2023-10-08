@@ -2,9 +2,8 @@ import { $api } from 'shared/api/api'
 import { CreateProductDto, ProductDto, UpdateProductDto } from './types'
 import qs from 'qs'
 import { PageableResponse } from 'shared/api/types'
-import { ProductForm } from '../ui/form/product-form-schema'
 
-export const createProduct = async (productDto: ProductForm) => {
+export const createProduct = async (productDto: CreateProductDto) => {
   return (
     await $api.post(`/products`, {
       ...productDto,

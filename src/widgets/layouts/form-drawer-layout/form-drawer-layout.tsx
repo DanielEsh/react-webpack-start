@@ -7,6 +7,7 @@ import { type ZodType } from 'zod'
 import { type FieldValues, type DefaultValues } from 'react-hook-form'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
+import { productFormSchema } from 'entities/products'
 export interface Props<FormValues> extends TypeWithChildren {
   loading?: boolean
   error?: boolean
@@ -42,7 +43,7 @@ export const FormDrawerLayout = <FormValues extends FieldValues>(
 
   const formMethods = useForm<FormValues>(formSchema, defaultValues)
 
-  const { reset } = formMethods
+  const { reset, formState } = formMethods
 
   const handleSubmit = async (form: any) => {
     await onSubmit(form)
@@ -71,9 +72,13 @@ export const FormDrawerLayout = <FormValues extends FieldValues>(
             <DrawerHeader>
               <h2>Update category</h2>
             </DrawerHeader>
-
             {children}
-
+            CREATE FORM
+            <pre className="bg-slate-950 mt-2 w-[340px] rounded-md p-4">
+              <code className="text-black">
+                {JSON.stringify(formState, null, 2)}
+              </code>
+            </pre>
             <DrawerFooter>
               <div className="flex gap-2 px-4 pb-6">
                 <Button

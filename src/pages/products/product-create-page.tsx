@@ -8,6 +8,8 @@ import {
   ProductFormFields,
 } from 'entities/products'
 import { ProductForm } from 'entities/products/ui/form/product-form-schema'
+import { ProductsAttributesGroupsMain } from 'features/products/product-attributes-groups/products-attributes-groups'
+import { ProductAttributesGroup } from 'features/products/product-attributes-groups/types'
 
 const ProductCreatePage = () => {
   const { mutateAsync: createProductMutation } = useCreateProductMutation()
@@ -19,6 +21,7 @@ const ProductCreatePage = () => {
     price: 0,
     brandId: 0,
     categoryId: 0,
+    attributesGroups: [],
   }
 
   const handleSuccessCreate = (data: ProductDto) => {
@@ -41,6 +44,10 @@ const ProductCreatePage = () => {
     console.log('error')
   }
 
+  const handleAttributeGroupsChange = (data: ProductAttributesGroup[]) => {
+    console.log('CHANGE', data)
+  }
+
   return (
     <FormDrawerLayout
       formSchema={productFormSchema}
@@ -50,6 +57,10 @@ const ProductCreatePage = () => {
       onSubmit={createNewProduct}
     >
       <ProductFormFields />
+      <ProductsAttributesGroupsMain
+        attributeGroups={defaultValues.attributesGroups}
+        onChange={handleAttributeGroupsChange}
+      />
     </FormDrawerLayout>
   )
 }

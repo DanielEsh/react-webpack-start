@@ -1,22 +1,19 @@
 import { ProductAttributesGroupsTable } from './data-table'
 import { ProductAttributesGroup } from './types'
 
-const data: ProductAttributesGroup[] = [
-  {
-    name: 'Группа атрибутов 1',
-    attributes: [
-      {
-        attributeId: 4,
-        value: 'attribute-value',
-      },
-    ],
-  },
-  {
-    name: 'Группа атрибутов 2',
-    attributes: [],
-  },
-]
+interface Props {
+  attributeGroups: ProductAttributesGroup[]
+  onChange(attributeGroups: ProductAttributesGroup[]): void
+}
 
-export const ProductsAttributesGroupsMain = () => {
-  return <ProductAttributesGroupsTable data={data} />
+export const ProductsAttributesGroupsMain = ({
+  attributeGroups,
+  onChange,
+}: Props) => {
+  return (
+    <ProductAttributesGroupsTable
+      data={attributeGroups}
+      onChange={onChange}
+    />
+  )
 }

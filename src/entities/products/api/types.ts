@@ -4,14 +4,14 @@ import type { CategoryDto } from 'entities/categories/types'
 type ProductBrand = Pick<BrandDto, 'id' | 'name' | 'slug'>
 type ProductCategory = Pick<CategoryDto, 'id' | 'name' | 'slug'>
 
-export interface AttributeDto {
+export interface AttributesGroupsAttributeDto {
   attributeId: number
   value: string
 }
 
-export interface ProductAttributesGroupsDto {
+export interface AttributesGroupsDto {
   name: string
-  attributes: AttributeDto[]
+  attributes: AttributesGroupsAttributeDto[]
 }
 
 export interface ProductDto {
@@ -22,7 +22,7 @@ export interface ProductDto {
   descriptions?: string
   brand: ProductBrand
   category: ProductCategory
-  attributesGroups: ProductAttributesGroupsDto[]
+  attributesGroups: AttributesGroupsDto[]
 }
 
 export type CreateProductDto = Pick<
