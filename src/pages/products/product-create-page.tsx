@@ -10,8 +10,14 @@ import {
 import { ProductForm } from 'entities/products/ui/form/product-form-schema'
 import { ProductsAttributesGroupsMain } from 'features/products/product-attributes-groups/products-attributes-groups'
 import { ProductAttributesGroup } from 'features/products/product-attributes-groups/types'
+import { Button, Drawer, Form } from 'shared/ui-kit'
+import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
+import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
+import { useForm } from 'shared/ui-kit/form/use-form'
+import { useNavigate } from 'react-router-dom'
 
 const ProductCreatePage = () => {
+  const navigate = useNavigate()
   const { mutateAsync: createProductMutation } = useCreateProductMutation()
   const { showNotification } = useNotification()
   const invalidateAttributes = useInvalidateProducts()
@@ -44,24 +50,74 @@ const ProductCreatePage = () => {
     console.log('error')
   }
 
+  const formMethods = useForm(productFormSchema, defaultValues)
+
+  const { reset, formState, setValue } = formMethods
+
+  const close = () => {
+    navigate('/products')
+  }
+
+  const handleSubmit = async (form: any) => {
+    console.log('FORM', form)
+
+    // await createNewProduct(form)
+    // close()
+  }
+
   const handleAttributeGroupsChange = (data: ProductAttributesGroup[]) => {
     console.log('CHANGE', data)
+    setValue('attributesGroups', data)
   }
 
   return (
-    <FormDrawerLayout
-      formSchema={productFormSchema}
-      defaultValues={defaultValues}
-      backLinkPath="/products"
-      submitButtonLabel="Create"
-      onSubmit={createNewProduct}
-    >
-      <ProductFormFields />
-      <ProductsAttributesGroupsMain
-        attributeGroups={defaultValues.attributesGroups}
-        onChange={handleAttributeGroupsChange}
-      />
-    </FormDrawerLayout>
+    <>
+      <Drawer
+        open
+        onOpenChange={close}
+      >
+        <Form
+          className="flex h-full flex-col"
+          methods={formMethods}
+          onSubmit={handleSubmit}
+        >
+          <>
+            <DrawerHeader>
+              <h2>Create product</h2>
+            </DrawerHeader>
+            <ProductFormFields />
+            <ProductsAttributesGroupsMain
+              attributeGroups={defaultValues.attributesGroups}
+              onChange={handleAttributeGroupsChange}
+            />
+            CREATE FORM
+            <pre className="bg-slate-950 mt-2 w-[340px] rounded-md p-4">
+              <code className="text-black">
+                {JSON.stringify(formState, null, 2)}
+              </code>
+            </pre>
+            <DrawerFooter>
+              <div className="flex gap-2 px-4 pb-6">
+                <Button
+                  type="submit"
+                  variant="primary"
+                >
+                  Create
+                </Button>
+
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={close}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </DrawerFooter>
+          </>
+        </Form>
+      </Drawer>
+    </>
   )
 }
 
