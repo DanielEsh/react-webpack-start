@@ -152,8 +152,8 @@ export const ProductAttributesGroupsTable = ({
         </Table.Head>
 
         <Table.Body>
-          {table.getRowModel().rows.map((row) => {
-            return (
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => (
               <Fragment key={row.id}>
                 <Table.Row>
                   {/* first row is a normal row */}
@@ -179,7 +179,6 @@ export const ProductAttributesGroupsTable = ({
                       <AttributesList
                         attributes={attributeGroupsData[row.index].attributes}
                         attributesOptions={attributes?.content}
-                        attributeIndex={row.index}
                         onAddClick={() => addAttributeInGroupByIndex(row.index)}
                         onChange={(attributes) =>
                           updatedAttributesInGroupByIndex(attributes, row.index)
@@ -189,8 +188,17 @@ export const ProductAttributesGroupsTable = ({
                   </Table.Row>
                 )}
               </Fragment>
-            )
-          })}
+            ))
+          ) : (
+            <Table.Row>
+              <Table.Cell
+                className="h-[120px] bg-white text-center"
+                colSpan={getColumns.length}
+              >
+                No results.
+              </Table.Cell>
+            </Table.Row>
+          )}
         </Table.Body>
       </Table>
 
