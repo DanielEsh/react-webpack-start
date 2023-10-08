@@ -1,12 +1,6 @@
-// import { type Cell, flexRender } from '@tanstack/react-table'
-// import { ProductAttributesGroup } from './types'
-import { CellContext } from '@tanstack/react-table'
+import type { CellContext } from '@tanstack/react-table'
 import { useEffect, useState } from 'react'
 import { ProductAttributesGroup } from './types'
-
-// interface Props {
-//   cell: Cell<ProductAttributesGroup, unknown>
-// }
 
 interface Props {
   cellInfo: CellContext<ProductAttributesGroup, string>

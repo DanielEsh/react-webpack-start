@@ -65,7 +65,7 @@ export const ProductAttributesGroupsTable = ({
     setAttributesGroupsData(updateData)
   }
 
-  const table = useReactTable<any>({
+  const table = useReactTable({
     data: attributeGroupsData,
     columns: getColumns,
     state: {
