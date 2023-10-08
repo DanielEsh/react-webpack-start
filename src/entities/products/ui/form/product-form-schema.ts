@@ -6,7 +6,9 @@ const attributesSchema = z.object({
 })
 
 const productsAttributesGroupsSchema = z.object({
-  name: z.string().nonempty(),
+  name: z.string().nonempty({
+    message: 'Must be required',
+  }),
   attributes: z.array(attributesSchema),
 })
 

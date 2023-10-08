@@ -61,8 +61,8 @@ const ProductCreatePage = () => {
   const handleSubmit = async (form: any) => {
     console.log('FORM', form)
 
-    await createNewProduct(form)
-    close()
+    // await createNewProduct(form)
+    // close()
   }
 
   const handleAttributeGroupsChange = (data: ProductAttributesGroup[]) => {

@@ -179,6 +179,7 @@ export const ProductAttributesGroupsTable = ({
                       <AttributesList
                         attributes={attributeGroupsData[row.index].attributes}
                         attributesOptions={attributes?.content}
+                        attributeIndex={row.index}
                         onAddClick={() => addAttributeInGroupByIndex(row.index)}
                         onChange={(attributes) =>
                           updatedAttributesInGroupByIndex(attributes, row.index)

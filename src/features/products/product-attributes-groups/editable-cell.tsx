@@ -1,5 +1,6 @@
-import type { CellContext } from '@tanstack/react-table'
-import { useEffect, useState } from 'react'
+import type { CellContext, EditRowsState } from '@tanstack/react-table'
+import { KeyboardEvent, useEffect, useState } from 'react'
+import { Form } from 'shared/ui-kit'
 import { ProductAttributesGroup } from './types'
 
 interface Props {
@@ -22,14 +23,40 @@ export const EditableTableCell = ({ cellInfo }: Props) => {
     table.options.meta?.updateData(row.index, column.id, value)
   }
 
+  const toggleEditRow = () => {
+    table.options.meta?.setEditedRows((state: EditRowsState) => ({
+      ...state,
+      [row.id]: !state[row.id],
+    }))
+  }
+
+  const onKeyEnterPress = (value: string) => {
+    if (value) {
+      setValue(value)
+      toggleEditRow()
+    }
+  }
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      onKeyEnterPress(event.currentTarget.value)
+    }
+  }
+
+  console.log('INDEX', cellInfo.row.index)
+
   return isEditable ? (
-    <input
-      autoFocus
-      className="inline-flex border-b border-black"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      onBlur={onBlur}
-    />
+    <Form.Field name={`attributesGroups.[${cellInfo.row.index}].name`}>
+      <input
+        autoFocus
+        className="inline-flex border-b border-black"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={onBlur}
+        onKeyDown={handleKeyDown}
+      />
+    </Form.Field>
   ) : (
     <>{value}</>
   )
