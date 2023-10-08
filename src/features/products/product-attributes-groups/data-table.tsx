@@ -29,21 +29,19 @@ export const ProductAttributesGroupsTable = ({
     0: true,
   })
 
-  const {
-    isLoading,
-    isError,
-    data: attributes,
-  } = useGetAttributes({
+  const { data: attributes } = useGetAttributes({
     page: 1,
     limit: 100,
   })
 
   const handleRemoveRow = (rowIndex: number) => {
-    const setFilterFunc = (old: ProductAttributesGroup[]) =>
-      old.filter(
-        (_row: ProductAttributesGroup, index: number) => index !== rowIndex,
-      )
-    setData(setFilterFunc)
+    const removeRowFn = (old: ProductAttributesGroup[]) =>
+      old.filter((_, index: number) => index !== rowIndex)
+
+    const updateData = removeRowFn(data)
+
+    onChange(updateData)
+    setData(updateData)
   }
 
   const handleUpdateRow = (
@@ -51,7 +49,7 @@ export const ProductAttributesGroupsTable = ({
     columnId: number,
     value: number,
   ) => {
-    setData((old) =>
+    const updateFn = (old: ProductAttributesGroup[]) =>
       old.map((row, index) => {
         if (index === rowIndex) {
           return {
@@ -60,8 +58,12 @@ export const ProductAttributesGroupsTable = ({
           }
         }
         return row
-      }),
-    )
+      })
+
+    const updateData = updateFn(data)
+
+    onChange(updateData)
+    setData(updateData)
   }
 
   const table = useReactTable<any>({
@@ -89,8 +91,10 @@ export const ProductAttributesGroupsTable = ({
     }
     const setFunc = (old: ProductAttributesGroup[]) => [...old, newRow]
 
-    setData(setFunc)
-    onChange(data)
+    const updateData = setFunc(data)
+
+    setData(updateData)
+    onChange(updateData)
 
     setEditedRows({
       [data.length]: true,
@@ -106,6 +110,7 @@ export const ProductAttributesGroupsTable = ({
     })
 
     setData(updatedAttributesGroup)
+    onChange(updatedAttributesGroup)
   }
 
   const handleAttributesChange = (
@@ -117,6 +122,7 @@ export const ProductAttributesGroupsTable = ({
 
     console.log('update', updatedAttributesData)
     setData(updatedAttributesData)
+    onChange(updatedAttributesData)
   }
 
   const activeClasses = (row: Row<ProductAttributesGroup>) =>

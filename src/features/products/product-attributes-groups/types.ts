@@ -1,5 +1,5 @@
 export interface ProductAttribute {
-  attributeId: number
+  attributeId?: number
   value: string
 }
 
