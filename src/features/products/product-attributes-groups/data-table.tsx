@@ -23,11 +23,10 @@ export const ProductAttributesGroupsTable = ({
   data: externalData,
   onChange,
 }: Props) => {
-  const [data, setData] = useState<ProductAttributesGroup[]>(externalData)
+  const [attributeGroupsData, setAttributesGroupsData] =
+    useState<ProductAttributesGroup[]>(externalData)
   const [editedRows, setEditedRows] = useState({})
-  const [expanded, setExpanded] = useState<ExpandedState>({
-    0: true,
-  })
+  const [expanded, setExpanded] = useState<ExpandedState>({})
 
   const { data: attributes } = useGetAttributes({
     page: 1,
@@ -35,13 +34,13 @@ export const ProductAttributesGroupsTable = ({
   })
 
   const handleRemoveRow = (rowIndex: number) => {
-    const removeRowFn = (old: ProductAttributesGroup[]) =>
-      old.filter((_, index: number) => index !== rowIndex)
+    const removeRowFn = (state: ProductAttributesGroup[]) =>
+      state.filter((_, index: number) => index !== rowIndex)
 
-    const updateData = removeRowFn(data)
+    const updateData = removeRowFn(attributeGroupsData)
 
     onChange(updateData)
-    setData(updateData)
+    setAttributesGroupsData(updateData)
   }
 
   const handleUpdateRow = (
@@ -49,25 +48,25 @@ export const ProductAttributesGroupsTable = ({
     columnId: number,
     value: number,
   ) => {
-    const updateFn = (old: ProductAttributesGroup[]) =>
-      old.map((row, index) => {
+    const updateFn = (state: ProductAttributesGroup[]) =>
+      state.map((row, index) => {
         if (index === rowIndex) {
           return {
-            ...old[rowIndex]!,
+            ...row,
             [columnId]: value,
           }
         }
         return row
       })
 
-    const updateData = updateFn(data)
+    const updateData = updateFn(attributeGroupsData)
 
     onChange(updateData)
-    setData(updateData)
+    setAttributesGroupsData(updateData)
   }
 
   const table = useReactTable<any>({
-    data,
+    data: attributeGroupsData,
     columns: getColumns,
     state: {
       expanded,
@@ -84,44 +83,46 @@ export const ProductAttributesGroupsTable = ({
     },
   })
 
-  const handleAddAttributeGroup = () => {
-    const newRow: ProductAttributesGroup = {
+  const addAttributesGroup = () => {
+    const createdRow: ProductAttributesGroup = {
       name: '',
       attributes: [],
     }
-    const setFunc = (old: ProductAttributesGroup[]) => [...old, newRow]
+    const setStateFn = (state: ProductAttributesGroup[]) => [
+      ...state,
+      createdRow,
+    ]
 
-    const updateData = setFunc(data)
+    const updateData = setStateFn(attributeGroupsData)
 
-    setData(updateData)
+    setAttributesGroupsData(updateData)
     onChange(updateData)
 
     setEditedRows({
-      [data.length]: true,
+      [attributeGroupsData.length]: true,
     })
   }
 
-  const handleAddClick = (index: number) => {
-    const updatedAttributesGroup = [...data]
+  const addAttributeInGroupByIndex = (index: number) => {
+    const updatedAttributesGroup = [...attributeGroupsData]
 
     updatedAttributesGroup[index].attributes.push({
       attributeId: undefined,
       value: '',
     })
 
-    setData(updatedAttributesGroup)
+    setAttributesGroupsData(updatedAttributesGroup)
     onChange(updatedAttributesGroup)
   }
 
-  const handleAttributesChange = (
+  const updatedAttributesInGroupByIndex = (
     attributes: ProductAttribute[],
     groupIndex: number,
   ) => {
-    const updatedAttributesData = [...data]
+    const updatedAttributesData = [...attributeGroupsData]
     updatedAttributesData[groupIndex].attributes = attributes
 
-    console.log('update', updatedAttributesData)
-    setData(updatedAttributesData)
+    setAttributesGroupsData(updatedAttributesData)
     onChange(updatedAttributesData)
   }
 
@@ -176,10 +177,12 @@ export const ProductAttributesGroupsTable = ({
                       className={activeClasses(row)}
                     >
                       <AttributesList
-                        attributes={data[row.index].attributes}
+                        attributes={attributeGroupsData[row.index].attributes}
                         attributesOptions={attributes?.content}
-                        onAddClick={() => handleAddClick(row.index)}
-                        onChange={(e) => handleAttributesChange(e, row.index)}
+                        onAddClick={() => addAttributeInGroupByIndex(row.index)}
+                        onChange={(attributes) =>
+                          updatedAttributesInGroupByIndex(attributes, row.index)
+                        }
                       />
                     </Table.Cell>
                   </Table.Row>
@@ -191,13 +194,13 @@ export const ProductAttributesGroupsTable = ({
       </Table>
 
       <div className="mt-4">
-        <Button onClick={handleAddAttributeGroup}>
-          Добавить группу атрибутов
-        </Button>
+        <Button onClick={addAttributesGroup}>Добавить группу атрибутов</Button>
       </div>
 
       <pre className="bg-slate-950 mt-2 w-[340px] rounded-md p-4">
-        <code className="text-black">{JSON.stringify(data, null, 2)}</code>
+        <code className="text-black">
+          {JSON.stringify(attributeGroupsData, null, 2)}
+        </code>
       </pre>
     </div>
   )
