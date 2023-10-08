@@ -17,6 +17,7 @@ import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { Form } from 'shared/ui-kit/form'
 import { useForm } from 'shared/ui-kit/form/use-form'
+import { ProductAttributesGroup } from 'features/products/product-attributes-groups/types'
 
 export default function ProductDetailsPage() {
   const { id } = useParams()
@@ -33,17 +34,8 @@ export default function ProductDetailsPage() {
     price: data?.price ?? 1,
     brandId: data?.brand.id ?? 0,
     categoryId: data?.category.id ?? 0,
-    // attributesGroups: [
-    //   {
-    //     name: 'Группа атрибутов 1',
-    //     attributes: [
-    //       {
-    //         attributeId: 4,
-    //         value: 'attribute-value',
-    //       },
-    //     ],
-    //   },
-    // ],
+    // FIXME: наименование
+    attributesGroups: data?.attributeGroup ?? [],
   }
 
   const handleSuccessUpdate = (data: ProductDto) => {
@@ -84,8 +76,14 @@ export default function ProductDetailsPage() {
       setValue('brandId', data.brand.id)
       setValue('categoryId', data.category.id)
       setValue('description', data.descriptions)
+      setValue('attributesGroups', data.attributesGroups)
     }
   }, [data])
+
+  const handleAttributeGroupsChange = (data: ProductAttributesGroup[]) => {
+    console.log('CHANGE', data)
+    setValue('attributesGroups', data)
+  }
 
   return (
     <Drawer
@@ -107,7 +105,10 @@ export default function ProductDetailsPage() {
             </DrawerHeader>
 
             {/*<ProductFormFields />*/}
-            <ProductsAttributesGroupsMain />
+            <ProductsAttributesGroupsMain
+              attributeGroups={defaultValues.attributesGroups}
+              onChange={handleAttributeGroupsChange}
+            />
 
             <DrawerFooter>
               <div className="flex gap-2 px-4 pb-6">

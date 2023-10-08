@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 const attributesSchema = z.object({
-  attributeId: z.number(),
+  attributeId: z.number().optional(),
   value: z.string().nonempty(),
 })
 

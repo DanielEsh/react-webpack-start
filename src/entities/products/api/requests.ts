@@ -4,22 +4,7 @@ import qs from 'qs'
 import { PageableResponse } from 'shared/api/types'
 
 export const createProduct = async (productDto: CreateProductDto) => {
-  return (
-    await $api.post(`/products`, {
-      ...productDto,
-      attributesGroups: [
-        {
-          name: 'Группа атрибутов 1',
-          attributes: [
-            {
-              attributeId: 4,
-              value: 'attribute-value',
-            },
-          ],
-        },
-      ],
-    })
-  ).data
+  return (await $api.post(`/products`, productDto)).data
 }
 
 interface Params {
