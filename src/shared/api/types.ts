@@ -11,6 +11,13 @@ interface Pagination {
   links: PaginationLinks
 }
 
+export interface PageableResponseParams {
+  page: number
+  limit: number
+  sort_by?: string[]
+  order_by?: string[]
+}
+
 export interface Meta {
   totalItemsCount: number
   pagination: Pagination

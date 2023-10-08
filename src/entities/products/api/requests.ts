@@ -1,20 +1,13 @@
 import { $api } from 'shared/api/api'
 import { CreateProductDto, ProductDto, UpdateProductDto } from './types'
 import qs from 'qs'
-import { PageableResponse } from 'shared/api/types'
+import { PageableResponse, PageableResponseParams } from 'shared/api'
 
 export const createProduct = async (productDto: CreateProductDto) => {
   return (await $api.post(`/products`, productDto)).data
 }
 
-interface Params {
-  page: number
-  limit: number
-  sort_by?: string[]
-  order_by?: string[]
-}
-
-export const getProducts = async (params: Params) => {
+export const getProducts = async (params: PageableResponseParams) => {
   const query = `products?${qs.stringify(params)}`
   return (await $api.get<PageableResponse<ProductDto>>(query)).data
 }
