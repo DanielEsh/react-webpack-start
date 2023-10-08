@@ -44,8 +44,6 @@ export const EditableTableCell = ({ cellInfo }: Props) => {
     }
   }
 
-  console.log('INDEX', cellInfo.row.index)
-
   return isEditable ? (
     <Form.Field name={`attributesGroups.[${cellInfo.row.index}].name`}>
       <input
