@@ -4,6 +4,7 @@ import { UiDefaultProps } from 'shared/ui-kit/types'
 
 interface FormFieldProps extends UiDefaultProps {
   name: string
+  onBlur?(): void
 }
 
 interface childrenFormProps extends FieldValues {
@@ -11,7 +12,7 @@ interface childrenFormProps extends FieldValues {
 }
 
 export const FormField = (props: FormFieldProps) => {
-  const { children, className, name } = props
+  const { children, className, name, onBlur } = props
   const { control } = useFormContext()
 
   const childrenWithFormFieldProps = (fieldProps: childrenFormProps) => {

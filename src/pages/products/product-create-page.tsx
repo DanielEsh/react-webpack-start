@@ -63,6 +63,7 @@ const ProductCreatePage = () => {
   }
 
   const handleAttributeGroupsChange = (data: ProductAttributesGroup[]) => {
+    console.log('CHANGE', data)
     setValue('attributesGroups', data)
   }
 
