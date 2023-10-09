@@ -19,15 +19,15 @@ export interface ProductDto {
   article: string
   name: string
   price: number
-  descriptions?: string
+  description?: string
   brand: ProductBrand
   category: ProductCategory
-  attributesGroups: AttributesGroupsDto[]
+  attributeGroup: AttributesGroupsDto[]
 }
 
 export type CreateProductDto = Pick<
   ProductDto,
-  'article' | 'name' | 'price' | 'descriptions'
+  'article' | 'name' | 'price' | 'description'
 > & {
   brandId?: any
   categoryId?: any

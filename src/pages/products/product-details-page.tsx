@@ -34,8 +34,8 @@ export default function ProductDetailsPage() {
     price: data?.price ?? 1,
     brandId: data?.brand.id ?? 0,
     categoryId: data?.category.id ?? 0,
-    // FIXME: наименование
-    attributesGroups: data?.attributeGroup ?? [],
+    description: data?.description ?? '',
+    attributeGroup: data?.attributeGroup ?? [],
   }
 
   const handleSuccessUpdate = (data: ProductDto) => {
@@ -75,14 +75,13 @@ export default function ProductDetailsPage() {
       setValue('price', data.price)
       setValue('brandId', data.brand.id)
       setValue('categoryId', data.category.id)
-      setValue('description', data.descriptions)
-      setValue('attributesGroups', data.attributesGroups)
+      setValue('description', data.description)
+      setValue('attributeGroup', data.attributeGroup)
     }
   }, [data])
 
   const handleAttributeGroupsChange = (data: ProductAttributesGroup[]) => {
-    console.log('CHANGE', data)
-    setValue('attributesGroups', data)
+    setValue('attributeGroup', data)
   }
 
   return (
@@ -104,9 +103,9 @@ export default function ProductDetailsPage() {
               <h2>Update product</h2>
             </DrawerHeader>
 
-            {/*<ProductFormFields />*/}
+            <ProductFormFields />
             <ProductsAttributesGroupsMain
-              attributeGroups={defaultValues.attributesGroups}
+              attributeGroups={defaultValues.attributeGroup}
               onChange={handleAttributeGroupsChange}
             />
 

@@ -22,8 +22,8 @@ export const productFormSchema = z.object({
   price: z.number().positive(),
   brandId: z.number(),
   categoryId: z.number(),
-  description: z.string().optional().nullable(),
-  attributesGroups: z.array(productsAttributesGroupsSchema),
+  description: z.string().optional(),
+  attributeGroup: z.array(productsAttributesGroupsSchema),
 })
 
 export type ProductForm = z.infer<typeof productFormSchema>
