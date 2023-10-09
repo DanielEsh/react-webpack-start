@@ -43,7 +43,7 @@ export const EditableTableCell = ({ cellInfo }: Props) => {
 
   return isEditable ? (
     <Input
-      label="test"
+      label="Название"
       autoFocus
       value={value}
       onKeyDown={handleKeyDown}
