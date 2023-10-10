@@ -26,7 +26,7 @@ const ProductCreatePage = () => {
     price: 0,
     brandId: 0,
     categoryId: 0,
-    attributesGroups: [],
+    attributeGroup: [],
   }
 
   const handleSuccessCreate = (data: ProductDto) => {
@@ -64,7 +64,7 @@ const ProductCreatePage = () => {
 
   const handleAttributeGroupsChange = (data: ProductAttributesGroup[]) => {
     console.log('CHANGE', data)
-    setValue('attributesGroups', data)
+    setValue('attributeGroup', data)
   }
 
   return (
@@ -84,7 +84,7 @@ const ProductCreatePage = () => {
             </DrawerHeader>
             <ProductFormFields />
             <ProductsAttributesGroupsMain
-              attributeGroups={defaultValues.attributesGroups}
+              attributeGroups={defaultValues.attributeGroup}
               onChange={handleAttributeGroupsChange}
             />
             <DrawerFooter>
