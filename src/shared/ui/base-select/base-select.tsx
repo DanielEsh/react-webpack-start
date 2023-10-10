@@ -16,10 +16,13 @@ export interface BaseSelectProps {
 
 export const BaseSelect = (props: BaseSelectProps) => {
   const { options, defaultValue, label, className, onChange } = props
+  const selectedValue = options.find(
+    (element) => element.value === defaultValue,
+  )
 
   return (
     <Select
-      defaultValue={defaultValue}
+      defaultValue={selectedValue?.label}
       onChange={onChange}
     >
       <Select.Trigger className={className}>

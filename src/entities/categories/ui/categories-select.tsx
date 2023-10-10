@@ -17,7 +17,6 @@ interface CategoryOptions {
 export const CategoriesSelect = forwardRef<HTMLSelectElement, Props>(
   ({ value, onChange, ...restProps }, forwardedRef) => {
     const [options, setOptions] = useState<CategoryOptions[]>([])
-    const [selectedValue, setSelectedValue] = useState('')
 
     const success = (data: PageableResponse<Category>) => {
       const options: CategoryOptions[] = data.content.map((brand) => ({
@@ -36,15 +35,6 @@ export const CategoriesSelect = forwardRef<HTMLSelectElement, Props>(
       success,
     )
 
-    useEffect(() => {
-      if (value) {
-        const selectedCategoryId = options.find(
-          (element) => element.value === value,
-        )
-        setSelectedValue(selectedCategoryId?.label)
-      }
-    }, [value, options])
-
     const handleChange = (categoryLabel: string) => {
       const selectedCategoryId = options.find(
         (element) => element.label === categoryLabel,
@@ -57,7 +47,7 @@ export const CategoriesSelect = forwardRef<HTMLSelectElement, Props>(
       <BaseSelect
         label="Select Category"
         options={options}
-        defaultValue={selectedValue}
+        defaultValue={value}
         onChange={handleChange}
       />
     )

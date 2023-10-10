@@ -17,7 +17,6 @@ interface BrandOptions {
 export const BrandsSelect = forwardRef<HTMLSelectElement, Props>(
   ({ value, onChange, ...restProps }, forwardedRef) => {
     const [options, setOptions] = useState<BrandOptions[]>([])
-    const [selectedValue, setSelectedValue] = useState('')
 
     const success = (data: PageableResponse<BrandDto>) => {
       const options: BrandOptions[] = data.content.map((brand) => ({
@@ -36,15 +35,6 @@ export const BrandsSelect = forwardRef<HTMLSelectElement, Props>(
       success,
     )
 
-    useEffect(() => {
-      if (value) {
-        const selectedBrandId = options.find(
-          (element) => element.value === value,
-        )
-        setSelectedValue(selectedBrandId?.label)
-      }
-    }, [value, options])
-
     const handleChange = (brandLabel: string) => {
       const selectedBrandId = options.find(
         (element) => element.label === brandLabel,
@@ -56,7 +46,7 @@ export const BrandsSelect = forwardRef<HTMLSelectElement, Props>(
     return (
       <BaseSelect
         label="Select Brand"
-        defaultValue={selectedValue}
+        defaultValue={value}
         options={options}
         onChange={handleChange}
       />
