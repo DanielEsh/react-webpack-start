@@ -10,7 +10,7 @@ import {
 } from '@tanstack/react-table'
 import { Button, Table } from 'shared/ui-kit'
 import { AttributesList } from './attributes-list'
-import { getColumns } from './data-table-columns'
+import { productAttributesGroupsTableColumns } from './product-attributes-groups-table-columns'
 import { classNames } from 'shared/utils'
 import { useGetAttributes } from 'entities/attributes'
 
@@ -67,7 +67,7 @@ export const ProductAttributesGroupsTable = ({
 
   const table = useReactTable({
     data: attributeGroupsData,
-    columns: getColumns,
+    columns: productAttributesGroupsTableColumns,
     state: {
       expanded,
     },
@@ -193,7 +193,7 @@ export const ProductAttributesGroupsTable = ({
             <Table.Row>
               <Table.Cell
                 className="h-[120px] bg-white text-center"
-                colSpan={getColumns.length}
+                colSpan={productAttributesGroupsTableColumns.length}
               >
                 No results.
               </Table.Cell>
@@ -205,12 +205,6 @@ export const ProductAttributesGroupsTable = ({
       <div className="mt-4">
         <Button onClick={addAttributesGroup}>Добавить группу атрибутов</Button>
       </div>
-
-      <pre className="bg-slate-950 mt-2 w-[340px] rounded-md p-4">
-        <code className="text-black">
-          {JSON.stringify(attributeGroupsData, null, 2)}
-        </code>
-      </pre>
     </div>
   )
 }

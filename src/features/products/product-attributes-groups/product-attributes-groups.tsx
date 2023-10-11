@@ -1,4 +1,4 @@
-import { ProductAttributesGroupsTable } from './data-table'
+import { ProductAttributesGroupsTable } from './product-attributes-groups-table'
 import { ProductAttributesGroup } from './types'
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   onChange(attributeGroups: ProductAttributesGroup[]): void
 }
 
-export const ProductsAttributesGroupsMain = ({
+export const ProductAttributesGroups = ({
   attributeGroups,
   onChange,
 }: Props) => {

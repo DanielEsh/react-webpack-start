@@ -7,7 +7,7 @@ import {
   useInvalidateProducts,
 } from 'entities/products'
 import { useUpdateProductById } from 'entities/products/api/queries'
-import { ProductsAttributesGroupsMain } from 'features/products/product-attributes-groups/products-attributes-groups'
+import { ProductAttributesGroups } from 'features/products/product-attributes-groups/product-attributes-groups'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useNotification } from 'shared/notification'
@@ -104,7 +104,7 @@ export default function ProductDetailsPage() {
             </DrawerHeader>
 
             <ProductFormFields />
-            <ProductsAttributesGroupsMain
+            <ProductAttributesGroups
               attributeGroups={defaultValues.attributeGroup}
               onChange={handleAttributeGroupsChange}
             />

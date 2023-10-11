@@ -7,7 +7,9 @@ interface Props {
   cellInfo: CellContext<ProductAttributesGroup, string>
 }
 
-export const EditableTableCell = ({ cellInfo }: Props) => {
+export const ProductAttributesGroupsTableEditableCell = ({
+  cellInfo,
+}: Props) => {
   const { getValue, row, column, table } = cellInfo
 
   const initialValue = getValue()
@@ -16,7 +18,6 @@ export const EditableTableCell = ({ cellInfo }: Props) => {
   const isEditable = table.options.meta?.editedRows[row.id]
 
   const handleBlur = () => {
-    console.log('onBlur', value)
     table.options.meta?.updateData(row.index, column.id, value)
   }
 

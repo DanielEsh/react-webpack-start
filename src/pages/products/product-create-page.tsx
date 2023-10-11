@@ -7,7 +7,7 @@ import {
   ProductFormFields,
 } from 'entities/products'
 import { ProductForm } from 'entities/products/ui/form/product-form-schema'
-import { ProductsAttributesGroupsMain } from 'features/products/product-attributes-groups/products-attributes-groups'
+import { ProductAttributesGroups } from 'features/products/product-attributes-groups/product-attributes-groups'
 import { ProductAttributesGroup } from 'features/products/product-attributes-groups/types'
 import { Button, Drawer, Form } from 'shared/ui-kit'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
@@ -83,7 +83,7 @@ const ProductCreatePage = () => {
               <h2>Create product</h2>
             </DrawerHeader>
             <ProductFormFields />
-            <ProductsAttributesGroupsMain
+            <ProductAttributesGroups
               attributeGroups={defaultValues.attributeGroup}
               onChange={handleAttributeGroupsChange}
             />

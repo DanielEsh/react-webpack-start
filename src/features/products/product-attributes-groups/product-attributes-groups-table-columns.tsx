@@ -1,10 +1,13 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { Table } from 'shared/ui-kit'
 import { ProductAttributesGroup } from './types'
-import { ProductAttributesGroupsTableRowActions } from './actions'
-import { EditableTableCell } from './editable-cell'
+import { ProductAttributesGroupsTableRowActions } from './product-attributes-groups-table-row-actions'
+import { ProductAttributesGroupsTableEditableCell } from './product-attributes-groups-table-editable-cell'
 
-export const getColumns: ColumnDef<ProductAttributesGroup, string>[] = [
+export const productAttributesGroupsTableColumns: ColumnDef<
+  ProductAttributesGroup,
+  string
+>[] = [
   {
     id: 'name',
     accessorFn: ({ name }) => name,
@@ -16,7 +19,9 @@ export const getColumns: ColumnDef<ProductAttributesGroup, string>[] = [
         Название
       </Table.ColumnHeader>
     ),
-    cell: (cellInfo) => <EditableTableCell cellInfo={cellInfo} />,
+    cell: (cellInfo) => (
+      <ProductAttributesGroupsTableEditableCell cellInfo={cellInfo} />
+    ),
   },
   {
     id: 'count',
