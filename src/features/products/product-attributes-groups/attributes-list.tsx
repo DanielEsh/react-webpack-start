@@ -1,6 +1,6 @@
 import { Button } from 'shared/ui-kit'
 import { ProductAttribute } from './types'
-import { AttributeListAttribute } from './attribute-list-attribute'
+import { AttributesListItem } from './attributes-list-item'
 import { AttributeDto } from 'entities/attributes'
 import type { BaseSelectOption } from 'shared/ui/base-select'
 
@@ -19,9 +19,6 @@ export const AttributesList = ({
 }: Props) => {
   const handleChange = (attribute: ProductAttribute, index: number) => {
     const updatedData = [...attributes]
-
-    console.log('update', attribute)
-
     updatedData[index] = {
       attributeId: attribute.attributeId,
       value: attribute.value,
@@ -35,7 +32,7 @@ export const AttributesList = ({
     onChange(updatedData)
   }
 
-  const mappedAttributesOptions = () => {
+  const mappedAttributesOptions = (): BaseSelectOption[] => {
     if (!attributesOptions) return []
 
     return attributesOptions.map((attribute) => {
@@ -49,7 +46,7 @@ export const AttributesList = ({
   return (
     <div className="p-4">
       {attributes.map((attribute, index) => (
-        <AttributeListAttribute
+        <AttributesListItem
           key={index}
           attribute={attribute}
           selectOptions={mappedAttributesOptions()}

@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import { Button, Input } from 'shared/ui-kit'
-import { BaseSelect } from 'shared/ui/base-select'
+import { BaseSelect, type BaseSelectOption } from 'shared/ui/base-select'
 import { ProductAttribute } from './types'
 import IconTrash from 'shared/assets/icons/trash.svg'
 
 interface Props {
   attribute: ProductAttribute
-  selectOptions: any
+  selectOptions: BaseSelectOption[]
   onChange(attribute: ProductAttribute): void
   onRemove(): void
 }
 
-export const AttributeListAttribute = ({
+export const AttributesListItem = ({
   attribute,
   selectOptions,
   onChange,
@@ -20,7 +20,10 @@ export const AttributeListAttribute = ({
   const [attributeValues, setAttributeValues] =
     useState<ProductAttribute>(attribute)
 
-  const handleChange = (field: keyof ProductAttribute, value: any) => {
+  const handleChange = (
+    field: keyof ProductAttribute,
+    value: string | number,
+  ) => {
     const updatedAttributeValues = {
       ...attributeValues,
       [field]: value,
@@ -38,13 +41,7 @@ export const AttributeListAttribute = ({
           options={selectOptions}
           defaultValue={attribute.attributeId}
           label="атрибут"
-          onChange={(e) =>
-            handleChange(
-              'attributeId',
-              selectOptions.filter((attribute: any) => attribute.label === e)[0]
-                .value,
-            )
-          }
+          onChange={(value) => handleChange('attributeId', value)}
         />
 
         <Input
