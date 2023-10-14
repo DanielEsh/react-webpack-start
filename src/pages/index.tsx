@@ -5,6 +5,7 @@ import { AppRouterPaths } from './types'
 import RootLayout from 'widgets/layouts/RootLayout'
 
 const HomePage = lazy(() => import('pages/home-page'))
+const LoginPage = lazy(() => import('pages/login'))
 import categoriesRoutes from 'pages/categories'
 import brandsRoutes from 'pages/brands'
 import attributesRoutes from 'pages/attributes'
@@ -50,6 +51,12 @@ export const AppRouter = () => {
                 <NotFoundPage />
               </PageLoader>
             }
+          />
+        </Route>
+        <Route path={'login'}>
+          <Route
+            index
+            element={<LoginPage />}
           />
         </Route>
       </Routes>
