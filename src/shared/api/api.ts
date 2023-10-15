@@ -5,6 +5,46 @@ export const $api = axios.create({
   baseURL: getBaseUrl(),
 })
 
+$api.interceptors.request.use(
+  (config) => {
+    const ACCESS_TOKEN = localStorage.getItem('accessToken')
+
+    if (ACCESS_TOKEN && config.url !== 'auth/refresh') {
+      config.headers['Authorization'] = `Bearer ${ACCESS_TOKEN}`
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  },
+)
+
+$api.interceptors.response.use(
+  (config) => {
+    return config
+  },
+  async (error) => {
+    const originalRequest = error.config
+    if (error.response.status == 401 && error.config && !error.config._retry) {
+      originalRequest._retry = true
+      try {
+        const token = localStorage.getItem('refreshToken')
+        const response = await $api.post(
+          'auth/refresh',
+          {},
+          { headers: { Authorization: `Bearer ${token}` } },
+        )
+        localStorage.setItem('accessToken', response.data.accessToken)
+        return $api.request(originalRequest)
+      } catch (e) {
+        console.log('НЕ АВТОРИЗОВАН')
+        throw error
+      }
+    }
+    throw error
+  },
+)
+
 export const defaultsHeaders = {}
 export const defaultParams = (params?: any): AxiosRequestConfig => ({
   headers: defaultsHeaders,
