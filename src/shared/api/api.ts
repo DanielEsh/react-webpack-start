@@ -25,19 +25,27 @@ $api.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config
-    if (error.response.status == 401 && error.config && !error.config._retry) {
-      originalRequest._retry = true
+    if (
+      error.response.status === 401 &&
+      originalRequest &&
+      !originalRequest._retry
+    ) {
+      // originalRequest._retry = true
       try {
-        const token = localStorage.getItem('refreshToken')
+        const refreshToken = localStorage.getItem('refreshToken')
+
+        if (!refreshToken) throw error
+
         const response = await $api.post(
           'auth/refresh',
           {},
-          { headers: { Authorization: `Bearer ${token}` } },
+          { headers: { Authorization: `Bearer ${refreshToken}` } },
         )
         localStorage.setItem('accessToken', response.data.accessToken)
         return $api.request(originalRequest)
       } catch (e) {
-        console.log('НЕ АВТОРИЗОВАН')
+        console.log('Ошибка обновления токена или исключение')
+        // Вместо повторной отправки запроса, вы можете перенаправить пользователя на страницу входа или выполнить другие действия по вашему усмотрению.
         throw error
       }
     }
