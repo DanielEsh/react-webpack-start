@@ -1,8 +1,18 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useGetUserInfo } from 'entities/user/api/queries/use-get-user-info'
+import { Button } from 'shared/ui-kit'
+import { useLogoutMutation } from 'features/auth/api/queries/use-logout-mutation'
 
 export const HeaderUser = () => {
+  const navigate = useNavigate()
   const { isLoading, isError, isSuccess, data } = useGetUserInfo()
+  const { mutateAsync: logout } = useLogoutMutation()
+
+  const handleLogOutClick = async () => {
+    console.log('log out')
+    await logout()
+    navigate('/login')
+  }
 
   return (
     <>
@@ -20,6 +30,7 @@ export const HeaderUser = () => {
           </div>
         </Link>
       )}
+      <Button onClick={handleLogOutClick}>Выйти</Button>
     </>
   )
 }
