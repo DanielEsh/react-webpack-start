@@ -1,4 +1,4 @@
-import { Popover as HPopover } from '@headlessui/react'
+import { Link } from 'react-router-dom'
 import { useGetUserInfo } from 'entities/user/api/queries/use-get-user-info'
 
 export const HeaderUser = () => {
@@ -8,19 +8,18 @@ export const HeaderUser = () => {
     <>
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error...</div>}
-      {isSuccess && <div>{data.name}</div>}
-      <HPopover>
-        <HPopover.Button>
-          <div>Button</div>
-        </HPopover.Button>
-        <HPopover.Panel>
-          <div className="flex flex-col bg-blue-500">
-            <button>Button 1</button>
-            <button>Button 2</button>
-            <button>Button 3</button>
+      {isSuccess && (
+        <Link
+          to={'/profile'}
+          className="flex items-center gap-4"
+        >
+          <div className="h-[40px] w-[40px] rounded-full bg-amber-100"></div>
+          <div className="flex flex-col">
+            <span>{data.name}</span>
+            <span>email.com</span>
           </div>
-        </HPopover.Panel>
-      </HPopover>
+        </Link>
+      )}
     </>
   )
 }

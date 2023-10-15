@@ -6,6 +6,7 @@ import RootLayout from 'widgets/layouts/RootLayout'
 
 const HomePage = lazy(() => import('pages/home-page'))
 const LoginPage = lazy(() => import('pages/login'))
+const ProfilePage = lazy(() => import('pages/profile'))
 import categoriesRoutes from 'pages/categories'
 import brandsRoutes from 'pages/brands'
 import attributesRoutes from 'pages/attributes'
@@ -44,6 +45,14 @@ export const AppRouter = () => {
           {...attributesRoutes}
           {...productsRoutes}
           {...sandBoxPages}
+          <Route
+            path={'profile'}
+            element={
+              <PageLoader>
+                <ProfilePage />
+              </PageLoader>
+            }
+          />
           <Route
             path={AppRouterPaths.notFound}
             element={
