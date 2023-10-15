@@ -1,5 +1,5 @@
 import { PropsWithChildren, Suspense, lazy } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AppRouterPaths } from './types'
 
 import RootLayout from 'widgets/layouts/RootLayout'
@@ -20,6 +20,12 @@ export const PageLoader = ({ children }: PropsWithChildren) => (
   </Suspense>
 )
 
+export const PrivateRoute = ({ children }: PropsWithChildren) => {
+  const isAuth = false
+
+  return isAuth ? <>{children}</> : <Navigate to="/login" />
+}
+
 export const AppRouter = () => {
   return (
     <BrowserRouter>
@@ -35,9 +41,11 @@ export const AppRouter = () => {
           <Route
             index
             element={
-              <PageLoader>
-                <HomePage />
-              </PageLoader>
+              <PrivateRoute>
+                <PageLoader>
+                  <HomePage />
+                </PageLoader>
+              </PrivateRoute>
             }
           />
           {...categoriesRoutes}
