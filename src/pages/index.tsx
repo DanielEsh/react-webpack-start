@@ -21,7 +21,7 @@ export const PageLoader = ({ children }: PropsWithChildren) => (
 )
 
 export const PrivateRoute = ({ children }: PropsWithChildren) => {
-  const isAuth = false
+  const isAuth = true
 
   return isAuth ? <>{children}</> : <Navigate to="/login" />
 }
