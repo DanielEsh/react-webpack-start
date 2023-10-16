@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { getBaseUrl } from 'shared/api'
 import { fillTokens } from 'widgets/layouts/app-store/model'
+import { setAuthTokens } from 'features/auth/model'
 
 export const $api = axios.create({
   baseURL: getBaseUrl(),
@@ -42,8 +43,8 @@ $api.interceptors.response.use(
           {},
           { headers: { Authorization: `Bearer ${refreshToken}` } },
         )
-        localStorage.setItem('accessToken', response.data.accessToken)
-        fillTokens({
+
+        setAuthTokens({
           accessToken: response.data.accessToken,
         })
         return $api.request(originalRequest)
