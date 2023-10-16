@@ -3,17 +3,18 @@ import { useGetUserInfo } from 'entities/user/api/queries/use-get-user-info'
 import { Button } from 'shared/ui-kit'
 import { useLogoutMutation } from 'features/auth/api/queries/use-logout-mutation'
 import { useStore } from 'effector-react'
-import { $appStore } from 'widgets/layouts/app-store/model'
+import { $appStore, logout } from 'widgets/layouts/app-store/model'
 
 export const HeaderUser = () => {
   const appStore = useStore($appStore)
   const navigate = useNavigate()
   const { isLoading, isError, isSuccess } = useGetUserInfo()
-  const { mutateAsync: logout } = useLogoutMutation()
+  const { mutateAsync: logoutMutation } = useLogoutMutation()
 
   const handleLogOutClick = async () => {
     console.log('log out')
-    await logout()
+    await logoutMutation()
+    logout()
     navigate('/login')
   }
 
@@ -28,7 +29,7 @@ export const HeaderUser = () => {
         >
           <div className="h-[40px] w-[40px] rounded-full bg-amber-100"></div>
           <div className="flex flex-col">
-            <span>{appStore.user.name}</span>
+            <span>{appStore?.user?.name}</span>
             <span>email.com</span>
           </div>
         </Link>
