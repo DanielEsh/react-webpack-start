@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { getBaseUrl } from 'shared/api'
+import { fillTokens } from 'widgets/layouts/app-store/model'
 
 export const $api = axios.create({
   baseURL: getBaseUrl(),
@@ -42,6 +43,9 @@ $api.interceptors.response.use(
           { headers: { Authorization: `Bearer ${refreshToken}` } },
         )
         localStorage.setItem('accessToken', response.data.accessToken)
+        fillTokens({
+          accessToken: response.data.accessToken,
+        })
         return $api.request(originalRequest)
       } catch (e) {
         console.log('Ошибка обновления токена или исключение')

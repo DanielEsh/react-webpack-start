@@ -3,6 +3,7 @@ import { useForm } from 'shared/ui-kit/form/use-form'
 import { loginFormSchema, type LoginFormSchemaType } from './login-form-schema'
 import { useLoginMutation } from 'features/auth/api/queries/use-login-mutation'
 import { useNavigate } from 'react-router-dom'
+import { fillTokens } from 'widgets/layouts/app-store/model'
 export const LoginForm = () => {
   const navigate = useNavigate()
   const defaultValues: LoginFormSchemaType = {
@@ -16,6 +17,10 @@ export const LoginForm = () => {
     console.log('handleSuccessLogin', response)
     localStorage.setItem('accessToken', response.accessToken)
     localStorage.setItem('refreshToken', response.refreshToken)
+    fillTokens({
+      accessToken: response.accessToken,
+      refreshToken: response.refreshToken,
+    })
 
     navigate('/')
   }
