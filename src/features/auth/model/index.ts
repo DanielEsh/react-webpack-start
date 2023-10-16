@@ -2,13 +2,14 @@ import { createEvent, createStore, sample } from 'effector'
 
 interface AuthStore {
   isSuccessAuth: boolean
-  accessToken?: string
-  refreshToken?: string
+  accessToken?: string | null
+  refreshToken?: string | null
 }
 
 type SetAuthTokens = Pick<AuthStore, 'accessToken' | 'refreshToken'>
 
 export const setAuthTokens = createEvent<SetAuthTokens>()
+export const logout = createEvent()
 
 export const $authStore = createStore<AuthStore>({
   isSuccessAuth: false,
@@ -18,6 +19,12 @@ $authStore.on(setAuthTokens, (state, payload) => ({
   accessToken: payload.accessToken || state.accessToken,
   refreshToken: payload.refreshToken || state.refreshToken,
   ...state,
+}))
+
+$authStore.on(logout, () => ({
+  isSuccessAuth: false,
+  accessToken: null,
+  refreshToken: null,
 }))
 
 sample({
@@ -31,5 +38,13 @@ sample({
     if (refreshToken) {
       localStorage.setItem('refreshToken', refreshToken)
     }
+  },
+})
+
+sample({
+  source: logout,
+  fn: () => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
   },
 })
