@@ -9,8 +9,13 @@ import { NotificationRoot, NotificationProvider } from 'shared/notification'
 
 import './tailwind.css'
 import './global.css'
+import { changeAuthStatus } from 'features/auth/model'
 
 export const App = () => {
+  if (localStorage.getItem('refreshToken')) {
+    changeAuthStatus(true)
+  }
+
   return (
     <StrictMode>
       <NotificationProvider>

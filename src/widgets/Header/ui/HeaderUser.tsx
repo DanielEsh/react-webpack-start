@@ -15,7 +15,7 @@ export const HeaderUser = () => {
     console.log('log out')
     await logoutMutation()
     logout()
-    navigate('/login')
+    // navigate('/login')
   }
 
   return (

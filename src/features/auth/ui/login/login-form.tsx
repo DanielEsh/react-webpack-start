@@ -3,7 +3,7 @@ import { useForm } from 'shared/ui-kit/form/use-form'
 import { loginFormSchema, type LoginFormSchemaType } from './login-form-schema'
 import { useLoginMutation } from 'features/auth/api/queries/use-login-mutation'
 import { useNavigate } from 'react-router-dom'
-import { setAuthTokens } from 'features/auth/model'
+import { setAuthTokens, changeAuthStatus } from 'features/auth/model'
 export const LoginForm = () => {
   const navigate = useNavigate()
   const defaultValues: LoginFormSchemaType = {
@@ -19,6 +19,7 @@ export const LoginForm = () => {
       accessToken: response.accessToken,
       refreshToken: response.refreshToken,
     })
+    changeAuthStatus(true)
 
     navigate('/')
   }

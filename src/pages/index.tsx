@@ -1,6 +1,8 @@
 import { PropsWithChildren, Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useStore } from 'effector-react'
 import { AppRouterPaths } from './types'
+import { $authStore } from 'features/auth/model'
 
 import RootLayout from 'widgets/layouts/RootLayout'
 
@@ -21,9 +23,9 @@ export const PageLoader = ({ children }: PropsWithChildren) => (
 )
 
 export const PrivateRoute = ({ children }: PropsWithChildren) => {
-  const isAuth = true
+  const { isSuccessAuth } = useStore($authStore)
 
-  return isAuth ? <>{children}</> : <Navigate to="/login" />
+  return isSuccessAuth ? <>{children}</> : <Navigate to="/login" />
 }
 
 export const AppRouter = () => {

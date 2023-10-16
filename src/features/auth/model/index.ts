@@ -8,6 +8,7 @@ interface AuthStore {
 
 type SetAuthTokens = Pick<AuthStore, 'accessToken' | 'refreshToken'>
 
+export const changeAuthStatus = createEvent<boolean>()
 export const setAuthTokens = createEvent<SetAuthTokens>()
 export const logout = createEvent()
 
@@ -15,6 +16,10 @@ export const $authStore = createStore<AuthStore>({
   isSuccessAuth: false,
 })
 
+$authStore.on(changeAuthStatus, (state, payload) => ({
+  ...state,
+  isSuccessAuth: payload,
+}))
 $authStore.on(setAuthTokens, (state, payload) => ({
   accessToken: payload.accessToken || state.accessToken,
   refreshToken: payload.refreshToken || state.refreshToken,
