@@ -14,6 +14,7 @@ import brandsRoutes from 'pages/brands'
 import attributesRoutes from 'pages/attributes'
 import productsRoutes from 'pages/products'
 import { sandBoxPages } from './sandbox'
+import warehouseRoutes from 'pages/warehouse'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
 export const PageLoader = ({ children }: PropsWithChildren) => (
@@ -54,6 +55,7 @@ export const AppRouter = () => {
           {...brandsRoutes}
           {...attributesRoutes}
           {...productsRoutes}
+          {...warehouseRoutes}
           {...sandBoxPages}
           <Route
             path={'profile'}

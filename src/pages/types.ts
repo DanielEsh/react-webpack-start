@@ -4,6 +4,7 @@ export enum AppRouterNames {
   brands = 'brands',
   attributes = 'attributes',
   products = 'products',
+  warehouses = 'warehouses',
   notFound = 'notFound',
 }
 
@@ -13,5 +14,6 @@ export const AppRouterPaths: Record<AppRouterNames, string> = {
   [AppRouterNames.brands]: 'brands',
   [AppRouterNames.attributes]: 'attributes',
   [AppRouterNames.products]: 'products',
+  [AppRouterNames.warehouses]: 'warehouses',
   [AppRouterNames.notFound]: '*',
 }

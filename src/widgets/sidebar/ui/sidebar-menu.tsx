@@ -19,6 +19,10 @@ export const SideBarMenu = () => {
       <li>
         <Link to={AppRouterPaths.products}>products</Link>
       </li>
+
+      <li>
+        <Link to={AppRouterPaths.warehouses}>warehouses</Link>
+      </li>
     </ul>
   )
 }
