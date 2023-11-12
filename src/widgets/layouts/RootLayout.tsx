@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
-import { Footer } from 'widgets/Footer'
 import { AppSidebar } from './root-layout/ui/app-sidebar'
 import { AppHeader } from './root-layout/ui/app-header'
+import { AppFooter } from './root-layout/ui/app-footer'
 
 export default function RootLayout() {
   return (
@@ -15,7 +15,7 @@ export default function RootLayout() {
           <Outlet />
         </div>
 
-        <Footer />
+        <AppFooter />
       </div>
     </div>
   )
