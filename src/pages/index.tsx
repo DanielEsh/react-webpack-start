@@ -4,7 +4,7 @@ import { useStore } from 'effector-react'
 import { AppRouterPaths } from './types'
 import { $authStore } from 'features/auth/model'
 
-import RootLayout from 'widgets/layouts/RootLayout'
+import RootLayout from 'widgets/layouts/root-layout'
 
 const HomePage = lazy(() => import('pages/home-page'))
 const LoginPage = lazy(() => import('pages/login'))
