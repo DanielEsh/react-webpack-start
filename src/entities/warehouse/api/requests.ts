@@ -8,6 +8,7 @@ import {
 } from 'entities/warehouse/api/dto'
 import { ProductDto } from 'entities/products'
 import { UpdateProductDto } from 'entities/products/api/types'
+import { Category } from 'entities/categories/types'
 
 interface Params {
   page: number
@@ -34,4 +35,8 @@ export const updateWarehouseById = async (
   id: number,
 ) => {
   return (await $api.patch<WarehouseDto>(`/warehouse/${id}`, dto)).data
+}
+
+export const deleteWarehouse = async (id: number) => {
+  return (await $api.delete<WarehouseDto>(`/warehouse/${id}`)).data
 }
