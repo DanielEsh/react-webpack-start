@@ -11,7 +11,7 @@ import { useNotification } from 'shared/notification'
 import { WarehouseDto } from 'entities/warehouse/api/dto'
 
 export const WarehouseTable = () => {
-  const { data } = useGetWarehouses({
+  const { isSuccess, data } = useGetWarehouses({
     page: 1,
     limit: 10,
     sort_by: [],
@@ -38,11 +38,13 @@ export const WarehouseTable = () => {
     <div>
       <WarehouseTableHeader />
 
-      <PaginatedDataView
-        data={data?.content ?? []}
-        columns={warehouseColumns}
-        meta={{ totalPages: 10 }}
-      />
+      {isSuccess && data.meta && (
+        <PaginatedDataView
+          data={data?.content ?? []}
+          columns={warehouseColumns}
+          meta={{ totalPages: data?.meta.pagination.totalPages }}
+        />
+      )}
 
       <ConfirmDeleteDialog onConfirmDelete={handleConfirmDelete} />
     </div>
