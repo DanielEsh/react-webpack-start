@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom'
 import { AppRouterPaths } from 'pages/types'
-import { SideBarMenu } from './sidebar-menu'
+import { AppSidebarMenu } from './app-sidebar-menu'
 
-export const Sidebar = () => {
+export const AppSidebar = () => {
   return (
     <div className="relative h-screen min-w-[280px]">
-      <div className="fixed flex h-screen w-[280px] flex-col gap-6 bg-neutral-300 p-4">
+      <div className="fixed flex h-screen w-[280px] flex-col gap-6 border-r border-neutral-300 p-4">
         <div className="flex h-12 w-full items-center justify-center rounded bg-neutral-800 text-white">
           <Link to={AppRouterPaths.home}>LOGO</Link>
         </div>
 
-        <div className="flex h-[400px] w-full rounded bg-neutral-800 p-4 text-white">
-          <SideBarMenu />
+        <div className="flex w-full rounded">
+          <AppSidebarMenu />
         </div>
 
         <div className="mt-auto flex flex-col gap-2">
