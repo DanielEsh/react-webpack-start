@@ -9,7 +9,7 @@ export const createPublicApi = async (layer, sliceName) => {
 
   try {
     await writeFile(
-      resolveRoot('src', layer, sliceName, 'index.ts'),
+      resolveRoot('src', layer, sliceName, 'index.tsx'),
       `export { ${componentName} } from './ui/${componentName}/${componentName}';
 export { ${firstCharUpperCase(
         schemaName,
