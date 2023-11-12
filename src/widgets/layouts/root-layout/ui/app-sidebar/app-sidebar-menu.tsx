@@ -32,13 +32,16 @@ export const AppSidebarMenu = () => {
   ]
 
   const classes = (isActive: boolean) => {
-    return classNames('flex h-14 w-full items-center rounded-md p-2.5', {
-      'bg-neutral-900 text-white': isActive,
-    })
+    return classNames(
+      'flex h-14 w-full items-center rounded-md p-2.5 text-white',
+      {
+        'bg-neutral-900 ': isActive,
+      },
+    )
   }
 
   return (
-    <ul className="flex w-full flex-col rounded-md bg-neutral-200 p-2.5">
+    <ul className="flex w-full flex-col rounded-md bg-neutral-800 p-2.5">
       {menu.map((menuItem, index) => (
         <li key={index}>
           <NavLink

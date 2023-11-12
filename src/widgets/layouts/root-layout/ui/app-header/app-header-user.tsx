@@ -5,7 +5,7 @@ import { useLogoutMutation } from 'features/auth/api/queries/use-logout-mutation
 import { useStore } from 'effector-react'
 import { $appStore, logout } from 'widgets/layouts/app-store/model'
 
-export const HeaderUser = () => {
+export const AppHeaderUser = () => {
   const appStore = useStore($appStore)
   const navigate = useNavigate()
   const { isLoading, isError, isSuccess } = useGetUserInfo()
