@@ -33,7 +33,11 @@ export const warehouseColumns: ColumnDef<WarehouseDto, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: ({ row }) => <WarehouseTableRowActions row={row} />,
+    cell: ({ row }) => (
+      <Table.Cell>
+        <WarehouseTableRowActions row={row} />
+      </Table.Cell>
+    ),
     enableSorting: false,
   },
 ]

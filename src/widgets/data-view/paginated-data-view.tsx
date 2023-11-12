@@ -13,7 +13,7 @@ interface Meta {
 interface Props<DATA> {
   data: DATA[]
   columns: ColumnDef<DATA>[]
-  meta?: Meta
+  meta: Meta
   defaultValues?: DataViewState
   onChange?(state: any): void
 }
