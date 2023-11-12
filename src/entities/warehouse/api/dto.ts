@@ -6,8 +6,8 @@ interface WarehouseProductsDto {
 export interface WarehouseDto {
   id: number
   name: string
-  products: WarehouseProductsDto[]
+  products?: WarehouseProductsDto[]
 }
 
 export type WarehouseCreateDto = Pick<WarehouseDto, 'name' | 'products'>
-export type WarehouseUpdateDto = Pick<WarehouseDto, 'id' | 'name' | 'products'>
+export type WarehouseUpdateDto = Pick<WarehouseDto, 'name' | 'products'>
