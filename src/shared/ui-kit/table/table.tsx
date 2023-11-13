@@ -9,11 +9,9 @@ import { TableCell } from './table-cell'
 export const _Table = ({ children, className }: UiDefaultProps) => {
   return (
     <div className={classNames(className, 'rounded-md border')}>
-      <div className="h-full w-full">
-        <table className="caption-bottom relative h-full w-full text-sm">
-          {children}
-        </table>
-      </div>
+      <table className="caption-bottom relative w-full text-sm">
+        {children}
+      </table>
     </div>
   )
 }
