@@ -2,6 +2,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { Table } from 'shared/ui-kit'
 import { DataTableColumnHead } from 'widgets/data-table'
 import { OrderDto } from 'entities/order/api/dto'
+import { OrderDataTableRowActions } from './order-data-table-row-actions'
 
 export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
   {
@@ -80,6 +81,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: () => <div>actions</div>,
+    cell: ({ row }) => <OrderDataTableRowActions row={row} />,
+    enableSorting: false,
   },
 ]
