@@ -8,7 +8,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
     id: 'id',
     accessorKey: 'id',
     header: ({ column }) => (
-      <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
+      <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
           title="id"
@@ -21,7 +21,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
     id: 'number',
     accessorKey: 'number',
     header: ({ column }) => (
-      <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
+      <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
           title="number"
@@ -34,7 +34,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
     id: 'payment_status',
     accessorKey: 'payment_status',
     header: ({ column }) => (
-      <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
+      <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
           title="payment_status"
@@ -47,7 +47,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
     id: 'status',
     accessorKey: 'status',
     header: ({ column }) => (
-      <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
+      <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
           title="status"
@@ -60,7 +60,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
     id: 'total_price',
     accessorKey: 'total_price',
     header: ({ column }) => (
-      <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
+      <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
           title="total_price"
@@ -73,7 +73,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
     id: 'actions',
     accessorKey: 'actions',
     header: ({ column }) => (
-      <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
+      <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
           title="actions"
