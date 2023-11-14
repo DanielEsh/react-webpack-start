@@ -11,3 +11,9 @@ export interface WarehouseDto {
 
 export type WarehouseCreateDto = Pick<WarehouseDto, 'name' | 'products'>
 export type WarehouseUpdateDto = Pick<WarehouseDto, 'name' | 'products'>
+
+export interface WarehouseProductDto {
+  id: number
+  quantity: number
+  product: any
+}

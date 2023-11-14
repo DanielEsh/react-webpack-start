@@ -5,6 +5,7 @@ import {
   WarehouseDto,
   WarehouseCreateDto,
   WarehouseUpdateDto,
+  WarehouseProductDto,
 } from 'entities/warehouse/api/dto'
 import { ProductDto } from 'entities/products'
 import { UpdateProductDto } from 'entities/products/api/types'
@@ -28,6 +29,14 @@ export const getWarehouses = async (params: Params) => {
 
 export const getWarehouseById = async (id: number) => {
   return (await $api.get<WarehouseDto>(`/warehouse/${id}`)).data
+}
+
+export const getWarehouseProducts = async (id: number) => {
+  return (
+    await $api.get<PageableResponse<WarehouseProductDto>>(
+      `/warehouse/${id}/products`,
+    )
+  ).data
 }
 
 export const updateWarehouseById = async (

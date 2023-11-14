@@ -10,14 +10,19 @@ import {
 } from 'entities/warehouse/ui/form/warehouse-form-schema'
 import { WarehouseFormFields } from 'entities/warehouse/ui/form/warehouse-form-fields'
 import { useForm } from 'shared/ui-kit/form/use-form'
-import { ProductDto } from 'entities/products'
 import { useNotification } from 'shared/notification'
 import { useUpdateWarehouseByIdMutate } from 'entities/warehouse/api/queries/use-update-warehouse-by-id-mutate'
 import { WarehouseDto } from 'entities/warehouse/api/dto'
 import { useEffect } from 'react'
+import { WarehouseProductsTable } from 'entities/warehouse/ui/warehouse-products-table'
 
 export default function WarehouseDetailsPage() {
-  const { id } = useParams()
+  const { id } = useParams<{
+    id: string
+  }>()
+
+  if (!id) return
+
   const navigate = useNavigate()
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -86,6 +91,7 @@ export default function WarehouseDetailsPage() {
 
             <div className="flex flex-col gap-4 px-6">
               <WarehouseFormFields />
+              <WarehouseProductsTable id={+id} />
             </div>
 
             <DrawerFooter>
