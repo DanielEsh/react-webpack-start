@@ -14,7 +14,7 @@ import { useNotification } from 'shared/notification'
 import { useUpdateWarehouseByIdMutate } from 'entities/warehouse/api/queries/use-update-warehouse-by-id-mutate'
 import { WarehouseDto } from 'entities/warehouse/api/dto'
 import { useEffect } from 'react'
-import { WarehouseProductsTable } from 'entities/warehouse/ui/warehouse-products-table'
+import { WarehouseProductsTable } from 'entities/warehouse/ui/warehouse-products-table/warehouse-products-table'
 
 export default function WarehouseDetailsPage() {
   const { id } = useParams<{
