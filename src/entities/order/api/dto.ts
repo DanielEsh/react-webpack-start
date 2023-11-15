@@ -13,3 +13,20 @@ export interface OrderDto {
   comment: string
   total_price: string
 }
+
+interface UserDetails {
+  name: string
+  email: string
+  phone: number
+  comment: string
+}
+
+export interface OrderDetailsDto {
+  id: number
+  number: string
+  payment_status: OrderPaymentStatus
+  status: any
+  user_details: UserDetails
+  warehouse: any
+  staff: any
+}
