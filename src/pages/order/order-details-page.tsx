@@ -3,7 +3,6 @@ import { Accordion, Button, Drawer } from 'shared/ui-kit'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
 import { useGetOrderByIdQuery } from 'entities/order/api/queries/use-get-order-by-id-query'
-import { AccordionDemo } from 'pages/sandbox/ui/accordion-demo'
 
 export default function OrderDetailsPage() {
   const { id } = useParams<{
