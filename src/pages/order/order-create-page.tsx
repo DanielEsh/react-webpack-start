@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Drawer } from 'shared/ui-kit'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
+import { OrderForm } from 'entities/order/ui/OrderForm'
 
 export default function OrderCreatePage() {
   const navigate = useNavigate()
@@ -20,9 +21,7 @@ export default function OrderCreatePage() {
           <h2>Create order</h2>
         </DrawerHeader>
 
-        <div className="p-4">
-          <div>data</div>
-        </div>
+        <OrderForm />
 
         <DrawerFooter>
           <div className="flex gap-2 px-4 pb-6">
