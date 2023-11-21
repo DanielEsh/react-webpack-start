@@ -1,7 +1,11 @@
 import qs from 'qs'
 import { $api } from 'shared/api/api'
 import { PageableResponse, PageableResponseParams } from 'shared/api'
-import { OrderDetailsDto, OrderDto } from './dto'
+import { CreateOrderDto, OrderDetailsDto, OrderDto } from './dto'
+
+export const createOrder = async (createOrderDto: CreateOrderDto) => {
+  return (await $api.post(`/order`, createOrderDto)).data
+}
 
 export const getOrders = async (params: PageableResponseParams) => {
   const query = `order?${qs.stringify(params)}`

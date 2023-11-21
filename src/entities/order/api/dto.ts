@@ -14,19 +14,32 @@ export interface OrderDto {
   total_price: string
 }
 
-interface UserDetails {
+interface UserDetailsDto {
   name: string
   email: string
   phone: number
   comment: string
 }
 
+interface DeliveryDetailsDto {
+  country: string
+  city: string
+  street: string
+  house: string
+  building: string
+  apartment_office: string
+  zip_code: string
+}
+
 export interface OrderDetailsDto {
   id: number
   number: string
-  payment_status: OrderPaymentStatus
+  payment_status: any
   status: any
-  user_details: UserDetails
   warehouse: any
   staff: any
+  user_details: UserDetailsDto
+  delivery_details: DeliveryDetailsDto
 }
+
+export type CreateOrderDto = Pick<OrderDetailsDto, 'id' | 'number' | 'status'>

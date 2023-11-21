@@ -6,15 +6,18 @@ import {
 } from 'entities/order/ui/order-form/order-form-schema'
 import { OrderFormFields } from 'entities/order/ui/order-form/fields/OrderFormFields'
 import { OrderFormAccordion } from 'entities/order/ui/order-form/OrderFormAccordion'
+import { useCreateOrderMutation } from 'entities/order/api/queries/use-create-order-mutation'
 
 export const OrderForm = () => {
+  const { mutateAsync: createOrderMutation } = useCreateOrderMutation()
+
   const orderFormDefaultValues: OrderFormSchema = {
-    staff: 'staff',
-    status: 'status',
-    payment_status: 'payment_status',
-    warehouse: 'warehouse',
+    staff: '',
+    status: '',
+    payment_status: null,
+    warehouse: '',
     user_details: {
-      firstName: '',
+      firstName: 'firstName',
       lastName: 'lastName',
       middleName: 'middleName',
       email: 'email',
@@ -34,8 +37,9 @@ export const OrderForm = () => {
 
   const methods = useForm(orderFormSchema, orderFormDefaultValues)
 
-  const handleSubmit = (form: OrderFormSchema) => {
+  const handleSubmit = async (form: OrderFormSchema) => {
     console.log('submit', form)
+    await createOrderMutation(form)
   }
 
   return (
