@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 export enum OrderPaymentStatus {
   cash = 'cash',
 }
@@ -15,9 +17,11 @@ export interface OrderDto {
 }
 
 interface UserDetailsDto {
-  name: string
+  firstName: string
+  lastName: string
+  middleName: string
   email: string
-  phone: number
+  phone: string
   comment: string
 }
 
@@ -34,12 +38,12 @@ interface DeliveryDetailsDto {
 export interface OrderDetailsDto {
   id: number
   number: string
-  payment_status: any
+  payment_status?: any
   status: any
-  warehouse: any
-  staff: any
+  warehouse?: any
+  staff?: any
   user_details: UserDetailsDto
   delivery_details: DeliveryDetailsDto
 }
 
-export type CreateOrderDto = Pick<OrderDetailsDto, 'id' | 'number' | 'status'>
+export type CreateOrderDto = Omit<OrderDetailsDto, 'id' | 'number' | 'status'>
