@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, FormHTMLAttributes } from 'react'
 import { UiDefaultProps } from 'shared/ui-kit/types'
 import {
   FormProvider,
@@ -11,6 +11,7 @@ import { FormField } from './form-field'
 export interface FormProps<FieldValues extends ReactHookFormFieldValues>
   extends UiDefaultProps {
   methods: UseFormReturn<FieldValues>
+  id?: string
   onReset?: () => void
   onSubmit: SubmitHandler<FieldValues>
 }
@@ -19,7 +20,8 @@ const COMPONENT_NAME = 'Form'
 
 export const _Form = forwardRef<HTMLFormElement, FormProps<any>>(
   (props, forwardedRef) => {
-    const { children, className, methods, onSubmit, onReset } = props
+    const { children, className, methods, onSubmit, onReset, ...restProps } =
+      props
 
     return (
       <FormProvider {...methods}>
@@ -28,6 +30,7 @@ export const _Form = forwardRef<HTMLFormElement, FormProps<any>>(
           className={className}
           onReset={onReset}
           onSubmit={methods.handleSubmit(onSubmit)}
+          {...restProps}
         >
           {children}
         </form>

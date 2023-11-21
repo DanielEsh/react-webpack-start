@@ -38,6 +38,7 @@ export const OrderForm = () => {
 
   return (
     <Form
+      id="order-form"
       methods={methods}
       onSubmit={handleSubmit}
     >

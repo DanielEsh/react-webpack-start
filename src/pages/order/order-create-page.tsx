@@ -28,6 +28,7 @@ export default function OrderCreatePage() {
             <Button
               type="submit"
               variant="primary"
+              form="order-form"
             >
               Update
             </Button>
