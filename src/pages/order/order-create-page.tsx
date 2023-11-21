@@ -21,7 +21,7 @@ export default function OrderCreatePage() {
           <h2>Create order</h2>
         </DrawerHeader>
 
-        <OrderForm />
+        <OrderForm onSuccessCreate={close} />
 
         <DrawerFooter>
           <div className="flex gap-2 px-4 pb-6">
