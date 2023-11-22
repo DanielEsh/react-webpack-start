@@ -1,8 +1,9 @@
-import { OrderForm } from 'entities/order/ui/OrderForm'
+import { OrderForm } from 'entities/order/ui/order-form'
 import { OrderDetailsDto } from 'entities/order/api/dto'
 import { useUpdateOrderMutation } from 'entities/order/api/queries/use-update-order-mutation'
 import { OrderFormSchema } from 'entities/order/ui/order-form/order-form-schema'
 import { useNotification } from 'shared/notification'
+import { OrderUpdateFields } from 'features/order/update/ui/order-update-fields'
 
 interface Props {
   data?: OrderDetailsDto
@@ -39,6 +40,7 @@ export const OrderUpdateForm = ({ data, onSuccessUpdate }: Props) => {
 
   return (
     <OrderForm
+      fields={<OrderUpdateFields />}
       defaultValues={data}
       onSubmit={handleSubmit}
     />

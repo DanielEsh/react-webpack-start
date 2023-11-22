@@ -3,7 +3,7 @@ import { Button, Drawer } from 'shared/ui-kit'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
 import { useGetOrderByIdQuery } from 'entities/order/api/queries/use-get-order-by-id-query'
-import { OrderUpdateForm } from 'features/order/update/order-update-form'
+import { OrderUpdateForm } from 'features/order/update'
 
 export default function OrderDetailsPage() {
   const { id } = useParams<{

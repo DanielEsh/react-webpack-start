@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Drawer } from 'shared/ui-kit'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
-import { OrderCreateForm } from 'features/order/create/order-create-form'
+import { OrderCreateForm } from 'features/order/create'
 
 export default function OrderCreatePage() {
   const navigate = useNavigate()
