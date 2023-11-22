@@ -33,6 +33,10 @@ export const AppSidebarMenu = () => {
       label: 'Orders',
       link: AppRouterPaths.orders,
     },
+    {
+      label: 'Staff',
+      link: AppRouterPaths.staff,
+    },
   ]
 
   const classes = (isActive: boolean) => {
