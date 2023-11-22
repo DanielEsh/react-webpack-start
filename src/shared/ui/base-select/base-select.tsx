@@ -1,7 +1,7 @@
 import { Select } from 'shared/ui-kit/form-controls'
 
 export interface BaseSelectOption {
-  value: number
+  value: number | string
   label: string
 }
 
