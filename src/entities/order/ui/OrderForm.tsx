@@ -8,35 +8,12 @@ import { OrderFormFields } from 'entities/order/ui/order-form/fields/OrderFormFi
 import { OrderFormAccordion } from 'entities/order/ui/order-form/OrderFormAccordion'
 
 interface Props {
+  defaultValues?: OrderFormSchema
   onSubmit(form: OrderFormSchema): void
 }
 
-export const OrderForm = ({ onSubmit }: Props) => {
-  const orderFormDefaultValues: OrderFormSchema = {
-    staff: '',
-    status: '',
-    payment_status: null,
-    warehouse: '',
-    user_details: {
-      firstName: 'firstName',
-      lastName: 'lastName',
-      middleName: 'middleName',
-      email: 'email',
-      phone: 'phone',
-      comment: 'comment',
-    },
-    delivery_details: {
-      city: 'city',
-      country: 'country',
-      zip_code: 'zip_code',
-      street: 'street',
-      house: 'house',
-      building: 'building',
-      apartment_office: 'apartment_office',
-    },
-  }
-
-  const methods = useForm(orderFormSchema, orderFormDefaultValues)
+export const OrderForm = ({ defaultValues, onSubmit }: Props) => {
+  const methods = useForm(orderFormSchema, defaultValues)
 
   const handleSubmit = async (form: OrderFormSchema) => {
     onSubmit(form)

@@ -26,5 +26,34 @@ export const OrderCreateForm = ({ onSuccessCreate }: Props) => {
     })
   }
 
-  return <OrderForm onSubmit={handleSubmit} />
+  const orderFormDefaultValues: OrderFormSchema = {
+    staff: '',
+    status: '',
+    payment_status: null,
+    warehouse: '',
+    user_details: {
+      firstName: 'firstName',
+      lastName: 'lastName',
+      middleName: 'middleName',
+      email: 'email',
+      phone: 'phone',
+      comment: 'comment',
+    },
+    delivery_details: {
+      city: 'city',
+      country: 'country',
+      zip_code: 'zip_code',
+      street: 'street',
+      house: 'house',
+      building: 'building',
+      apartment_office: 'apartment_office',
+    },
+  }
+
+  return (
+    <OrderForm
+      defaultValues={orderFormDefaultValues}
+      onSubmit={handleSubmit}
+    />
+  )
 }
