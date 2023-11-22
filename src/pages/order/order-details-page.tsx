@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { Accordion, Button, Drawer } from 'shared/ui-kit'
+import { Button, Drawer } from 'shared/ui-kit'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
 import { useGetOrderByIdQuery } from 'entities/order/api/queries/use-get-order-by-id-query'
@@ -31,13 +31,19 @@ export default function OrderDetailsPage() {
         </DrawerHeader>
       )}
 
-      {isSuccess && <OrderUpdateForm form={data} />}
+      {isSuccess && (
+        <OrderUpdateForm
+          data={data}
+          onSuccessUpdate={close}
+        />
+      )}
 
       <DrawerFooter>
         <div className="flex gap-2 px-4 pb-6">
           <Button
             type="submit"
             variant="primary"
+            form="order-form"
           >
             Update
           </Button>

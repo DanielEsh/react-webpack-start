@@ -1,5 +1,3 @@
-import { z } from 'zod'
-
 export enum OrderPaymentStatus {
   cash = 'cash',
 }
@@ -39,7 +37,7 @@ export interface OrderDetailsDto {
   id: number
   number: string
   payment_status?: any
-  status: any
+  status?: any
   warehouse?: any
   staff?: any
   user_details: UserDetailsDto
@@ -47,3 +45,4 @@ export interface OrderDetailsDto {
 }
 
 export type CreateOrderDto = Omit<OrderDetailsDto, 'id' | 'number' | 'status'>
+export type UpdateOrderDto = Omit<OrderDetailsDto, 'id' | 'number'>

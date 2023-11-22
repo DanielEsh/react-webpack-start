@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
 export const orderFormSchema = z.object({
+  status: z.any().optional(),
   payment_status: z.any(),
-  status: z.any(),
   warehouse: z.any(),
   staff: z.any(),
   user_details: z.object({
