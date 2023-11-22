@@ -15,3 +15,7 @@ export const getOrders = async (params: PageableResponseParams) => {
 export const getOrderById = async (id: number) => {
   return (await $api.get<OrderDetailsDto>(`/order/${id}`)).data
 }
+
+export const updateOrder = async (dto: OrderDto, id: number) => {
+  return (await $api.patch<OrderDto>(`/order/${id}`, dto)).data
+}
