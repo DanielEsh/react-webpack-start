@@ -32,22 +32,22 @@ $api.interceptors.response.use(
       originalRequest &&
       !originalRequest._retry
     ) {
-      // originalRequest._retry = true
+      originalRequest._retry = true
       try {
-        // const refreshToken = localStorage.getItem('refreshToken')
-        //
-        // if (!refreshToken) throw error
-        //
-        // const response = await $api.post(
-        //   'auth/refresh',
-        //   {},
-        //   { headers: { Authorization: `Bearer ${refreshToken}` } },
-        // )
-        //
-        // setAuthTokens({
-        //   accessToken: response.data.accessToken,
-        // })
-        // return $api.request(originalRequest)
+        const refreshToken = localStorage.getItem('refreshToken')
+
+        if (!refreshToken) throw error
+
+        const response = await $api.post(
+          'auth/refresh',
+          {},
+          { headers: { Authorization: `Bearer ${refreshToken}` } },
+        )
+
+        setAuthTokens({
+          accessToken: response.data.accessToken,
+        })
+        return $api.request(originalRequest)
       } catch (e) {
         console.log('Ошибка обновления токена или исключение')
         // Вместо повторной отправки запроса, вы можете перенаправить пользователя на страницу входа или выполнить другие действия по вашему усмотрению.

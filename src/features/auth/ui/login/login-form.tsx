@@ -4,8 +4,8 @@ import { loginFormSchema, type LoginFormSchemaType } from './login-form-schema'
 import { useLogin } from 'features/auth/use-login'
 export const LoginForm = () => {
   const defaultValues: LoginFormSchemaType = {
-    username: 'new user',
-    password: '12345',
+    username: 'example.com',
+    password: '123',
   }
 
   const login = useLogin()
