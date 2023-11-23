@@ -1,12 +1,14 @@
 import { useNavigate } from 'react-router-dom'
-import {
-  WarehouseForm,
-  warehouseFormSchema,
-} from 'entities/warehouse/ui/form/warehouse-form-schema'
+
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { Button, Drawer, Form } from 'shared/ui-kit'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
+import { StaffFormFields } from 'entities/staff/ui/form/staff-form-fields'
+import {
+  staffFormSchema,
+  type StaffFormSchema,
+} from 'entities/staff/ui/form/staff-form-schema'
 
 export default function StaffCreatePage() {
   const navigate = useNavigate()
@@ -14,10 +16,10 @@ export default function StaffCreatePage() {
     navigate('/staff')
   }
 
-  const formMethods = useForm(warehouseFormSchema)
+  const formMethods = useForm(staffFormSchema)
 
-  const handleSubmit = async (form: any) => {
-    console.log('SUBMIT')
+  const handleSubmit = async (form: StaffFormSchema) => {
+    console.log('SUBMIT', form)
   }
 
   return (
@@ -36,7 +38,7 @@ export default function StaffCreatePage() {
           </DrawerHeader>
 
           <div className="flex flex-col gap-4 px-6">
-            <div>body</div>
+            <StaffFormFields />
           </div>
 
           <DrawerFooter>
