@@ -9,9 +9,11 @@ import {
   staffFormSchema,
   type StaffFormSchema,
 } from 'entities/staff/ui/form/staff-form-schema'
+import { useCreateStaffMutation } from 'entities/staff/api/queries/use-create-staff-mutation'
 
 export default function StaffCreatePage() {
   const navigate = useNavigate()
+  const { mutateAsync: createStaff } = useCreateStaffMutation()
   const close = () => {
     navigate('/staff')
   }
@@ -19,7 +21,9 @@ export default function StaffCreatePage() {
   const formMethods = useForm(staffFormSchema)
 
   const handleSubmit = async (form: StaffFormSchema) => {
-    console.log('SUBMIT', form)
+    await createStaff(form, {
+      onSuccess: close,
+    })
   }
 
   return (

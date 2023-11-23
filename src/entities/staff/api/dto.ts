@@ -6,3 +6,5 @@ export interface StaffDto {
   phone: string
   email: string
 }
+
+export type CreateStaffDto = Omit<StaffDto, 'id'>
