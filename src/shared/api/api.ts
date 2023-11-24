@@ -32,7 +32,7 @@ $api.interceptors.response.use(
       originalRequest &&
       !originalRequest._retry
     ) {
-      originalRequest._retry = true
+      // originalRequest._retry = true
       try {
         const refreshToken = localStorage.getItem('refreshToken')
 

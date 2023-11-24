@@ -2,6 +2,7 @@ import qs from 'qs'
 import { $api } from 'shared/api/api'
 import { PageableResponse, PageableResponseParams } from 'shared/api'
 import {
+  ChangeOrderStatus,
   CreateOrderDto,
   OrderDetailsDto,
   OrderDto,
@@ -23,4 +24,13 @@ export const getOrderById = async (id: number) => {
 
 export const updateOrder = async (dto: UpdateOrderDto, id: number) => {
   return (await $api.patch<OrderDetailsDto>(`/order/${id}`, dto)).data
+}
+
+export const changeOrderStatus = async (
+  changeOrderStatusDto: ChangeOrderStatus,
+  id: number,
+) => {
+  return (
+    await $api.patch<OrderDetailsDto>(`/order/${id}`, changeOrderStatusDto)
+  ).data
 }

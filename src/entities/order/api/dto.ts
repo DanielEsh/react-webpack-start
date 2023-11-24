@@ -46,3 +46,8 @@ export interface OrderDetailsDto {
 
 export type CreateOrderDto = Omit<OrderDetailsDto, 'id' | 'number' | 'status'>
 export type UpdateOrderDto = Omit<OrderDetailsDto, 'id' | 'number'>
+
+export interface ChangeOrderStatus {
+  staff: number
+  expectedStatus: string
+}
