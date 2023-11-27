@@ -12,6 +12,7 @@ export const DropdownTrigger = forwardRef<
   return (
     <DropdownMenuPrimitive.Trigger
       ref={forwardedRef}
+      asChild
       {...restProps}
     >
       {children}

@@ -12,6 +12,7 @@ export const DropdownItem = forwardRef<
   return (
     <DropdownMenuPrimitive.Item
       ref={forwardedRef}
+      className="relative flex cursor-pointer select-none items-center rounded-sm py-2 px-3.5 text-sm outline-none hover:bg-neutral-200 data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
       {...restProps}
     >
       {children}
