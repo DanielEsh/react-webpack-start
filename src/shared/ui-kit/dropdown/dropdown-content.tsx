@@ -15,9 +15,9 @@ export const DropdownContent = forwardRef<
       <DropdownMenuPrimitive.Content
         ref={forwardedRef}
         side="bottom"
-        align="start"
+        align="end"
         sideOffset={8}
-        className="min-w-[8rem] overflow-hidden rounded-md border shadow-md"
+        className="min-w-[8rem] overflow-hidden rounded-md border bg-white shadow-md"
         {...restProps}
       >
         {children}
