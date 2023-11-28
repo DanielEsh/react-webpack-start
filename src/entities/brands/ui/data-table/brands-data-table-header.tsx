@@ -1,4 +1,4 @@
-import { Link } from 'shared/ui-kit/link'
+import { ButtonLink } from 'shared/ui-kit/button-link'
 import IconPlus from 'shared/assets/icons/plus.svg'
 
 export const BrandsDataTableHeader = () => {
@@ -7,12 +7,12 @@ export const BrandsDataTableHeader = () => {
       <h1 className="text-2xl">Brands</h1>
 
       <div className="flex gap-3">
-        <Link
+        <ButtonLink
           to="/brands/create"
           addonLeft={<IconPlus />}
         >
           <span>Create</span>
-        </Link>
+        </ButtonLink>
       </div>
     </div>
   )

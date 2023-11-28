@@ -6,14 +6,14 @@ export interface LinkProps extends BaseButtonProps {
   to: string
 }
 
-export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ children, ...restProps }, forwardedRef) => {
+export const ButtonLink = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ children, variant = 'ghost', ...restProps }, forwardedRef) => {
     return (
       <BaseButton
         ref={forwardedRef}
         as={RouterLink}
         children={children}
-        variant="ghost"
+        variant={variant}
         {...restProps}
       />
     )

@@ -5,6 +5,7 @@ import { useGetCategories } from 'entities/categories/api/queries'
 import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
 import { useEffect, useState } from 'react'
 import { DataViewState } from 'widgets/data-view'
+import { Breadcrumbs } from 'shared/ui-kit'
 
 const CategoriesPage = () => {
   const [tableValues, setTableValues] = useState<DataViewState>({
@@ -42,9 +43,10 @@ const CategoriesPage = () => {
   return (
     <div>
       <div>
-        <pre>
-          <code>Breadcrumbs</code>
-        </pre>
+        <Breadcrumbs>
+          <Breadcrumbs.Item to="/">Главная</Breadcrumbs.Item>
+          <Breadcrumbs.Item isLast>Категории</Breadcrumbs.Item>
+        </Breadcrumbs>
 
         <CategoriesDataTableHeader />
 

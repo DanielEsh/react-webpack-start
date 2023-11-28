@@ -1,5 +1,5 @@
 import { Row } from '@tanstack/react-table'
-import { Link } from 'shared/ui-kit/link'
+import { ButtonLink } from 'shared/ui-kit/button-link'
 import { Button } from 'shared/ui-kit/button'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
@@ -23,12 +23,12 @@ export const BrandsDataTableRowActions = ({ row }: Props) => {
 
   return (
     <div className="flex justify-end gap-1">
-      <Link
+      <ButtonLink
         size="sm"
         to={`/brands/${original.slug}`}
       >
         <IconEdit />
-      </Link>
+      </ButtonLink>
 
       <Button
         variant="ghost"

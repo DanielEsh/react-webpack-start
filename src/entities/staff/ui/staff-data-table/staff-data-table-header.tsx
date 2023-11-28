@@ -1,4 +1,4 @@
-import { Link } from 'shared/ui-kit'
+import { ButtonLink } from 'shared/ui-kit'
 import IconPlus from 'shared/assets/icons/plus.svg'
 
 export const StaffDataTableHeader = () => {
@@ -7,12 +7,12 @@ export const StaffDataTableHeader = () => {
       <h1 className="text-2xl">Staff</h1>
 
       <div className="flex gap-3">
-        <Link
+        <ButtonLink
           to="/staff/create"
           addonLeft={<IconPlus />}
         >
           Create
-        </Link>
+        </ButtonLink>
       </div>
     </div>
   )

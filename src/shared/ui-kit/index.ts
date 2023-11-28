@@ -1,5 +1,5 @@
 export * from './button'
-export * from './link'
+export * from './button-link'
 
 export * from './form'
 export * from './form-controls'
