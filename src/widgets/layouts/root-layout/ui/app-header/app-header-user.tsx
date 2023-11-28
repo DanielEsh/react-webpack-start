@@ -29,7 +29,7 @@ export const AppHeaderUser = () => {
           <div className="h-[40px] w-[40px] rounded-full bg-amber-100"></div>
           <div className="flex flex-col items-start">
             <span>Иванов И.И</span>
-            <span>ivanovii@ecommerce.com</span>
+            <span>ivanovii@ecommerce.ru</span>
           </div>
         </Dropdown.Trigger>
 
@@ -39,7 +39,7 @@ export const AppHeaderUser = () => {
             <div className="flex flex-col items-start">
               <span>Иванов И.И</span>
               <span>Старший менеджер</span>
-              <span>ivanovii@ecommerce.com</span>
+              <span>ivanovii@ecommerce.ru</span>
             </div>
           </div>
 

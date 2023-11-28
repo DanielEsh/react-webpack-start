@@ -13,15 +13,6 @@ export const AppSidebar = () => {
         <div className="flex w-full rounded">
           <AppSidebarMenu />
         </div>
-
-        <div className="mt-auto flex flex-col gap-2">
-          <div className="flex h-12 w-full items-center justify-center rounded bg-neutral-800 text-white">
-            THEME SWICHER
-          </div>
-          <div className="flex h-12 w-full items-center justify-center rounded bg-neutral-800 text-white">
-            LANG SWICHER
-          </div>
-        </div>
       </div>
     </div>
   )
