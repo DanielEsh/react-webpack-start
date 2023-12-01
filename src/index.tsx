@@ -6,7 +6,9 @@ import 'shared/lib/l18n/i18'
 
 // msw
 // import { initMsw } from '__mocks__'
-
+import dayjs from 'dayjs'
+import 'dayjs/locale/ru'
+dayjs.locale('ru')
 const initApp = async () => {
   // await initMsw()
 

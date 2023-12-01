@@ -4,8 +4,9 @@ import { DataTableColumnHead } from 'widgets/data-table'
 import { CategoriesDataTableRowActions } from './categories-data-row-actions'
 import { ReactNode } from 'react'
 import { Table } from 'shared/ui-kit/table'
+import { formatDate } from 'shared/utils/dayjs'
 
-export const columns: ColumnDef<Category>[] = [
+export const columns: ColumnDef<Category, any>[] = [
   {
     id: 'id',
     accessorKey: 'id',
@@ -56,7 +57,7 @@ export const columns: ColumnDef<Category>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => <Table.Cell>{formatDate(info.getValue())}</Table.Cell>,
   },
   {
     id: 'updated_at',
@@ -69,7 +70,7 @@ export const columns: ColumnDef<Category>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => <Table.Cell>{formatDate(info.getValue())}</Table.Cell>,
   },
   {
     id: 'actions',
