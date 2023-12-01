@@ -56,7 +56,7 @@ const CategoriesPage = () => {
           <CategoriesDataTable
             data={data?.content}
             defaultDataTableValues={tableValues}
-            totalPages={data.meta.pagination.totalPages}
+            meta={data.meta}
             onChange={handleChange}
           />
         )}

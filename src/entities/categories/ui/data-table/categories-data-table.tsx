@@ -15,11 +15,11 @@ import { DataViewState } from 'widgets/data-view'
 interface Props {
   data: Category[]
   defaultDataTableValues: DataViewState
-  totalPages: number
+  meta: any
   onChange?(state: DataViewState): void
 }
 
-export const CategoriesDataTable = ({ data, totalPages, onChange }: Props) => {
+export const CategoriesDataTable = ({ data, meta, onChange }: Props) => {
   const { mutate: deleteCategoryMutation } = useDeleteCategoryMutation()
   const { invalidateCategories } = useInvalidateCategories()
   const { showNotification } = useNotification()
@@ -45,7 +45,7 @@ export const CategoriesDataTable = ({ data, totalPages, onChange }: Props) => {
       <PaginatedDataView
         data={data}
         columns={columns}
-        meta={{ totalPages }}
+        meta={meta}
         onChange={onChange}
       />
 

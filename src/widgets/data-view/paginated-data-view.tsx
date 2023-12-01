@@ -6,14 +6,10 @@ import { DataViewContext } from './data-view.context'
 import { dataViewReducer } from './constants'
 import { DataViewState } from './types'
 
-interface Meta {
-  totalPages: number
-}
-
 interface Props<DATA> {
   data: DATA[]
   columns: ColumnDef<DATA>[]
-  meta: Meta
+  meta: any
   defaultValues?: DataViewState
   onChange?(state: any): void
 }
@@ -47,7 +43,7 @@ export const PaginatedDataView = <DATA extends unknown | object>(
         columns={columns}
       />
 
-      <DataViewFooterToolbar totalPages={meta.totalPages} />
+      <DataViewFooterToolbar totalPages={meta.pagination.totalPages} />
     </DataViewContext.Provider>
   )
 }

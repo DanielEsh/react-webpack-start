@@ -14,7 +14,7 @@ export const columns: ColumnDef<Category, any>[] = [
       <Table.ColumnHeader className="w-[98px]">
         <DataTableColumnHead
           column={column}
-          title="id"
+          title="Id"
         />
       </Table.ColumnHeader>
     ),
@@ -27,7 +27,7 @@ export const columns: ColumnDef<Category, any>[] = [
       <Table.ColumnHeader className="min-w-[320px]">
         <DataTableColumnHead
           column={column}
-          title="slug"
+          title="Slug"
         />
       </Table.ColumnHeader>
     ),
@@ -40,7 +40,7 @@ export const columns: ColumnDef<Category, any>[] = [
       <Table.ColumnHeader className="min-w-[320px]">
         <DataTableColumnHead
           column={column}
-          title="name"
+          title="Название"
         />
       </Table.ColumnHeader>
     ),
@@ -78,7 +78,7 @@ export const columns: ColumnDef<Category, any>[] = [
       <Table.ColumnHeader className="w-[98px]">
         <DataTableColumnHead
           column={column}
-          title="actions"
+          title=""
         />
       </Table.ColumnHeader>
     ),
