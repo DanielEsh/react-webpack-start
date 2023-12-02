@@ -14,13 +14,13 @@ import { type DataViewState, PaginatedDataView } from 'widgets/data-view'
 interface Props {
   data: BrandDto[]
   defaultDataTableValues: DataViewState
-  totalPages: number
+  meta: any
   onChange?(state: DataViewState): void
 }
 
 export const BrandsDataTable = ({
   data,
-  totalPages,
+  meta,
   defaultDataTableValues,
   onChange,
 }: Props) => {
@@ -48,7 +48,7 @@ export const BrandsDataTable = ({
       <PaginatedDataView
         data={data}
         columns={brandsDataTableColumns}
-        meta={{ totalPages }}
+        meta={meta}
         defaultValues={defaultDataTableValues}
         onChange={onChange}
       />

@@ -44,12 +44,12 @@ export const DataViewFooterToolbar = ({ totalPages }: Props) => {
   return (
     <div className="mt-6 flex items-center justify-end px-2">
       <div className="flex items-center space-x-6 lg:space-x-8">
-        <div className="flex items-center space-x-2">
+        <div className="flex w-[100px] items-center space-x-2">
           <BaseSelect
             defaultValue={10}
             options={rowsPerPageOptions}
             onChange={handleLimitChange}
-            label="Количество записей"
+            label="Количество"
           />
         </div>
         {totalPages > 1 && (

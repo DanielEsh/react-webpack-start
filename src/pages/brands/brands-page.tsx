@@ -5,6 +5,7 @@ import { BrandsDataTableHeader } from 'entities/brands/ui/data-table/brands-data
 import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
 import { useEffect, useState } from 'react'
 import type { DataViewState } from 'widgets/data-view'
+import { Breadcrumbs } from 'shared/ui-kit'
 
 const BrandsPage = () => {
   const [tableValues, setTableValues] = useState<DataViewState>({
@@ -41,9 +42,10 @@ const BrandsPage = () => {
 
   return (
     <div>
-      <pre>
-        <code>Breadcrumbs</code>
-      </pre>
+      <Breadcrumbs>
+        <Breadcrumbs.Item to="/">Главная</Breadcrumbs.Item>
+        <Breadcrumbs.Item isLast>Бренды</Breadcrumbs.Item>
+      </Breadcrumbs>
 
       <BrandsDataTableHeader />
 
@@ -53,7 +55,7 @@ const BrandsPage = () => {
         <BrandsDataTable
           data={data?.content}
           defaultDataTableValues={tableValues}
-          totalPages={data.meta.pagination.totalPages}
+          meta={data.meta}
           onChange={handleChange}
         />
       )}

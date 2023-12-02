@@ -4,8 +4,8 @@ interface Props {
 }
 export const DataTablePageCounter = ({ currentPage, totalPages }: Props) => {
   return (
-    <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-      Page {currentPage} of {totalPages}
+    <div className="flex items-center justify-center text-sm font-medium">
+      Страница {currentPage} из {totalPages}
     </div>
   )
 }
