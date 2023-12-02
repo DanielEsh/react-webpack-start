@@ -12,7 +12,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
-          title="id"
+          title="Id"
         />
       </Table.ColumnHeader>
     ),
@@ -25,7 +25,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
-          title="number"
+          title="номер"
         />
       </Table.ColumnHeader>
     ),
@@ -38,7 +38,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
-          title="payment_status"
+          title="статус оплаты"
         />
       </Table.ColumnHeader>
     ),
@@ -51,7 +51,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
-          title="status"
+          title="статус"
         />
       </Table.ColumnHeader>
     ),
@@ -64,7 +64,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
-          title="total_price"
+          title="общая цена"
         />
       </Table.ColumnHeader>
     ),
@@ -77,7 +77,7 @@ export const getOrdersDataTableColumns: ColumnDef<OrderDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
-          title="actions"
+          title=""
         />
       </Table.ColumnHeader>
     ),

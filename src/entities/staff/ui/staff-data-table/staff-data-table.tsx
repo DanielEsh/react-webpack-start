@@ -19,7 +19,7 @@ export const StaffDataTable = () => {
         <PaginatedDataView
           data={data?.content ?? []}
           columns={staffDataTableColumns}
-          meta={{ totalPages: data?.meta.pagination.totalPages }}
+          meta={data?.meta}
         />
       )}
     </div>

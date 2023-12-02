@@ -7,10 +7,6 @@ export const CategoriesDataTableHeader = () => {
   return (
     <div className="mt-4 mb-2">
       <h1 className="text-2xl">Категории</h1>
-      <p className="w-[600px]">
-        Представляет возможность для логической группировки продукции, облегчая
-        процесс управления и обработки товаров
-      </p>
 
       <div className="mt-4 flex justify-between">
         <div className="flex gap-3"></div>

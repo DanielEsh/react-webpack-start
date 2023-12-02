@@ -14,31 +14,31 @@ export const staffDataTableColumns: ColumnDef<StaffDto, any>[] = [
   {
     id: 'first_name',
     accessorKey: 'first_name',
-    header: () => <Table.ColumnHeader>first name</Table.ColumnHeader>,
+    header: () => <Table.ColumnHeader>Имя</Table.ColumnHeader>,
     cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
   },
   {
     id: 'last_name',
     accessorKey: 'last_name',
-    header: () => <Table.ColumnHeader>last name</Table.ColumnHeader>,
+    header: () => <Table.ColumnHeader>Фамилия</Table.ColumnHeader>,
     cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
   },
   {
     id: 'middle_name',
     accessorKey: 'middle_name',
-    header: () => <Table.ColumnHeader>middle name</Table.ColumnHeader>,
+    header: () => <Table.ColumnHeader>Отчество</Table.ColumnHeader>,
     cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
   },
   {
     id: 'email',
     accessorKey: 'email',
-    header: () => <Table.ColumnHeader>email</Table.ColumnHeader>,
+    header: () => <Table.ColumnHeader>Почта</Table.ColumnHeader>,
     cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
   },
   {
     id: 'phone',
     accessorKey: 'phone',
-    header: () => <Table.ColumnHeader>phone</Table.ColumnHeader>,
+    header: () => <Table.ColumnHeader>Телефон</Table.ColumnHeader>,
     cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
   },
   {
@@ -47,7 +47,7 @@ export const staffDataTableColumns: ColumnDef<StaffDto, any>[] = [
       <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
         <DataTableColumnHead
           column={column}
-          title="actions"
+          title=""
         />
       </Table.ColumnHeader>
     ),
