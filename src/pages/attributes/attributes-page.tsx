@@ -7,6 +7,7 @@ import { Outlet } from 'react-router-dom'
 import { DataViewState } from 'widgets/data-view'
 import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
 import { useEffect, useState } from 'react'
+import { Breadcrumbs } from 'shared/ui-kit'
 
 const AttiributesPage = () => {
   const [tableValues, setTableValues] = useState<DataViewState>({
@@ -43,9 +44,10 @@ const AttiributesPage = () => {
 
   return (
     <div>
-      <pre>
-        <code>Breadcrumbs</code>
-      </pre>
+      <Breadcrumbs>
+        <Breadcrumbs.Item to="/">Главная</Breadcrumbs.Item>
+        <Breadcrumbs.Item isLast>Атрибуты</Breadcrumbs.Item>
+      </Breadcrumbs>
 
       <AttributesDataTableHeader />
 
@@ -55,7 +57,7 @@ const AttiributesPage = () => {
         <AttributesDataTable
           data={data?.content}
           defaultDataTableValues={tableValues}
-          totalPages={data.meta.pagination.totalPages}
+          meta={data.meta}
           onChange={handleChange}
         />
       )}

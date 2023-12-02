@@ -42,7 +42,7 @@ export const WarehouseTable = () => {
         <PaginatedDataView
           data={data?.content ?? []}
           columns={warehouseColumns}
-          meta={{ totalPages: data?.meta.pagination.totalPages }}
+          meta={data?.meta}
         />
       )}
 

@@ -4,8 +4,9 @@ import { AttributesDataTableRowActions } from './attributes-data-table-row-actio
 import { ReactNode } from 'react'
 import { Table } from 'shared/ui-kit/table'
 import { AttributeDto } from 'entities/attributes/api'
+import { formatDate } from 'shared/utils/dayjs'
 
-export const attributesDataTableColumns: ColumnDef<AttributeDto>[] = [
+export const attributesDataTableColumns: ColumnDef<AttributeDto, any>[] = [
   {
     id: 'id',
     accessorKey: 'id',
@@ -13,7 +14,7 @@ export const attributesDataTableColumns: ColumnDef<AttributeDto>[] = [
       <Table.ColumnHeader className="w-[98px]">
         <DataTableColumnHead
           column={column}
-          title="id"
+          title="Id"
         />
       </Table.ColumnHeader>
     ),
@@ -26,7 +27,7 @@ export const attributesDataTableColumns: ColumnDef<AttributeDto>[] = [
       <Table.ColumnHeader className="min-w-[320px]">
         <DataTableColumnHead
           column={column}
-          title="name"
+          title="Название"
         />
       </Table.ColumnHeader>
     ),
@@ -39,11 +40,37 @@ export const attributesDataTableColumns: ColumnDef<AttributeDto>[] = [
       <Table.ColumnHeader className="min-w-[320px]">
         <DataTableColumnHead
           column={column}
-          title="type"
+          title="Тип"
         />
       </Table.ColumnHeader>
     ),
     cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+  },
+  {
+    id: 'created_at',
+    accessorFn: ({ created_at }) => created_at,
+    header: ({ column }) => (
+      <Table.ColumnHeader className="min-w-[320px]">
+        <DataTableColumnHead
+          column={column}
+          title="Дата создания"
+        />
+      </Table.ColumnHeader>
+    ),
+    cell: (info) => <Table.Cell>{formatDate(info.getValue())}</Table.Cell>,
+  },
+  {
+    id: 'updated_at',
+    accessorFn: ({ updated_at }) => updated_at,
+    header: ({ column }) => (
+      <Table.ColumnHeader className="min-w-[320px]">
+        <DataTableColumnHead
+          column={column}
+          title="Дата обновления"
+        />
+      </Table.ColumnHeader>
+    ),
+    cell: (info) => <Table.Cell>{formatDate(info.getValue())}</Table.Cell>,
   },
   {
     id: 'actions',
@@ -51,7 +78,7 @@ export const attributesDataTableColumns: ColumnDef<AttributeDto>[] = [
       <Table.ColumnHeader className="w-[98px]">
         <DataTableColumnHead
           column={column}
-          title="actions"
+          title=""
         />
       </Table.ColumnHeader>
     ),

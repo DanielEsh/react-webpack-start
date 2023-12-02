@@ -13,7 +13,7 @@ export const getProductsColumns: ColumnDef<ProductDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
         <DataTableColumnHead
           column={column}
-          title="id"
+          title="Id"
         />
       </Table.ColumnHeader>
     ),
@@ -26,7 +26,7 @@ export const getProductsColumns: ColumnDef<ProductDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 min-w-[320px] bg-white">
         <DataTableColumnHead
           column={column}
-          title="article"
+          title="Артикул"
         />
       </Table.ColumnHeader>
     ),
@@ -39,7 +39,7 @@ export const getProductsColumns: ColumnDef<ProductDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 min-w-[320px] bg-white">
         <DataTableColumnHead
           column={column}
-          title="name"
+          title="Название"
         />
       </Table.ColumnHeader>
     ),
@@ -52,7 +52,7 @@ export const getProductsColumns: ColumnDef<ProductDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
-          title="price"
+          title="Цена"
         />
       </Table.ColumnHeader>
     ),
@@ -65,7 +65,7 @@ export const getProductsColumns: ColumnDef<ProductDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
-          title="category"
+          title="Категория"
         />
       </Table.ColumnHeader>
     ),
@@ -78,7 +78,7 @@ export const getProductsColumns: ColumnDef<ProductDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 bg-white">
         <DataTableColumnHead
           column={column}
-          title="brand"
+          title="Бренд"
         />
       </Table.ColumnHeader>
     ),
@@ -90,7 +90,7 @@ export const getProductsColumns: ColumnDef<ProductDto, string>[] = [
       <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
         <DataTableColumnHead
           column={column}
-          title="actions"
+          title=""
         />
       </Table.ColumnHeader>
     ),

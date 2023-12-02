@@ -14,13 +14,13 @@ export const warehouseColumns: ColumnDef<WarehouseDto, any>[] = [
   {
     id: 'name',
     accessorKey: 'name',
-    header: ({ column }) => <Table.ColumnHeader>Name</Table.ColumnHeader>,
+    header: ({ column }) => <Table.ColumnHeader>Название</Table.ColumnHeader>,
     cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
   },
   {
     id: 'address',
     accessorKey: 'address',
-    header: ({ column }) => <Table.ColumnHeader>Address</Table.ColumnHeader>,
+    header: ({ column }) => <Table.ColumnHeader>Адрес</Table.ColumnHeader>,
     cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
   },
   {
@@ -29,7 +29,7 @@ export const warehouseColumns: ColumnDef<WarehouseDto, any>[] = [
       <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
         <DataTableColumnHead
           column={column}
-          title="actions"
+          title=""
         />
       </Table.ColumnHeader>
     ),

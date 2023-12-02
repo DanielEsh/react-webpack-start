@@ -9,6 +9,7 @@ import { ProductsDataTableHeader } from 'entities/products/ui/data-table/product
 import { Outlet } from 'react-router-dom'
 import { useNotification } from 'shared/notification'
 import { DeleteState } from 'shared/ui/dialog/confirm-delete'
+import { Breadcrumbs } from 'shared/ui-kit'
 
 const ProductsPage = () => {
   const {
@@ -52,6 +53,11 @@ const ProductsPage = () => {
 
   return (
     <div>
+      <Breadcrumbs>
+        <Breadcrumbs.Item to="/">Главная</Breadcrumbs.Item>
+        <Breadcrumbs.Item isLast>Продукция</Breadcrumbs.Item>
+      </Breadcrumbs>
+
       {isLoading && <div>Loading</div>}
       {isError && <div>Error</div>}
       {data && (
@@ -62,7 +68,7 @@ const ProductsPage = () => {
             onDelete={handleDelete}
             onEndReached={handleNextFetch}
           />
-          <div className="flex gap-5">
+          <div className="mt-4 flex gap-5">
             <div>Всего: {data.pages[0].meta.totalItemsCount}</div>
           </div>
         </>
