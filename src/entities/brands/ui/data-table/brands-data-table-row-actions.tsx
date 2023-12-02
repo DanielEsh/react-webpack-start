@@ -3,11 +3,11 @@ import { ButtonLink } from 'shared/ui-kit/button-link'
 import { Button } from 'shared/ui-kit/button'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
-import { Category } from 'entities/categories/types'
 import { useDeleteConfirmation } from 'shared/ui/dialog/confirm-delete'
+import { BrandDto } from 'entities/brands/api/types'
 
 interface Props {
-  row: Row<Category>
+  row: Row<BrandDto>
 }
 
 export const BrandsDataTableRowActions = ({ row }: Props) => {
@@ -15,7 +15,7 @@ export const BrandsDataTableRowActions = ({ row }: Props) => {
   const { openDeleteConfirmDialog } = useDeleteConfirmation()
 
   const handleDeleteClick = () => {
-    openDeleteConfirmDialog<number, Category>({
+    openDeleteConfirmDialog<number, BrandDto>({
       key: original.id,
       data: original,
     })
