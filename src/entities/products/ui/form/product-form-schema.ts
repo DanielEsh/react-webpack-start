@@ -22,7 +22,7 @@ export const productFormSchema = z.object({
   price: z.number().positive(),
   brandId: z.number(),
   categoryId: z.number(),
-  description: z.string().optional(),
+  description: z.string().optional().nullable(),
   attributeGroup: z.array(productsAttributesGroupsSchema),
 })
 
