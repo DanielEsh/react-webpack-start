@@ -17,6 +17,7 @@ import { sandBoxPages } from './sandbox'
 import warehouseRoutes from 'pages/warehouse'
 import ordersRoutes from 'pages/order'
 import staffRoutes from 'pages/staff'
+import { routerCfg } from 'app/router'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
 export const PageLoader = ({ children }: PropsWithChildren) => (
@@ -34,56 +35,69 @@ export const PrivateRoute = ({ children }: PropsWithChildren) => {
 export const AppRouter = () => {
   return (
     <BrowserRouter>
+      {/*<Routes>*/}
+      {/*  <Route*/}
+      {/*    path={AppRouterPaths.home}*/}
+      {/*    element={*/}
+      {/*      <PageLoader>*/}
+      {/*        <RootLayout />*/}
+      {/*      </PageLoader>*/}
+      {/*    }*/}
+      {/*  >*/}
+      {/*    <Route*/}
+      {/*      index*/}
+      {/*      element={*/}
+      {/*        <PrivateRoute>*/}
+      {/*          <PageLoader>*/}
+      {/*            <HomePage />*/}
+      {/*          </PageLoader>*/}
+      {/*        </PrivateRoute>*/}
+      {/*      }*/}
+      {/*    />*/}
+      {/*    {...categoriesRoutes}*/}
+      {/*    {...brandsRoutes}*/}
+      {/*    {...attributesRoutes}*/}
+      {/*    {...productsRoutes}*/}
+      {/*    {...warehouseRoutes}*/}
+      {/*    {...ordersRoutes}*/}
+      {/*    {...staffRoutes}*/}
+      {/*    {...sandBoxPages}*/}
+      {/*    <Route*/}
+      {/*      path={'profile'}*/}
+      {/*      element={*/}
+      {/*        <PageLoader>*/}
+      {/*          <ProfilePage />*/}
+      {/*        </PageLoader>*/}
+      {/*      }*/}
+      {/*    />*/}
+      {/*    <Route*/}
+      {/*      path={AppRouterPaths.notFound}*/}
+      {/*      element={*/}
+      {/*        <PageLoader>*/}
+      {/*          <NotFoundPage />*/}
+      {/*        </PageLoader>*/}
+      {/*      }*/}
+      {/*    />*/}
+      {/*  </Route>*/}
+      {/*  <Route path={'login'}>*/}
+      {/*    <Route*/}
+      {/*      index*/}
+      {/*      element={<LoginPage />}*/}
+      {/*    />*/}
+      {/*  </Route>*/}
+      {/*</Routes>*/}
+
       <Routes>
-        <Route
-          path={AppRouterPaths.home}
-          element={
-            <PageLoader>
-              <RootLayout />
-            </PageLoader>
-          }
-        >
-          <Route
-            index
-            element={
-              <PrivateRoute>
-                <PageLoader>
-                  <HomePage />
-                </PageLoader>
-              </PrivateRoute>
-            }
-          />
-          {...categoriesRoutes}
-          {...brandsRoutes}
-          {...attributesRoutes}
-          {...productsRoutes}
-          {...warehouseRoutes}
-          {...ordersRoutes}
-          {...staffRoutes}
-          {...sandBoxPages}
-          <Route
-            path={'profile'}
-            element={
-              <PageLoader>
-                <ProfilePage />
-              </PageLoader>
-            }
-          />
-          <Route
-            path={AppRouterPaths.notFound}
-            element={
-              <PageLoader>
-                <NotFoundPage />
-              </PageLoader>
-            }
-          />
-        </Route>
-        <Route path={'login'}>
-          <Route
-            index
-            element={<LoginPage />}
-          />
-        </Route>
+        {Object.entries(routerCfg).map(([key, route]) => {
+          console.log('key', key)
+          console.log('route', route)
+          return (
+            <Route
+              key={key}
+              {...route}
+            />
+          )
+        })}
       </Routes>
     </BrowserRouter>
   )
