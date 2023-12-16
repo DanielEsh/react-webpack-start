@@ -6,6 +6,7 @@ import {
   WarehouseCreateDto,
   WarehouseUpdateDto,
   WarehouseProductDto,
+  CreateWarehouseProductDto,
 } from 'entities/warehouse/api/dto'
 import { ProductDto } from 'entities/products'
 import { UpdateProductDto } from 'entities/products/api/types'
@@ -20,6 +21,22 @@ interface Params {
 
 export const createWarehouse = async (warehouseDto: WarehouseCreateDto) => {
   return (await $api.post(`/warehouse`, warehouseDto)).data
+}
+
+interface Test {
+  warehouseId: number
+  createWarehouseProductDto: CreateWarehouseProductDto
+}
+
+export const createWarehouseProduct = async (options: Test) => {
+  const { warehouseId, createWarehouseProductDto } = options
+
+  return (
+    await $api.post<WarehouseProductDto>(
+      `/warehouse/${warehouseId}/products`,
+      createWarehouseProductDto,
+    )
+  ).data
 }
 
 export const getWarehouses = async (params: Params) => {

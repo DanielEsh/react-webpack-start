@@ -17,6 +17,7 @@ import {
   warehouseProductSchema,
   WarehouseProductsForm,
 } from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-schema'
+import { useCreateWarehouseProductMutation } from 'entities/warehouse/api/queries/use-create-warehouse-product-mutation'
 
 interface Props {
   id: number
@@ -41,6 +42,8 @@ export const WarehouseProductsTable = ({ id }: Props) => {
 
   const [opened, { open, close }] = useDisclosure()
   const formMethods = useForm(warehouseProductSchema)
+
+  const { mutate: createWarehouseProduct } = useCreateWarehouseProductMutation()
 
   const table = useReactTable({
     data: localData,
@@ -67,7 +70,11 @@ export const WarehouseProductsTable = ({ id }: Props) => {
   }
 
   const handleSubmit = (warehouseProductForm: WarehouseProductsForm) => {
-    console.log('submit', warehouseProductForm)
+    createWarehouseProduct({
+      warehouseId: id,
+      createWarehouseProductDto: warehouseProductForm,
+    })
+    close()
   }
 
   const handlePagination = (page: any) => {
