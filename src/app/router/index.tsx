@@ -1,10 +1,23 @@
-import { RouteProps } from 'react-router-dom'
+import { Navigate, RouteProps } from 'react-router-dom'
 import RootLayout from 'widgets/layouts/root-layout'
-import { PageLoader, PrivateRoute } from 'pages'
-import { lazy } from 'react'
+import { lazy, PropsWithChildren, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { useStore } from 'effector-react'
+import { $authStore } from 'features/auth/model'
 
 const HomePage = lazy(() => import('pages/home-page'))
+
+const PageLoader = ({ children }: PropsWithChildren) => (
+  <Suspense fallback={<div>PAGE LOADER...</div>}>
+    <>{children}</>
+  </Suspense>
+)
+
+const PrivateRoute = ({ children }: PropsWithChildren) => {
+  const { isSuccessAuth } = useStore($authStore)
+
+  return isSuccessAuth ? <>{children}</> : <Navigate to="/login" />
+}
 
 export enum AppRoutes {
   HOME = 'home',
@@ -20,7 +33,13 @@ export enum AppLayouts {
 const appRoutes: Record<AppRoutes, RouteProps> = {
   [AppRoutes.HOME]: {
     index: true,
-    element: <div>HOME page</div>,
+    element: (
+      <PrivateRoute>
+        <PageLoader>
+          <HomePage />
+        </PageLoader>
+      </PrivateRoute>
+    ),
   },
   [AppRoutes.CATEGORIES]: {
     path: 'categories',
