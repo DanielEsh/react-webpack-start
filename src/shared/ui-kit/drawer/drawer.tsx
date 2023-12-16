@@ -5,7 +5,7 @@ import { classNames } from 'shared/utils/classNames'
 import { Modal } from '../modal'
 import { DrawerClose } from './drawer-close'
 
-const drawerVariants = cva('fixed overflow-auto z-50 bg-white shadow-lg', {
+const drawerVariants = cva('fixed overflow-auto bg-white shadow-lg', {
   variants: {
     side: {
       top: 'inset-x-0 top-0 border-b',

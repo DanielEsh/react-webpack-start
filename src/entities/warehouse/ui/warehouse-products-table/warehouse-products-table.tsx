@@ -17,7 +17,7 @@ import {
   warehouseProductSchema,
   WarehouseProductsForm,
 } from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-schema'
-import type { DataViewState } from 'widgets/data-view'
+
 interface Props {
   id: number
 }
@@ -26,7 +26,7 @@ export const WarehouseProductsTable = ({ id }: Props) => {
   const [localData, setLocalData] = useState<any>([])
   const [tableValues, setTableValues] = useState<any>({
     page: 1,
-    limit: 2,
+    limit: 5,
   })
 
   const { data } = useGetWarehouseProductsQuery(id, {
