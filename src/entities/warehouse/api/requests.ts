@@ -31,10 +31,11 @@ export const getWarehouseById = async (id: number) => {
   return (await $api.get<WarehouseDto>(`/warehouse/${id}`)).data
 }
 
-export const getWarehouseProducts = async (id: number) => {
+export const getWarehouseProducts = async (id: number, params: Params) => {
+  const query = `${qs.stringify(params)}`
   return (
     await $api.get<PageableResponse<WarehouseProductDto>>(
-      `/warehouse/${id}/products`,
+      `/warehouse/${id}/products?${query}`,
     )
   ).data
 }

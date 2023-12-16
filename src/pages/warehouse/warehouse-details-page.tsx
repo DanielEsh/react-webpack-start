@@ -59,6 +59,7 @@ export default function WarehouseDetailsPage() {
   }
 
   const handleSubmit = async (form: any) => {
+    console.log('HANDLE MAIN SUBMIT')
     await updateWarehouseByIdMutate(
       {
         form,
@@ -75,11 +76,7 @@ export default function WarehouseDetailsPage() {
       open
       onOpenChange={close}
     >
-      <Form
-        className="flex h-full flex-col"
-        methods={formMethods}
-        onSubmit={handleSubmit}
-      >
+      <div className="flex h-full flex-col">
         {isLoading && <div>Loading...</div>}
         {isError && <div>Error</div>}
 
@@ -89,10 +86,14 @@ export default function WarehouseDetailsPage() {
               <h2>Update warehouse</h2>
             </DrawerHeader>
 
-            <div className="flex flex-col gap-4 px-6">
+            <Form
+              methods={formMethods}
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-4 px-6"
+            >
               <WarehouseFormFields />
-              <WarehouseProductsTable id={+id} />
-            </div>
+            </Form>
+            <WarehouseProductsTable id={+id} />
 
             <DrawerFooter>
               <div className="flex gap-2 px-4 pb-6">
@@ -114,7 +115,7 @@ export default function WarehouseDetailsPage() {
             </DrawerFooter>
           </>
         )}
-      </Form>
+      </div>
     </Drawer>
   )
 }

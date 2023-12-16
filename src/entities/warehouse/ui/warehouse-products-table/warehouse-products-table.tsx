@@ -5,26 +5,42 @@ import {
 } from '@tanstack/react-table'
 import { useGetWarehouseProductsQuery } from 'entities/warehouse/api/queries/use-get-warehouse-products-query'
 import { warehouseProductsTableColumns } from 'entities/warehouse/ui/warehouse-products-table/warehouse-products-table-columns'
-import { Button, Table } from 'shared/ui-kit'
+import { Button, Form, InputNumber, Table } from 'shared/ui-kit'
+import { useForm } from 'shared/ui-kit/form/use-form'
 import { DataTablePageCounter } from 'shared/ui/data-table/data-table-page-counter'
 import { Pagiantion } from 'shared/ui-kit/Pagiantion/Pagination'
 import { useState } from 'react'
 import { Modal } from 'shared/ui-kit/modal'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 import { ProductSelect } from 'entities/products/ui/product-select'
+import {
+  warehouseProductSchema,
+  WarehouseProductsForm,
+} from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-schema'
+import type { DataViewState } from 'widgets/data-view'
 interface Props {
   id: number
 }
 
 export const WarehouseProductsTable = ({ id }: Props) => {
   const [localData, setLocalData] = useState<any>([])
+  const [tableValues, setTableValues] = useState<any>({
+    page: 1,
+    limit: 2,
+  })
+
   const { data } = useGetWarehouseProductsQuery(id, {
+    params: {
+      page: tableValues.page,
+      limit: tableValues.limit,
+    },
     onSuccess: (data) => {
       setLocalData(data.content)
     },
   })
 
   const [opened, { open, close }] = useDisclosure()
+  const formMethods = useForm(warehouseProductSchema)
 
   const table = useReactTable({
     data: localData,
@@ -48,6 +64,18 @@ export const WarehouseProductsTable = ({ id }: Props) => {
 
     setLocalData((state) => [...state, mock])
     open()
+  }
+
+  const handleSubmit = (warehouseProductForm: WarehouseProductsForm) => {
+    console.log('submit', warehouseProductForm)
+  }
+
+  const handlePagination = (page: any) => {
+    console.log('PAGE', page)
+    setTableValues((state) => ({
+      ...state,
+      page,
+    }))
   }
 
   return (
@@ -110,6 +138,7 @@ export const WarehouseProductsTable = ({ id }: Props) => {
                 <Pagiantion
                   totalPages={data.meta.pagination.totalPages}
                   currentPage={data.meta.pagination.page}
+                  onChange={handlePagination}
                 />
               </>
             )}
@@ -121,9 +150,32 @@ export const WarehouseProductsTable = ({ id }: Props) => {
         open={opened}
         onOpenChange={close}
       >
-        <div>
-          <ProductSelect />
-        </div>
+        <Form
+          methods={formMethods}
+          className="p-4"
+          onSubmit={handleSubmit}
+        >
+          <div className="flex flex-col gap-3">
+            <Form.Field name="productId">
+              <ProductSelect />
+            </Form.Field>
+
+            <Form.Field name="quantity">
+              <InputNumber label="quantity" />
+            </Form.Field>
+          </div>
+
+          <div className="mt-3.5 flex gap-3">
+            <Button
+              type="submit"
+              variant="primary"
+            >
+              Submit
+            </Button>
+
+            <Button>Cancel</Button>
+          </div>
+        </Form>
       </Modal>
     </>
   )
