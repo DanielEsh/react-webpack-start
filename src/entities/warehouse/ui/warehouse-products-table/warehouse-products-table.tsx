@@ -24,7 +24,6 @@ interface Props {
 }
 
 export const WarehouseProductsTable = ({ id }: Props) => {
-  const [localData, setLocalData] = useState<any>([])
   const [tableValues, setTableValues] = useState<any>({
     page: 1,
     limit: 5,
@@ -35,9 +34,6 @@ export const WarehouseProductsTable = ({ id }: Props) => {
       page: tableValues.page,
       limit: tableValues.limit,
     },
-    onSuccess: (data) => {
-      setLocalData(data.content)
-    },
   })
 
   const [opened, { open, close }] = useDisclosure()
@@ -46,28 +42,10 @@ export const WarehouseProductsTable = ({ id }: Props) => {
   const { mutate: createWarehouseProduct } = useCreateWarehouseProductMutation()
 
   const table = useReactTable({
-    data: localData,
+    data: data?.content || [],
     columns: warehouseProductsTableColumns,
     getCoreRowModel: getCoreRowModel(),
   })
-
-  const addProduct = () => {
-    const mock = {
-      id: 1,
-      quantity: 50,
-      product: {
-        id: 15,
-        article: 'O015',
-        name: 'Тостер с функцией разморозки',
-        price: 69,
-        description: null,
-        attributeGroup: [],
-      },
-    }
-
-    setLocalData((state) => [...state, mock])
-    open()
-  }
 
   const handleSubmit = (warehouseProductForm: WarehouseProductsForm) => {
     createWarehouseProduct({
@@ -78,7 +56,6 @@ export const WarehouseProductsTable = ({ id }: Props) => {
   }
 
   const handlePagination = (page: any) => {
-    console.log('PAGE', page)
     setTableValues((state) => ({
       ...state,
       page,
@@ -131,7 +108,7 @@ export const WarehouseProductsTable = ({ id }: Props) => {
           </Table>
 
           <div>
-            <Button onClick={addProduct}>Добавить</Button>
+            <Button onClick={open}>Добавить</Button>
           </div>
 
           <div className="flex justify-end">
@@ -180,7 +157,7 @@ export const WarehouseProductsTable = ({ id }: Props) => {
               Submit
             </Button>
 
-            <Button>Cancel</Button>
+            <Button onClick={close}>Cancel</Button>
           </div>
         </Form>
       </Modal>
