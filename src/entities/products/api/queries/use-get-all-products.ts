@@ -16,7 +16,11 @@ const flatResponse = <T>(pages: PageableResponse<T>[] = []) => {
 
 const LIMIT = 20
 
-export const useGetProducts = () => {
+interface Options {
+  onSuccess?(data?: any): void
+}
+
+export const useGetProducts = (options?: Options) => {
   const {
     isLoading,
     isError,
@@ -34,6 +38,7 @@ export const useGetProducts = () => {
       })
     },
     keepPreviousData: true,
+    onSuccess: options?.onSuccess,
     getNextPageParam: (lastPage) => {
       return lastPage.meta.pagination.links.next
     },

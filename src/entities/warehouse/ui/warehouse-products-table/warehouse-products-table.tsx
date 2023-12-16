@@ -9,6 +9,9 @@ import { Button, Table } from 'shared/ui-kit'
 import { DataTablePageCounter } from 'shared/ui/data-table/data-table-page-counter'
 import { Pagiantion } from 'shared/ui-kit/Pagiantion/Pagination'
 import { useState } from 'react'
+import { Modal } from 'shared/ui-kit/modal'
+import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
+import { ProductSelect } from 'entities/products/ui/product-select'
 interface Props {
   id: number
 }
@@ -20,6 +23,8 @@ export const WarehouseProductsTable = ({ id }: Props) => {
       setLocalData(data.content)
     },
   })
+
+  const [opened, { open, close }] = useDisclosure()
 
   const table = useReactTable({
     data: localData,
@@ -42,6 +47,7 @@ export const WarehouseProductsTable = ({ id }: Props) => {
     }
 
     setLocalData((state) => [...state, mock])
+    open()
   }
 
   return (
@@ -110,6 +116,15 @@ export const WarehouseProductsTable = ({ id }: Props) => {
           </div>
         </div>
       )}
+
+      <Modal
+        open={opened}
+        onOpenChange={close}
+      >
+        <div>
+          <ProductSelect />
+        </div>
+      </Modal>
     </>
   )
 }

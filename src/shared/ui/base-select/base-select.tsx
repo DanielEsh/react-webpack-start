@@ -28,7 +28,7 @@ export const BaseSelect = (props: BaseSelectProps) => {
       <Select.Trigger className={className}>
         <Select.Value placeholder={label}></Select.Value>
       </Select.Trigger>
-      <Select.Content>
+      <Select.Content className="max-h-[250px]">
         {options.length ? (
           options.map(({ value, label }) => (
             <Select.Item
