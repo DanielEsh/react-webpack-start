@@ -17,7 +17,7 @@ import { sandBoxPages } from './sandbox'
 import warehouseRoutes from 'pages/warehouse'
 import ordersRoutes from 'pages/order'
 import staffRoutes from 'pages/staff'
-import { routerCfg } from 'app/router'
+import { routerConfig } from 'app/router'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
 export const PageLoader = ({ children }: PropsWithChildren) => (
@@ -88,7 +88,7 @@ export const AppRouter = () => {
       {/*</Routes>*/}
 
       <Routes>
-        {Object.entries(routerCfg).map(([key, route]) => {
+        {Object.entries(routerConfig).map(([key, route]) => {
           console.log('key', key)
           console.log('route', route)
           return (
