@@ -18,6 +18,7 @@ import warehouseRoutes from 'pages/warehouse'
 import ordersRoutes from 'pages/order'
 import staffRoutes from 'pages/staff'
 import { routerConfig } from 'app/router'
+import { renderRouteFromConfig } from 'app/router/ui/render-route-from-config'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
 export const PageLoader = ({ children }: PropsWithChildren) => (
@@ -87,18 +88,7 @@ export const AppRouter = () => {
       {/*  </Route>*/}
       {/*</Routes>*/}
 
-      <Routes>
-        {Object.entries(routerConfig).map(([key, route]) => {
-          console.log('key', key)
-          console.log('route', route)
-          return (
-            <Route
-              key={key}
-              {...route}
-            />
-          )
-        })}
-      </Routes>
+      <Routes>{renderRouteFromConfig(routerConfig)}</Routes>
     </BrowserRouter>
   )
 }

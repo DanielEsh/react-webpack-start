@@ -4,6 +4,7 @@ import RootLayout from 'widgets/layouts/root-layout'
 import { AppLayouts, AppRoutes } from 'app/router/types'
 import { lazy } from 'react'
 import { PageLoader } from 'shared/ui/page-loader'
+import { renderRouteFromConfig } from 'app/router/ui/render-route-from-config'
 
 const HomePage = lazy(() => import('pages/home-page'))
 
@@ -36,11 +37,6 @@ export const routerConfig: Record<AppLayouts, RouteProps> = {
   [AppLayouts.APP]: {
     path: '/',
     element: <RootLayout />,
-    children: Object.entries(appRoutes).map(([key, route]) => (
-      <Route
-        key={key}
-        {...route}
-      />
-    )),
+    children: renderRouteFromConfig(appRoutes),
   },
 }
