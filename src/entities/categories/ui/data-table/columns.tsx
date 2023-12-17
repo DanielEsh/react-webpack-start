@@ -18,7 +18,7 @@ export const columns: ColumnDef<Category, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue() as ReactNode,
   },
   {
     id: 'slug',
@@ -31,7 +31,7 @@ export const columns: ColumnDef<Category, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue() as ReactNode,
   },
   {
     id: 'name',
@@ -44,7 +44,7 @@ export const columns: ColumnDef<Category, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue() as ReactNode,
   },
   {
     id: 'created_at',
@@ -57,7 +57,7 @@ export const columns: ColumnDef<Category, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{formatDate(info.getValue())}</Table.Cell>,
+    cell: (info) => formatDate(info.getValue()),
   },
   {
     id: 'updated_at',
@@ -70,7 +70,7 @@ export const columns: ColumnDef<Category, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{formatDate(info.getValue())}</Table.Cell>,
+    cell: (info) => formatDate(info.getValue()),
   },
   {
     id: 'actions',
@@ -82,11 +82,7 @@ export const columns: ColumnDef<Category, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: ({ row }) => (
-      <Table.Cell>
-        <CategoriesDataTableRowActions row={row} />
-      </Table.Cell>
-    ),
+    cell: ({ row }) => <CategoriesDataTableRowActions row={row} />,
     enableSorting: false,
   },
 ]

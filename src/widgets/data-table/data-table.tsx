@@ -7,10 +7,12 @@ import {
   SortingState,
 } from '@tanstack/react-table'
 import { Table } from 'shared/ui-kit/table'
-import { useContext, useState } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
 import { DataViewContext } from 'widgets/data-view/data-view.context'
 import { DataViewActions, type SortPayload } from 'widgets/data-view/types'
+import { getProductsColumns } from 'entities/products/ui/data-table/products-data-table-columns'
+import { DataTableBody } from 'widgets/data-table/data-table-body'
 
 interface Props<DATA> {
   data: DATA[]
@@ -80,37 +82,24 @@ export const DataTable = <TData extends unknown | object>(
         <Table.Head>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Row key={headerGroup.id}>
-              {headerGroup.headers.map((header) =>
-                header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    ),
-              )}
+              {headerGroup.headers.map((header) => (
+                <Fragment key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                </Fragment>
+              ))}
             </Table.Row>
           ))}
         </Table.Head>
         <Table.Body>
-          {table.getRowModel().rows?.length ? (
-            table
-              .getRowModel()
-              .rows.map((row) => (
-                <Table.Row key={row.id}>
-                  {row
-                    .getVisibleCells()
-                    .map((cell) =>
-                      flexRender(cell.column.columnDef.cell, cell.getContext()),
-                    )}
-                </Table.Row>
-              ))
-          ) : (
-            <Table.Row>
-              <Table.Cell className="h-[308px] text-center">
-                No results.
-              </Table.Cell>
-            </Table.Row>
-          )}
+          <DataTableBody
+            rows={table.getRowModel().rows}
+            columnsLength={columns.length}
+          />
         </Table.Body>
       </Table>
     </div>
