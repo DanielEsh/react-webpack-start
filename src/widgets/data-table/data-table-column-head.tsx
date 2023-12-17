@@ -26,7 +26,7 @@ export const DataTableColumnHead = <TData, TValue>(
     return <span>{title}</span>
   }
 
-  const renderIcon = () =>
+  const renderSortIcon = () =>
     column.getIsSorted() === 'desc' ? (
       <IconSortDescending className="h-4 w-4" />
     ) : column.getIsSorted() === 'asc' ? (
@@ -40,7 +40,7 @@ export const DataTableColumnHead = <TData, TValue>(
       className="-ml-2"
       size="sm"
       variant="ghost"
-      addonRight={renderIcon()}
+      addonRight={renderSortIcon()}
       onClick={toggleSort}
     >
       {title}
