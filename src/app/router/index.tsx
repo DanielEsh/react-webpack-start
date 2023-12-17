@@ -1,1 +1,1 @@
-export { routerConfig } from 'app/router/router-config'
+export { routerConfig } from 'app/router/config/router-config'
