@@ -1,7 +1,8 @@
 import { Column } from '@tanstack/react-table'
 import { Button } from 'shared/ui-kit/button'
-import IconArrowUp from 'shared/assets/icons/arrow-up.svg'
-import IconArrowDown from 'shared/assets/icons/arrow-down.svg'
+import IconArrowDownUp from 'shared/assets/icons/arrow-down-up.svg'
+import IconSortAscending from 'shared/assets/icons/sort-ascending.svg'
+import IconSortDescending from 'shared/assets/icons/sort-descending.svg'
 
 interface Props<TData, TValue> {
   column: Column<TData, TValue>
@@ -27,10 +28,12 @@ export const DataTableColumnHead = <TData, TValue>(
 
   const renderIcon = () =>
     column.getIsSorted() === 'desc' ? (
-      <IconArrowDown />
+      <IconSortDescending className="h-4 w-4" />
     ) : column.getIsSorted() === 'asc' ? (
-      <IconArrowUp />
-    ) : null
+      <IconSortAscending className="h-4 w-4" />
+    ) : (
+      <IconArrowDownUp className="h-4 w-4" />
+    )
 
   return (
     <Button
