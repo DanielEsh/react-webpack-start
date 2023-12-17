@@ -6,7 +6,7 @@ import IconSortDescending from 'shared/assets/icons/sort-descending.svg'
 
 interface Props<TData, TValue> {
   column: Column<TData, TValue>
-  title: string
+  title?: string
 }
 
 export const DataTableColumnHead = <TData, TValue>(

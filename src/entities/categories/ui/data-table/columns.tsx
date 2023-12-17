@@ -76,10 +76,7 @@ export const columns: ColumnDef<Category, any>[] = [
     id: 'actions',
     header: ({ column }) => (
       <Table.ColumnHeader className="w-[98px]">
-        <DataTableColumnHead
-          column={column}
-          title=""
-        />
+        <DataTableColumnHead column={column} />
       </Table.ColumnHeader>
     ),
     cell: ({ row }) => <CategoriesDataTableRowActions row={row} />,
