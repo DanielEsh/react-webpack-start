@@ -11,7 +11,6 @@ import { Fragment, useContext, useState } from 'react'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
 import { DataViewContext } from 'widgets/data-view/data-view.context'
 import { DataViewActions, type SortPayload } from 'widgets/data-view/types'
-import { getProductsColumns } from 'entities/products/ui/data-table/products-data-table-columns'
 import { DataTableBody } from 'widgets/data-table/data-table-body'
 
 interface Props<DATA> {
@@ -81,7 +80,10 @@ export const DataTable = <TData extends unknown | object>(
       <Table>
         <Table.Head>
           {table.getHeaderGroups().map((headerGroup) => (
-            <Table.Row key={headerGroup.id}>
+            <Table.Row
+              key={headerGroup.id}
+              className="hover:bg-white"
+            >
               {headerGroup.headers.map((header) => (
                 <Fragment key={header.id}>
                   {header.isPlaceholder

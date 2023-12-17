@@ -1,5 +1,6 @@
 import { flexRender, Row } from '@tanstack/react-table'
 import { Table } from 'shared/ui-kit'
+import { DataTableEmpty } from 'shared/ui/data-table/data-table-empty'
 
 interface Props {
   rows: Row<any>[]
@@ -11,10 +12,10 @@ export const DataTableBody = ({ rows, columnsLength }: Props) => {
     return (
       <Table.Row>
         <Table.Cell
-          className="h-[308px] text-center"
+          className="h-[308px] bg-white text-center"
           colSpan={columnsLength}
         >
-          No results.
+          <DataTableEmpty />
         </Table.Cell>
       </Table.Row>
     )
