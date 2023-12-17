@@ -1,7 +1,5 @@
 import { StrictMode, Suspense } from 'react'
-// import { BrowserRouter } from 'react-router-dom'
-// import { AppRouter } from 'app/providers/router'
-import { AppRouter } from 'pages'
+import { AppRouter } from 'app/router/ui/app-router'
 // import { ErrorBoundary } from 'app/providers/ErrorBoundary'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from 'shared/lib/react-query'
