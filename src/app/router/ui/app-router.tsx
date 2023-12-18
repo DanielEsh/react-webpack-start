@@ -16,6 +16,7 @@ import { sandBoxPages } from 'pages/sandbox'
 import warehouseRoutes from 'pages/warehouse'
 import ordersRoutes from 'pages/order'
 import staffRoutes from 'pages/staff'
+import { Page } from 'app/router/ui/page'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
 export const AppRouter = () => {
@@ -25,19 +26,17 @@ export const AppRouter = () => {
         <Route
           path={AppRouterPaths.home}
           element={
-            <PageLoader>
+            <Page>
               <RootLayout />
-            </PageLoader>
+            </Page>
           }
         >
           <Route
             index
             element={
-              <PrivateRoute>
-                <PageLoader>
-                  <HomePage />
-                </PageLoader>
-              </PrivateRoute>
+              <Page isPrivate={true}>
+                <HomePage />
+              </Page>
             }
           />
           {...categoriesRoutes}
