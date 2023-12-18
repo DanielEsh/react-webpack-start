@@ -2,7 +2,7 @@ import { Row } from '@tanstack/react-table'
 // import { useDeleteConfirmation } from 'shared/ui/dialog/confirm-delete'
 import { ProductDto } from 'entities/products/api'
 import { useDeleteConfirmation } from 'shared/ui/dialog/confirm-delete'
-import { DataTableRowButtons } from 'widgets/data-table/data-table-row-actions'
+import { DataTableRowButtons } from 'shared/ui/data-table/data-table-row-actions'
 
 interface Props {
   row: Row<ProductDto>

@@ -11,7 +11,7 @@ import { Fragment, useContext, useState } from 'react'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
 import { DataViewContext } from 'widgets/data-view/data-view.context'
 import { DataViewActions, type SortPayload } from 'widgets/data-view/types'
-import { DataTableBody } from 'widgets/data-table/data-table-body'
+import { DataTableBody } from 'shared/ui/data-table/data-table-body'
 
 interface Props<DATA> {
   data: DATA[]

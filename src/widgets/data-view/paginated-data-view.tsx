@@ -1,5 +1,5 @@
 import { type ColumnDef } from '@tanstack/react-table'
-import { DataTable } from 'widgets/data-table'
+import { DataTable } from 'shared/ui/data-table'
 import { DataViewFooterToolbar } from './data-view-footer-toolbar'
 import { useEffect, useReducer } from 'react'
 import { DataViewContext } from './data-view.context'

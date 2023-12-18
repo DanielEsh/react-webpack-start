@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { Category } from 'entities/categories/types'
-import { DataTableColumnHead } from 'widgets/data-table'
+import { DataTableColumnHead } from 'shared/ui/data-table'
 import { CategoriesDataTableRowActions } from './categories-data-row-actions'
 import { ReactNode } from 'react'
 import { Table } from 'shared/ui-kit/table'

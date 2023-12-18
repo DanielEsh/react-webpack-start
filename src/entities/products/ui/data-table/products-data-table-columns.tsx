@@ -1,5 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { DataTableColumnHead } from 'widgets/data-table'
+import { DataTableColumnHead } from 'shared/ui/data-table'
 import { Table } from 'shared/ui-kit/table'
 import { ProductDto } from 'entities/products/api'
 import { ProductsDataTableRowActions } from './products-data-table-row-actions'

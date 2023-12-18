@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { Table } from 'shared/ui-kit'
-import { DataTableColumnHead } from 'widgets/data-table'
+import { DataTableColumnHead } from 'shared/ui/data-table'
 import { OrderDto } from 'entities/order/api/dto'
 import { OrderDataTableRowActions } from './order-data-table-row-actions'
 

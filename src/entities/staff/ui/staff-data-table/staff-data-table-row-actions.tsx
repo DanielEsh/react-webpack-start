@@ -1,5 +1,5 @@
 import { useDeleteConfirmation } from 'shared/ui/dialog/confirm-delete'
-import { DataTableRowButtons } from 'widgets/data-table/data-table-row-actions'
+import { DataTableRowButtons } from 'shared/ui/data-table/data-table-row-actions'
 import { Row } from '@tanstack/react-table'
 import { StaffDto } from 'entities/staff/api/dto'
 

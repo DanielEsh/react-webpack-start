@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { StaffDto } from 'entities/staff/api/dto'
 import { Table } from 'shared/ui-kit'
-import { DataTableColumnHead } from 'widgets/data-table'
+import { DataTableColumnHead } from 'shared/ui/data-table'
 import { StaffDataTableRowActions } from 'entities/staff/ui/staff-data-table/staff-data-table-row-actions'
 
 export const staffDataTableColumns: ColumnDef<StaffDto, any>[] = [

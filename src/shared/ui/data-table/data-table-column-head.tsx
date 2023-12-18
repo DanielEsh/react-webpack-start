@@ -32,7 +32,7 @@ export const DataTableColumnHead = <TData, TValue>(
     ) : column.getIsSorted() === 'asc' ? (
       <IconSortAscending className="h-4 w-4" />
     ) : (
-      <IconArrowDownUp className="h-4 w-4" />
+      <IconArrowDownUp className="h-4 w-4 text-gray-400" />
     )
 
   return (
