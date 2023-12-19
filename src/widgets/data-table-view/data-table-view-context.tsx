@@ -7,9 +7,15 @@ interface DataTableViewContextValues {
   dispatch: Dispatch<DataTableViewChangeActions>
 }
 
-const DataTableViewContext = createContext<DataTableViewContextValues | null>(
-  null,
-)
+export const DataTableViewContext = createContext<DataTableViewContextValues>({
+  state: {
+    page: 1,
+    limit: 10,
+  },
+  dispatch: () => {
+    throw new Error('not implemented')
+  },
+})
 
 interface Props extends TypeWithChildren {
   value: DataTableViewContextValues
