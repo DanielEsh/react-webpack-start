@@ -6,6 +6,7 @@ import { useSyncWithQueryParams } from 'widgets/data-view/use-sync-query-string'
 import { useEffect, useState } from 'react'
 import { DataViewState } from 'widgets/data-view'
 import { Breadcrumbs } from 'shared/ui-kit'
+import { DataTableView } from 'widgets/data-table-view/data-table-view'
 
 const CategoriesPage = () => {
   const [tableValues, setTableValues] = useState<DataViewState>({
@@ -53,12 +54,16 @@ const CategoriesPage = () => {
         {isError && <div>Error...</div>}
         {isLoading && <div>Loading...</div>}
         {data && (
-          <CategoriesDataTable
-            data={data?.content}
-            defaultDataTableValues={tableValues}
-            meta={data.meta}
-            onChange={handleChange}
-          />
+          <>
+            <CategoriesDataTable
+              data={data?.content}
+              defaultDataTableValues={tableValues}
+              meta={data.meta}
+              onChange={handleChange}
+            />
+
+            <DataTableView />
+          </>
         )}
 
         <Outlet />
