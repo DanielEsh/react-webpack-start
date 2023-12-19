@@ -29,7 +29,8 @@ export const DataViewTableToolbar = () => {
   const handleLimitChange = (limit: number) => {
     dispatch({
       type: DataTableViewActions.LIMIT_CHANGE,
-      payload: limit,
+      // TODO: почему-то radixui select превращает number в string. Заменить на свой селект
+      payload: +limit,
     })
   }
 
