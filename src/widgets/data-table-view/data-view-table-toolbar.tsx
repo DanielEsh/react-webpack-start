@@ -42,9 +42,9 @@ export const DataViewTableToolbar = () => {
   }
 
   return (
-    <div className="mt-6 flex items-center justify-between px-2">
+    <div className="mt-6 flex items-center justify-between">
       <div>
-        <span>Всего элементов: 20</span>
+        <span className="font-medium">Всего элементов: 20</span>
       </div>
 
       <div className="flex items-center space-x-6">
