@@ -1,25 +1,31 @@
 import { useReducer } from 'react'
 import { dataTableViewReducer, DataTableViewActions } from './constants'
+import { DataTableViewState } from './types'
+import { DataTableViewProvider } from './data-table-view-context'
+
+const defaultValues: DataTableViewState = {
+  page: 1,
+  limit: 10,
+}
 
 export const DataTableView = () => {
-  const defaultValues = {
-    page: 1,
-    limit: 10,
-  }
-
   const [state, dispatch] = useReducer(dataTableViewReducer, defaultValues)
 
-  const handleClick = () => {
+  const handleChangePage = (currentPage: number) => {
     dispatch({
       type: DataTableViewActions.PAGE_CHANGE,
-      payload: 1,
+      payload: currentPage,
     })
   }
 
   return (
     <div>
-      <span>{JSON.stringify(state, null, 2)}</span>
-      <button onClick={handleClick}>change page</button>
+      <DataTableViewProvider value={{ state, dispatch }}>
+        <span>{JSON.stringify(state, null, 2)}</span>
+        <button onClick={() => handleChangePage(state.page + 1)}>
+          change page
+        </button>
+      </DataTableViewProvider>
     </div>
   )
 }
