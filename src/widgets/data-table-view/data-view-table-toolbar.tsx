@@ -2,8 +2,8 @@ import { useContext } from 'react'
 import { DataTableViewContext } from './data-table-view-context'
 import { BaseSelect, BaseSelectOption } from 'shared/ui/base-select'
 import { DataTableViewActions } from './constants'
-import { DataTablePageCounter } from 'shared/ui/data-table/data-table-page-counter'
 import { Pagiantion } from 'shared/ui-kit/Pagiantion/Pagination'
+import { DataTableViewToolbarPageCounter } from 'widgets/data-table-view/data-table-view-toolbar-page-counter'
 
 const rowsPerPageOptions: BaseSelectOption[] = [
   {
@@ -57,7 +57,7 @@ export const DataViewTableToolbar = () => {
           />
         </div>
 
-        <DataTablePageCounter
+        <DataTableViewToolbarPageCounter
           totalPages={20}
           currentPage={page}
         />
