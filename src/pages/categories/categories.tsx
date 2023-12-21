@@ -63,7 +63,6 @@ const CategoriesPage = () => {
               onChange={handleChange}
             />
 
-            <DataTableView />
             <RCategoriesDataTable />
           </>
         )}

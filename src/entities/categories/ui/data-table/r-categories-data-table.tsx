@@ -1,4 +1,6 @@
 import { useGetCategories } from 'entities/categories/api/queries'
+import { DataTableView } from 'widgets/data-table-view/data-table-view'
+import { columns } from './columns'
 
 export const RCategoriesDataTable = () => {
   const { isLoading, isError, data } = useGetCategories({
@@ -12,7 +14,12 @@ export const RCategoriesDataTable = () => {
     <>
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error</div>}
-      {data && <pre>{JSON.stringify(data.content, null, 2)}</pre>}
+      {data && (
+        <DataTableView
+          data={data}
+          columns={columns}
+        />
+      )}
     </>
   )
 }

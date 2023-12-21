@@ -20,7 +20,13 @@ const rowsPerPageOptions: BaseSelectOption[] = [
   },
 ]
 
-export const DataTableViewToolbar = () => {
+interface Props {
+  totalCount: number
+  totalPages: number
+}
+
+export const DataTableViewToolbar = (props: Props) => {
+  const { totalCount, totalPages } = props
   const {
     state: { page },
     dispatch,
@@ -44,7 +50,7 @@ export const DataTableViewToolbar = () => {
   return (
     <div className="mt-6 flex items-center justify-between">
       <div>
-        <span className="font-medium">Всего элементов: 20</span>
+        <span className="font-medium">Всего элементов: {totalCount}</span>
       </div>
 
       <div className="flex items-center space-x-6">
@@ -58,12 +64,12 @@ export const DataTableViewToolbar = () => {
         </div>
 
         <DataTableViewToolbarPageCounter
-          totalPages={20}
+          totalPages={totalPages}
           currentPage={page}
         />
 
         <Pagiantion
-          totalPages={20}
+          totalPages={totalPages}
           currentPage={page}
           onChange={handleCurrentPageChange}
         />

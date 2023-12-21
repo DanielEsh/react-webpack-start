@@ -1,33 +1,36 @@
 import { useReducer } from 'react'
-import { dataTableViewReducer, DataTableViewActions } from './constants'
+import { dataTableViewReducer } from './constants'
 import { DataTableViewState } from './types'
 import { DataTableViewProvider } from './data-table-view-context'
 import { DataTableViewToolbar } from './data-table-view-toolbar'
+import { DataTable } from 'shared/ui/data-table'
 
 const defaultValues: DataTableViewState = {
   page: 1,
   limit: 10,
 }
 
-export const DataTableView = () => {
-  const [state, dispatch] = useReducer(dataTableViewReducer, defaultValues)
+interface Props {
+  data: any
+  columns: any
+}
 
-  const handleChangePage = (currentPage: number) => {
-    dispatch({
-      type: DataTableViewActions.PAGE_CHANGE,
-      payload: currentPage,
-    })
-  }
+export const DataTableView = (props: Props) => {
+  const { data, columns } = props
+  const [state, dispatch] = useReducer(dataTableViewReducer, defaultValues)
 
   return (
     <div>
       <DataTableViewProvider value={{ state, dispatch }}>
-        <span>{JSON.stringify(state, null, 2)}</span>
-        <button onClick={() => handleChangePage(state.page + 1)}>
-          change page
-        </button>
+        <DataTable
+          data={data.content}
+          columns={columns}
+        />
 
-        <DataTableViewToolbar />
+        <DataTableViewToolbar
+          totalCount={data.meta.totalItemsCount}
+          totalPages={data.meta.pagination.totalPages}
+        />
       </DataTableViewProvider>
     </div>
   )
