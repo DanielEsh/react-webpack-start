@@ -2,7 +2,7 @@ import { useReducer } from 'react'
 import { dataTableViewReducer, DataTableViewActions } from './constants'
 import { DataTableViewState } from './types'
 import { DataTableViewProvider } from './data-table-view-context'
-import { DataViewTableToolbar } from './data-view-table-toolbar'
+import { DataTableViewToolbar } from './data-table-view-toolbar'
 
 const defaultValues: DataTableViewState = {
   page: 1,
@@ -27,7 +27,7 @@ export const DataTableView = () => {
           change page
         </button>
 
-        <DataViewTableToolbar />
+        <DataTableViewToolbar />
       </DataTableViewProvider>
     </div>
   )

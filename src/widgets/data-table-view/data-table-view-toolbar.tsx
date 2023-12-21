@@ -20,7 +20,7 @@ const rowsPerPageOptions: BaseSelectOption[] = [
   },
 ]
 
-export const DataViewTableToolbar = () => {
+export const DataTableViewToolbar = () => {
   const {
     state: { page },
     dispatch,
