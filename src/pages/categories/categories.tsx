@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { DataViewState } from 'widgets/data-view'
 import { Breadcrumbs } from 'shared/ui-kit'
 import { DataTableView } from 'widgets/data-table-view/data-table-view'
+import { RCategoriesDataTable } from 'entities/categories/ui/data-table/r-categories-data-table'
 
 const CategoriesPage = () => {
   const [tableValues, setTableValues] = useState<DataViewState>({
@@ -63,6 +64,7 @@ const CategoriesPage = () => {
             />
 
             <DataTableView />
+            <RCategoriesDataTable />
           </>
         )}
 
