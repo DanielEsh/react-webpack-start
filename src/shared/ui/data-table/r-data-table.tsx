@@ -9,7 +9,6 @@ import {
 import { Table } from 'shared/ui-kit/table'
 import { Fragment, useState } from 'react'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
-import { type SortPayload } from 'widgets/data-view/types'
 import { DataTableBody } from 'shared/ui/data-table/data-table-body'
 
 interface Props<DATA> {
@@ -43,9 +42,7 @@ export const DataTable = <TData extends unknown | object>(
       })
     }
 
-    onSortingChange(
-      transformTableSortingToStoreValues(internalSorting) as SortPayload,
-    )
+    onSortingChange(transformTableSortingToStoreValues())
   }, [internalSorting])
 
   useIsomorphicLayoutEffect(() => {
