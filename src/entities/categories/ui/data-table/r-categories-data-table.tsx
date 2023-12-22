@@ -10,6 +10,18 @@ export const RCategoriesDataTable = () => {
     order_by: [],
   })
 
+  const handlePageChange = (currentPage: number) => {
+    console.log('page', currentPage)
+  }
+
+  const handleLimitChange = (limit: number) => {
+    console.log('limit', limit)
+  }
+
+  const handleSortChange = (sort: any) => {
+    console.log('sort', sort)
+  }
+
   return (
     <>
       {isLoading && <div>Loading...</div>}
@@ -18,6 +30,9 @@ export const RCategoriesDataTable = () => {
         <DataTableView
           data={data}
           columns={columns}
+          onPageChange={handlePageChange}
+          onLimitChange={handleLimitChange}
+          onSortChange={handleSortChange}
         />
       )}
     </>

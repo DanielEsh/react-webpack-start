@@ -1,7 +1,4 @@
-import { useContext } from 'react'
-import { DataTableViewContext } from './data-table-view-context'
 import { BaseSelect, BaseSelectOption } from 'shared/ui/base-select'
-import { DataTableViewActions } from './constants'
 import { Pagiantion } from 'shared/ui-kit/Pagiantion/Pagination'
 import { DataTableViewToolbarPageCounter } from 'widgets/data-table-view/data-table-view-toolbar-page-counter'
 
@@ -23,28 +20,29 @@ const rowsPerPageOptions: BaseSelectOption[] = [
 interface Props {
   totalCount: number
   totalPages: number
+  currentPage: number
+  limitPages: number
+  onPageChange(currentPage: number): void
+  onLimitChange(limit: number): void
 }
 
 export const DataTableViewToolbar = (props: Props) => {
-  const { totalCount, totalPages } = props
   const {
-    state: { page },
-    dispatch,
-  } = useContext(DataTableViewContext)
+    totalCount,
+    totalPages,
+    currentPage,
+    limitPages,
+    onPageChange,
+    onLimitChange,
+  } = props
 
   const handleLimitChange = (limit: number) => {
-    dispatch({
-      type: DataTableViewActions.LIMIT_CHANGE,
-      // TODO: почему-то radixui select превращает number в string. Заменить на свой селект
-      payload: +limit,
-    })
+    // TODO: почему-то radixui select превращает number в string. Заменить на свой селект
+    onLimitChange(+limit)
   }
 
   const handleCurrentPageChange = (currentPage: number) => {
-    dispatch({
-      type: DataTableViewActions.PAGE_CHANGE,
-      payload: currentPage,
-    })
+    onPageChange(currentPage)
   }
 
   return (
@@ -56,7 +54,7 @@ export const DataTableViewToolbar = (props: Props) => {
       <div className="flex items-center space-x-6">
         <div className="flex w-[100px] items-center space-x-2">
           <BaseSelect
-            defaultValue={10}
+            defaultValue={limitPages}
             options={rowsPerPageOptions}
             onChange={handleLimitChange}
             label="Количество"
@@ -65,12 +63,12 @@ export const DataTableViewToolbar = (props: Props) => {
 
         <DataTableViewToolbarPageCounter
           totalPages={totalPages}
-          currentPage={page}
+          currentPage={currentPage}
         />
 
         <Pagiantion
           totalPages={totalPages}
-          currentPage={page}
+          currentPage={currentPage}
           onChange={handleCurrentPageChange}
         />
       </div>
