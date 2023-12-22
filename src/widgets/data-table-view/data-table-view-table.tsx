@@ -8,7 +8,7 @@ import {
 import { Table } from 'shared/ui-kit/table'
 import { Fragment } from 'react'
 import { DataTableBody } from 'shared/ui/data-table/data-table-body'
-import { useSort, type SortValues } from './use-sort'
+import { useSort, type SortValues } from 'shared/ui/data-table/use-sort'
 
 interface Props<DATA> {
   data: DATA[]
@@ -17,7 +17,7 @@ interface Props<DATA> {
   onSortingChange(sort: any): void
 }
 
-export const DataTable = <TData extends unknown | object>(
+export const DataTableViewTable = <TData extends unknown | object>(
   props: Props<TData>,
 ) => {
   const { data, columns, sorting, onSortingChange } = props

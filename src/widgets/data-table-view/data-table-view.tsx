@@ -1,23 +1,30 @@
 import { DataTableViewToolbar } from './data-table-view-toolbar'
-import { DataTable } from 'shared/ui/data-table/r-data-table'
+import { DataTableViewTable } from './data-table-view-table'
+import type { SortValues } from 'shared/ui/data-table/use-sort'
+import type { ColumnDef } from '@tanstack/react-table'
+import type { PageableResponse } from 'shared/api'
 
-interface Props {
-  data: any
-  columns: any
-  onSortChange(sort: any): void
+interface Props<DATA> {
+  data: PageableResponse<DATA>
+  columns: ColumnDef<DATA>[]
+  sorting: SortValues
+  onSortChange(sort: SortValues): void
   onPageChange(currentPage: number): void
   onLimitChange(limit: number): void
 }
 
-export const DataTableView = (props: Props) => {
-  const { data, columns, onSortChange, onLimitChange, onPageChange } = props
+export const DataTableView = <TData extends unknown | object>(
+  props: Props<TData>,
+) => {
+  const { data, columns, sorting, onSortChange, onLimitChange, onPageChange } =
+    props
 
   return (
     <div>
-      <DataTable
+      <DataTableViewTable
         data={data.content}
         columns={columns}
-        sorting={{}}
+        sorting={sorting}
         onSortingChange={onSortChange}
       />
 
