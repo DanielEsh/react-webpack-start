@@ -1,55 +1,26 @@
-import { Category } from 'entities/categories/types'
+import { useGetCategories } from 'entities/categories/api/queries'
+import { DataTableView } from 'widgets/data-table-view/data-table-view'
 import { columns } from './columns'
-import {
-  ConfirmDeleteDialog,
-  type DeleteState,
-} from 'shared/ui/dialog/confirm-delete'
-import {
-  useDeleteCategoryMutation,
-  useInvalidateCategories,
-} from 'entities/categories/api/queries'
-import { useNotification } from 'shared/notification'
-import { PaginatedDataView } from 'widgets/data-view/paginated-data-view'
-import { DataViewState } from 'widgets/data-view'
+import { useDataTableViewState } from 'widgets/data-table-view/use-data-table-view-state'
 
-interface Props {
-  data: Category[]
-  defaultDataTableValues: DataViewState
-  meta: any
-  onChange?(state: DataViewState): void
-}
-
-export const CategoriesDataTable = ({ data, meta, onChange }: Props) => {
-  const { mutate: deleteCategoryMutation } = useDeleteCategoryMutation()
-  const { invalidateCategories } = useInvalidateCategories()
-  const { showNotification } = useNotification()
-
-  const handleSuccessCategoryDelete = (data: Category) => {
-    console.log('success delete', data)
-    showNotification({
-      id: '0',
-      title: 'Успешное удаление',
-      message: `message`,
-    })
-    invalidateCategories()
-  }
-
-  const handleConfirmDelete = (data: DeleteState<number, Category>) => {
-    deleteCategoryMutation(data.key, {
-      onSuccess: handleSuccessCategoryDelete,
-    })
-  }
+export const CategoriesDataTable = () => {
+  const { state, changePage, changeLimit, changeSort } = useDataTableViewState()
+  const { isLoading, isError, data } = useGetCategories(state)
 
   return (
     <>
-      <PaginatedDataView
-        data={data}
-        columns={columns}
-        meta={meta}
-        onChange={onChange}
-      />
-
-      <ConfirmDeleteDialog onConfirmDelete={handleConfirmDelete} />
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Error</div>}
+      {data && (
+        <DataTableView
+          data={data}
+          columns={columns}
+          sorting={{ sortBy: state.sort_by, orderBy: state.order_by }}
+          onPageChange={changePage}
+          onLimitChange={changeLimit}
+          onSortChange={changeSort}
+        />
+      )}
     </>
   )
 }
