@@ -4,17 +4,16 @@ import {
   getSortedRowModel,
   useReactTable,
   type ColumnDef,
-  SortingState,
 } from '@tanstack/react-table'
 import { Table } from 'shared/ui-kit/table'
-import { Fragment, useState } from 'react'
-import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
+import { Fragment } from 'react'
 import { DataTableBody } from 'shared/ui/data-table/data-table-body'
+import { useSort, type SortValues } from './use-sort'
 
 interface Props<DATA> {
   data: DATA[]
   columns: ColumnDef<DATA>[]
-  sorting?: any
+  sorting: SortValues
   onSortingChange(sort: any): void
 }
 
@@ -22,45 +21,13 @@ export const DataTable = <TData extends unknown | object>(
   props: Props<TData>,
 ) => {
   const { data, columns, sorting, onSortingChange } = props
-  const [internalSorting, setSorting] = useState<SortingState>([])
-  const transformTableSortingToStoreValues = () => {
-    const initialValue = {}
-
-    return internalSorting.reduce((acc, item) => {
-      return {
-        sortBy: item.id,
-        orderBy: item.desc ? 'desc' : 'asc',
-      }
-    }, initialValue)
-  }
-
-  useIsomorphicLayoutEffect(() => {
-    if (!internalSorting.length) {
-      onSortingChange({
-        sortBy: null,
-        orderBy: null,
-      })
-    }
-
-    onSortingChange(transformTableSortingToStoreValues())
-  }, [internalSorting])
-
-  useIsomorphicLayoutEffect(() => {
-    if (sorting.sortBy && sorting.orderBy) {
-      setSorting([
-        {
-          id: sorting.sortBy,
-          desc: sorting.orderBy === 'desc',
-        },
-      ])
-    }
-  }, [])
+  const { sortState, setSorting } = useSort(sorting, onSortingChange)
 
   const table = useReactTable({
     data,
     columns,
     state: {
-      sorting: internalSorting,
+      sorting: sortState,
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
