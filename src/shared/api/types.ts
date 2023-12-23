@@ -14,8 +14,8 @@ interface Pagination {
 export interface PageableResponseParams {
   page: number
   limit: number
-  sort_by?: string[]
-  order_by?: string[]
+  sortBy?: string[]
+  orderBy?: string[]
 }
 
 export interface Meta {

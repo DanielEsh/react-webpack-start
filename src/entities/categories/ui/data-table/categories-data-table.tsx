@@ -15,7 +15,7 @@ export const CategoriesDataTable = () => {
         <DataTableView
           data={data}
           columns={columns}
-          sorting={{ sortBy: state.sort_by, orderBy: state.order_by }}
+          sorting={{ sortBy: state.sortBy, orderBy: state.orderBy }}
           onPageChange={changePage}
           onLimitChange={changeLimit}
           onSortChange={changeSort}

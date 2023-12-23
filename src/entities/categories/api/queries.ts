@@ -7,7 +7,7 @@ import {
   updateCategoryBySlug,
 } from './requests'
 import { CategoryForm } from '../ui/form/types'
-import { PageableResponse } from 'shared/api/types'
+import { PageableResponse, PageableResponseParams } from 'shared/api/types'
 import { Category } from '../types'
 
 export const useCreateCategoryMutation = () => {
@@ -16,15 +16,8 @@ export const useCreateCategoryMutation = () => {
   })
 }
 
-interface Values {
-  page: number
-  limit: number
-  sort_by?: string[]
-  order_by?: string[]
-}
-
 export const useGetCategories = (
-  values: Values,
+  values: PageableResponseParams,
   onSuccess?: (data: PageableResponse<Category>) => void,
 ) => {
   return useQuery({

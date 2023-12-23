@@ -8,16 +8,16 @@ import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutE
 interface InitialState {
   page: number
   limit: number
-  sort_by?: string
-  order_by?: 'asc' | 'desc'
+  sortBy?: string
+  orderBy?: 'asc' | 'desc'
 }
 
 export function useDataTableViewState() {
   const defaultState: InitialState = {
     page: 1,
     limit: 10,
-    sort_by: undefined,
-    order_by: undefined,
+    sortBy: undefined,
+    orderBy: undefined,
   }
 
   const [searchParams, setSearchParams] = useSearchParams()
@@ -31,9 +31,9 @@ export function useDataTableViewState() {
 
     defaultState.page = pageFromSearchParams ? +pageFromSearchParams : 1
     defaultState.limit = limitFromSearchParams ? +limitFromSearchParams : 10
-    defaultState.sort_by = searchParams.get('sort_by') ?? undefined
-    defaultState.order_by =
-      (searchParams.get('order_by') as 'asc' | 'desc') ?? undefined
+    defaultState.sortBy = searchParams.get('sortBy') ?? undefined
+    defaultState.orderBy =
+      (searchParams.get('orderBy') as 'asc' | 'desc') ?? undefined
   }, [])
 
   const [state, setState] = useState(defaultState)
@@ -69,15 +69,15 @@ export function useDataTableViewState() {
   const handleSortChange = (sort: SortValues) => {
     setState((state) => ({
       ...state,
-      sort_by: sort.sortBy,
-      order_by: sort.orderBy,
+      sortBy: sort.sortBy,
+      orderBy: sort.orderBy,
     }))
 
     setSearchParams(
       qs.stringify({
         ...state,
-        sort_by: sort.sortBy,
-        order_by: sort.orderBy,
+        sortBy: sort.sortBy,
+        orderBy: sort.orderBy,
       }),
     )
   }
