@@ -25,7 +25,7 @@ export const CategoriesDataTableRowActions = ({ row }: Props) => {
     <div className="flex justify-end gap-1">
       <ButtonLink
         size="sm"
-        to={`/categories/${original.slug}`}
+        to={`/categories/${original.id}`}
       >
         <IconEdit />
       </ButtonLink>

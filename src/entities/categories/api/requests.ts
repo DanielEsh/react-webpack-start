@@ -25,18 +25,17 @@ export const getCategories = async (params: Params) => {
   return (await $api.get<PageableResponse<Category>>(query)).data
 }
 
-export const getCategoryBySlug = async (slug: string) => {
-  console.log('getCategoryBySlug')
-  return (await $api.get<CategoryDto>(`/categories/${slug}`)).data
+export const getCategoryById = async (id: number) => {
+  return (await $api.get<CategoryDto>(`/categories/${id}`)).data
 }
 
-export const updateCategoryBySlug = async (
+export const updateCategoryById = async (
   form: UpdateCategoryDto,
-  slug: string,
+  id: number,
 ) => {
-  return (await $api.patch<Category>(`/categories/${slug}`, form)).data
+  return (await $api.patch<CategoryDto>(`/categories/${id}`, form)).data
 }
 
 export const deleteCategory = async (id: number) => {
-  return (await $api.delete<Category>(`/categories/${id}`)).data
+  return (await $api.delete<CategoryDto>(`/categories/${id}`)).data
 }

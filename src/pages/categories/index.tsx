@@ -15,7 +15,7 @@ export default [
       element={<CategoryCreatePage />}
     />
     <Route
-      path=":slug"
+      path=":id"
       element={<CategoryDetailsPage />}
     />
   </Route>,

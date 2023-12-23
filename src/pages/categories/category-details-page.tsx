@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom'
 import {
-  useGetCategoryDetails,
+  useGetCategoryByIdQuery,
   useInvalidateCategories,
   useUpdateCategoryMutation,
-} from 'entities/categories/api/queries'
+} from 'entities/categories'
 import { CategoryFormFields } from 'entities/categories/ui/form/category-form-fields'
 import { categoryFormSchema } from 'entities/categories/ui/form/category-form-schema'
 import { CategoryForm } from 'entities/categories/ui/form/types'
@@ -11,12 +11,15 @@ import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer
 import { useNotification } from 'shared/notification'
 
 const CategoryDetailsPage = () => {
-  const { slug } = useParams()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const { isSuccess, isLoading, isError, data } = useGetCategoryDetails(slug)
+  const { id } = useParams()
+
+  if (!id) {
+    throw Error('')
+  }
+
+  const { isSuccess, isLoading, isError, data } = useGetCategoryByIdQuery(+id)
   const { mutateAsync: updateCategoryMutation } = useUpdateCategoryMutation()
-  const { invalidateCategories } = useInvalidateCategories()
+  const invalidateCategories = useInvalidateCategories()
   const { showNotification } = useNotification()
 
   const defaultValues: CategoryForm = {
@@ -24,21 +27,20 @@ const CategoryDetailsPage = () => {
     name: data?.name ?? '',
   }
 
-  const handleSuccessUpdate = (data: any) => {
+  const handleSuccessUpdate = async (data: any) => {
     showNotification({
       id: data.slug,
       title: 'Успешное обновление категории',
       message: `Категория ${data.name} успешно создана`,
     })
-    invalidateCategories()
+    await invalidateCategories()
   }
 
   const updateCategory = async (form: CategoryForm) => {
-    console.log('form', form)
     await updateCategoryMutation(
       {
         form,
-        slug: slug || '',
+        id: +id,
       },
       {
         onSuccess: handleSuccessUpdate,
