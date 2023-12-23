@@ -32,7 +32,7 @@ export const DataTableView = <TData extends unknown | object>(
         totalCount={data.meta.totalItemsCount}
         totalPages={data.meta.pagination.totalPages}
         currentPage={data.meta.pagination.page}
-        limitPages={10}
+        limitPages={data.meta.pagination.itemsPerPage}
         onLimitChange={onLimitChange}
         onPageChange={onPageChange}
       />
