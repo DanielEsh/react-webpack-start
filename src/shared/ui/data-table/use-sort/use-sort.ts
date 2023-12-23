@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { SortingState } from '@tanstack/react-table'
 import { useIsomorphicLayoutEffect } from 'shared/lib/hooks/useIsomorphicLayoutEffect'
+import { useIsFirstRender } from 'shared/lib/hooks/use-is-first-render'
 export interface SortValues {
   sortBy?: string
   orderBy?: 'asc' | 'desc'
@@ -11,7 +12,7 @@ export function useSort(
   callback: (values: SortValues) => void,
 ) {
   const [sorting, setSorting] = useState<SortingState>([])
-
+  const isFirst = useIsFirstRender()
   const transformTableSortingToValues = () => {
     return sorting.reduce((_, item) => {
       return {
@@ -22,6 +23,7 @@ export function useSort(
   }
 
   useIsomorphicLayoutEffect(() => {
+    if (isFirst) return
     if (!sorting.length) {
       callback({})
     }
