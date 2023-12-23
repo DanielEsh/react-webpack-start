@@ -7,7 +7,7 @@ interface Props {
   isPrivate?: boolean
 }
 
-export const Page = (props: Props) => {
+export const RouterPage = (props: Props) => {
   const { children, isPrivate = false } = props
 
   if (isPrivate) {

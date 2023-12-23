@@ -2,7 +2,6 @@ import { lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AppRouterPaths } from 'pages/types'
 import { PageLoader } from 'shared/ui/page-loader'
-import { PrivateRoute } from './private-route'
 
 import RootLayout from 'widgets/layouts/root-layout'
 const HomePage = lazy(() => import('pages/home-page'))
@@ -16,8 +15,47 @@ import { sandBoxPages } from 'pages/sandbox'
 import warehouseRoutes from 'pages/warehouse'
 import ordersRoutes from 'pages/order'
 import staffRoutes from 'pages/staff'
-import { Page } from 'app/router/ui/page'
+import { RouterPage } from 'app/router/ui/router-page'
 const NotFoundPage = lazy(() => import('pages/not-found'))
+
+const combinedRootLayoutRoutes = () => {
+  return (
+    <>
+      <Route
+        index
+        element={
+          <RouterPage isPrivate={true}>
+            <HomePage />
+          </RouterPage>
+        }
+      />
+      <Route
+        path={'profile'}
+        element={
+          <PageLoader>
+            <ProfilePage />
+          </PageLoader>
+        }
+      />
+      {...categoriesRoutes}
+      {...brandsRoutes}
+      {...attributesRoutes}
+      {...productsRoutes}
+      {...warehouseRoutes}
+      {...ordersRoutes}
+      {...staffRoutes}
+      {...sandBoxPages}
+      <Route
+        path={AppRouterPaths.notFound}
+        element={
+          <PageLoader>
+            <NotFoundPage />
+          </PageLoader>
+        }
+      />
+    </>
+  )
+}
 
 export const AppRouter = () => {
   return (
@@ -26,43 +64,12 @@ export const AppRouter = () => {
         <Route
           path={AppRouterPaths.home}
           element={
-            <Page>
+            <RouterPage>
               <RootLayout />
-            </Page>
+            </RouterPage>
           }
         >
-          <Route
-            index
-            element={
-              <Page isPrivate={true}>
-                <HomePage />
-              </Page>
-            }
-          />
-          {...categoriesRoutes}
-          {...brandsRoutes}
-          {...attributesRoutes}
-          {...productsRoutes}
-          {...warehouseRoutes}
-          {...ordersRoutes}
-          {...staffRoutes}
-          {...sandBoxPages}
-          <Route
-            path={'profile'}
-            element={
-              <PageLoader>
-                <ProfilePage />
-              </PageLoader>
-            }
-          />
-          <Route
-            path={AppRouterPaths.notFound}
-            element={
-              <PageLoader>
-                <NotFoundPage />
-              </PageLoader>
-            }
-          />
+          {combinedRootLayoutRoutes()}
         </Route>
         <Route path={'login'}>
           <Route
