@@ -1,23 +1,19 @@
-import { Row } from '@tanstack/react-table'
-import { ButtonLink } from 'shared/ui-kit/button-link'
-import { Button } from 'shared/ui-kit/button'
+import { ButtonLink, Button } from 'shared/ui-kit'
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
-import { Category } from 'entities/categories/types'
 import { useDeleteConfirmation } from 'shared/ui/dialog/confirm-delete'
-
+import { Category } from '../../types'
 interface Props {
-  row: Row<Category>
+  category: Category
 }
 
-export const CategoriesDataTableRowActions = ({ row }: Props) => {
-  const { original } = row
+export const CategoriesDataTableRowActions = ({ category }: Props) => {
   const { openDeleteConfirmDialog } = useDeleteConfirmation()
 
   const handleDeleteClick = () => {
     openDeleteConfirmDialog<number, Category>({
-      key: original.id,
-      data: original,
+      key: category.id,
+      data: category,
     })
   }
 
@@ -25,7 +21,7 @@ export const CategoriesDataTableRowActions = ({ row }: Props) => {
     <div className="flex justify-end gap-1">
       <ButtonLink
         size="sm"
-        to={`/categories/${original.id}`}
+        to={`/categories/${category.id}`}
       >
         <IconEdit />
       </ButtonLink>

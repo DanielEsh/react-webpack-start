@@ -3,10 +3,10 @@ import {
   useGetCategoryByIdQuery,
   useInvalidateCategories,
   useUpdateCategoryMutation,
+  CategoryFormFields,
+  categoryFormSchema,
+  type CategoryForm,
 } from 'entities/categories'
-import { CategoryFormFields } from 'entities/categories/ui/form/category-form-fields'
-import { categoryFormSchema } from 'entities/categories/ui/form/category-form-schema'
-import { CategoryForm } from 'entities/categories/ui/form/types'
 import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
 import { useNotification } from 'shared/notification'
 import { assertInvariant } from 'shared/api/errors'

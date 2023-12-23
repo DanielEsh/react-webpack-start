@@ -1,6 +1,6 @@
 import { useGetCategories } from 'entities/categories'
 import { DataTableView } from 'widgets/data-table-view/data-table-view'
-import { columns } from './columns'
+import { categoriesDataTableColumns } from './categories-data-table-columns'
 import { useDataTableViewState } from 'widgets/data-table-view/use-data-table-view-state'
 
 export const CategoriesDataTable = () => {
@@ -14,7 +14,7 @@ export const CategoriesDataTable = () => {
       {data && (
         <DataTableView
           data={data}
-          columns={columns}
+          columns={categoriesDataTableColumns}
           sorting={{ sortBy: state.sortBy, orderBy: state.orderBy }}
           onPageChange={changePage}
           onLimitChange={changeLimit}

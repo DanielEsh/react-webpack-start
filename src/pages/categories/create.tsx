@@ -10,7 +10,7 @@ import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer
 
 const CategoryCreatePage = () => {
   const { mutateAsync: createCategoryMutation } = useCreateCategoryMutation()
-  const { invalidateCategories } = useInvalidateCategories()
+  const invalidateCategories = useInvalidateCategories()
   const { showNotification } = useNotification()
 
   const defaultValues: CategoryForm = {
@@ -25,13 +25,13 @@ const CategoryCreatePage = () => {
     })
   }
 
-  function handleSuccessCreate(data: any) {
+  async function handleSuccessCreate(data: any) {
     showNotification({
       id: data.id,
       title: 'Успешное создание категории',
       message: `Категория ${data.name} успешно создана`,
     })
-    invalidateCategories()
+    await invalidateCategories()
   }
 
   function handleErrorCreate() {

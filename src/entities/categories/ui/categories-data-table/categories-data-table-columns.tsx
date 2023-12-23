@@ -1,12 +1,12 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { Category } from 'entities/categories/types'
 import { DataTableColumnHead } from 'shared/ui/data-table'
-import { CategoriesDataTableRowActions } from './categories-data-row-actions'
+import { CategoriesDataTableRowActions } from './categories-data-table-row-actions'
 import { ReactNode } from 'react'
 import { Table } from 'shared/ui-kit/table'
 import { formatDate } from 'shared/utils/dayjs'
 
-export const columns: ColumnDef<Category, any>[] = [
+export const categoriesDataTableColumns: ColumnDef<Category, any>[] = [
   {
     id: 'id',
     accessorKey: 'id',
@@ -79,7 +79,9 @@ export const columns: ColumnDef<Category, any>[] = [
         <DataTableColumnHead column={column} />
       </Table.ColumnHeader>
     ),
-    cell: ({ row }) => <CategoriesDataTableRowActions row={row} />,
+    cell: ({ row }) => (
+      <CategoriesDataTableRowActions category={row.original} />
+    ),
     enableSorting: false,
   },
 ]

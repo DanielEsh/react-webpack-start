@@ -1,22 +1,22 @@
 import { Outlet } from 'react-router-dom'
-import { CategoriesDataTableHeader } from 'entities/categories/ui/data-table/data-table-header'
-import { CategoriesDataTable } from 'entities/categories/ui/data-table/categories-data-table'
 import { Breadcrumbs } from 'shared/ui-kit'
+import {
+  CategoriesDataTableHeader,
+  CategoriesDataTable,
+} from 'entities/categories'
 
 const CategoriesPage = () => {
   return (
     <div>
-      <div>
-        <Breadcrumbs>
-          <Breadcrumbs.Item to="/">Главная</Breadcrumbs.Item>
-          <Breadcrumbs.Item isLast>Категории</Breadcrumbs.Item>
-        </Breadcrumbs>
+      <Breadcrumbs>
+        <Breadcrumbs.Item to="/">Главная</Breadcrumbs.Item>
+        <Breadcrumbs.Item isLast>Категории</Breadcrumbs.Item>
+      </Breadcrumbs>
 
-        <CategoriesDataTableHeader />
-        <CategoriesDataTable />
+      <CategoriesDataTableHeader />
+      <CategoriesDataTable />
 
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   )
 }
