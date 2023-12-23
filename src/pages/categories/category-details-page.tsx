@@ -9,14 +9,11 @@ import { categoryFormSchema } from 'entities/categories/ui/form/category-form-sc
 import { CategoryForm } from 'entities/categories/ui/form/types'
 import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
 import { useNotification } from 'shared/notification'
+import { assertInvariant } from 'shared/api/errors'
 
 const CategoryDetailsPage = () => {
   const { id } = useParams()
-
-  if (!id) {
-    throw Error('')
-  }
-
+  assertInvariant(id)
   const { isSuccess, isLoading, isError, data } = useGetCategoryByIdQuery(+id)
   const { mutateAsync: updateCategoryMutation } = useUpdateCategoryMutation()
   const invalidateCategories = useInvalidateCategories()
