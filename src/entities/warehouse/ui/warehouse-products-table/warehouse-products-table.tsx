@@ -39,12 +39,26 @@ export const WarehouseProductsTable = ({ id }: Props) => {
   const [opened, { open, close }] = useDisclosure()
   const formMethods = useForm(warehouseProductSchema)
 
+  const { setValue } = formMethods
+
   const { mutate: createWarehouseProduct } = useCreateWarehouseProductMutation()
+
+  const handleEditActions = (item: any) => {
+    console.log('handle edit action', item)
+    setValue('productId', item.product.id)
+    setValue('quantity', item.quantity)
+    open()
+  }
 
   const table = useReactTable({
     data: data?.content || [],
     columns: warehouseProductsTableColumns,
     getCoreRowModel: getCoreRowModel(),
+    meta: {
+      rowActions: {
+        edit: handleEditActions,
+      },
+    },
   })
 
   const handleSubmit = (warehouseProductForm: WarehouseProductsForm) => {

@@ -1,7 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { WarehouseProductDto } from 'entities/warehouse/api/dto'
-import { Button, Table } from 'shared/ui-kit'
-import { Dropdown } from 'shared/ui-kit/dropdown'
+import { Table } from 'shared/ui-kit'
 import { WarehouseProductsTableRowActions } from 'entities/warehouse/ui/warehouse-products-table/warehouse-products-table-row-actions'
 
 export const warehouseProductsTableColumns: ColumnDef<
@@ -24,9 +23,12 @@ export const warehouseProductsTableColumns: ColumnDef<
     id: 'actions',
     accessorKey: '',
     header: () => <Table.ColumnHeader>Actions</Table.ColumnHeader>,
-    cell: ({ row }) => (
+    cell: ({ row, table }) => (
       <Table.Cell>
-        <WarehouseProductsTableRowActions warehouseProduct={row.original} />
+        <WarehouseProductsTableRowActions
+          actions={table.options.meta.rowActions}
+          warehouseProduct={row.original}
+        />
       </Table.Cell>
     ),
   },
