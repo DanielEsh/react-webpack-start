@@ -1,26 +1,24 @@
 import { useDeleteConfirmation } from 'shared/ui/dialog/confirm-delete'
 import { DataTableRowButtons } from 'shared/ui/data-table/data-table-row-actions'
-import { Row } from '@tanstack/react-table'
 import { WarehouseDto } from 'entities/warehouse/api/dto'
 
 interface Props {
-  row: Row<WarehouseDto>
+  warehouse: WarehouseDto
 }
 
-export const WarehouseTableRowActions = ({ row }: Props) => {
-  const { original } = row
+export const WarehouseDataTableRowActions = ({ warehouse }: Props) => {
   const { openDeleteConfirmDialog } = useDeleteConfirmation()
 
   const handleDeleteClick = () => {
     openDeleteConfirmDialog<number, WarehouseDto>({
-      key: original.id,
-      data: original,
+      key: warehouse.id,
+      data: warehouse,
     })
   }
 
   return (
     <DataTableRowButtons
-      link={`/warehouses/${original.id}`}
+      link={`/warehouses/${warehouse.id}`}
       onDeleteClick={handleDeleteClick}
     />
   )

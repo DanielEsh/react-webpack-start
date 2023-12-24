@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
-import { WarehouseTable } from 'entities/warehouse/ui/warehouse-table/warehouse-table'
 import { Breadcrumbs } from 'shared/ui-kit'
+import { WarehouseTableHeader, WarehouseDataTable } from 'entities/warehouse'
 
 export default function WarehousesPage() {
   return (
@@ -10,7 +10,8 @@ export default function WarehousesPage() {
         <Breadcrumbs.Item isLast>Склад</Breadcrumbs.Item>
       </Breadcrumbs>
 
-      <WarehouseTable />
+      <WarehouseTableHeader />
+      <WarehouseDataTable />
       <Outlet />
     </div>
   )
