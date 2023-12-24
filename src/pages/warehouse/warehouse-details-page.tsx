@@ -1,74 +1,29 @@
-import { Button, Drawer, Form } from 'shared/ui-kit'
+import { Button, Drawer } from 'shared/ui-kit'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
-import { ProductAttributesGroups } from 'features/products/product-attributes-groups'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetWarehouseByIdQuery } from 'entities/warehouse/api/queries'
-import {
-  WarehouseForm,
-  warehouseFormSchema,
-} from 'entities/warehouse/ui/form/warehouse-form-schema'
-import { WarehouseFormFields } from 'entities/warehouse/ui/form/warehouse-form-fields'
-import { useForm } from 'shared/ui-kit/form/use-form'
-import { useNotification } from 'shared/notification'
-import { useUpdateWarehouseByIdMutate } from 'entities/warehouse/api/queries/use-update-warehouse-by-id-mutate'
-import { WarehouseDto } from 'entities/warehouse/api/dto'
-import { useEffect } from 'react'
 import { WarehouseProductsTable } from 'entities/warehouse/ui/warehouse-products-table/warehouse-products-table'
+import { assertInvariant } from 'shared/api/errors'
+import {
+  WAREHOUSE_UPDATE_FORM_ID,
+  WarehouseUpdateForm,
+} from 'features/warehouse/update'
 
 export default function WarehouseDetailsPage() {
-  const { id } = useParams<{
+  const { id: paramId } = useParams<{
     id: string
   }>()
 
-  // if (!id) return
+  assertInvariant(paramId)
+  const id = +paramId
 
   const navigate = useNavigate()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const { isLoading, isSuccess, isError, data } = useGetWarehouseByIdQuery(id)
-  const { mutateAsync: updateWarehouseByIdMutate } =
-    useUpdateWarehouseByIdMutate()
-  const { showNotification } = useNotification()
 
-  const defaultValues: WarehouseForm = {
-    name: data?.name ?? '',
-  }
+  const { isLoading, isSuccess, isError, data } = useGetWarehouseByIdQuery(id)
 
   const close = () => {
     navigate('/warehouses')
-  }
-
-  const formMethods = useForm(warehouseFormSchema, defaultValues)
-
-  const { setValue } = formMethods
-
-  useEffect(() => {
-    if (data) {
-      setValue('name', data.name)
-    }
-  }, [data])
-
-  const handleSuccessUpdate = (data: WarehouseDto) => {
-    showNotification({
-      id: data.id,
-      title: 'Успешное обновление склада',
-      message: `Склад ${data.name} успешно обновлен`,
-    })
-    close()
-  }
-
-  const handleSubmit = async (form: any) => {
-    console.log('HANDLE MAIN SUBMIT')
-    await updateWarehouseByIdMutate(
-      {
-        form,
-        id: id ? +id : 0,
-      },
-      {
-        onSuccess: handleSuccessUpdate,
-      },
-    )
   }
 
   return (
@@ -86,13 +41,13 @@ export default function WarehouseDetailsPage() {
               <h2>Update warehouse</h2>
             </DrawerHeader>
 
-            <Form
-              methods={formMethods}
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-4 px-6"
-            >
-              <WarehouseFormFields />
-            </Form>
+            <div className="flex flex-col gap-4 px-6">
+              <WarehouseUpdateForm
+                id={id}
+                defaultValues={{ name: data.name }}
+                onSuccessUpdate={close}
+              />
+            </div>
             <WarehouseProductsTable id={+id} />
 
             <DrawerFooter>
@@ -100,6 +55,7 @@ export default function WarehouseDetailsPage() {
                 <Button
                   type="submit"
                   variant="primary"
+                  form={WAREHOUSE_UPDATE_FORM_ID}
                 >
                   Update
                 </Button>
