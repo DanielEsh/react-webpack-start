@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   createBrowserRouter,
+  type RouteObject,
 } from 'react-router-dom'
 import { AppRouterPaths } from 'pages/types'
 import { PageLoader } from 'shared/ui/page-loader'
@@ -47,7 +48,233 @@ import StaffPage from 'pages/staff/staff-page'
 import StaffCreatePage from 'pages/staff/staff-create-page'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
-export const router = createBrowserRouter([
+type RouterCfgCustomProperty = Omit<RouteObject, 'children'> & {
+  private?: boolean
+  children?: Record<string, RouterCfgCustomProperty>
+}
+
+type RouterType = Record<string, RouterCfgCustomProperty>
+
+const routerCfg: RouterType = {
+  RootLayout: {
+    path: '/',
+    element: <RootLayout />,
+    children: {
+      HomePage: {
+        index: true,
+        element: <HomePage />,
+      },
+      Attributes: {
+        path: 'attributes',
+        element: (
+          <RouterPage>
+            <AttributesPage />
+          </RouterPage>
+        ),
+        children: {
+          AttributeCreate: {
+            path: 'create',
+            element: (
+              <RouterPage>
+                <AttributeCreatePage />
+              </RouterPage>
+            ),
+          },
+          AttributeDetails: {
+            path: ':id',
+            element: (
+              <RouterPage>
+                <AttributeDetailsPage />
+              </RouterPage>
+            ),
+          },
+        },
+      },
+      Brands: {
+        path: 'brands',
+        element: (
+          <RouterPage>
+            <BrandsPage />
+          </RouterPage>
+        ),
+        children: {
+          BrandCreate: {
+            path: 'create',
+            element: (
+              <RouterPage>
+                <BrandCreatePage />
+              </RouterPage>
+            ),
+          },
+          BrandDetails: {
+            path: ':id',
+            element: (
+              <RouterPage>
+                <BrandDetailsPage />
+              </RouterPage>
+            ),
+          },
+        },
+      },
+      Categories: {
+        path: 'categories',
+        element: (
+          <RouterPage>
+            <CategoriesPage />
+          </RouterPage>
+        ),
+        children: {
+          CategoryCreate: {
+            path: 'create',
+            element: (
+              <RouterPage>
+                <CategoryCreatePage />
+              </RouterPage>
+            ),
+          },
+          CategoryDetails: {
+            path: ':id',
+            element: (
+              <RouterPage>
+                <CategoryDetailsPage />
+              </RouterPage>
+            ),
+          },
+        },
+      },
+      Products: {
+        path: 'products',
+        element: (
+          <RouterPage>
+            <ProductsPage />
+          </RouterPage>
+        ),
+        children: {
+          ProductCreate: {
+            path: 'create',
+            element: (
+              <RouterPage>
+                <ProductCreatePage />
+              </RouterPage>
+            ),
+          },
+          ProductDetails: {
+            path: ':id',
+            element: (
+              <RouterPage>
+                <ProductDetailsPage />
+              </RouterPage>
+            ),
+          },
+        },
+      },
+      Warehouse: {
+        path: 'warehouses',
+        element: (
+          <RouterPage>
+            <WarehousesPage />
+          </RouterPage>
+        ),
+        children: {
+          WarehouseCreate: {
+            path: 'create',
+            element: (
+              <RouterPage>
+                <WarehouseCreatePage />
+              </RouterPage>
+            ),
+          },
+          WarehouseDetails: {
+            path: ':id',
+            element: (
+              <RouterPage>
+                <WarehouseDetailsPage />
+              </RouterPage>
+            ),
+          },
+        },
+      },
+      Staff: {
+        path: 'staff',
+        element: (
+          <RouterPage>
+            <StaffPage />
+          </RouterPage>
+        ),
+        children: {
+          StaffCreate: {
+            path: 'create',
+            element: (
+              <RouterPage>
+                <StaffCreatePage />
+              </RouterPage>
+            ),
+          },
+        },
+      },
+      Order: {
+        path: 'orders',
+        element: (
+          <RouterPage>
+            <OrdersPage />
+          </RouterPage>
+        ),
+        children: {
+          OrderCreate: {
+            path: 'create',
+            element: (
+              <RouterPage>
+                <OrderCreatePage />
+              </RouterPage>
+            ),
+          },
+          OrderDetails: {
+            path: ':id',
+            element: (
+              <RouterPage>
+                <OrderDetailsPage />
+              </RouterPage>
+            ),
+          },
+        },
+      },
+      NotFound: {
+        path: '*',
+        element: (
+          <RouterPage>
+            <NotFoundPage />
+          </RouterPage>
+        ),
+      },
+    },
+  },
+  LoginLayout: {
+    path: 'login',
+    element: (
+      <RouterPage>
+        <LoginPage />
+      </RouterPage>
+    ),
+  },
+}
+
+function transformChildren(obj: any) {
+  if (obj.children) {
+    obj.children = Object.values(obj.children).map(transformChildren)
+  }
+
+  return obj
+}
+
+const test = transformChildren(Object.values(routerCfg).map(transformChildren))
+
+console.log('test', test)
+
+export const routerFromConfig = createBrowserRouter(test)
+
+console.log('routerFromConfig', routerFromConfig)
+
+const cfg = [
   {
     path: '/',
     element: (
@@ -256,8 +483,13 @@ export const router = createBrowserRouter([
       </RouterPage>
     ),
   },
-])
+]
 
+console.log('cfg', cfg)
+
+export const router = createBrowserRouter(cfg)
+
+console.log('router', router)
 const combinedRootLayoutRoutes = () => {
   return (
     <>
