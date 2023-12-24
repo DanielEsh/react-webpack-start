@@ -21,7 +21,7 @@ export default function WarehouseDetailsPage() {
     id: string
   }>()
 
-  if (!id) return
+  // if (!id) return
 
   const navigate = useNavigate()
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

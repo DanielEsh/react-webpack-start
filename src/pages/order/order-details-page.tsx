@@ -11,7 +11,7 @@ export default function OrderDetailsPage() {
     id: string
   }>()
 
-  if (!id) return
+  // if (!id) return
 
   const navigate = useNavigate()
   const { isSuccess, data } = useGetOrderByIdQuery(+id)

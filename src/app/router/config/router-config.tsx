@@ -54,7 +54,9 @@ const categories: Record<string, RouteProps> = {
   },
 }
 
-const appRoutes: Record<AppRoutes, RouteProps> = {
+type RouterConfigKey = RouteProps | Record<string, RouteProps>[]
+
+const appRoutes: Record<AppRoutes, RouterConfigKey> = {
   [AppRoutes.HOME]: {
     index: true,
     element: (
@@ -65,17 +67,13 @@ const appRoutes: Record<AppRoutes, RouteProps> = {
       </PrivateRoute>
     ),
   },
-  [AppRoutes.CATEGORIES]: {
-    path: 'categories',
-    element: (
-      <PrivateRoute>
-        <PageLoader>
-          <CategoriesPage />
-        </PageLoader>
-      </PrivateRoute>
-    ),
-    children: renderRouteFromConfig(categories),
-  },
+  [AppRoutes.CATEGORIES]: [
+    {
+      CATEGORIES_CREATE: {
+        index: true,
+      },
+    },
+  ],
   [AppRoutes.BRANDS]: {
     path: 'brands',
     element: (
