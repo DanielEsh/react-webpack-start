@@ -5,7 +5,6 @@ import {
   Route,
   createBrowserRouter,
   type RouteObject,
-  type Router,
 } from 'react-router-dom'
 import { AppRouterPaths } from 'pages/types'
 import { PageLoader } from 'shared/ui/page-loader'
@@ -47,7 +46,6 @@ import WarehouseCreatePage from 'pages/warehouse/warehouse-create-page'
 import WarehouseDetailsPage from 'pages/warehouse/warehouse-details-page'
 import StaffPage from 'pages/staff/staff-page'
 import StaffCreatePage from 'pages/staff/staff-create-page'
-import path from 'path'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
 enum AppRoutes {
@@ -78,7 +76,6 @@ enum AppRoutes {
 }
 
 type RouterCfgCustomProperty = Omit<RouteObject, 'children'> & {
-  private?: boolean
   children?: Record<string, RouterCfgCustomProperty>
 }
 
@@ -283,7 +280,6 @@ const routerCfg: RouterType = {
   [AppRoutes.Root]: {
     path: '/',
     element: <RootLayout />,
-    private: true,
     children: {
       [AppRoutes.Home]: {
         index: true,
@@ -333,9 +329,7 @@ function createRouter(routerCfg: RouterType) {
         return {
           index: true,
           path: item.path,
-          element: (
-            <RouterPage isPrivate={item.private}>{item.element}</RouterPage>
-          ),
+          element: item.element,
           children: undefined,
         }
       }
@@ -343,9 +337,7 @@ function createRouter(routerCfg: RouterType) {
       return {
         path: item.path,
         index: false,
-        element: (
-          <RouterPage isPrivate={item.private}>{item.element}</RouterPage>
-        ),
+        element: item.element,
         children: item.children,
       }
     }),
