@@ -5,6 +5,7 @@ import {
   Route,
   createBrowserRouter,
   type RouteObject,
+  type Router,
 } from 'react-router-dom'
 import { AppRouterPaths } from 'pages/types'
 import { PageLoader } from 'shared/ui/page-loader'
@@ -46,11 +47,12 @@ import WarehouseCreatePage from 'pages/warehouse/warehouse-create-page'
 import WarehouseDetailsPage from 'pages/warehouse/warehouse-details-page'
 import StaffPage from 'pages/staff/staff-page'
 import StaffCreatePage from 'pages/staff/staff-create-page'
+import path from 'path'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
 enum AppRoutes {
   Root = 'RootLayout',
-  Home = 'home',
+  Home = 'Home',
   Attributes = 'Attributes',
   AttributeCreate = 'AttributeCreate',
   AttributeDetails = 'AttributeDetails',
@@ -82,189 +84,218 @@ type RouterCfgCustomProperty = Omit<RouteObject, 'children'> & {
 
 type RouterType = Record<string, RouterCfgCustomProperty>
 
+const AttributesRoutes = {
+  [AppRoutes.Attributes]: {
+    path: 'attributes',
+    element: (
+      <RouterPage>
+        <AttributesPage />
+      </RouterPage>
+    ),
+    children: {
+      [AppRoutes.AttributeCreate]: {
+        path: 'create',
+        element: (
+          <RouterPage>
+            <AttributeCreatePage />
+          </RouterPage>
+        ),
+      },
+      [AppRoutes.AttributeDetails]: {
+        path: ':id',
+        element: (
+          <RouterPage>
+            <AttributeDetailsPage />
+          </RouterPage>
+        ),
+      },
+    },
+  },
+}
+
+const BrandsRoutes = {
+  [AppRoutes.Brands]: {
+    path: 'brands',
+    element: (
+      <RouterPage>
+        <BrandsPage />
+      </RouterPage>
+    ),
+    children: {
+      [AppRoutes.BrandCreate]: {
+        path: 'create',
+        element: (
+          <RouterPage>
+            <BrandCreatePage />
+          </RouterPage>
+        ),
+      },
+      [AppRoutes.BrandDetails]: {
+        path: ':id',
+        element: (
+          <RouterPage>
+            <BrandDetailsPage />
+          </RouterPage>
+        ),
+      },
+    },
+  },
+}
+
+const CategoriesRoutes = {
+  [AppRoutes.Categories]: {
+    path: 'categories',
+    element: (
+      <RouterPage>
+        <CategoriesPage />
+      </RouterPage>
+    ),
+    children: {
+      [AppRoutes.CategoryCreate]: {
+        path: 'create',
+        element: (
+          <RouterPage>
+            <CategoryCreatePage />
+          </RouterPage>
+        ),
+      },
+      [AppRoutes.CategoryDetails]: {
+        path: ':id',
+        element: (
+          <RouterPage>
+            <CategoryDetailsPage />
+          </RouterPage>
+        ),
+      },
+    },
+  },
+}
+
+const ProductsRoutes = {
+  [AppRoutes.Products]: {
+    path: 'products',
+    element: (
+      <RouterPage>
+        <ProductsPage />
+      </RouterPage>
+    ),
+    children: {
+      [AppRoutes.ProductCreate]: {
+        path: 'create',
+        element: (
+          <RouterPage>
+            <ProductCreatePage />
+          </RouterPage>
+        ),
+      },
+      [AppRoutes.ProductDetails]: {
+        path: ':id',
+        element: (
+          <RouterPage>
+            <ProductDetailsPage />
+          </RouterPage>
+        ),
+      },
+    },
+  },
+}
+
+const WarehouseRoutes = {
+  [AppRoutes.Warehouses]: {
+    path: 'warehouses',
+    element: (
+      <RouterPage>
+        <WarehousesPage />
+      </RouterPage>
+    ),
+    children: {
+      [AppRoutes.WarehouseCreate]: {
+        path: 'create',
+        element: (
+          <RouterPage>
+            <WarehouseCreatePage />
+          </RouterPage>
+        ),
+      },
+      [AppRoutes.WarehouseDetails]: {
+        path: ':id',
+        element: (
+          <RouterPage>
+            <WarehouseDetailsPage />
+          </RouterPage>
+        ),
+      },
+    },
+  },
+}
+
+const StaffRoutes = {
+  [AppRoutes.Staff]: {
+    path: 'staff',
+    element: (
+      <RouterPage>
+        <StaffPage />
+      </RouterPage>
+    ),
+    children: {
+      [AppRoutes.StaffCreate]: {
+        path: 'create',
+        element: (
+          <RouterPage>
+            <StaffCreatePage />
+          </RouterPage>
+        ),
+      },
+    },
+  },
+}
+
+const OrdersRoutes = {
+  [AppRoutes.Orders]: {
+    path: 'orders',
+    element: (
+      <RouterPage>
+        <OrdersPage />
+      </RouterPage>
+    ),
+    children: {
+      [AppRoutes.OrderCreate]: {
+        path: 'create',
+        element: (
+          <RouterPage>
+            <OrderCreatePage />
+          </RouterPage>
+        ),
+      },
+      [AppRoutes.OrderDetails]: {
+        path: ':id',
+        element: (
+          <RouterPage>
+            <OrderDetailsPage />
+          </RouterPage>
+        ),
+      },
+    },
+  },
+}
+
 const routerCfg: RouterType = {
   [AppRoutes.Root]: {
     path: '/',
     element: <RootLayout />,
+    private: true,
     children: {
       [AppRoutes.Home]: {
         index: true,
         element: <HomePage />,
       },
-      [AppRoutes.Attributes]: {
-        path: 'attributes',
-        element: (
-          <RouterPage>
-            <AttributesPage />
-          </RouterPage>
-        ),
-        children: {
-          [AppRoutes.AttributeCreate]: {
-            path: 'create',
-            element: (
-              <RouterPage>
-                <AttributeCreatePage />
-              </RouterPage>
-            ),
-          },
-          [AppRoutes.AttributeDetails]: {
-            path: ':id',
-            element: (
-              <RouterPage>
-                <AttributeDetailsPage />
-              </RouterPage>
-            ),
-          },
-        },
-      },
-      [AppRoutes.Brands]: {
-        path: 'brands',
-        element: (
-          <RouterPage>
-            <BrandsPage />
-          </RouterPage>
-        ),
-        children: {
-          [AppRoutes.BrandCreate]: {
-            path: 'create',
-            element: (
-              <RouterPage>
-                <BrandCreatePage />
-              </RouterPage>
-            ),
-          },
-          [AppRoutes.BrandDetails]: {
-            path: ':id',
-            element: (
-              <RouterPage>
-                <BrandDetailsPage />
-              </RouterPage>
-            ),
-          },
-        },
-      },
-      [AppRoutes.Categories]: {
-        path: 'categories',
-        element: (
-          <RouterPage>
-            <CategoriesPage />
-          </RouterPage>
-        ),
-        children: {
-          [AppRoutes.CategoryCreate]: {
-            path: 'create',
-            element: (
-              <RouterPage>
-                <CategoryCreatePage />
-              </RouterPage>
-            ),
-          },
-          [AppRoutes.CategoryDetails]: {
-            path: ':id',
-            element: (
-              <RouterPage>
-                <CategoryDetailsPage />
-              </RouterPage>
-            ),
-          },
-        },
-      },
-      [AppRoutes.Products]: {
-        path: 'products',
-        element: (
-          <RouterPage>
-            <ProductsPage />
-          </RouterPage>
-        ),
-        children: {
-          [AppRoutes.ProductCreate]: {
-            path: 'create',
-            element: (
-              <RouterPage>
-                <ProductCreatePage />
-              </RouterPage>
-            ),
-          },
-          [AppRoutes.ProductDetails]: {
-            path: ':id',
-            element: (
-              <RouterPage>
-                <ProductDetailsPage />
-              </RouterPage>
-            ),
-          },
-        },
-      },
-      [AppRoutes.Warehouses]: {
-        path: 'warehouses',
-        element: (
-          <RouterPage>
-            <WarehousesPage />
-          </RouterPage>
-        ),
-        children: {
-          [AppRoutes.WarehouseCreate]: {
-            path: 'create',
-            element: (
-              <RouterPage>
-                <WarehouseCreatePage />
-              </RouterPage>
-            ),
-          },
-          [AppRoutes.WarehouseDetails]: {
-            path: ':id',
-            element: (
-              <RouterPage>
-                <WarehouseDetailsPage />
-              </RouterPage>
-            ),
-          },
-        },
-      },
-      [AppRoutes.Staff]: {
-        path: 'staff',
-        element: (
-          <RouterPage>
-            <StaffPage />
-          </RouterPage>
-        ),
-        children: {
-          [AppRoutes.StaffCreate]: {
-            path: 'create',
-            element: (
-              <RouterPage>
-                <StaffCreatePage />
-              </RouterPage>
-            ),
-          },
-        },
-      },
-      [AppRoutes.Orders]: {
-        path: 'orders',
-        element: (
-          <RouterPage>
-            <OrdersPage />
-          </RouterPage>
-        ),
-        children: {
-          [AppRoutes.OrderCreate]: {
-            path: 'create',
-            element: (
-              <RouterPage>
-                <OrderCreatePage />
-              </RouterPage>
-            ),
-          },
-          [AppRoutes.OrderDetails]: {
-            path: ':id',
-            element: (
-              <RouterPage>
-                <OrderDetailsPage />
-              </RouterPage>
-            ),
-          },
-        },
-      },
+      ...AttributesRoutes,
+      ...BrandsRoutes,
+      ...CategoriesRoutes,
+      ...ProductsRoutes,
+      ...WarehouseRoutes,
+      ...StaffRoutes,
+      ...OrdersRoutes,
       [AppRoutes.NotFound]: {
         path: '*',
         element: (
@@ -293,13 +324,35 @@ function transformChildren(obj: any) {
   return obj
 }
 
-const test = transformChildren(Object.values(routerCfg).map(transformChildren))
+function createRouter(routerCfg: RouterType) {
+  const routeObject = Object.values(routerCfg).map(transformChildren)
 
-console.log('test', test)
+  return createBrowserRouter(
+    routeObject.map((item): RouteObject => {
+      if (item.index) {
+        return {
+          index: true,
+          path: item.path,
+          element: (
+            <RouterPage isPrivate={item.private}>{item.element}</RouterPage>
+          ),
+          children: undefined,
+        }
+      }
 
-export const routerFromConfig = createBrowserRouter(test)
+      return {
+        path: item.path,
+        index: false,
+        element: (
+          <RouterPage isPrivate={item.private}>{item.element}</RouterPage>
+        ),
+        children: item.children,
+      }
+    }),
+  )
+}
 
-console.log('routerFromConfig', routerFromConfig)
+export const routerFromConfig = createRouter(routerCfg)
 
 const cfg = [
   {
