@@ -1,57 +1,49 @@
-import { useNotification } from 'shared/notification'
-import {
-  type BrandForm,
-  brandFormSchema,
-  BrandFormFields,
-} from 'entities/brands'
-import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
-import {
-  useCreateBrandMutation,
-  useInvalidateBrands,
-} from 'entities/brands/api/queries'
-import { BrandDto } from 'entities/brands/api/types'
+import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
+import { Button, Drawer } from 'shared/ui-kit'
+import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
+import { BrandsCreateForm } from 'features/brands/create/brands-create-form'
+import { useNavigate } from 'react-router-dom'
+import { BRAND_CREATE_FORM_ID } from 'features/brands/create'
 
-const BrandCreatePage = () => {
-  const { mutateAsync: createBrandMutation } = useCreateBrandMutation()
-  const { invalidateBrands } = useInvalidateBrands()
-  const { showNotification } = useNotification()
+export default function BrandCreatePage() {
+  const navigate = useNavigate()
 
-  const defaultValues: BrandForm = {
-    slug: '',
-    name: '',
-  }
-
-  const handleSuccessCreate = (data: BrandDto) => {
-    showNotification({
-      id: data.id,
-      title: 'Успешное создание бренда',
-      message: `Бренд ${data.name} успешно создан`,
-    })
-    invalidateBrands()
-  }
-
-  const createNewBrand = async (form: BrandForm) => {
-    return await createBrandMutation(form, {
-      onSuccess: (data) => handleSuccessCreate(data),
-      onError: handleErrorCreate,
-    })
-  }
-
-  function handleErrorCreate() {
-    console.log('error')
+  const close = () => {
+    navigate('/brands')
   }
 
   return (
-    <FormDrawerLayout
-      formSchema={brandFormSchema}
-      defaultValues={defaultValues}
-      backLinkPath="/brands"
-      submitButtonLabel="Create"
-      onSubmit={createNewBrand}
+    <Drawer
+      open
+      onOpenChange={close}
     >
-      <BrandFormFields />
-    </FormDrawerLayout>
+      <div className="flex h-full flex-col">
+        <DrawerHeader>
+          <h2>Create brand</h2>
+        </DrawerHeader>
+
+        <BrandsCreateForm onSuccessCreate={close} />
+
+        <DrawerFooter>
+          <div className="flex gap-2 px-4 pb-6">
+            <Button
+              type="submit"
+              variant="primary"
+              form={BRAND_CREATE_FORM_ID}
+            >
+              Создать
+            </Button>
+
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={close}
+            >
+              Отмена
+            </Button>
+          </div>
+        </DrawerFooter>
+      </div>
+    </Drawer>
   )
 }
-
-export default BrandCreatePage
