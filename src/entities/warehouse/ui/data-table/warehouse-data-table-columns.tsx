@@ -2,7 +2,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { WarehouseDto } from 'entities/warehouse/api/dto'
 import { Table } from 'shared/ui-kit'
 import { DataTableColumnHead } from 'shared/ui/data-table'
-import { WarehouseDataTableRowActions } from 'entities/warehouse/ui/warehouse-data-table/warehouse-data-table-row-actions'
+import { WarehouseDataTableRowActions } from 'entities/warehouse/ui/data-table/warehouse-data-table-row-actions'
 
 export const warehouseDataTableColumns: ColumnDef<WarehouseDto, any>[] = [
   {
