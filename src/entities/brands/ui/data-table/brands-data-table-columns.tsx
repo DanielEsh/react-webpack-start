@@ -1,7 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTableColumnHead } from 'shared/ui/data-table'
 import { BrandsDataTableRowActions } from './brands-data-table-row-actions'
-import { ReactNode } from 'react'
 import { Table } from 'shared/ui-kit/table'
 import { formatDate } from 'shared/utils/dayjs'
 import { BrandDto } from 'entities/brands/api/types'
@@ -18,7 +17,7 @@ export const brandsDataTableColumns: ColumnDef<BrandDto, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'slug',
@@ -31,7 +30,7 @@ export const brandsDataTableColumns: ColumnDef<BrandDto, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'name',
@@ -44,7 +43,7 @@ export const brandsDataTableColumns: ColumnDef<BrandDto, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{info.getValue() as ReactNode}</Table.Cell>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'created_at',
@@ -57,7 +56,7 @@ export const brandsDataTableColumns: ColumnDef<BrandDto, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{formatDate(info.getValue())}</Table.Cell>,
+    cell: (info) => formatDate(info.getValue()),
   },
   {
     id: 'updated_at',
@@ -70,7 +69,7 @@ export const brandsDataTableColumns: ColumnDef<BrandDto, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: (info) => <Table.Cell>{formatDate(info.getValue())}</Table.Cell>,
+    cell: (info) => formatDate(info.getValue()),
   },
   {
     id: 'actions',
@@ -82,11 +81,7 @@ export const brandsDataTableColumns: ColumnDef<BrandDto, any>[] = [
         />
       </Table.ColumnHeader>
     ),
-    cell: ({ row }) => (
-      <Table.Cell>
-        <BrandsDataTableRowActions row={row} />
-      </Table.Cell>
-    ),
+    cell: ({ row }) => <BrandsDataTableRowActions brand={row.original} />,
     enableSorting: false,
   },
 ]

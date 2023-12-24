@@ -7,17 +7,16 @@ import { useDeleteConfirmation } from 'shared/ui/dialog/confirm-delete'
 import { BrandDto } from 'entities/brands/api/types'
 
 interface Props {
-  row: Row<BrandDto>
+  brand: BrandDto
 }
 
-export const BrandsDataTableRowActions = ({ row }: Props) => {
-  const { original } = row
+export const BrandsDataTableRowActions = ({ brand }: Props) => {
   const { openDeleteConfirmDialog } = useDeleteConfirmation()
 
   const handleDeleteClick = () => {
     openDeleteConfirmDialog<number, BrandDto>({
-      key: original.id,
-      data: original,
+      key: brand.id,
+      data: brand,
     })
   }
 
@@ -25,7 +24,7 @@ export const BrandsDataTableRowActions = ({ row }: Props) => {
     <div className="flex justify-end gap-1">
       <ButtonLink
         size="sm"
-        to={`/brands/${original.slug}`}
+        to={`/brands/${brand.slug}`}
       >
         <IconEdit />
       </ButtonLink>

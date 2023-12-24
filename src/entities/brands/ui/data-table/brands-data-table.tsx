@@ -6,24 +6,17 @@ import {
 import { BrandDto } from 'entities/brands/api/types'
 import {
   useDeleteBrandMutation,
+  useGetBrands,
   useInvalidateBrands,
 } from 'entities/brands/api/queries'
 import { useNotification } from 'shared/notification'
-import { type DataViewState, PaginatedDataView } from 'widgets/data-view'
+import { DataTableView } from 'widgets/data-table-view/data-table-view'
+import { useDataTableViewState } from 'widgets/data-table-view/use-data-table-view-state'
 
-interface Props {
-  data: BrandDto[]
-  defaultDataTableValues: DataViewState
-  meta: any
-  onChange?(state: DataViewState): void
-}
+export const BrandsDataTable = () => {
+  const { state, changePage, changeLimit, changeSort } = useDataTableViewState()
+  const { isLoading, isError, data } = useGetBrands(state)
 
-export const BrandsDataTable = ({
-  data,
-  meta,
-  defaultDataTableValues,
-  onChange,
-}: Props) => {
   const { mutate: deleteCategoryMutation } = useDeleteBrandMutation()
   const { invalidateBrands } = useInvalidateBrands()
   const { showNotification } = useNotification()
@@ -45,15 +38,22 @@ export const BrandsDataTable = ({
 
   return (
     <>
-      <PaginatedDataView
-        data={data}
-        columns={brandsDataTableColumns}
-        meta={meta}
-        defaultValues={defaultDataTableValues}
-        onChange={onChange}
-      />
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Error</div>}
+      {data && (
+        <>
+          <DataTableView
+            data={data}
+            columns={brandsDataTableColumns}
+            sorting={{ sortBy: state.sortBy, orderBy: state.orderBy }}
+            onPageChange={changePage}
+            onLimitChange={changeLimit}
+            onSortChange={changeSort}
+          />
 
-      <ConfirmDeleteDialog onConfirmDelete={handleConfirmDelete} />
+          <ConfirmDeleteDialog onConfirmDelete={handleConfirmDelete} />
+        </>
+      )}
     </>
   )
 }
