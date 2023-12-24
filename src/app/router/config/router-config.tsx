@@ -1,7 +1,7 @@
 import RootLayout from 'widgets/layouts/root-layout'
 import { lazy } from 'react'
 import { RouterPage } from 'app/router/ui/router-page'
-import { RouteConfig } from './types'
+import { RouterConfig } from './types'
 import { AppRoutes } from './constants'
 import {
   attributesRoutes,
@@ -17,7 +17,7 @@ const HomePage = lazy(() => import('pages/home-page'))
 const NotFoundPage = lazy(() => import('pages/not-found'))
 const LoginPage = lazy(() => import('pages/login'))
 
-export const routerConfig: RouteConfig = {
+export const routerConfig: RouterConfig = {
   [AppRoutes.Root]: {
     path: '/',
     element: <RootLayout />,

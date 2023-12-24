@@ -4,4 +4,4 @@ type RouterConfigItem = Omit<RouteObject, 'children'> & {
   children?: Record<string, RouterConfigItem>
 }
 
-export type RouteConfig = Record<string, RouterConfigItem>
+export type RouterConfig = Record<string, RouterConfigItem>
