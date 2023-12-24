@@ -48,6 +48,33 @@ import StaffPage from 'pages/staff/staff-page'
 import StaffCreatePage from 'pages/staff/staff-create-page'
 const NotFoundPage = lazy(() => import('pages/not-found'))
 
+enum AppRoutes {
+  Root = 'RootLayout',
+  Home = 'home',
+  Attributes = 'Attributes',
+  AttributeCreate = 'AttributeCreate',
+  AttributeDetails = 'AttributeDetails',
+  Brands = 'Brands',
+  BrandCreate = 'BrandsCreate',
+  BrandDetails = 'BrandDetails',
+  Categories = 'Categories',
+  CategoryCreate = 'CategoryCreate',
+  CategoryDetails = 'CategoryDetails',
+  Products = 'Products',
+  ProductCreate = 'ProductCreate',
+  ProductDetails = 'ProductDetails',
+  Warehouses = 'Warehouses',
+  WarehouseCreate = 'WarehouseCreate',
+  WarehouseDetails = 'WarehouseDetails',
+  Staff = 'Staff',
+  StaffCreate = 'StaffCreate',
+  Orders = 'Orders',
+  OrderCreate = 'OrderCreate',
+  OrderDetails = 'OrderDetails',
+  NotFound = 'NotFound',
+  LogIn = 'LogIn',
+}
+
 type RouterCfgCustomProperty = Omit<RouteObject, 'children'> & {
   private?: boolean
   children?: Record<string, RouterCfgCustomProperty>
@@ -56,15 +83,15 @@ type RouterCfgCustomProperty = Omit<RouteObject, 'children'> & {
 type RouterType = Record<string, RouterCfgCustomProperty>
 
 const routerCfg: RouterType = {
-  RootLayout: {
+  [AppRoutes.Root]: {
     path: '/',
     element: <RootLayout />,
     children: {
-      HomePage: {
+      [AppRoutes.Home]: {
         index: true,
         element: <HomePage />,
       },
-      Attributes: {
+      [AppRoutes.Attributes]: {
         path: 'attributes',
         element: (
           <RouterPage>
@@ -72,7 +99,7 @@ const routerCfg: RouterType = {
           </RouterPage>
         ),
         children: {
-          AttributeCreate: {
+          [AppRoutes.AttributeCreate]: {
             path: 'create',
             element: (
               <RouterPage>
@@ -80,7 +107,7 @@ const routerCfg: RouterType = {
               </RouterPage>
             ),
           },
-          AttributeDetails: {
+          [AppRoutes.AttributeDetails]: {
             path: ':id',
             element: (
               <RouterPage>
@@ -90,7 +117,7 @@ const routerCfg: RouterType = {
           },
         },
       },
-      Brands: {
+      [AppRoutes.Brands]: {
         path: 'brands',
         element: (
           <RouterPage>
@@ -98,7 +125,7 @@ const routerCfg: RouterType = {
           </RouterPage>
         ),
         children: {
-          BrandCreate: {
+          [AppRoutes.BrandCreate]: {
             path: 'create',
             element: (
               <RouterPage>
@@ -106,7 +133,7 @@ const routerCfg: RouterType = {
               </RouterPage>
             ),
           },
-          BrandDetails: {
+          [AppRoutes.BrandDetails]: {
             path: ':id',
             element: (
               <RouterPage>
@@ -116,7 +143,7 @@ const routerCfg: RouterType = {
           },
         },
       },
-      Categories: {
+      [AppRoutes.Categories]: {
         path: 'categories',
         element: (
           <RouterPage>
@@ -124,7 +151,7 @@ const routerCfg: RouterType = {
           </RouterPage>
         ),
         children: {
-          CategoryCreate: {
+          [AppRoutes.CategoryCreate]: {
             path: 'create',
             element: (
               <RouterPage>
@@ -132,7 +159,7 @@ const routerCfg: RouterType = {
               </RouterPage>
             ),
           },
-          CategoryDetails: {
+          [AppRoutes.CategoryDetails]: {
             path: ':id',
             element: (
               <RouterPage>
@@ -142,7 +169,7 @@ const routerCfg: RouterType = {
           },
         },
       },
-      Products: {
+      [AppRoutes.Products]: {
         path: 'products',
         element: (
           <RouterPage>
@@ -150,7 +177,7 @@ const routerCfg: RouterType = {
           </RouterPage>
         ),
         children: {
-          ProductCreate: {
+          [AppRoutes.ProductCreate]: {
             path: 'create',
             element: (
               <RouterPage>
@@ -158,7 +185,7 @@ const routerCfg: RouterType = {
               </RouterPage>
             ),
           },
-          ProductDetails: {
+          [AppRoutes.ProductDetails]: {
             path: ':id',
             element: (
               <RouterPage>
@@ -168,7 +195,7 @@ const routerCfg: RouterType = {
           },
         },
       },
-      Warehouse: {
+      [AppRoutes.Warehouses]: {
         path: 'warehouses',
         element: (
           <RouterPage>
@@ -176,7 +203,7 @@ const routerCfg: RouterType = {
           </RouterPage>
         ),
         children: {
-          WarehouseCreate: {
+          [AppRoutes.WarehouseCreate]: {
             path: 'create',
             element: (
               <RouterPage>
@@ -184,7 +211,7 @@ const routerCfg: RouterType = {
               </RouterPage>
             ),
           },
-          WarehouseDetails: {
+          [AppRoutes.WarehouseDetails]: {
             path: ':id',
             element: (
               <RouterPage>
@@ -194,7 +221,7 @@ const routerCfg: RouterType = {
           },
         },
       },
-      Staff: {
+      [AppRoutes.Staff]: {
         path: 'staff',
         element: (
           <RouterPage>
@@ -202,7 +229,7 @@ const routerCfg: RouterType = {
           </RouterPage>
         ),
         children: {
-          StaffCreate: {
+          [AppRoutes.StaffCreate]: {
             path: 'create',
             element: (
               <RouterPage>
@@ -212,7 +239,7 @@ const routerCfg: RouterType = {
           },
         },
       },
-      Order: {
+      [AppRoutes.Orders]: {
         path: 'orders',
         element: (
           <RouterPage>
@@ -220,7 +247,7 @@ const routerCfg: RouterType = {
           </RouterPage>
         ),
         children: {
-          OrderCreate: {
+          [AppRoutes.OrderCreate]: {
             path: 'create',
             element: (
               <RouterPage>
@@ -228,7 +255,7 @@ const routerCfg: RouterType = {
               </RouterPage>
             ),
           },
-          OrderDetails: {
+          [AppRoutes.OrderDetails]: {
             path: ':id',
             element: (
               <RouterPage>
@@ -238,7 +265,7 @@ const routerCfg: RouterType = {
           },
         },
       },
-      NotFound: {
+      [AppRoutes.NotFound]: {
         path: '*',
         element: (
           <RouterPage>
@@ -248,7 +275,7 @@ const routerCfg: RouterType = {
       },
     },
   },
-  LoginLayout: {
+  [AppRoutes.LogIn]: {
     path: 'login',
     element: (
       <RouterPage>
