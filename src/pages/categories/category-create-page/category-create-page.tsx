@@ -7,7 +7,7 @@ import {
   CATEGORY_CREATE_FORM_ID,
 } from 'features/categories/create'
 
-const CategoryCreatePage = () => {
+export default function CategoryCreatePage() {
   const navigate = useNavigate()
 
   const close = () => {
@@ -49,5 +49,3 @@ const CategoryCreatePage = () => {
     </Drawer>
   )
 }
-
-export default CategoryCreatePage

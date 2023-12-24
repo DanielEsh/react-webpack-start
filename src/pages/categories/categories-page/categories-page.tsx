@@ -5,7 +5,7 @@ import {
   CategoriesDataTable,
 } from 'entities/categories'
 
-const CategoriesPage = () => {
+export default function CategoriesPage() {
   return (
     <div>
       <Breadcrumbs>
@@ -20,5 +20,3 @@ const CategoriesPage = () => {
     </div>
   )
 }
-
-export default CategoriesPage

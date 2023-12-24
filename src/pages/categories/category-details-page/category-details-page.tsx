@@ -9,7 +9,7 @@ import {
   CATEGORY_UPDATE_FORM_ID,
 } from 'features/categories/update'
 
-const CategoryDetailsPage = () => {
+export default function CategoryDetailsPage() {
   const { id } = useParams()
   assertInvariant(id)
 
@@ -69,5 +69,3 @@ const CategoryDetailsPage = () => {
     </Drawer>
   )
 }
-
-export default CategoryDetailsPage
