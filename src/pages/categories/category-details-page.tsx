@@ -1,64 +1,72 @@
-import { useParams } from 'react-router-dom'
-import {
-  useGetCategoryByIdQuery,
-  useInvalidateCategories,
-  useUpdateCategoryMutation,
-  CategoryFormFields,
-  categoryFormSchema,
-  type CategoryForm,
-} from 'entities/categories'
-import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
-import { useNotification } from 'shared/notification'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useGetCategoryByIdQuery } from 'entities/categories'
 import { assertInvariant } from 'shared/api/errors'
+import { Button, Drawer } from 'shared/ui-kit'
+import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
+import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
+import {
+  CategoryUpdateForm,
+  CATEGORY_UPDATE_FORM_ID,
+} from 'features/categories/update'
 
 const CategoryDetailsPage = () => {
   const { id } = useParams()
   assertInvariant(id)
-  const { isSuccess, isLoading, isError, data } = useGetCategoryByIdQuery(+id)
-  const { mutateAsync: updateCategoryMutation } = useUpdateCategoryMutation()
-  const invalidateCategories = useInvalidateCategories()
-  const { showNotification } = useNotification()
 
-  const defaultValues: CategoryForm = {
-    slug: data?.slug ?? '',
-    name: data?.name ?? '',
-  }
+  const { isLoading, isError, data } = useGetCategoryByIdQuery(+id)
+  const navigate = useNavigate()
 
-  const handleSuccessUpdate = async (data: any) => {
-    showNotification({
-      id: data.slug,
-      title: 'Успешное обновление категории',
-      message: `Категория ${data.name} успешно создана`,
-    })
-    await invalidateCategories()
-  }
-
-  const updateCategory = async (form: CategoryForm) => {
-    await updateCategoryMutation(
-      {
-        form,
-        id: +id,
-      },
-      {
-        onSuccess: handleSuccessUpdate,
-      },
-    )
+  const close = () => {
+    navigate('/categories')
   }
 
   return (
-    <FormDrawerLayout
-      loading={isLoading}
-      error={isError}
-      success={isSuccess}
-      data={data}
-      formSchema={categoryFormSchema}
-      defaultValues={defaultValues}
-      backLinkPath="/categories"
-      submitButtonLabel="Update"
-      onSubmit={updateCategory}
+    <Drawer
+      open
+      onOpenChange={close}
     >
-      <CategoryFormFields />
-    </FormDrawerLayout>
+      {isLoading && <div>isLoading...</div>}
+      {isError && <div>isError</div>}
+
+      <div className="flex h-full flex-col">
+        {data && (
+          <>
+            <DrawerHeader>
+              <h2>Update category</h2>
+            </DrawerHeader>
+
+            <CategoryUpdateForm
+              id={+id}
+              defaultValues={{
+                slug: data.slug,
+                name: data.name,
+                description: data.description,
+              }}
+            />
+
+            <DrawerFooter>
+              <div className="flex gap-2 px-4 pb-6">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  form={CATEGORY_UPDATE_FORM_ID}
+                >
+                  Обновить
+                </Button>
+
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={close}
+                >
+                  Отменить
+                </Button>
+              </div>
+            </DrawerFooter>
+          </>
+        )}
+      </div>
+    </Drawer>
   )
 }
 
