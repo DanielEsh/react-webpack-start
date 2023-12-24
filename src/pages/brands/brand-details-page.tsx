@@ -1,64 +1,71 @@
-import { useParams } from 'react-router-dom'
-import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
-import { useNotification } from 'shared/notification'
-import {
-  useGetBrandDetailsBySlug,
-  useInvalidateBrands,
-  useUpdateBrandMutation,
-} from 'entities/brands/api/queries'
-import { BrandForm, BrandFormFields, brandFormSchema } from 'entities/brands'
-import { BrandDto } from 'entities/brands/api/types'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Button, Drawer } from 'shared/ui-kit'
+import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
+import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
+import { BRAND_UPDATE_FORM_ID } from 'features/brands/update/constants'
+import { BrandUpdateForm } from 'features/brands/update/brand-update-form'
+import { assertInvariant } from 'shared/api/errors'
+import { useGetBrandDetailsById } from 'entities/brands/api/queries/use-get-brands-details-by-id'
 
-const BrandDetailsPage = () => {
-  const { slug } = useParams()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const { isSuccess, isLoading, isError, data } = useGetBrandDetailsBySlug(slug)
-  const { mutateAsync: updateBrandMutation } = useUpdateBrandMutation()
-  const { invalidateBrands } = useInvalidateBrands()
-  const { showNotification } = useNotification()
+export default function BrandDetailsPage() {
+  const { id: paramId } = useParams()
+  assertInvariant(paramId)
+  const id = +paramId
 
-  const defaultValues: BrandForm = {
-    slug: data?.slug ?? '',
-    name: data?.name ?? '',
-  }
+  const { isLoading, isError, data } = useGetBrandDetailsById(id)
 
-  const handleSuccessUpdate = (data: BrandDto) => {
-    showNotification({
-      id: data.slug,
-      title: 'Успешное обновление бренда',
-      message: `Бренд ${data.name} успешно обновлен`,
-    })
-    invalidateBrands()
-  }
+  const navigate = useNavigate()
 
-  const updateCategory = async (form: BrandForm) => {
-    await updateBrandMutation(
-      {
-        form,
-        slug: slug || '',
-      },
-      {
-        onSuccess: handleSuccessUpdate,
-      },
-    )
+  const close = () => {
+    navigate('/brands')
   }
 
   return (
-    <FormDrawerLayout
-      loading={isLoading}
-      error={isError}
-      success={isSuccess}
-      data={data}
-      formSchema={brandFormSchema}
-      defaultValues={defaultValues}
-      backLinkPath="/brands"
-      submitButtonLabel="Update"
-      onSubmit={updateCategory}
+    <Drawer
+      open={true}
+      onOpenChange={close}
     >
-      <BrandFormFields />
-    </FormDrawerLayout>
+      <>
+        {isLoading && <div>Loading...</div>}
+        {isError && <div>Error</div>}
+        {data && (
+          <div className="flex h-full flex-col">
+            <DrawerHeader>
+              <h2>Update brand</h2>
+            </DrawerHeader>
+
+            <BrandUpdateForm
+              id={id}
+              defaultValues={{
+                slug: data.slug,
+                name: data.name,
+                description: data.description,
+              }}
+              onSuccessUpdate={close}
+            />
+
+            <DrawerFooter>
+              <div className="flex gap-2 px-4 pb-6">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  form={BRAND_UPDATE_FORM_ID}
+                >
+                  Обновить
+                </Button>
+
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={close}
+                >
+                  Отмена
+                </Button>
+              </div>
+            </DrawerFooter>
+          </div>
+        )}
+      </>
+    </Drawer>
   )
 }
-
-export default BrandDetailsPage

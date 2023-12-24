@@ -19,13 +19,12 @@ export const getBrands = async (params: Params) => {
   return (await $api.get<PageableResponse<BrandDto>>(query)).data
 }
 
-export const getBrandBySlug = async (slug: string) => {
-  console.log('getCategoryBySlug')
-  return (await $api.get<BrandDto>(`/brands/${slug}`)).data
+export const getBrandById = async (id: number) => {
+  return (await $api.get<BrandDto>(`/brands/${id}`)).data
 }
 
-export const updateBrandBySlug = async (dto: UpdateBrandDto, slug: string) => {
-  return (await $api.patch<BrandDto>(`/brands/${slug}`, dto)).data
+export const updateBrandById = async (dto: UpdateBrandDto, id: number) => {
+  return (await $api.patch<BrandDto>(`/brands/${id}`, dto)).data
 }
 
 export const deleteBrand = async (id: number) => {
