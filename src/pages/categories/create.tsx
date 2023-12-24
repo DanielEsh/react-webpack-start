@@ -1,53 +1,52 @@
+import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
+import { Button, Drawer } from 'shared/ui-kit'
+import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
+import { useNavigate } from 'react-router-dom'
 import {
-  useCreateCategoryMutation,
-  useInvalidateCategories,
-} from 'entities/categories/api/queries'
-import { useNotification } from 'shared/notification'
-import { CategoryFormFields } from 'entities/categories/ui/form/category-form-fields'
-import { categoryFormSchema } from 'entities/categories/ui/form/category-form-schema'
-import { CategoryForm } from 'entities/categories/ui/form/types'
-import { FormDrawerLayout } from 'widgets/layouts/form-drawer-layout/form-drawer-layout'
+  CategoryCreateForm,
+  CATEGORY_CREATE_FORM_ID,
+} from 'features/categories/create'
 
 const CategoryCreatePage = () => {
-  const { mutateAsync: createCategoryMutation } = useCreateCategoryMutation()
-  const invalidateCategories = useInvalidateCategories()
-  const { showNotification } = useNotification()
+  const navigate = useNavigate()
 
-  const defaultValues: CategoryForm = {
-    slug: '',
-    name: '',
-  }
-
-  const createNewCategory = async (form: CategoryForm) => {
-    return await createCategoryMutation(form, {
-      onSuccess: (data) => handleSuccessCreate(data),
-      onError: handleErrorCreate,
-    })
-  }
-
-  async function handleSuccessCreate(data: any) {
-    showNotification({
-      id: data.id,
-      title: 'Успешное создание категории',
-      message: `Категория ${data.name} успешно создана`,
-    })
-    await invalidateCategories()
-  }
-
-  function handleErrorCreate() {
-    console.log('error')
+  const close = () => {
+    navigate('/categories')
   }
 
   return (
-    <FormDrawerLayout
-      formSchema={categoryFormSchema}
-      defaultValues={defaultValues}
-      backLinkPath="/categories"
-      submitButtonLabel="Create"
-      onSubmit={createNewCategory}
+    <Drawer
+      open
+      onOpenChange={close}
     >
-      <CategoryFormFields />
-    </FormDrawerLayout>
+      <div className="flex h-full flex-col">
+        <DrawerHeader>
+          <h2>Create category</h2>
+        </DrawerHeader>
+
+        <CategoryCreateForm onSuccessCreate={close} />
+
+        <DrawerFooter>
+          <div className="flex gap-2 px-4 pb-6">
+            <Button
+              type="submit"
+              variant="primary"
+              form={CATEGORY_CREATE_FORM_ID}
+            >
+              Создать
+            </Button>
+
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={close}
+            >
+              Отменить
+            </Button>
+          </div>
+        </DrawerFooter>
+      </div>
+    </Drawer>
   )
 }
 
