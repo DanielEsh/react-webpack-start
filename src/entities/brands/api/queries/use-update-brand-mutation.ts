@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { updateBrandById } from '../requests'
-import { BrandForm } from 'entities/brands/ui/form/types'
+import { BrandForm } from 'entities/brands/ui/brands-form/types'
 
 export const useUpdateBrandMutation = () => {
   return useMutation({

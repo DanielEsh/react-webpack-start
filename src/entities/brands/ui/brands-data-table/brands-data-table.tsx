@@ -1,13 +1,13 @@
 import { brandsDataTableColumns } from './brands-data-table-columns'
 import { ConfirmDeleteDialog } from 'shared/ui/dialog/confirm-delete'
-import { useGetBrands } from 'entities/brands/api/queries'
+import { useGetBrandsQuery } from 'entities/brands/api/queries'
 import { DataTableView } from 'widgets/data-table-view/data-table-view'
 import { useDataTableViewState } from 'widgets/data-table-view/use-data-table-view-state'
-import { useBrandDelete } from 'features/brands/delete/use-brand-delete'
+import { useBrandDelete } from 'features/brands/delete'
 
 export const BrandsDataTable = () => {
   const { state, changePage, changeLimit, changeSort } = useDataTableViewState()
-  const { isLoading, isError, data } = useGetBrands(state)
+  const { isLoading, isError, data } = useGetBrandsQuery(state)
   const { handleConfirmDelete } = useBrandDelete()
 
   return (

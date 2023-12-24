@@ -2,17 +2,16 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Drawer } from 'shared/ui-kit'
 import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
-import { BRAND_UPDATE_FORM_ID } from 'features/brands/update/constants'
-import { BrandUpdateForm } from 'features/brands/update/brand-update-form'
+import { BrandUpdateForm, BRAND_UPDATE_FORM_ID } from 'features/brands/update'
 import { assertInvariant } from 'shared/api/errors'
-import { useGetBrandDetailsById } from 'entities/brands/api/queries/use-get-brands-details-by-id'
+import { useGetBrandDetailsByIdQuery } from 'entities/brands'
 
 export default function BrandDetailsPage() {
   const { id: paramId } = useParams()
   assertInvariant(paramId)
   const id = +paramId
 
-  const { isLoading, isError, data } = useGetBrandDetailsById(id)
+  const { isLoading, isError, data } = useGetBrandDetailsByIdQuery(id)
 
   const navigate = useNavigate()
 

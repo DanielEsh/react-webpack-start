@@ -1,6 +1,6 @@
 export { useCreateBrandMutation } from './use-create-brand-mutation'
-export { useGetBrands } from './use-get-brands'
-export { useGetBrandDetailsById } from './use-get-brands-details-by-id'
+export { useGetBrandsQuery } from './use-get-brands-query'
+export { useGetBrandDetailsByIdQuery } from './use-get-brand-details-by-id-query'
 export { useUpdateBrandMutation } from './use-update-brand-mutation'
 export { useDeleteBrandMutation } from './use-delete-brand-mutation'
 export { useInvalidateBrands } from './use-invalidate-brands'

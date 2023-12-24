@@ -1,20 +1,13 @@
 import qs from 'qs'
 import { $api } from 'shared/api/api'
-import { PageableResponse } from 'shared/api/types'
+import { PageableResponse, PageableResponseParams } from 'shared/api/types'
 import { BrandDto, CreateBrandDto, UpdateBrandDto } from './types'
 
 export const createBrand = async (dto: CreateBrandDto) => {
   return (await $api.post(`/brands`, dto)).data
 }
 
-interface Params {
-  page: number
-  limit: number
-  sort_by?: string[]
-  order_by?: string[]
-}
-
-export const getBrands = async (params: Params) => {
+export const getBrands = async (params: PageableResponseParams) => {
   const query = `brands?${qs.stringify(params)}`
   return (await $api.get<PageableResponse<BrandDto>>(query)).data
 }

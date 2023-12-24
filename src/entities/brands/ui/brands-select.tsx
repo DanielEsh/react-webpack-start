@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useState } from 'react'
 import { BaseSelect } from 'shared/ui/base-select'
-import { useGetBrands } from '../api/queries'
+import { useGetBrandsQuery } from '../api/queries'
 import { PageableResponse } from 'shared/api/types'
 import { BrandDto } from '../api/types'
 
@@ -27,7 +27,7 @@ export const BrandsSelect = forwardRef<HTMLSelectElement, Props>(
       setOptions(options)
     }
 
-    useGetBrands(
+    useGetBrandsQuery(
       {
         page: 1,
         limit: 10,
