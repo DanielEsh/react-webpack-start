@@ -78,6 +78,15 @@ export const WarehouseProductsTable = ({ id }: Props) => {
     }))
   }
 
+  const change = (isOpen: boolean) => {
+    console.log('change', isOpen)
+    if (isOpen) {
+      open()
+    } else {
+      close()
+    }
+  }
+
   return (
     <>
       {data && (
@@ -185,7 +194,7 @@ export const WarehouseProductsTable = ({ id }: Props) => {
 
       <Modal
         open={opened}
-        onOpenChange={close}
+        onOpenChange={change}
       >
         <Form
           methods={formMethods}
@@ -210,7 +219,9 @@ export const WarehouseProductsTable = ({ id }: Props) => {
               Submit
             </Button>
 
-            <Button onClick={close}>Cancel</Button>
+            <DialogPrimitive.DialogClose>
+              <Button onClick={close}>Cancel</Button>
+            </DialogPrimitive.DialogClose>
           </div>
         </Form>
       </Modal>

@@ -6,7 +6,7 @@ import { UiDefaultProps } from '../types'
 export interface ModalProps extends UiDefaultProps {
   open: boolean
   persistent?: boolean
-  onOpenChange?(): void
+  onOpenChange?(isOpen?: boolean): void
   onClose?(): void
 }
 
