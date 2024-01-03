@@ -47,8 +47,9 @@ export default function WarehouseDetailsPage() {
                 defaultValues={{ name: data.name }}
                 onSuccessUpdate={close}
               />
+
+              <WarehouseProductsTable id={+id} />
             </div>
-            <WarehouseProductsTable id={+id} />
 
             <DrawerFooter>
               <div className="flex gap-2 px-4 pb-6">

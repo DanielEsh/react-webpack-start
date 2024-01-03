@@ -10,26 +10,20 @@ export const warehouseProductsTableColumns: ColumnDef<
   {
     id: 'name',
     accessorKey: 'product.name',
-    header: () => <Table.ColumnHeader>Product</Table.ColumnHeader>,
-    cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
+    header: () => <Table.ColumnHeader>Товар</Table.ColumnHeader>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'quantity',
     accessorKey: 'quantity',
-    header: () => <Table.ColumnHeader>Quantity</Table.ColumnHeader>,
-    cell: (info) => <Table.Cell>{info.getValue()}</Table.Cell>,
+    header: () => <Table.ColumnHeader>Количество</Table.ColumnHeader>,
+    cell: (info) => info.getValue(),
   },
   {
     id: 'actions',
     accessorKey: '',
-    header: () => <Table.ColumnHeader>Actions</Table.ColumnHeader>,
-    cell: ({ row, table }) => (
-      <Table.Cell>
-        <WarehouseProductsTableRowActions
-          actions={table.options.meta.rowActions}
-          warehouseProduct={row.original}
-        />
-      </Table.Cell>
+    cell: ({ row }) => (
+      <WarehouseProductsTableRowActions warehouseProduct={row.original} />
     ),
   },
 ]

@@ -9,7 +9,7 @@ import { Button, Form, InputNumber, Table } from 'shared/ui-kit'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { DataTablePageCounter } from 'shared/ui/data-table/data-table-page-counter'
 import { Pagiantion } from 'shared/ui-kit/Pagiantion/Pagination'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Modal } from 'shared/ui-kit/modal'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
 import { ProductSelect } from 'entities/products/ui/product-select'
@@ -18,8 +18,7 @@ import {
   WarehouseProductsForm,
 } from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-schema'
 import { useCreateWarehouseProductMutation } from 'entities/warehouse/api/queries/use-create-warehouse-product-mutation'
-import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { ModalContent } from 'shared/ui-kit/modal/modal-content'
+import { DataTableBody } from 'shared/ui/data-table/data-table-body'
 
 interface Props {
   id: number
@@ -41,26 +40,12 @@ export const WarehouseProductsTable = ({ id }: Props) => {
   const [opened, { open, close }] = useDisclosure()
   const formMethods = useForm(warehouseProductSchema)
 
-  const { setValue } = formMethods
-
   const { mutate: createWarehouseProduct } = useCreateWarehouseProductMutation()
-
-  const handleEditActions = (item: any) => {
-    console.log('handle edit action', item)
-    setValue('productId', item.product.id)
-    setValue('quantity', item.quantity)
-    open()
-  }
 
   const table = useReactTable({
     data: data?.content || [],
     columns: warehouseProductsTableColumns,
     getCoreRowModel: getCoreRowModel(),
-    meta: {
-      rowActions: {
-        edit: handleEditActions,
-      },
-    },
   })
 
   const handleSubmit = (warehouseProductForm: WarehouseProductsForm) => {
@@ -78,87 +63,62 @@ export const WarehouseProductsTable = ({ id }: Props) => {
     }))
   }
 
-  const change = (isOpen: boolean) => {
-    console.log('change', isOpen)
-    if (isOpen) {
-      open()
-    } else {
-      close()
-    }
-  }
-
   return (
     <>
       {data && (
         <div>
-          <Table>
+          <Table className="min-h-[308px]">
             <Table.Head>
               {table.getHeaderGroups().map((headerGroup) => (
-                <Table.Row key={headerGroup.id}>
-                  {headerGroup.headers.map((header) =>
-                    header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        ),
-                  )}
+                <Table.Row
+                  key={headerGroup.id}
+                  className="hover:bg-white"
+                >
+                  {headerGroup.headers.map((header) => (
+                    <Fragment key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
+                    </Fragment>
+                  ))}
                 </Table.Row>
               ))}
             </Table.Head>
             <Table.Body>
-              {table.getRowModel().rows?.length ? (
-                table
-                  .getRowModel()
-                  .rows.map((row) => (
-                    <Table.Row key={row.id}>
-                      {row
-                        .getVisibleCells()
-                        .map((cell) =>
-                          flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          ),
-                        )}
-                    </Table.Row>
-                  ))
-              ) : (
-                <Table.Row>
-                  <Table.Cell className="h-[308px] text-center">
-                    No results.
-                  </Table.Cell>
-                </Table.Row>
-              )}
+              <DataTableBody
+                rows={table.getRowModel().rows}
+                columnsLength={table.getAllColumns().length}
+              />
             </Table.Body>
           </Table>
 
-          <div>
+          <div className="mt-3.5 flex items-center justify-between">
             <Button onClick={open}>Добавить</Button>
-          </div>
 
-          <div className="flex justify-end">
-            {data.meta.pagination.totalPages > 1 && (
-              <>
-                <DataTablePageCounter
-                  totalPages={data.meta.pagination.totalPages}
-                  currentPage={data.meta.pagination.page}
-                />
+            <div className="flex gap-3">
+              {data.meta.pagination.totalPages > 1 && (
+                <>
+                  <DataTablePageCounter
+                    totalPages={data.meta.pagination.totalPages}
+                    currentPage={data.meta.pagination.page}
+                  />
 
-                <Pagiantion
-                  totalPages={data.meta.pagination.totalPages}
-                  currentPage={data.meta.pagination.page}
-                  onChange={handlePagination}
-                />
-              </>
-            )}
+                  <Pagiantion
+                    totalPages={data.meta.pagination.totalPages}
+                    currentPage={data.meta.pagination.page}
+                    onChange={handlePagination}
+                  />
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}
 
-      <Modal
-        open={opened}
-        onOpenChange={change}
-      >
+      <Modal open={opened}>
         <Form
           methods={formMethods}
           className="p-4"
@@ -182,9 +142,7 @@ export const WarehouseProductsTable = ({ id }: Props) => {
               Submit
             </Button>
 
-            <DialogPrimitive.DialogClose>
-              <Button onClick={close}>Cancel</Button>
-            </DialogPrimitive.DialogClose>
+            <Button onClick={close}>Cancel</Button>
           </div>
         </Form>
       </Modal>

@@ -8,11 +8,9 @@ import { WarehouseProductUpdateForm } from 'entities/warehouse/ui/warehouse-prod
 
 interface Props {
   warehouseProduct: WarehouseProductDto
-  actions: any
 }
 export const WarehouseProductsTableRowActions = ({
   warehouseProduct,
-  actions,
 }: Props) => {
   const { mutate } = useDeleteWarehouseMutate()
   const [opened, { open, close }] = useDisclosure()
@@ -21,14 +19,13 @@ export const WarehouseProductsTableRowActions = ({
   }
 
   const handleEditClick = () => {
-    console.log('edit')
-    // actions.edit(warehouseProduct)
     open()
   }
 
   return (
     <div className="flex justify-end gap-1">
       <Button
+        variant="ghost"
         size="sm"
         onClick={handleEditClick}
       >
