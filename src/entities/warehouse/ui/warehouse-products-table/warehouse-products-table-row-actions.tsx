@@ -1,8 +1,10 @@
-import { Dropdown } from 'shared/ui-kit/dropdown'
-import { Button } from 'shared/ui-kit'
+import { Button, Modal } from 'shared/ui-kit'
 import { WarehouseProductDto } from 'entities/warehouse/api/dto'
 import { useDeleteWarehouseMutate } from 'entities/warehouse/api/queries/use-delete-warehouse-product-mutation'
-import { Row } from '@tanstack/react-table'
+import IconEdit from 'shared/assets/icons/edit.svg'
+import IconTrash from 'shared/assets/icons/trash.svg'
+import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
+import { WarehouseProductUpdateForm } from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-update-form'
 
 interface Props {
   warehouseProduct: WarehouseProductDto
@@ -13,26 +15,43 @@ export const WarehouseProductsTableRowActions = ({
   actions,
 }: Props) => {
   const { mutate } = useDeleteWarehouseMutate()
-
+  const [opened, { open, close }] = useDisclosure()
   const handleDelete = () => {
     mutate(warehouseProduct.id)
   }
 
   const handleEditClick = () => {
     console.log('edit')
-    actions.edit(warehouseProduct)
+    // actions.edit(warehouseProduct)
+    open()
   }
 
   return (
-    <Dropdown>
-      <Dropdown.Trigger>
-        <Button>Dropdown</Button>
-      </Dropdown.Trigger>
+    <div className="flex justify-end gap-1">
+      <Button
+        size="sm"
+        onClick={handleEditClick}
+      >
+        <IconEdit />
+      </Button>
 
-      <Dropdown.Content>
-        <Dropdown.Item onClick={handleDelete}>delete</Dropdown.Item>
-        <Dropdown.Item onClick={handleEditClick}>edit</Dropdown.Item>
-      </Dropdown.Content>
-    </Dropdown>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={handleDelete}
+      >
+        <IconTrash />
+      </Button>
+
+      <Modal open={opened}>
+        <WarehouseProductUpdateForm
+          defaultValues={{
+            productId: warehouseProduct.product,
+            quantity: warehouseProduct.quantity,
+          }}
+          onClose={close}
+        />
+      </Modal>
+    </div>
   )
 }

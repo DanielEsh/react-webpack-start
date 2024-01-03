@@ -134,43 +134,6 @@ export const WarehouseProductsTable = ({ id }: Props) => {
 
           <div>
             <Button onClick={open}>Добавить</Button>
-
-            <DialogPrimitive.Root>
-              <DialogPrimitive.Trigger>
-                <Button>Добавить (Dialog)</Button>
-              </DialogPrimitive.Trigger>
-
-              <ModalContent>
-                <Form
-                  methods={formMethods}
-                  className="p-4"
-                  onSubmit={handleSubmit}
-                >
-                  <div className="flex flex-col gap-3">
-                    <Form.Field name="productId">
-                      <ProductSelect />
-                    </Form.Field>
-
-                    <Form.Field name="quantity">
-                      <InputNumber label="quantity" />
-                    </Form.Field>
-                  </div>
-
-                  <div className="mt-3.5 flex gap-3">
-                    <Button
-                      type="submit"
-                      variant="primary"
-                    >
-                      Submit
-                    </Button>
-
-                    <DialogPrimitive.DialogClose asChild>
-                      <Button>Close (Dialog)</Button>
-                    </DialogPrimitive.DialogClose>
-                  </div>
-                </Form>
-              </ModalContent>
-            </DialogPrimitive.Root>
           </div>
 
           <div className="flex justify-end">
