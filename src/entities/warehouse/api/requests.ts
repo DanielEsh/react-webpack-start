@@ -64,6 +64,10 @@ export const updateWarehouseById = async (
   return (await $api.patch<WarehouseDto>(`/warehouse/${id}`, dto)).data
 }
 
+export const updateWarehouseProductById = async (id: number, dto: any) => {
+  return (await $api.patch(`/warehouse/products/${id}`, dto)).data
+}
+
 export const deleteWarehouseProduct = async (id: number) => {
   return (await $api.delete<WarehouseProductDto>(`/warehouse/products/${id}`))
     .data

@@ -45,6 +45,7 @@ export const WarehouseProductsTableRowActions = ({
 
       <Modal open={opened}>
         <WarehouseProductUpdateForm
+          id={warehouseProduct.id}
           defaultValues={{
             productId: warehouseProduct.product,
             quantity: warehouseProduct.quantity,

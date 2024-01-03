@@ -5,20 +5,29 @@ import {
   warehouseProductSchema,
   WarehouseProductsForm,
 } from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-schema'
+import { useUpdateWarehouseProductByIdMutation } from 'entities/warehouse/api/queries/use-update-warehouse-product-by-id-mutation'
 
 interface Props {
+  id: number
   defaultValues: WarehouseProductsForm
   onClose: () => void
 }
 
 export const WarehouseProductUpdateForm = ({
+  id,
   defaultValues,
   onClose,
 }: Props) => {
+  const { mutate } = useUpdateWarehouseProductByIdMutation()
   const formMethods = useForm(warehouseProductSchema, defaultValues)
 
   const handleSubmit = (form: WarehouseProductsForm) => {
-    console.log('UPDATE', form)
+    mutate({
+      form,
+      id,
+    })
+
+    onClose()
   }
 
   return (
