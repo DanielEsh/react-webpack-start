@@ -19,6 +19,7 @@ import {
 } from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-schema'
 import { useCreateWarehouseProductMutation } from 'entities/warehouse/api/queries/use-create-warehouse-product-mutation'
 import { DataTableBody } from 'shared/ui/data-table/data-table-body'
+import { WarehouseProductsCreateForm } from 'features/warehouse/warehouse-products'
 
 interface Props {
   id: number
@@ -38,23 +39,12 @@ export const WarehouseProductsTable = ({ id }: Props) => {
   })
 
   const [opened, { open, close }] = useDisclosure()
-  const formMethods = useForm(warehouseProductSchema)
-
-  const { mutate: createWarehouseProduct } = useCreateWarehouseProductMutation()
 
   const table = useReactTable({
     data: data?.content || [],
     columns: warehouseProductsTableColumns,
     getCoreRowModel: getCoreRowModel(),
   })
-
-  const handleSubmit = (warehouseProductForm: WarehouseProductsForm) => {
-    createWarehouseProduct({
-      warehouseId: id,
-      createWarehouseProductDto: warehouseProductForm,
-    })
-    close()
-  }
 
   const handlePagination = (page: any) => {
     setTableValues((state) => ({
@@ -119,32 +109,10 @@ export const WarehouseProductsTable = ({ id }: Props) => {
       )}
 
       <Modal open={opened}>
-        <Form
-          methods={formMethods}
-          className="p-4"
-          onSubmit={handleSubmit}
-        >
-          <div className="flex flex-col gap-3">
-            <Form.Field name="productId">
-              <ProductSelect />
-            </Form.Field>
-
-            <Form.Field name="quantity">
-              <InputNumber label="quantity" />
-            </Form.Field>
-          </div>
-
-          <div className="mt-3.5 flex gap-3">
-            <Button
-              type="submit"
-              variant="primary"
-            >
-              Submit
-            </Button>
-
-            <Button onClick={close}>Cancel</Button>
-          </div>
-        </Form>
+        <WarehouseProductsCreateForm
+          warehouseId={id}
+          onCancel={close}
+        />
       </Modal>
     </>
   )
