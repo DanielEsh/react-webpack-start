@@ -11,6 +11,7 @@ import {
   warehouseRoutes,
   staffRoutes,
   ordersRoutes,
+  sandboxRoutes,
 } from './routes'
 
 const HomePage = lazy(() => import('pages/home-page'))
@@ -33,6 +34,7 @@ export const routerConfig: RouterConfig = {
       ...warehouseRoutes,
       ...staffRoutes,
       ...ordersRoutes,
+      ...sandboxRoutes,
       [AppRoutes.NotFound]: {
         path: '*',
         element: (

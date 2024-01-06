@@ -23,4 +23,7 @@ export enum AppRoutes {
   OrderDetails = 'OrderDetails',
   NotFound = 'NotFound',
   LogIn = 'LogIn',
+
+  Sandbox = 'Sandbox',
+  SandboxIcons = 'SandboxIcons',
 }
