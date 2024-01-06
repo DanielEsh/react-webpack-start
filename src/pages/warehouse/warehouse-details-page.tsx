@@ -3,7 +3,7 @@ import { DrawerHeader } from 'shared/ui-kit/drawer/drawer-header'
 import { DrawerFooter } from 'shared/ui-kit/drawer/drawer-footer'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetWarehouseByIdQuery } from 'entities/warehouse/api/queries'
-import { WarehouseProductsTable } from 'entities/warehouse/ui/warehouse-products-table/warehouse-products-table'
+import { WarehouseProductsTable } from 'features/warehouse/warehouse-products'
 import { assertInvariant } from 'shared/api/errors'
 import {
   WAREHOUSE_UPDATE_FORM_ID,

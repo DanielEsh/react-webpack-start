@@ -1,1 +1,1 @@
-export { WarehouseProductsCreateForm } from './create/warehouse-products-create-form'
+export { WarehouseProductsTable } from './warehouse-products-table'

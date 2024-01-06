@@ -1,40 +1,30 @@
+import { Fragment, useState } from 'react'
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
 import { useGetWarehouseProductsQuery } from 'entities/warehouse/api/queries/use-get-warehouse-products-query'
-import { warehouseProductsTableColumns } from 'entities/warehouse/ui/warehouse-products-table/warehouse-products-table-columns'
-import { Button, Form, InputNumber, Table } from 'shared/ui-kit'
-import { useForm } from 'shared/ui-kit/form/use-form'
+import { Button, Table, Modal } from 'shared/ui-kit'
 import { DataTablePageCounter } from 'shared/ui/data-table/data-table-page-counter'
 import { Pagiantion } from 'shared/ui-kit/Pagiantion/Pagination'
-import { Fragment, useState } from 'react'
-import { Modal } from 'shared/ui-kit/modal'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
-import { ProductSelect } from 'entities/products/ui/product-select'
-import {
-  warehouseProductSchema,
-  WarehouseProductsForm,
-} from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-schema'
-import { useCreateWarehouseProductMutation } from 'entities/warehouse/api/queries/use-create-warehouse-product-mutation'
 import { DataTableBody } from 'shared/ui/data-table/data-table-body'
-import { WarehouseProductsCreateForm } from 'features/warehouse/warehouse-products'
+import { warehouseProductsTableColumns } from './warehouse-products-table-columns'
+import { WarehouseProductsCreateForm } from './create/warehouse-products-create-form'
+import { useDataTableViewState } from 'widgets/data-table-view/use-data-table-view-state'
 
 interface Props {
   id: number
 }
 
 export const WarehouseProductsTable = ({ id }: Props) => {
-  const [tableValues, setTableValues] = useState<any>({
-    page: 1,
-    limit: 5,
-  })
+  const { state, changePage } = useDataTableViewState()
 
   const { data } = useGetWarehouseProductsQuery(id, {
     params: {
-      page: tableValues.page,
-      limit: tableValues.limit,
+      page: state.page,
+      limit: state.limit,
     },
   })
 
@@ -45,13 +35,6 @@ export const WarehouseProductsTable = ({ id }: Props) => {
     columns: warehouseProductsTableColumns,
     getCoreRowModel: getCoreRowModel(),
   })
-
-  const handlePagination = (page: any) => {
-    setTableValues((state) => ({
-      ...state,
-      page,
-    }))
-  }
 
   return (
     <>
@@ -99,7 +82,7 @@ export const WarehouseProductsTable = ({ id }: Props) => {
                   <Pagiantion
                     totalPages={data.meta.pagination.totalPages}
                     currentPage={data.meta.pagination.page}
-                    onChange={handlePagination}
+                    onChange={changePage}
                   />
                 </>
               )}

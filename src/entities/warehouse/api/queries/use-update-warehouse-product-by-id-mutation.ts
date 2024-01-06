@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updateWarehouseProductById } from '../requests'
-import { WarehouseProductsForm } from '../../ui/warehouse-products-table/warehouse-product-schema'
+import { WarehouseProductsForm } from '../../../../features/warehouse/warehouse-products/warehouse-product-schema'
 
 export const useUpdateWarehouseProductByIdMutation = () => {
   const queryClient = useQueryClient()

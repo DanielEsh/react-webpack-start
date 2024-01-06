@@ -4,7 +4,7 @@ import { useDeleteWarehouseMutate } from 'entities/warehouse/api/queries/use-del
 import IconEdit from 'shared/assets/icons/edit.svg'
 import IconTrash from 'shared/assets/icons/trash.svg'
 import { useDisclosure } from 'shared/lib/hooks/useDisclosure'
-import { WarehouseProductUpdateForm } from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-update-form'
+import { WarehouseProductUpdateForm } from 'features/warehouse/warehouse-products/update/warehouse-product-update-form'
 
 interface Props {
   warehouseProduct: WarehouseProductDto

@@ -4,7 +4,7 @@ import { useForm } from 'shared/ui-kit/form/use-form'
 import {
   warehouseProductSchema,
   WarehouseProductsForm,
-} from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-schema'
+} from 'features/warehouse/warehouse-products/warehouse-product-schema'
 import { useUpdateWarehouseProductByIdMutation } from 'entities/warehouse/api/queries/use-update-warehouse-product-by-id-mutation'
 
 interface Props {

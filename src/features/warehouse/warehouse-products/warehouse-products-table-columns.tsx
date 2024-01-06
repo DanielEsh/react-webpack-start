@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { WarehouseProductDto } from 'entities/warehouse/api/dto'
 import { Table } from 'shared/ui-kit'
-import { WarehouseProductsTableRowActions } from 'entities/warehouse/ui/warehouse-products-table/warehouse-products-table-row-actions'
+import { WarehouseProductsTableRowActions } from 'features/warehouse/warehouse-products/warehouse-products-table-row-actions'
 
 export const warehouseProductsTableColumns: ColumnDef<
   WarehouseProductDto,

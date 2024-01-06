@@ -3,7 +3,7 @@ import { ProductSelect } from 'entities/products/ui/product-select'
 import {
   warehouseProductSchema,
   WarehouseProductsForm,
-} from 'entities/warehouse/ui/warehouse-products-table/warehouse-product-schema'
+} from 'features/warehouse/warehouse-products/warehouse-product-schema'
 import { useForm } from 'shared/ui-kit/form/use-form'
 import { useCreateWarehouseProductMutation } from 'entities/warehouse/api/queries/use-create-warehouse-product-mutation'
 
