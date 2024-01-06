@@ -1,8 +1,10 @@
 import { AppRoutes } from 'app/router/config/constants'
 import { RouterPage } from 'app/router/ui/router-page'
-import WarehousesPage from 'pages/warehouse/warehouses-page'
-import WarehouseCreatePage from 'pages/warehouse/warehouse-create-page'
-import WarehouseDetailsPage from 'pages/warehouse/warehouse-details-page'
+import {
+  WarehousesPage,
+  WarehouseCreatePage,
+  WarehouseDetailsPage,
+} from 'pages/warehouse'
 
 export const warehouseRoutes = {
   [AppRoutes.Warehouses]: {
