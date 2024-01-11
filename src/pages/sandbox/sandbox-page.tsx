@@ -2,6 +2,7 @@ import { Breadcrumbs } from 'shared/ui-kit/breadcrumbs/breadcrumbs'
 import { AccordionDemo } from './ui/accordion-demo'
 import { DropdownDemo } from 'pages/sandbox/ui/dropdown-demo'
 import { NestedDialogDemo } from 'pages/sandbox/ui/nested-dialog-demo'
+import { ProductsSelectDemo } from 'pages/sandbox/ui/products-select-demo'
 
 export default function SandBoxPage() {
   return (
@@ -21,6 +22,10 @@ export default function SandBoxPage() {
       <div>
         <div>Nested Dialog</div>
         <NestedDialogDemo />
+      </div>
+
+      <div>
+        <ProductsSelectDemo />
       </div>
     </div>
   )

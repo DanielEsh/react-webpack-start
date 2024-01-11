@@ -7,6 +7,30 @@ import { splitThousands } from 'shared/utils/split-thousands'
 
 export const getProductsColumns: ColumnDef<ProductDto, string>[] = [
   {
+    id: 'select',
+    header: ({ table }) => (
+      <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
+        <input
+          type="checkbox"
+          checked={table.getIsAllRowsSelected()}
+          onChange={table.getToggleAllRowsSelectedHandler}
+        />
+      </Table.ColumnHeader>
+    ),
+    cell: ({ row }) => (
+      <div className="px-1">
+        <input
+          type="checkbox"
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            onChange: row.getToggleSelectedHandler(),
+          }}
+        />
+      </div>
+    ),
+  },
+  {
     id: 'id',
     accessorKey: 'id',
     header: ({ column }) => (

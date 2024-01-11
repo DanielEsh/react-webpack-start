@@ -1,6 +1,7 @@
 import {
   flexRender,
   getCoreRowModel,
+  RowSelectionState,
   useReactTable,
 } from '@tanstack/react-table'
 import { ProductDto } from 'entities/products/api'
@@ -11,7 +12,7 @@ import {
   DeleteState,
 } from 'shared/ui/dialog/confirm-delete'
 import { useIntersection } from 'shared/lib/hooks/use-intersection/use-intersection'
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 interface Props {
   data: ProductDto[]
@@ -20,10 +21,17 @@ interface Props {
 }
 
 export const ProductsDataTable = ({ data, onDelete, onEndReached }: Props) => {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
+
   const table = useReactTable({
     data,
     columns: getProductsColumns,
     getCoreRowModel: getCoreRowModel(),
+    state: {
+      rowSelection,
+    },
+    enableMultiRowSelection: true,
+    onRowSelectionChange: setRowSelection,
   })
 
   const { ref: bottomElementRef, entry } = useIntersection({

@@ -1,5 +1,4 @@
-import { Suspense, lazy } from 'react'
-import { Route } from 'react-router-dom'
+import { lazy } from 'react'
 
 export const SandBoxPage = lazy(() => import('./sandbox-page'))
 export const SandBoxPageIcons = lazy(() => import('./sandbox-icons-page'))
