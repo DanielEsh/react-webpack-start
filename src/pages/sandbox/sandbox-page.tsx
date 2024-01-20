@@ -3,6 +3,7 @@ import { AccordionDemo } from './ui/accordion-demo'
 import { DropdownDemo } from 'pages/sandbox/ui/dropdown-demo'
 import { NestedDialogDemo } from 'pages/sandbox/ui/nested-dialog-demo'
 import { ProductsSelectDemo } from 'pages/sandbox/ui/products-select-demo'
+import { CheckboxDemo } from 'pages/sandbox/ui/checkbox-demo'
 
 export default function SandBoxPage() {
   return (
@@ -26,6 +27,7 @@ export default function SandBoxPage() {
 
       <div>
         <ProductsSelectDemo />
+        <CheckboxDemo />
       </div>
     </div>
   )
