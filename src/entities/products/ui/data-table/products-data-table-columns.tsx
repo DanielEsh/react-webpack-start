@@ -4,28 +4,25 @@ import { Table } from 'shared/ui-kit/table'
 import { ProductDto } from 'entities/products/api'
 import { ProductsDataTableRowActions } from './products-data-table-row-actions'
 import { splitThousands } from 'shared/utils/split-thousands'
+import { Checkbox } from 'shared/ui-kit'
 
 export const getProductsColumns: ColumnDef<ProductDto, string>[] = [
   {
     id: 'select',
     header: ({ table }) => (
       <Table.ColumnHeader className="sticky top-0 w-[98px] bg-white">
-        <input
-          type="checkbox"
+        <Checkbox
           checked={table.getIsAllRowsSelected()}
-          onChange={table.getToggleAllRowsSelectedHandler}
+          onChange={() => table.toggleAllRowsSelected()}
         />
       </Table.ColumnHeader>
     ),
     cell: ({ row }) => (
       <div className="px-1">
-        <input
-          type="checkbox"
-          {...{
-            checked: row.getIsSelected(),
-            disabled: !row.getCanSelect(),
-            onChange: row.getToggleSelectedHandler(),
-          }}
+        <Checkbox
+          checked={row.getIsSelected()}
+          disabled={!row.getCanSelect()}
+          onChange={() => row.toggleSelected()}
         />
       </div>
     ),

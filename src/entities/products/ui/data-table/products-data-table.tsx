@@ -34,6 +34,10 @@ export const ProductsDataTable = ({ data, onDelete, onEndReached }: Props) => {
     onRowSelectionChange: setRowSelection,
   })
 
+  useEffect(() => {
+    console.log(rowSelection)
+  }, [rowSelection])
+
   const { ref: bottomElementRef, entry } = useIntersection({
     root: null, // viewport
     threshold: 0.7,
@@ -47,6 +51,7 @@ export const ProductsDataTable = ({ data, onDelete, onEndReached }: Props) => {
 
   return (
     <>
+      <div>Выбрано элементов: {Object.keys(rowSelection).length}</div>
       <Table className="h-[720px] overflow-y-auto">
         <Table.Head>
           {table.getHeaderGroups().map((headerGroup) => (

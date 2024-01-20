@@ -11,7 +11,7 @@ interface CheckboxProps {
   label?: ReactNode
   checked?: boolean
   disabled?: boolean
-  onChange?: () => void
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 const COMPONENT_NAME = 'Checkbox'
@@ -23,6 +23,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
       setChecked(event.target.checked)
+      props.onChange && props.onChange(event)
     }
 
     const iconClasses = classNames(
